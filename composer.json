@@ -1,7 +1,7 @@
 {
   "name": "jtl/channel-api-client",
   "type": "library",
-  "require-dev": {
+  "require": {
     "guzzlehttp/guzzle": "^6.2"
   },
   "autoload": {
