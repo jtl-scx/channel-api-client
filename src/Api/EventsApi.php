@@ -268,7 +268,7 @@ class EventsApi
     protected function acknowlageEventsRequest($event_id_list = null)
     {
 
-        $resourcePath = '/channel/events';
+        $resourcePath = '/channel/event';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
@@ -554,7 +554,7 @@ class EventsApi
     protected function getEventsRequest($created_after = null, $event_type_list = null)
     {
 
-        $resourcePath = '/channel/events';
+        $resourcePath = '/channel/event';
         $formParams = [];
         $queryParams = [];
         $headerParams = [];
