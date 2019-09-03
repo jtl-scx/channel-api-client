@@ -1,0 +1,18 @@
+{
+  "name": "jtl/channel-api-client",
+  "type": "library",
+  "require-dev": {
+    "guzzlehttp/guzzle": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "JTL\\SCX\\Client\\Channel\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "JTL\\SCX\\Client\\Channel\\": "test/"
+    }
+  },
+  "description": "API Client for SCX Channel API"
+}
