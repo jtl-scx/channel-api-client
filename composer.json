@@ -2,7 +2,8 @@
   "name": "jtl/channel-api-client",
   "type": "library",
   "require": {
-    "guzzlehttp/guzzle": "^6.2"
+    "guzzlehttp/guzzle": "^6.2",
+    "jtl/scx-api-client": "dev-master"
   },
   "autoload": {
     "psr-4": {
@@ -14,5 +15,22 @@
       "JTL\\SCX\\Client\\Channel\\": "test/"
     }
   },
-  "description": "API Client for SCX Channel API"
+  "description": "API Client for SCX Channel API",
+  "repositories": [
+    {
+      "type": "path",
+      "url": "/home/patric/Dev/scx/scx-client"
+    }
+  ],
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.15"
+  },
+  "scripts": {
+    "phpcs": [
+      "vendor/bin/php-cs-fixer fix --config=./.php_cs.dist"
+    ],
+    "phpcs-dry": [
+      "vendor/bin/php-cs-fixer fix --config=./.php_cs.dist --dry-run"
+    ]
+  }
 }
