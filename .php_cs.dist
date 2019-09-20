@@ -2,6 +2,7 @@
 
 $finder = PhpCsFixer\Finder::create();
 $finder->in(['src', 'tests']);
+$finder->exclude('Model');
 
 $config = PhpCsFixer\Config::create();
 $config->setFinder($finder);
