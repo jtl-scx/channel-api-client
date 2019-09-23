@@ -27,11 +27,17 @@ class CreateSellerApi extends AbstractApi
         return new CreateSellerResponse($response->getStatusCode());
     }
 
+    /**
+     * @return string
+     */
     protected function getUrl(): string
     {
         return '/channel/seller';
     }
 
+    /**
+     * @return string
+     */
     protected function getHttpMethod(): string
     {
         return AbstractApi::HTTP_METHOD_POST;

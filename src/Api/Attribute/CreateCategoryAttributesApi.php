@@ -30,11 +30,17 @@ class CreateCategoryAttributesApi extends AbstractApi
         return new CreateCategoryAttributesResponse($response->getStatusCode());
     }
 
+    /**
+     * @return string
+     */
     protected function getUrl(): string
     {
         return '/channel/attribute/category/{categoryId}';
     }
 
+    /**
+     * @return string
+     */
     protected function getHttpMethod(): string
     {
         return AbstractApi::HTTP_METHOD_PUT;
