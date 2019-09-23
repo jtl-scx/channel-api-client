@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * This File is part of JTL-Software
  *
@@ -14,14 +14,20 @@ use JTL\SCX\Client\Api\Configuration;
 use JTL\SCX\Client\Request\RequestFactory;
 use JTL\SCX\Client\Request\UrlFactory;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
-trait ApiMockFactory
+abstract class AbstractTestCase extends TestCase
 {
+    public function tearDown(): void
+    {
+        Mockery::close();
+    }
+
     /**
      * @return Configuration|Mockery\LegacyMockInterface|Mockery\MockInterface
      */
-    public function createConfigurationMock()
+    protected function createConfigurationMock()
     {
         $host = 'http://localhost';
         $authToken = '123456789';
@@ -42,7 +48,7 @@ trait ApiMockFactory
      * @param ResponseInterface $response
      * @return ClientInterface|Mockery\LegacyMockInterface|Mockery\MockInterface
      */
-    public function createClientMock(ResponseInterface $response)
+    protected function createClientMock(ResponseInterface $response)
     {
         $client = Mockery::mock(ClientInterface::class);
         $client->shouldReceive('send')
@@ -53,7 +59,12 @@ trait ApiMockFactory
         return $client;
     }
 
-    public function createRequestFactoryMock(string $method, string $body = null)
+    /**
+     * @param string $method
+     * @param string|null $body
+     * @return RequestFactory|Mockery\LegacyMockInterface|Mockery\MockInterface
+     */
+    protected function createRequestFactoryMock(string $method, string $body = null)
     {
         $requestFactory = Mockery::mock(RequestFactory::class);
         $request = Mockery::mock(Request::class);
@@ -66,7 +77,12 @@ trait ApiMockFactory
         return $requestFactory;
     }
 
-    public function createUrlFactoryMock(string $url, array $params = [])
+    /**
+     * @param string $url
+     * @param array $params
+     * @return UrlFactory|Mockery\LegacyMockInterface|Mockery\MockInterface
+     */
+    protected function createUrlFactoryMock(string $url, array $params = [])
     {
         $urlFactory = Mockery::mock(UrlFactory::class);
 

@@ -10,17 +10,21 @@ namespace JTL\SCX\Client\Channel\Api\Seller;
 
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Seller\Request\CreateSellerRequest;
+use JTL\SCX\Client\Channel\Api\Seller\Response\CreateSellerResponse;
+use JTL\SCX\Client\Exception\RequestFailedException;
 
 class CreateSellerApi extends AbstractApi
 {
     /**
      * @param CreateSellerRequest $createSellerRequest
-     * @throws \JTL\SCX\Client\Exception\RequestFailedException
+     * @return CreateSellerResponse
+     * @throws RequestFailedException
      */
-    public function create(CreateSellerRequest $createSellerRequest): void
+    public function create(CreateSellerRequest $createSellerRequest): CreateSellerResponse
     {
         $json = (string)$createSellerRequest->getCreateSellerModel();
-        $this->request($json);
+        $response = $this->request($json);
+        return new CreateSellerResponse($response->getStatusCode());
     }
 
     protected function getUrl(): string

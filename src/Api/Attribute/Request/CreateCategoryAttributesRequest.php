@@ -51,7 +51,6 @@ class CreateCategoryAttributesRequest extends AbstractRequest
         return $this->attributeList;
     }
 
-
     /**
      * @throws RequestValidationFailedException
      */

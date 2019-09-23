@@ -10,37 +10,42 @@ namespace JTL\SCX\Client\Channel\Api\Attribute;
 
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\AbstractTestCase;
-use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateGlobalAttributesRequest;
+use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateSellerAttributesRequest;
 use JTL\SCX\Client\Channel\Model\AttributeList;
 use Mockery;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Class CreateGlobalAttributesApiTest
+ * Class CreateSellerAttributesApiTest
  * @package JTL\SCX\Client\Channel\Api\Attribute
  *
- * @covers \JTL\SCX\Client\Channel\Api\Attribute\CreateGlobalAttributesApi
+ * @covers \JTL\SCX\Client\Channel\Api\Attribute\CreateSellerAttributesApi
  */
-class CreateGlobalAttributesApiTest extends AbstractTestCase
+class CreateSellerAttributesApiTest extends AbstractTestCase
 {
-    public function testCreateGlobalAttributes(): void
+    public function testCreateSellerAttributes(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
-        $request = Mockery::mock(CreateGlobalAttributesRequest::class);
+        $request = Mockery::mock(CreateSellerAttributesRequest::class);
         $attributeList = Mockery::mock(AttributeList::class);
+        $sellerId = uniqid('sellerId', true);
 
         $body = uniqid('body', true);
 
         $client = $this->createClientMock($response);
         $configuration = $this->createConfigurationMock();
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_PUT, $body);
-        $urlFactory = $this->createUrlFactoryMock('/channel/attribute/global');
+        $urlFactory = $this->createUrlFactoryMock('/channel/attribute/seller/{sellerId}', ['sellerId' => $sellerId]);
 
         $request->shouldReceive('validate')->once();
 
         $request->shouldReceive('getAttributeList')
             ->once()
             ->andReturn($attributeList);
+
+        $request->shouldReceive('getSellerId')
+            ->once()
+            ->andReturn($sellerId);
 
         $attributeList->shouldReceive('__toString')
             ->once()
@@ -50,8 +55,8 @@ class CreateGlobalAttributesApiTest extends AbstractTestCase
             ->once()
             ->andReturn(200);
 
-        $api = new CreateGlobalAttributesApi($client, $configuration, $requestFactory, $urlFactory);
-        $response = $api->createGlobalAttributes($request);
+        $api = new CreateSellerAttributesApi($client, $configuration, $requestFactory, $urlFactory);
+        $response = $api->createSellerAttributes($request);
 
         $this->assertEquals(200, $response->getStatusCode());
     }

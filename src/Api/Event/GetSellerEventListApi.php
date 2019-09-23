@@ -22,6 +22,8 @@ use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 use JTL\SCX\Client\Exception\RequestFailedException;
+use JTL\SCX\Client\Request\RequestFactory;
+use JTL\SCX\Client\Request\UrlFactory;
 use JTL\SCX\Client\Serializer\JsonSerializer;
 
 class GetSellerEventListApi extends AbstractApi
@@ -31,9 +33,22 @@ class GetSellerEventListApi extends AbstractApi
      */
     private $jsonSerializer;
 
-    public function __construct(ClientInterface $client, Configuration $configuration, JsonSerializer $jsonSerializer)
-    {
-        parent::__construct($client, $configuration);
+    /**
+     * GetSellerEventListApi constructor.
+     * @param ClientInterface $client
+     * @param Configuration $configuration
+     * @param RequestFactory $requestFactory
+     * @param UrlFactory $urlFactory
+     * @param JsonSerializer $jsonSerializer
+     */
+    public function __construct(
+        ClientInterface $client,
+        Configuration $configuration,
+        RequestFactory $requestFactory,
+        UrlFactory $urlFactory,
+        JsonSerializer $jsonSerializer
+    ) {
+        parent::__construct($client, $configuration, $requestFactory, $urlFactory);
         $this->jsonSerializer = $jsonSerializer;
     }
 

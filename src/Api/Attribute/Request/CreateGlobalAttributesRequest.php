@@ -19,6 +19,10 @@ class CreateGlobalAttributesRequest extends AbstractRequest
      */
     private $attributeList;
 
+    /**
+     * CreateGlobalAttributesRequest constructor.
+     * @param AttributeList $attributeList
+     */
     public function __construct(AttributeList $attributeList)
     {
         $this->attributeList = $attributeList;
@@ -37,7 +41,7 @@ class CreateGlobalAttributesRequest extends AbstractRequest
      */
     public function validate(): void
     {
-        foreach ($this->attributeList as $attribute) {
+        foreach ($this->attributeList->getAttributeList() as $attribute) {
             $this->validateModel($attribute);
         }
     }

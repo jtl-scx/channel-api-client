@@ -9,11 +9,10 @@
 namespace JTL\SCX\Client\Channel\Api\Attribute;
 
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateCategoryAttributesRequest;
-use JTL\SCX\Client\Channel\ApiMockFactory;
 use JTL\SCX\Client\Channel\Model\AttributeList;
 use Mockery;
-use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -22,16 +21,9 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Attribute\CreateCategoryAttributesApi
  */
-class CreateCategoryAttributesApiTest extends TestCase
+class CreateCategoryAttributesApiTest extends AbstractTestCase
 {
-    use ApiMockFactory;
-
-    public function tearDown(): void
-    {
-        Mockery::close();
-    }
-
-    public function testCreateCategoryAttributes()
+    public function testCreateCategoryAttributes(): void
     {
         $response = Mockery::mock(ResponseInterface::class);
 

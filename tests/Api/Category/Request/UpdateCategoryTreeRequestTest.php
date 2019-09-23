@@ -1,0 +1,41 @@
+<?php declare(strict_types=1);
+/**
+ * This File is part of JTL-Software
+ *
+ * User: pkanngiesser
+ * Date: 2019/09/23
+ */
+
+namespace JTL\SCX\Client\Channel\Api\Category\Request;
+
+use JTL\SCX\Client\Channel\AbstractTestCase;
+use JTL\SCX\Client\Channel\Model\Category;
+use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
+use Mockery;
+
+/**
+ * Class UpdateCategoryTreeRequestTest
+ * @package JTL\SCX\Client\Channel\Api\Category\Request
+ *
+ * @covers \JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest
+ */
+class UpdateCategoryTreeRequestTest extends AbstractTestCase
+{
+    public function testCanBeCreatedAndValidated(): void
+    {
+        $channelCategoryTree = Mockery::mock(ChannelCategoryTree::class);
+        $category = Mockery::mock(Category::class);
+
+        $channelCategoryTree->shouldReceive('getCategoryList')
+            ->once()
+            ->andReturn([$category]);
+
+        $category->shouldReceive('valid')
+            ->once()
+            ->andReturnTrue();
+
+        $request = new UpdateCategoryTreeRequest($channelCategoryTree);
+        $request->validate();
+        $this->assertSame($channelCategoryTree, $request->getChannelCategoryTree());
+    }
+}
