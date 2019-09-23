@@ -12,7 +12,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "JTL\\SCX\\Client\\Channel\\": "test/"
+      "JTL\\SCX\\Client\\Channel\\": "tests/"
     }
   },
   "description": "API Client for SCX Channel API",
@@ -23,7 +23,9 @@
     }
   ],
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.15"
+    "friendsofphp/php-cs-fixer": "^2.15",
+    "mockery/mockery": "^1.2",
+    "phpunit/phpunit": "^8.3"
   },
   "scripts": {
     "phpcs": [
