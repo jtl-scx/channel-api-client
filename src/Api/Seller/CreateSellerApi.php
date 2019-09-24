@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Seller;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Seller\Request\CreateSellerRequest;
 use JTL\SCX\Client\Channel\Api\Seller\Response\CreateSellerResponse;
@@ -19,6 +20,7 @@ class CreateSellerApi extends AbstractApi
      * @param CreateSellerRequest $createSellerRequest
      * @return CreateSellerResponse
      * @throws RequestFailedException
+     * @throws GuzzleException
      */
     public function create(CreateSellerRequest $createSellerRequest): CreateSellerResponse
     {

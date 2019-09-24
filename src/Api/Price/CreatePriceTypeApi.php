@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Price;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Price\Request\CreatePriceTypeRequest;
 use JTL\SCX\Client\Channel\Api\Price\Response\CreatePriceTypeResponse;
@@ -21,6 +22,7 @@ class CreatePriceTypeApi extends AbstractApi
      * @return CreatePriceTypeResponse
      * @throws RequestFailedException
      * @throws RequestValidationFailedException
+     * @throws GuzzleException
      */
     public function create(CreatePriceTypeRequest $request): CreatePriceTypeResponse
     {

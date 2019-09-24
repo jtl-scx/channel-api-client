@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Channel;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Channel\Response\GetChannelStatusResponse;
 use JTL\SCX\Client\Channel\Model\ChannelStatus;
@@ -19,6 +20,7 @@ class GetChannelStatusApi extends AbstractApi
     /**
      * @return GetChannelStatusResponse
      * @throws RequestFailedException
+     * @throws GuzzleException
      */
     public function getStatus(): GetChannelStatusResponse
     {

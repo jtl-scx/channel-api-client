@@ -36,6 +36,5 @@ class DeleteGlobalAttributeRequest extends AbstractRequest
 
     public function validate(): void
     {
-        return;
     }
 }

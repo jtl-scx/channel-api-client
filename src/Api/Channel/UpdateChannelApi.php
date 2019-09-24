@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Channel;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Channel\Request\UpdateChannelRequest;
 use JTL\SCX\Client\Channel\Api\Channel\Response\UpdateChannelResponse;
@@ -19,6 +20,7 @@ class UpdateChannelApi extends AbstractApi
      * @param UpdateChannelRequest $channelRequest
      * @return UpdateChannelResponse
      * @throws RequestFailedException
+     * @throws GuzzleException
      */
     public function update(UpdateChannelRequest $channelRequest): UpdateChannelResponse
     {

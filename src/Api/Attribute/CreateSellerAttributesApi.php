@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Attribute;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateSellerAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\CreateSellerAttributesResponse;
@@ -21,6 +22,7 @@ class CreateSellerAttributesApi extends AbstractApi
      * @return CreateSellerAttributesResponse
      * @throws RequestFailedException
      * @throws RequestValidationFailedException
+     * @throws GuzzleException
      */
     public function createSellerAttributes(CreateSellerAttributesRequest $request): CreateSellerAttributesResponse
     {

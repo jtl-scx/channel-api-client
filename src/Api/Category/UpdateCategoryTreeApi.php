@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Category;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest;
 use JTL\SCX\Client\Channel\Api\Category\Response\UpdateCategoryTreeResponse;
@@ -21,6 +22,7 @@ class UpdateCategoryTreeApi extends AbstractApi
      * @return UpdateCategoryTreeResponse
      * @throws RequestFailedException
      * @throws RequestValidationFailedException
+     * @throws GuzzleException
      */
     public function update(UpdateCategoryTreeRequest $request): UpdateCategoryTreeResponse
     {

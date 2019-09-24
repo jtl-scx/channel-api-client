@@ -38,6 +38,5 @@ class CreateOrdersRequest extends AbstractRequest
 
     public function validate(): void
     {
-        return;
     }
 }

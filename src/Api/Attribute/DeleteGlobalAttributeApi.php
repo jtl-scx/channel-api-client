@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Attribute;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\DeleteGlobalAttributeRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\DeleteGlobalAttributeResponse;
@@ -19,8 +20,9 @@ class DeleteGlobalAttributeApi extends AbstractApi
      * @param DeleteGlobalAttributeRequest $request
      * @return DeleteGlobalAttributeResponse
      * @throws RequestFailedException
+     * @throws GuzzleException
      */
-    public function deleteAttribute(DeleteGlobalAttributeRequest $request)
+    public function deleteAttribute(DeleteGlobalAttributeRequest $request): DeleteGlobalAttributeResponse
     {
         $response = $this->request(null, ['attributeId' => $request->getAttributeId()]);
         return new DeleteGlobalAttributeResponse($response->getStatusCode());

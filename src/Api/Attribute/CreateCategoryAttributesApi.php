@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Attribute;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateCategoryAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\CreateCategoryAttributesResponse;
@@ -21,6 +22,7 @@ class CreateCategoryAttributesApi extends AbstractApi
      * @return CreateCategoryAttributesResponse
      * @throws RequestFailedException
      * @throws RequestValidationFailedException
+     * @throws GuzzleException
      */
     public function createCategoryAttributes(CreateCategoryAttributesRequest $request): CreateCategoryAttributesResponse
     {

@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Attribute;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateGlobalAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\CreateGlobalAttributesResponse;
@@ -21,8 +22,9 @@ class CreateGlobalAttributesApi extends AbstractApi
      * @return CreateGlobalAttributesResponse
      * @throws RequestFailedException
      * @throws RequestValidationFailedException
+     * @throws GuzzleException
      */
-    public function createGlobalAttributes(CreateGlobalAttributesRequest $request)
+    public function createGlobalAttributes(CreateGlobalAttributesRequest $request): CreateGlobalAttributesResponse
     {
         $request->validate();
         $response = $this->request((string)$request->getAttributeList());

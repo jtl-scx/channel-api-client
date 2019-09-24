@@ -8,7 +8,10 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event;
 
+use DateTimeImmutable;
+use Exception;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Api\Configuration;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
@@ -55,11 +58,12 @@ class GetSellerEventListApi extends AbstractApi
     /**
      * @return GetSellerEventListResponse
      * @throws RequestFailedException
+     * @throws Exception
+     * @throws GuzzleException
      */
     public function getEventList(): GetSellerEventListResponse
     {
         $responseData = $this->request();
-        /** @var \stdClass $data */
         $data = $this->jsonSerializer->deserialize($responseData->getBody()->getContents(), false);
 
         $eventList = [];
@@ -67,7 +71,7 @@ class GetSellerEventListApi extends AbstractApi
         foreach ($data->eventList as $event) {
             $eventContainer = new EventContainer(
                 $event->id,
-                new \DateTimeImmutable($event->createdAt),
+                new DateTimeImmutable($event->createdAt),
                 $event->type,
                 $this->createEventByType($event->type, $event->event)
             );
@@ -80,7 +84,7 @@ class GetSellerEventListApi extends AbstractApi
     /**
      * @param string $type
      * @param object $data
-     * @return array|object|null
+     * @return mixed
      */
     private function createEventByType(string $type, object $data)
     {

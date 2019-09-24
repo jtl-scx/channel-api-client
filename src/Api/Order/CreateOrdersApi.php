@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Order;
 
+use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrdersRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
@@ -19,6 +20,7 @@ class CreateOrdersApi extends AbstractApi
      * @param CreateOrdersRequest $request
      * @return CreateOrdersResponse
      * @throws RequestFailedException
+     * @throws GuzzleException
      */
     public function create(CreateOrdersRequest $request): CreateOrdersResponse
     {
