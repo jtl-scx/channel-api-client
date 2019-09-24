@@ -1,10 +1,7 @@
 {
   "name": "jtl/channel-api-client",
   "type": "library",
-  "require": {
-    "guzzlehttp/guzzle": "^6.3",
-    "jtl/scx-api-client": "dev-master"
-  },
+  "description": "API Client for SCX Channel API",
   "autoload": {
     "psr-4": {
       "JTL\\SCX\\Client\\Channel\\": "src/"
@@ -15,7 +12,6 @@
       "JTL\\SCX\\Client\\Channel\\": "tests/"
     }
   },
-  "description": "API Client for SCX Channel API",
   "repositories": [
     {
       "type": "vcs",
@@ -25,7 +21,13 @@
   "require-dev": {
     "friendsofphp/php-cs-fixer": "^2.15",
     "mockery/mockery": "^1.2",
-    "phpunit/phpunit": "^8.3"
+    "phpunit/phpunit": "^8.3",
+    "guzzlehttp/guzzle": "^6.3",
+    "jtl/scx-api-client": "dev-master"
+  },
+  "suggest": {
+    "guzzlehttp/guzzle": "Require this for making HTTP calls",
+    "jtl/scx-api-client": "Require this for working with SCX API"
   },
   "scripts": {
     "phpcs": [

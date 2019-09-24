@@ -18,7 +18,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use JTL\SCX\Client\Channel\ObjectSerializer;
-use JTL\SCX\Client\Serializer\JsonSerializer;
+use JTL\SCX\Client\JsonSerializer;
 use Mockery;
 use Psr\Http\Message\ResponseInterface;
 
@@ -105,9 +105,9 @@ class GetSellerEventListApiTest extends AbstractTestCase
         $this->api = new GetSellerEventListApi(
             $this->client,
             $this->configuration,
+            $this->jsonSerializer,
             $this->requestFactory,
-            $this->urlFactory,
-            $this->jsonSerializer
+            $this->urlFactory
         );
 
         $this->event = new \stdClass();
@@ -282,23 +282,5 @@ class GetSellerEventListApiTest extends AbstractTestCase
 
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame($eventMock, $response->getEventList()[0]->getEvent());
-    }
-
-    public function testCanNotGetEvent(): void
-    {
-        $this->event->type = 'Foo';
-
-        $data = new \stdClass();
-        $data->eventList = [$this->event];
-
-        $this->jsonSerializer->shouldReceive('deserialize')
-            ->with($this->responseBody, false)
-            ->once()
-            ->andReturn($data);
-        
-        $response = $this->api->getEventList();
-
-        $this->assertSame(200, $response->getStatusCode());
-        $this->assertNull($response->getEventList()[0]->getEvent());
     }
 }

@@ -25,9 +25,9 @@ use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 use JTL\SCX\Client\Exception\RequestFailedException;
+use JTL\SCX\Client\JsonSerializer;
 use JTL\SCX\Client\Request\RequestFactory;
 use JTL\SCX\Client\Request\UrlFactory;
-use JTL\SCX\Client\Serializer\JsonSerializer;
 
 class GetSellerEventListApi extends AbstractApi
 {
@@ -40,19 +40,19 @@ class GetSellerEventListApi extends AbstractApi
      * GetSellerEventListApi constructor.
      * @param ClientInterface $client
      * @param Configuration $configuration
-     * @param RequestFactory $requestFactory
-     * @param UrlFactory $urlFactory
+     * @param RequestFactory|null $requestFactory
+     * @param UrlFactory|null $urlFactory
      * @param JsonSerializer $jsonSerializer
      */
     public function __construct(
         ClientInterface $client,
         Configuration $configuration,
-        RequestFactory $requestFactory,
-        UrlFactory $urlFactory,
-        JsonSerializer $jsonSerializer
+        JsonSerializer $jsonSerializer = null,
+        RequestFactory $requestFactory = null,
+        UrlFactory $urlFactory = null
     ) {
         parent::__construct($client, $configuration, $requestFactory, $urlFactory);
-        $this->jsonSerializer = $jsonSerializer;
+        $this->jsonSerializer = $jsonSerializer ?? new JsonSerializer();
     }
 
     /**
@@ -83,10 +83,10 @@ class GetSellerEventListApi extends AbstractApi
 
     /**
      * @param string $type
-     * @param object $data
+     * @param \stdClass $data
      * @return mixed
      */
-    private function createEventByType(string $type, object $data)
+    private function createEventByType(string $type, \stdClass $data)
     {
         switch ($type) {
             case 'System:Notification':
@@ -105,7 +105,7 @@ class GetSellerEventListApi extends AbstractApi
                 return ObjectSerializer::deserialize($data, SellerEventOfferEnd::class);
         }
 
-        return null;
+        return $data;
     }
 
     /**
