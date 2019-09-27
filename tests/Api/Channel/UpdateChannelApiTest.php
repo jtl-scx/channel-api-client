@@ -35,6 +35,7 @@ class UpdateChannelApiTest extends AbstractTestCase
         $configuration = $this->createConfigurationMock();
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_PATCH, $body);
         $urlFactory = $this->createUrlFactoryMock('/channel');
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
         $request->shouldReceive('getChannelUpdate')
             ->once()
@@ -48,7 +49,14 @@ class UpdateChannelApiTest extends AbstractTestCase
             ->once()
             ->andReturn(200);
 
-        $api = new UpdateChannelApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new UpdateChannelApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
 
         $apiResponse = $api->update($request);
 

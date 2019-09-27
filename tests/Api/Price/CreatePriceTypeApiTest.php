@@ -51,8 +51,16 @@ class CreatePriceTypeApiTest extends AbstractTestCase
         $configuration = $this->createConfigurationMock();
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_POST, $body);
         $urlFactory = $this->createUrlFactoryMock('/channel/price');
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
-        $api = new CreatePriceTypeApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new CreatePriceTypeApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
 
         $apiResponse = $api->create($request);
 

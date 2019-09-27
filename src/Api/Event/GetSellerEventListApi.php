@@ -51,12 +51,12 @@ class GetSellerEventListApi extends AbstractAuthAwareApi
      */
     public function __construct(
         Configuration $configuration,
-        ClientInterface $client = null,
         SessionTokenStorage $tokenStorage = null,
+        ClientInterface $client = null,
         AuthApi $authApi = null,
-        JsonSerializer $jsonSerializer = null,
         RequestFactory $requestFactory = null,
-        UrlFactory $urlFactory = null
+        UrlFactory $urlFactory = null,
+        JsonSerializer $jsonSerializer = null
     ) {
         parent::__construct($configuration, $tokenStorage, $client, $authApi, $requestFactory, $urlFactory);
         $this->jsonSerializer = $jsonSerializer ?? new JsonSerializer();

@@ -9,6 +9,8 @@
 namespace JTL\SCX\Client\Channel\Api\Event;
 
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\Auth\AuthApi;
+use JTL\SCX\Client\Auth\SessionTokenStorage;
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
@@ -82,6 +84,16 @@ class GetSellerEventListApiTest extends AbstractTestCase
      */
     private $objectSerializer;
 
+    /**
+     * @var SessionTokenStorage
+     */
+    private $tokenStorage;
+
+    /**
+     * @var AuthApi
+     */
+    private $authApi;
+
     public function setUp(): void
     {
         $this->response = Mockery::mock(ResponseInterface::class);
@@ -101,13 +113,16 @@ class GetSellerEventListApiTest extends AbstractTestCase
         $this->urlFactory = $this->createUrlFactoryMock('/channel/event');
         $this->jsonSerializer = Mockery::mock(JsonSerializer::class);
         $this->objectSerializer = Mockery::mock('alias:'. ObjectSerializer::class);
+        [$this->tokenStorage, $this->authApi] = $this->createAuthMocks();
 
         $this->api = new GetSellerEventListApi(
-            $this->client,
             $this->configuration,
-            $this->jsonSerializer,
+            $this->tokenStorage,
+            $this->client,
+            $this->authApi,
             $this->requestFactory,
-            $this->urlFactory
+            $this->urlFactory,
+            $this->jsonSerializer
         );
 
         $this->event = new \stdClass();

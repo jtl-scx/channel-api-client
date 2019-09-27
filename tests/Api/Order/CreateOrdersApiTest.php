@@ -45,12 +45,20 @@ class CreateOrdersApiTest extends AbstractTestCase
         $configuration = $this->createConfigurationMock();
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_POST, $body);
         $urlFactory = $this->createUrlFactoryMock('/channel/order');
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
         $response->shouldReceive('getStatusCode')
             ->once()
             ->andReturn(200);
 
-        $api = new CreateOrdersApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new CreateOrdersApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
 
         $apiResponse = $api->create($request);
 

@@ -36,6 +36,7 @@ class CreateSellerAttributesApiTest extends AbstractTestCase
         $configuration = $this->createConfigurationMock();
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_PUT, $body);
         $urlFactory = $this->createUrlFactoryMock('/channel/attribute/seller/{sellerId}', ['sellerId' => $sellerId]);
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
         $request->shouldReceive('validate')->once();
 
@@ -55,7 +56,14 @@ class CreateSellerAttributesApiTest extends AbstractTestCase
             ->once()
             ->andReturn(200);
 
-        $api = new CreateSellerAttributesApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new CreateSellerAttributesApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
         $response = $api->createSellerAttributes($request);
 
         $this->assertEquals(200, $response->getStatusCode());

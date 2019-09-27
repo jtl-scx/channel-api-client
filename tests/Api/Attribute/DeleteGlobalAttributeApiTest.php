@@ -32,8 +32,16 @@ class DeleteGlobalAttributeApiTest extends AbstractTestCase
         $configuration = $this->createConfigurationMock();
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_DELETE);
         $urlFactory = $this->createUrlFactoryMock('/channel/attribute/global/{attributeId}', ['attributeId' => $attributeId]);
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
-        $api = new DeleteGlobalAttributeApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new DeleteGlobalAttributeApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
 
         $request->shouldReceive('getAttributeId')
             ->once()

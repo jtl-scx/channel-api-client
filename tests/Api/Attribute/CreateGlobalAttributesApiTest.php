@@ -28,6 +28,7 @@ class CreateGlobalAttributesApiTest extends AbstractTestCase
         $response = Mockery::mock(ResponseInterface::class);
         $request = Mockery::mock(CreateGlobalAttributesRequest::class);
         $attributeList = Mockery::mock(AttributeList::class);
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
         $body = uniqid('body', true);
 
@@ -50,7 +51,14 @@ class CreateGlobalAttributesApiTest extends AbstractTestCase
             ->once()
             ->andReturn(200);
 
-        $api = new CreateGlobalAttributesApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new CreateGlobalAttributesApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
         $response = $api->createGlobalAttributes($request);
 
         $this->assertEquals(200, $response->getStatusCode());
