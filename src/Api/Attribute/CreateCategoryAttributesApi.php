@@ -10,12 +10,13 @@ namespace JTL\SCX\Client\Channel\Api\Attribute;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateCategoryAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\CreateCategoryAttributesResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
 
-class CreateCategoryAttributesApi extends AbstractApi
+class CreateCategoryAttributesApi extends AbstractAuthAwareApi
 {
     /**
      * @param CreateCategoryAttributesRequest $request

@@ -10,12 +10,13 @@ namespace JTL\SCX\Client\Channel\Api\Channel;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Channel\Api\Channel\Response\GetChannelStatusResponse;
 use JTL\SCX\Client\Channel\Model\ChannelStatus;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 use JTL\SCX\Client\Exception\RequestFailedException;
 
-class GetChannelStatusApi extends AbstractApi
+class GetChannelStatusApi extends AbstractAuthAwareApi
 {
     /**
      * @return GetChannelStatusResponse

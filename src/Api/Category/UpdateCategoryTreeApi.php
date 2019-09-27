@@ -10,12 +10,13 @@ namespace JTL\SCX\Client\Channel\Api\Category;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest;
 use JTL\SCX\Client\Channel\Api\Category\Response\UpdateCategoryTreeResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
 
-class UpdateCategoryTreeApi extends AbstractApi
+class UpdateCategoryTreeApi extends AbstractAuthAwareApi
 {
     /**
      * @param UpdateCategoryTreeRequest $request

@@ -10,11 +10,12 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrdersRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 
-class CreateOrdersApi extends AbstractApi
+class CreateOrdersApi extends AbstractAuthAwareApi
 {
     /**
      * @param CreateOrdersRequest $request
