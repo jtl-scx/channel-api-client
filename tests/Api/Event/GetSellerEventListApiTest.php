@@ -298,4 +298,24 @@ class GetSellerEventListApiTest extends AbstractTestCase
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame($eventMock, $response->getEventList()[0]->getEvent());
     }
+
+    public function testCanGetStdClassIfEventUnknown(): void
+    {
+        $this->event->type = 'yolo';
+        $eventMock = new \stdClass();
+        $this->event->event = $eventMock;
+
+        $data = new \stdClass();
+        $data->eventList = [$this->event];
+
+        $this->jsonSerializer->shouldReceive('deserialize')
+            ->with($this->responseBody, false)
+            ->once()
+            ->andReturn($data);
+
+        $response = $this->api->getEventList();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame($eventMock, $response->getEventList()[0]->getEvent());
+    }
 }
