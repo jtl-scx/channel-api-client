@@ -23,7 +23,7 @@
     "mockery/mockery": "^1.2",
     "phpunit/phpunit": "^8.3",
     "guzzlehttp/guzzle": "^6.3",
-    "jtl/scx-api-client": "dev-EA-2238"
+    "jtl/scx-api-client": "^0.0.1"
   },
   "suggest": {
     "guzzlehttp/guzzle": "Require this for making HTTP calls",

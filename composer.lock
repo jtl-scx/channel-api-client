@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "99686dfc0247b33c87fae687428ed500",
+    "content-hash": "4d25d606361a1df13fd797bf34771554",
     "packages": [],
     "packages-dev": [
         {
@@ -625,11 +625,11 @@
         },
         {
             "name": "jtl/scx-api-client",
-            "version": "dev-EA-2238",
+            "version": "0.0.1",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.jtl-software.com:ea/scx/scx-api-client.git",
-                "reference": "fdbdeca76ab7f46fdb7408e7da59bca9224b18c3"
+                "reference": "0e700a48e6df857b751bb430c466b0f17dd835f9"
             },
             "require": {
                 "ext-json": "*"
@@ -663,20 +663,20 @@
                 ]
             },
             "description": "SCX-Client Base",
-            "time": "2019-09-27T06:07:39+00:00"
+            "time": "2019-09-30T07:36:44+00:00"
         },
         {
             "name": "mockery/mockery",
-            "version": "1.2.3",
+            "version": "1.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mockery/mockery.git",
-                "reference": "4eff936d83eb809bde2c57a3cea0ee9643769031"
+                "reference": "b3453f75fd23d9fd41685f2148f4abeacabc6405"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mockery/mockery/zipball/4eff936d83eb809bde2c57a3cea0ee9643769031",
-                "reference": "4eff936d83eb809bde2c57a3cea0ee9643769031",
+                "url": "https://api.github.com/repos/mockery/mockery/zipball/b3453f75fd23d9fd41685f2148f4abeacabc6405",
+                "reference": "b3453f75fd23d9fd41685f2148f4abeacabc6405",
                 "shasum": ""
             },
             "require": {
@@ -690,7 +690,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.2.x-dev"
                 }
             },
             "autoload": {
@@ -728,7 +728,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2019-08-07T15:01:07+00:00"
+            "time": "2019-09-30T08:30:27+00:00"
         },
         {
             "name": "myclabs/deep-copy",
@@ -3220,9 +3220,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "jtl/scx-api-client": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
