@@ -13,7 +13,10 @@ use Exception;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\AbstractAuthAwareApi;
+use JTL\SCX\Client\Api\Auth\AuthApi;
 use JTL\SCX\Client\Api\Configuration;
+use JTL\SCX\Client\Auth\SessionTokenStorage;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
 use JTL\SCX\Client\Channel\Api\Event\Response\GetSellerEventListResponse;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
@@ -29,7 +32,7 @@ use JTL\SCX\Client\JsonSerializer;
 use JTL\SCX\Client\Request\RequestFactory;
 use JTL\SCX\Client\Request\UrlFactory;
 
-class GetSellerEventListApi extends AbstractApi
+class GetSellerEventListApi extends AbstractAuthAwareApi
 {
     /**
      * @var JsonSerializer
@@ -40,18 +43,22 @@ class GetSellerEventListApi extends AbstractApi
      * GetSellerEventListApi constructor.
      * @param ClientInterface $client
      * @param Configuration $configuration
+     * @param SessionTokenStorage $tokenStorage
+     * @param AuthApi $authApi
+     * @param JsonSerializer $jsonSerializer
      * @param RequestFactory|null $requestFactory
      * @param UrlFactory|null $urlFactory
-     * @param JsonSerializer $jsonSerializer
      */
     public function __construct(
-        ClientInterface $client,
         Configuration $configuration,
-        JsonSerializer $jsonSerializer = null,
+        SessionTokenStorage $tokenStorage = null,
+        ClientInterface $client = null,
+        AuthApi $authApi = null,
         RequestFactory $requestFactory = null,
-        UrlFactory $urlFactory = null
+        UrlFactory $urlFactory = null,
+        JsonSerializer $jsonSerializer = null
     ) {
-        parent::__construct($client, $configuration, $requestFactory, $urlFactory);
+        parent::__construct($configuration, $tokenStorage, $client, $authApi, $requestFactory, $urlFactory);
         $this->jsonSerializer = $jsonSerializer ?? new JsonSerializer();
     }
 
@@ -65,7 +72,6 @@ class GetSellerEventListApi extends AbstractApi
     {
         $responseData = $this->request();
         $data = $this->jsonSerializer->deserialize($responseData->getBody()->getContents(), false);
-
         $eventList = [];
 
         foreach ($data->eventList as $event) {
@@ -73,7 +79,7 @@ class GetSellerEventListApi extends AbstractApi
                 $event->id,
                 new DateTimeImmutable($event->createdAt),
                 $event->type,
-                $this->createEventByType($event->type, $event->event)
+                is_array($event->event) ? null : $this->createEventByType($event->type, $event->event)
             );
             $eventList[] = $eventContainer;
         }

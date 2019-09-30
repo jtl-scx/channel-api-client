@@ -10,12 +10,13 @@ namespace JTL\SCX\Client\Channel\Api\Price;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Channel\Api\Price\Request\CreatePriceTypeRequest;
 use JTL\SCX\Client\Channel\Api\Price\Response\CreatePriceTypeResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
 
-class CreatePriceTypeApi extends AbstractApi
+class CreatePriceTypeApi extends AbstractAuthAwareApi
 {
     /**
      * @param CreatePriceTypeRequest $request

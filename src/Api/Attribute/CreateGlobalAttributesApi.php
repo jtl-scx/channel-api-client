@@ -10,12 +10,13 @@ namespace JTL\SCX\Client\Channel\Api\Attribute;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateGlobalAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\CreateGlobalAttributesResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
 
-class CreateGlobalAttributesApi extends AbstractApi
+class CreateGlobalAttributesApi extends AbstractAuthAwareApi
 {
     /**
      * @param CreateGlobalAttributesRequest $request

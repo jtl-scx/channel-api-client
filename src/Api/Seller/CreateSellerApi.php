@@ -10,11 +10,12 @@ namespace JTL\SCX\Client\Channel\Api\Seller;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Channel\Api\Seller\Request\CreateSellerRequest;
 use JTL\SCX\Client\Channel\Api\Seller\Response\CreateSellerResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 
-class CreateSellerApi extends AbstractApi
+class CreateSellerApi extends AbstractAuthAwareApi
 {
     /**
      * @param CreateSellerRequest $createSellerRequest

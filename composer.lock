@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d45484975c9324439b8e1779db8c27a6",
+    "content-hash": "99686dfc0247b33c87fae687428ed500",
     "packages": [],
     "packages-dev": [
         {
@@ -625,20 +625,23 @@
         },
         {
             "name": "jtl/scx-api-client",
-            "version": "dev-master",
+            "version": "dev-EA-2238",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.jtl-software.com:ea/scx/scx-api-client.git",
-                "reference": "2138a0fe11a74391b0a6b863436e35a3310f38cf"
+                "reference": "fdbdeca76ab7f46fdb7408e7da59bca9224b18c3"
             },
             "require": {
-                "ext-json": "*",
-                "guzzlehttp/guzzle": "^6.3"
+                "ext-json": "*"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^2.15",
+                "guzzlehttp/guzzle": "^6.3",
                 "mockery/mockery": "^1.2",
                 "phpunit/phpunit": "^8.3"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Require this for making HTTP calls"
             },
             "type": "library",
             "autoload": {
@@ -660,7 +663,7 @@
                 ]
             },
             "description": "SCX-Client Base",
-            "time": "2019-09-24T11:30:01+00:00"
+            "time": "2019-09-27T06:07:39+00:00"
         },
         {
             "name": "mockery/mockery",

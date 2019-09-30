@@ -45,6 +45,7 @@ class GetChannelStatusApiTest extends AbstractTestCase
 
         $channelStatus = Mockery::mock(ChannelStatus::class);
         $channel = Mockery::mock(SalesChannelData::class);
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
         $objectSerializer->shouldReceive('deserialize')
             ->with($responseBody, ChannelStatus::class)
@@ -55,7 +56,14 @@ class GetChannelStatusApiTest extends AbstractTestCase
             ->once()
             ->andReturn($channel);
 
-        $api = new GetChannelStatusApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new GetChannelStatusApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
         $apiResponse = $api->getStatus();
 
         $this->assertSame(200, $apiResponse->getStatusCode());

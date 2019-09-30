@@ -42,12 +42,20 @@ class CreateSellerApiTest extends AbstractTestCase
         $configuration = $this->createConfigurationMock();
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_POST, $body);
         $urlFactory = $this->createUrlFactoryMock('/channel/seller');
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
         $response->shouldReceive('getStatusCode')
             ->once()
             ->andReturn(200);
 
-        $api = new CreateSellerApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new CreateSellerApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
 
         $apiResponse = $api->create($request);
 

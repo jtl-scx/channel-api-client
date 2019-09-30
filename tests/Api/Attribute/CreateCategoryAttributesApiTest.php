@@ -9,6 +9,9 @@
 namespace JTL\SCX\Client\Channel\Api\Attribute;
 
 use JTL\SCX\Client\Api\AbstractApi;
+use JTL\SCX\Client\Api\Auth\AuthApi;
+use JTL\SCX\Client\Auth\Model\SessionToken;
+use JTL\SCX\Client\Auth\SessionTokenStorage;
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateCategoryAttributesRequest;
 use JTL\SCX\Client\Channel\Model\AttributeList;
@@ -32,7 +35,7 @@ class CreateCategoryAttributesApiTest extends AbstractTestCase
 
         $attributeList = Mockery::mock(AttributeList::class);
         $request = Mockery::mock(CreateCategoryAttributesRequest::class);
-
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
         $categoryId = uniqid('categoryId', true);
         $statusCode = 200;
         $body = uniqid('body', true);
@@ -56,11 +59,20 @@ class CreateCategoryAttributesApiTest extends AbstractTestCase
             ->once()
             ->andReturn($statusCode);
 
-        $urlFactory = $this->createUrlFactoryMock('/channel/attribute/category/{categoryId}', ['categoryId' => $categoryId]);
+        $urlFactory = $this->createUrlFactoryMock(
+            '/channel/attribute/category/{categoryId}',
+            ['categoryId' => $categoryId]
+        );
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_PUT, $body);
 
-
-        $api = new CreateCategoryAttributesApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new CreateCategoryAttributesApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
 
         $response = $api->createCategoryAttributes($request);
 

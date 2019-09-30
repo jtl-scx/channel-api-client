@@ -34,6 +34,7 @@ class UpdateCategoryTreeApiTest extends AbstractTestCase
         $configuration = $this->createConfigurationMock();
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_PUT, $body);
         $urlFactory = $this->createUrlFactoryMock('/channel/categories');
+        [$tokenStorage, $authApi] = $this->createAuthMocks();
 
         $request->shouldReceive('validate')->once();
 
@@ -50,7 +51,14 @@ class UpdateCategoryTreeApiTest extends AbstractTestCase
             ->andReturn(200);
 
 
-        $api = new UpdateCategoryTreeApi($client, $configuration, $requestFactory, $urlFactory);
+        $api = new UpdateCategoryTreeApi(
+            $configuration,
+            $tokenStorage,
+            $client,
+            $authApi,
+            $requestFactory,
+            $urlFactory
+        );
         $apiResponse = $api->update($request);
 
         $this->assertSame(200, $apiResponse->getStatusCode());

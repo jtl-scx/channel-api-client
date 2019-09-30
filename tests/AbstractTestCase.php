@@ -10,7 +10,10 @@ namespace JTL\SCX\Client\Channel;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Psr7\Request;
+use JTL\SCX\Client\Api\Auth\AuthApi;
 use JTL\SCX\Client\Api\Configuration;
+use JTL\SCX\Client\Auth\Model\SessionToken;
+use JTL\SCX\Client\Auth\SessionTokenStorage;
 use JTL\SCX\Client\Request\RequestFactory;
 use JTL\SCX\Client\Request\UrlFactory;
 use Mockery;
@@ -30,16 +33,11 @@ abstract class AbstractTestCase extends TestCase
     protected function createConfigurationMock()
     {
         $host = 'http://localhost';
-        $authToken = '123456789';
 
         $configuration = Mockery::mock(Configuration::class);
         $configuration->shouldReceive('getHost')
             ->once()
             ->andReturn($host);
-
-        $configuration->shouldReceive('getAuthToken')
-            ->once()
-            ->andReturn($authToken);
 
         return $configuration;
     }
@@ -92,5 +90,30 @@ abstract class AbstractTestCase extends TestCase
             ->andReturn(uniqid('url', true));
 
         return $urlFactory;
+    }
+
+    /**
+     * @return array
+     * @throws \Exception
+     */
+    protected function createAuthMocks(): array
+    {
+        $tokenStorage = Mockery::mock(SessionTokenStorage::class);
+        $authApi = Mockery::mock(AuthApi::class);
+        $sessionToken = Mockery::mock(SessionToken::class);
+
+        $tokenStorage->shouldReceive('load')
+            ->once()
+            ->andReturn($sessionToken);
+
+        $sessionToken->shouldReceive('getExpiresAt')
+            ->once()
+            ->andReturn(new \DateTimeImmutable('+2 minutes'));
+
+        $sessionToken->shouldReceive('getSessionToken')
+            ->once()
+            ->andReturn('session');
+
+        return [$tokenStorage, $authApi];
     }
 }
