@@ -20,6 +20,11 @@ use PHPUnit\Framework\TestCase;
  */
 class GetChannelStatusResponseTest extends TestCase
 {
+    public function tearDown(): void
+    {
+        \Mockery::close();
+    }
+
     public function testCanGetData(): void
     {
         $salesChannelData = Mockery::mock(SalesChannelData::class);

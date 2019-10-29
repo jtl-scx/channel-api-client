@@ -49,6 +49,7 @@ class UpdateCategoryTreeApiTest extends AbstractTestCase
         $response->shouldReceive('getStatusCode')
             ->once()
             ->andReturn(200);
+        $response->shouldReceive('getBody->getContents')->andReturn('{"categoryTreeVersion": "1559721549-ajifn"}');
 
 
         $api = new UpdateCategoryTreeApi(

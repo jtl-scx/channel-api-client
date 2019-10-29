@@ -13,6 +13,8 @@ use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest;
 use JTL\SCX\Client\Channel\Api\Category\Response\UpdateCategoryTreeResponse;
+use JTL\SCX\Client\Channel\Model\CategoryTreeVersion;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
 
@@ -29,8 +31,9 @@ class UpdateCategoryTreeApi extends AbstractAuthAwareApi
     {
         $request->validate();
         $response = $this->request((string)$request->getChannelCategoryTree());
+        $categoryTreeVersion = ObjectSerializer::deserialize($response->getBody()->getContents(), CategoryTreeVersion::class);
 
-        return new UpdateCategoryTreeResponse($response->getStatusCode());
+        return new UpdateCategoryTreeResponse($response->getStatusCode(), $categoryTreeVersion);
     }
 
     /**
