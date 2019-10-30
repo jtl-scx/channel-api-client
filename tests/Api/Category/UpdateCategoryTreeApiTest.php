@@ -11,6 +11,7 @@ namespace JTL\SCX\Client\Channel\Api\Category;
 use JTL\SCX\Client\Api\AbstractApi;
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest;
+use JTL\SCX\Client\Channel\Model\CategoryTreeVersion;
 use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
 use Mockery;
 use Psr\Http\Message\ResponseInterface;
@@ -20,6 +21,7 @@ use Psr\Http\Message\ResponseInterface;
  * @package JTL\SCX\Client\Channel\Api\Category
  *
  * @covers \JTL\SCX\Client\Channel\Api\Category\UpdateCategoryTreeApi
+ * @runTestsInSeparateProcesses
  */
 class UpdateCategoryTreeApiTest extends AbstractTestCase
 {
@@ -63,5 +65,6 @@ class UpdateCategoryTreeApiTest extends AbstractTestCase
         $apiResponse = $api->update($request);
 
         $this->assertSame(200, $apiResponse->getStatusCode());
+        $this->assertInstanceOf(CategoryTreeVersion::class, $apiResponse->getCategoryTreeVersion());
     }
 }
