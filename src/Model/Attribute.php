@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use ArrayAccess;
-use JTL\SCX\Client\Channel\ObjectSerializer;
+use \ArrayAccess;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * Attribute Class Doc Comment
@@ -63,14 +63,15 @@ class Attribute implements ModelInterface, ArrayAccess
         'type' => 'string',
         'enumValues' => 'string[]',
         'attributeValueValidation' => 'string',
-        'conditionalMandantoryBy' => '\JTL\SCX\Client\Channel\Model\AttributeConditionalMandantoryBy',
-        'conditionalOptionalBy' => '\JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy',
+        'conditionalMandatoryBy' => '\JTL\SCX\Client\Channel\Model\AttributeConditionalMandatoryBy[]',
+        'conditionalOptionalBy' => '\JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy[]',
         'required' => 'bool',
         'section' => 'string',
         'sectionPosition' => 'int',
         'subSection' => 'int',
         'subSectionPosition' => 'int',
-        'description' => 'string'
+        'description' => 'string',
+        'isVariationDimension' => 'bool'
     ];
 
     /**
@@ -85,14 +86,15 @@ class Attribute implements ModelInterface, ArrayAccess
         'type' => null,
         'enumValues' => null,
         'attributeValueValidation' => null,
-        'conditionalMandantoryBy' => null,
+        'conditionalMandatoryBy' => null,
         'conditionalOptionalBy' => null,
         'required' => null,
         'section' => null,
         'sectionPosition' => null,
         'subSection' => null,
         'subSectionPosition' => null,
-        'description' => null
+        'description' => null,
+        'isVariationDimension' => null
     ];
 
     /**
@@ -128,14 +130,15 @@ class Attribute implements ModelInterface, ArrayAccess
         'type' => 'type',
         'enumValues' => 'enumValues',
         'attributeValueValidation' => 'attributeValueValidation',
-        'conditionalMandantoryBy' => 'conditionalMandantoryBy',
+        'conditionalMandatoryBy' => 'conditionalMandatoryBy',
         'conditionalOptionalBy' => 'conditionalOptionalBy',
         'required' => 'required',
         'section' => 'section',
         'sectionPosition' => 'sectionPosition',
         'subSection' => 'subSection',
         'subSectionPosition' => 'subSectionPosition',
-        'description' => 'description'
+        'description' => 'description',
+        'isVariationDimension' => 'isVariationDimension'
     ];
 
     /**
@@ -150,14 +153,15 @@ class Attribute implements ModelInterface, ArrayAccess
         'type' => 'setType',
         'enumValues' => 'setEnumValues',
         'attributeValueValidation' => 'setAttributeValueValidation',
-        'conditionalMandantoryBy' => 'setConditionalMandantoryBy',
+        'conditionalMandatoryBy' => 'setConditionalMandatoryBy',
         'conditionalOptionalBy' => 'setConditionalOptionalBy',
         'required' => 'setRequired',
         'section' => 'setSection',
         'sectionPosition' => 'setSectionPosition',
         'subSection' => 'setSubSection',
         'subSectionPosition' => 'setSubSectionPosition',
-        'description' => 'setDescription'
+        'description' => 'setDescription',
+        'isVariationDimension' => 'setIsVariationDimension'
     ];
 
     /**
@@ -172,14 +176,15 @@ class Attribute implements ModelInterface, ArrayAccess
         'type' => 'getType',
         'enumValues' => 'getEnumValues',
         'attributeValueValidation' => 'getAttributeValueValidation',
-        'conditionalMandantoryBy' => 'getConditionalMandantoryBy',
+        'conditionalMandatoryBy' => 'getConditionalMandatoryBy',
         'conditionalOptionalBy' => 'getConditionalOptionalBy',
         'required' => 'getRequired',
         'section' => 'getSection',
         'sectionPosition' => 'getSectionPosition',
         'subSection' => 'getSubSection',
         'subSectionPosition' => 'getSubSectionPosition',
-        'description' => 'getDescription'
+        'description' => 'getDescription',
+        'isVariationDimension' => 'getIsVariationDimension'
     ];
 
     /**
@@ -275,7 +280,7 @@ class Attribute implements ModelInterface, ArrayAccess
         $this->container['type'] = isset($data['type']) ? $data['type'] : 'smalltext';
         $this->container['enumValues'] = isset($data['enumValues']) ? $data['enumValues'] : null;
         $this->container['attributeValueValidation'] = isset($data['attributeValueValidation']) ? $data['attributeValueValidation'] : null;
-        $this->container['conditionalMandantoryBy'] = isset($data['conditionalMandantoryBy']) ? $data['conditionalMandantoryBy'] : null;
+        $this->container['conditionalMandatoryBy'] = isset($data['conditionalMandatoryBy']) ? $data['conditionalMandatoryBy'] : null;
         $this->container['conditionalOptionalBy'] = isset($data['conditionalOptionalBy']) ? $data['conditionalOptionalBy'] : null;
         $this->container['required'] = isset($data['required']) ? $data['required'] : false;
         $this->container['section'] = isset($data['section']) ? $data['section'] : null;
@@ -283,6 +288,7 @@ class Attribute implements ModelInterface, ArrayAccess
         $this->container['subSection'] = isset($data['subSection']) ? $data['subSection'] : null;
         $this->container['subSectionPosition'] = isset($data['subSectionPosition']) ? $data['subSectionPosition'] : 0;
         $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['isVariationDimension'] = isset($data['isVariationDimension']) ? $data['isVariationDimension'] : null;
     }
 
     /**
@@ -500,25 +506,25 @@ class Attribute implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets conditionalMandantoryBy
+     * Gets conditionalMandatoryBy
      *
-     * @return \JTL\SCX\Client\Channel\Model\AttributeConditionalMandantoryBy|null
+     * @return \JTL\SCX\Client\Channel\Model\AttributeConditionalMandatoryBy[]|null
      */
-    public function getConditionalMandantoryBy()
+    public function getConditionalMandatoryBy()
     {
-        return $this->container['conditionalMandantoryBy'];
+        return $this->container['conditionalMandatoryBy'];
     }
 
     /**
-     * Sets conditionalMandantoryBy
+     * Sets conditionalMandatoryBy
      *
-     * @param \JTL\SCX\Client\Channel\Model\AttributeConditionalMandantoryBy|null $conditionalMandantoryBy conditionalMandantoryBy
+     * @param \JTL\SCX\Client\Channel\Model\AttributeConditionalMandatoryBy[]|null $conditionalMandatoryBy This property defines conditional manadatory settings
      *
      * @return $this
      */
-    public function setConditionalMandantoryBy($conditionalMandantoryBy)
+    public function setConditionalMandatoryBy($conditionalMandatoryBy)
     {
-        $this->container['conditionalMandantoryBy'] = $conditionalMandantoryBy;
+        $this->container['conditionalMandatoryBy'] = $conditionalMandatoryBy;
 
         return $this;
     }
@@ -526,7 +532,7 @@ class Attribute implements ModelInterface, ArrayAccess
     /**
      * Gets conditionalOptionalBy
      *
-     * @return \JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy|null
+     * @return \JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy[]|null
      */
     public function getConditionalOptionalBy()
     {
@@ -536,7 +542,7 @@ class Attribute implements ModelInterface, ArrayAccess
     /**
      * Sets conditionalOptionalBy
      *
-     * @param \JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy|null $conditionalOptionalBy conditionalOptionalBy
+     * @param \JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy[]|null $conditionalOptionalBy This property defines conditional optional settings
      *
      * @return $this
      */
@@ -687,6 +693,30 @@ class Attribute implements ModelInterface, ArrayAccess
     public function setDescription($description)
     {
         $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets isVariationDimension
+     *
+     * @return bool|null
+     */
+    public function getIsVariationDimension()
+    {
+        return $this->container['isVariationDimension'];
+    }
+
+    /**
+     * Sets isVariationDimension
+     *
+     * @param bool|null $isVariationDimension isVariationDimension
+     *
+     * @return $this
+     */
+    public function setIsVariationDimension($isVariationDimension)
+    {
+        $this->container['isVariationDimension'] = $isVariationDimension;
 
         return $this;
     }

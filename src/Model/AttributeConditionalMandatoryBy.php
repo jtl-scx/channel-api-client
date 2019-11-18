@@ -1,6 +1,6 @@
 <?php
 /**
- * AttributeConditionalMandantoryBy
+ * AttributeConditionalMandatoryBy
  *
  * PHP version 5
  *
@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -29,19 +29,18 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use ArrayAccess;
-use JTL\SCX\Client\Channel\ObjectSerializer;
+use \ArrayAccess;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * AttributeConditionalMandantoryBy Class Doc Comment
+ * AttributeConditionalMandatoryBy Class Doc Comment
  *
  * @category Class
- * @description This property define conditional manadatory settings
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class AttributeConditionalMandantoryBy implements ModelInterface, ArrayAccess
+class AttributeConditionalMandatoryBy implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class AttributeConditionalMandantoryBy implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Attribute_conditionalMandantoryBy';
+    protected static $openAPIModelName = 'Attribute_conditionalMandatoryBy';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -236,7 +235,7 @@ class AttributeConditionalMandantoryBy implements ModelInterface, ArrayAccess
     {
 
         if (!is_null($attributeId) && ($attributeId < 1)) {
-            throw new \InvalidArgumentException('invalid value for $attributeId when calling AttributeConditionalMandantoryBy., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $attributeId when calling AttributeConditionalMandatoryBy., must be bigger than or equal to 1.');
         }
 
         $this->container['attributeId'] = $attributeId;
