@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventOrderConfirmed
+ * ChannelEventOrderAddressUpdateRequestBody
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventOrderConfirmed Class Doc Comment
+ * ChannelEventOrderAddressUpdateRequestBody Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
+class ChannelEventOrderAddressUpdateRequestBody implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventOrderConfirmed';
+    protected static $openAPIModelName = 'ChannelEventOrderAddressUpdateRequestBody';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +58,9 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'sellerId' => 'string',
-        'orderId' => 'string'
+        'orderId' => 'string',
+        'billingAddress' => '\JTL\SCX\Client\Channel\Model\Address',
+        'shippingAddress' => '\JTL\SCX\Client\Channel\Model\Address'
     ];
 
     /**
@@ -68,7 +70,9 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'sellerId' => null,
-        'orderId' => null
+        'orderId' => null,
+        'billingAddress' => null,
+        'shippingAddress' => null
     ];
 
     /**
@@ -99,7 +103,9 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'sellerId' => 'sellerId',
-        'orderId' => 'orderId'
+        'orderId' => 'orderId',
+        'billingAddress' => 'billingAddress',
+        'shippingAddress' => 'shippingAddress'
     ];
 
     /**
@@ -109,7 +115,9 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'sellerId' => 'setSellerId',
-        'orderId' => 'setOrderId'
+        'orderId' => 'setOrderId',
+        'billingAddress' => 'setBillingAddress',
+        'shippingAddress' => 'setShippingAddress'
     ];
 
     /**
@@ -119,7 +127,9 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'sellerId' => 'getSellerId',
-        'orderId' => 'getOrderId'
+        'orderId' => 'getOrderId',
+        'billingAddress' => 'getBillingAddress',
+        'shippingAddress' => 'getShippingAddress'
     ];
 
     /**
@@ -184,6 +194,8 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
     {
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
+        $this->container['billingAddress'] = isset($data['billingAddress']) ? $data['billingAddress'] : null;
+        $this->container['shippingAddress'] = isset($data['shippingAddress']) ? $data['shippingAddress'] : null;
     }
 
     /**
@@ -202,6 +214,9 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
+        if ($this->container['orderId'] === null) {
+            $invalidProperties[] = "'orderId' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -238,7 +253,7 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling SellerEventOrderConfirmed., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling ChannelEventOrderAddressUpdateRequestBody., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -249,7 +264,7 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
     /**
      * Gets orderId
      *
-     * @return string|null
+     * @return string
      */
     public function getOrderId()
     {
@@ -259,13 +274,61 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
     /**
      * Sets orderId
      *
-     * @param string|null $orderId orderId
+     * @param string $orderId orderId
      *
      * @return $this
      */
     public function setOrderId($orderId)
     {
         $this->container['orderId'] = $orderId;
+
+        return $this;
+    }
+
+    /**
+     * Gets billingAddress
+     *
+     * @return \JTL\SCX\Client\Channel\Model\Address|null
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billingAddress'];
+    }
+
+    /**
+     * Sets billingAddress
+     *
+     * @param \JTL\SCX\Client\Channel\Model\Address|null $billingAddress billingAddress
+     *
+     * @return $this
+     */
+    public function setBillingAddress($billingAddress)
+    {
+        $this->container['billingAddress'] = $billingAddress;
+
+        return $this;
+    }
+
+    /**
+     * Gets shippingAddress
+     *
+     * @return \JTL\SCX\Client\Channel\Model\Address|null
+     */
+    public function getShippingAddress()
+    {
+        return $this->container['shippingAddress'];
+    }
+
+    /**
+     * Sets shippingAddress
+     *
+     * @param \JTL\SCX\Client\Channel\Model\Address|null $shippingAddress shippingAddress
+     *
+     * @return $this
+     */
+    public function setShippingAddress($shippingAddress)
+    {
+        $this->container['shippingAddress'] = $shippingAddress;
 
         return $this;
     }

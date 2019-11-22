@@ -518,7 +518,7 @@ class Attribute implements ModelInterface, ArrayAccess
     /**
      * Sets conditionalMandatoryBy
      *
-     * @param \JTL\SCX\Client\Channel\Model\AttributeConditionalMandatoryBy[]|null $conditionalMandatoryBy This property defines conditional manadatory settings
+     * @param \JTL\SCX\Client\Channel\Model\AttributeConditionalMandatoryBy[]|null $conditionalMandatoryBy This property defines conditional mandatory settings
      *
      * @return $this
      */

@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventOrderConfirmed
+ * ChannelEventOrderStatusUpdateRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventOrderConfirmed Class Doc Comment
+ * ChannelEventOrderStatusUpdateRequest Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
+class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventOrderConfirmed';
+    protected static $openAPIModelName = 'ChannelEventOrderStatusUpdateRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,7 +58,8 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'sellerId' => 'string',
-        'orderId' => 'string'
+        'orderId' => '\JTL\SCX\Client\Channel\Model\OrderStatus',
+        'paymentStatus' => 'PaymentStatus'
     ];
 
     /**
@@ -68,7 +69,8 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'sellerId' => null,
-        'orderId' => null
+        'orderId' => null,
+        'paymentStatus' => null
     ];
 
     /**
@@ -99,7 +101,8 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'sellerId' => 'sellerId',
-        'orderId' => 'orderId'
+        'orderId' => 'orderId',
+        'paymentStatus' => 'paymentStatus'
     ];
 
     /**
@@ -109,7 +112,8 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'sellerId' => 'setSellerId',
-        'orderId' => 'setOrderId'
+        'orderId' => 'setOrderId',
+        'paymentStatus' => 'setPaymentStatus'
     ];
 
     /**
@@ -119,7 +123,8 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'sellerId' => 'getSellerId',
-        'orderId' => 'getOrderId'
+        'orderId' => 'getOrderId',
+        'paymentStatus' => 'getPaymentStatus'
     ];
 
     /**
@@ -184,6 +189,7 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
     {
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
+        $this->container['paymentStatus'] = isset($data['paymentStatus']) ? $data['paymentStatus'] : null;
     }
 
     /**
@@ -202,6 +208,9 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
+        if ($this->container['orderId'] === null) {
+            $invalidProperties[] = "'orderId' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -238,7 +247,7 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling SellerEventOrderConfirmed., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling ChannelEventOrderStatusUpdateRequest., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -249,7 +258,7 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
     /**
      * Gets orderId
      *
-     * @return string|null
+     * @return \JTL\SCX\Client\Channel\Model\OrderStatus
      */
     public function getOrderId()
     {
@@ -259,13 +268,37 @@ class SellerEventOrderConfirmed implements ModelInterface, ArrayAccess
     /**
      * Sets orderId
      *
-     * @param string|null $orderId orderId
+     * @param \JTL\SCX\Client\Channel\Model\OrderStatus $orderId orderId
      *
      * @return $this
      */
     public function setOrderId($orderId)
     {
         $this->container['orderId'] = $orderId;
+
+        return $this;
+    }
+
+    /**
+     * Gets paymentStatus
+     *
+     * @return PaymentStatus|null
+     */
+    public function getPaymentStatus()
+    {
+        return $this->container['paymentStatus'];
+    }
+
+    /**
+     * Sets paymentStatus
+     *
+     * @param PaymentStatus|null $paymentStatus paymentStatus
+     *
+     * @return $this
+     */
+    public function setPaymentStatus($paymentStatus)
+    {
+        $this->container['paymentStatus'] = $paymentStatus;
 
         return $this;
     }

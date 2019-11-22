@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use ArrayAccess;
-use JTL\SCX\Client\Channel\ObjectSerializer;
+use \ArrayAccess;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * ChannelEventOrderStatusUpdate Class Doc Comment
@@ -58,9 +58,10 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'channel' => 'string',
+        'sellerId' => 'string',
         'orderId' => 'string',
-        'orderStatus' => '\JTL\SCX\Client\Channel\Model\OrderStatus',
-        'paymentStatus' => '\JTL\SCX\Client\Channel\Model\PaymentStatus'
+        'paymentStatus' => '\JTL\SCX\Client\Channel\Model\PaymentStatus',
+        'orderStatus' => '\JTL\SCX\Client\Channel\Model\OrderStatus'
     ];
 
     /**
@@ -70,9 +71,10 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'channel' => null,
+        'sellerId' => null,
         'orderId' => null,
-        'orderStatus' => null,
-        'paymentStatus' => null
+        'paymentStatus' => null,
+        'orderStatus' => null
     ];
 
     /**
@@ -103,9 +105,10 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'channel' => 'channel',
+        'sellerId' => 'sellerId',
         'orderId' => 'orderId',
-        'orderStatus' => 'orderStatus',
-        'paymentStatus' => 'paymentStatus'
+        'paymentStatus' => 'paymentStatus',
+        'orderStatus' => 'orderStatus'
     ];
 
     /**
@@ -115,9 +118,10 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'channel' => 'setChannel',
+        'sellerId' => 'setSellerId',
         'orderId' => 'setOrderId',
-        'orderStatus' => 'setOrderStatus',
-        'paymentStatus' => 'setPaymentStatus'
+        'paymentStatus' => 'setPaymentStatus',
+        'orderStatus' => 'setOrderStatus'
     ];
 
     /**
@@ -127,9 +131,10 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'channel' => 'getChannel',
+        'sellerId' => 'getSellerId',
         'orderId' => 'getOrderId',
-        'orderStatus' => 'getOrderStatus',
-        'paymentStatus' => 'getPaymentStatus'
+        'paymentStatus' => 'getPaymentStatus',
+        'orderStatus' => 'getOrderStatus'
     ];
 
     /**
@@ -193,9 +198,10 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['channel'] = isset($data['channel']) ? $data['channel'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['orderStatus'] = isset($data['orderStatus']) ? $data['orderStatus'] : null;
         $this->container['paymentStatus'] = isset($data['paymentStatus']) ? $data['paymentStatus'] : null;
+        $this->container['orderStatus'] = isset($data['orderStatus']) ? $data['orderStatus'] : null;
     }
 
     /**
@@ -214,6 +220,16 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'channel', must be conform to the pattern /^\\w{5,15}$/.";
         }
 
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
+        }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        }
+
+        if ($this->container['orderId'] === null) {
+            $invalidProperties[] = "'orderId' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -259,9 +275,38 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets sellerId
+     *
+     * @return string
+     */
+    public function getSellerId()
+    {
+        return $this->container['sellerId'];
+    }
+
+    /**
+     * Sets sellerId
+     *
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     *
+     * @return $this
+     */
+    public function setSellerId($sellerId)
+    {
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling ChannelEventOrderStatusUpdate., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
+
+        return $this;
+    }
+
+    /**
      * Gets orderId
      *
-     * @return string|null
+     * @return string
      */
     public function getOrderId()
     {
@@ -271,37 +316,13 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets orderId
      *
-     * @param string|null $orderId orderId
+     * @param string $orderId orderId
      *
      * @return $this
      */
     public function setOrderId($orderId)
     {
         $this->container['orderId'] = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * Gets orderStatus
-     *
-     * @return \JTL\SCX\Client\Channel\Model\OrderStatus|null
-     */
-    public function getOrderStatus()
-    {
-        return $this->container['orderStatus'];
-    }
-
-    /**
-     * Sets orderStatus
-     *
-     * @param \JTL\SCX\Client\Channel\Model\OrderStatus|null $orderStatus orderStatus
-     *
-     * @return $this
-     */
-    public function setOrderStatus($orderStatus)
-    {
-        $this->container['orderStatus'] = $orderStatus;
 
         return $this;
     }
@@ -326,6 +347,30 @@ class ChannelEventOrderStatusUpdate implements ModelInterface, ArrayAccess
     public function setPaymentStatus($paymentStatus)
     {
         $this->container['paymentStatus'] = $paymentStatus;
+
+        return $this;
+    }
+
+    /**
+     * Gets orderStatus
+     *
+     * @return \JTL\SCX\Client\Channel\Model\OrderStatus|null
+     */
+    public function getOrderStatus()
+    {
+        return $this->container['orderStatus'];
+    }
+
+    /**
+     * Sets orderStatus
+     *
+     * @param \JTL\SCX\Client\Channel\Model\OrderStatus|null $orderStatus orderStatus
+     *
+     * @return $this
+     */
+    public function setOrderStatus($orderStatus)
+    {
+        $this->container['orderStatus'] = $orderStatus;
 
         return $this;
     }

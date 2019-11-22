@@ -1,6 +1,6 @@
 <?php
 /**
- * SalesChannelOffer
+ * SellerEventOfferUpdate
  *
  * PHP version 5
  *
@@ -33,14 +33,15 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SalesChannelOffer Class Doc Comment
+ * SellerEventOfferUpdate Class Doc Comment
  *
  * @category Class
+ * @description Update existing Offer.  If your current channel implementation process listing in asychronous manner it is recommended to call &#x60;/channel/offer/received&#x60; afterwards to mark wating Offers as in-progress. If a channel process an Offer directly you do not need to mark a Offer as &#x60;in-progress&#x60;. But it is important to mark an Offer as &#x60;successful&#x60; listed. If there are any errors during the listing process it is importand to mark a offer as &#x60;failed&#x60;.
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SalesChannelOffer implements ModelInterface, ArrayAccess
+class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SalesChannelOffer';
+    protected static $openAPIModelName = 'SellerEventOfferUpdate';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -67,7 +68,14 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => 'string',
         'mainPicture' => 'string',
         'pictureList' => 'string[]',
-        'channelAttributeList' => '\JTL\SCX\Client\Channel\Model\SalesChannelAttributeList[]'
+        'channelAttributeList' => '\JTL\SCX\Client\Channel\Model\SalesChannelAttributeList[]',
+        'sku' => 'string',
+        'ean' => 'string',
+        'gtin' => 'string',
+        'upc' => 'string',
+        'isbn' => 'string',
+        'srp' => '\JTL\SCX\Client\Channel\Model\Price',
+        'productAttributeList' => 'object[]'
     ];
 
     /**
@@ -86,7 +94,14 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => null,
         'mainPicture' => null,
         'pictureList' => null,
-        'channelAttributeList' => null
+        'channelAttributeList' => null,
+        'sku' => null,
+        'ean' => null,
+        'gtin' => null,
+        'upc' => null,
+        'isbn' => null,
+        'srp' => null,
+        'productAttributeList' => null
     ];
 
     /**
@@ -126,7 +141,14 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => 'description',
         'mainPicture' => 'mainPicture',
         'pictureList' => 'pictureList',
-        'channelAttributeList' => 'channelAttributeList'
+        'channelAttributeList' => 'channelAttributeList',
+        'sku' => 'sku',
+        'ean' => 'ean',
+        'gtin' => 'gtin',
+        'upc' => 'upc',
+        'isbn' => 'isbn',
+        'srp' => 'srp',
+        'productAttributeList' => 'productAttributeList'
     ];
 
     /**
@@ -145,7 +167,14 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => 'setDescription',
         'mainPicture' => 'setMainPicture',
         'pictureList' => 'setPictureList',
-        'channelAttributeList' => 'setChannelAttributeList'
+        'channelAttributeList' => 'setChannelAttributeList',
+        'sku' => 'setSku',
+        'ean' => 'setEan',
+        'gtin' => 'setGtin',
+        'upc' => 'setUpc',
+        'isbn' => 'setIsbn',
+        'srp' => 'setSrp',
+        'productAttributeList' => 'setProductAttributeList'
     ];
 
     /**
@@ -164,7 +193,14 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => 'getDescription',
         'mainPicture' => 'getMainPicture',
         'pictureList' => 'getPictureList',
-        'channelAttributeList' => 'getChannelAttributeList'
+        'channelAttributeList' => 'getChannelAttributeList',
+        'sku' => 'getSku',
+        'ean' => 'getEan',
+        'gtin' => 'getGtin',
+        'upc' => 'getUpc',
+        'isbn' => 'getIsbn',
+        'srp' => 'getSrp',
+        'productAttributeList' => 'getProductAttributeList'
     ];
 
     /**
@@ -238,6 +274,13 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         $this->container['mainPicture'] = isset($data['mainPicture']) ? $data['mainPicture'] : null;
         $this->container['pictureList'] = isset($data['pictureList']) ? $data['pictureList'] : null;
         $this->container['channelAttributeList'] = isset($data['channelAttributeList']) ? $data['channelAttributeList'] : null;
+        $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
+        $this->container['ean'] = isset($data['ean']) ? $data['ean'] : null;
+        $this->container['gtin'] = isset($data['gtin']) ? $data['gtin'] : null;
+        $this->container['upc'] = isset($data['upc']) ? $data['upc'] : null;
+        $this->container['isbn'] = isset($data['isbn']) ? $data['isbn'] : null;
+        $this->container['srp'] = isset($data['srp']) ? $data['srp'] : null;
+        $this->container['productAttributeList'] = isset($data['productAttributeList']) ? $data['productAttributeList'] : null;
     }
 
     /**
@@ -266,6 +309,33 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         if ($this->container['priceList'] === null) {
             $invalidProperties[] = "'priceList' can't be null";
         }
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) > 100)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be smaller than or equal to 100.";
+        }
+
+        if (!is_null($this->container['title']) && (mb_strlen($this->container['title']) < 1)) {
+            $invalidProperties[] = "invalid value for 'title', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['subTitle']) && (mb_strlen($this->container['subTitle']) > 255)) {
+            $invalidProperties[] = "invalid value for 'subTitle', the character length must be smaller than or equal to 255.";
+        }
+
+        if (!is_null($this->container['description']) && (mb_strlen($this->container['description']) > 50000)) {
+            $invalidProperties[] = "invalid value for 'description', the character length must be smaller than or equal to 50000.";
+        }
+
+        if ($this->container['sku'] === null) {
+            $invalidProperties[] = "'sku' can't be null";
+        }
+        if ((mb_strlen($this->container['sku']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 100.";
+        }
+
+        if ((mb_strlen($this->container['sku']) < 1)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -302,7 +372,7 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling SalesChannelOffer., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling SellerEventOfferUpdate., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -331,7 +401,7 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     {
 
         if (($offerId < 1)) {
-            throw new \InvalidArgumentException('invalid value for $offerId when calling SalesChannelOffer., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid value for $offerId when calling SellerEventOfferUpdate., must be bigger than or equal to 1.');
         }
 
         $this->container['offerId'] = $offerId;
@@ -424,12 +494,19 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     /**
      * Sets title
      *
-     * @param string|null $title Title used for this specific SalesChannel. If no title is provided, the product title should be used.
+     * @param string|null $title title
      *
      * @return $this
      */
     public function setTitle($title)
     {
+        if (!is_null($title) && (mb_strlen($title) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling SellerEventOfferUpdate., must be smaller than or equal to 100.');
+        }
+        if (!is_null($title) && (mb_strlen($title) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $title when calling SellerEventOfferUpdate., must be bigger than or equal to 1.');
+        }
+
         $this->container['title'] = $title;
 
         return $this;
@@ -448,12 +525,16 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     /**
      * Sets subTitle
      *
-     * @param string|null $subTitle Subtitle used for this specific SalesChannel. If no subtitle is provided, the product description should be used.
+     * @param string|null $subTitle subTitle
      *
      * @return $this
      */
     public function setSubTitle($subTitle)
     {
+        if (!is_null($subTitle) && (mb_strlen($subTitle) > 255)) {
+            throw new \InvalidArgumentException('invalid length for $subTitle when calling SellerEventOfferUpdate., must be smaller than or equal to 255.');
+        }
+
         $this->container['subTitle'] = $subTitle;
 
         return $this;
@@ -472,12 +553,16 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     /**
      * Sets description
      *
-     * @param string|null $description Description used for this specific SalesChannel. If no description is provided, the product description should be used.
+     * @param string|null $description description
      *
      * @return $this
      */
     public function setDescription($description)
     {
+        if (!is_null($description) && (mb_strlen($description) > 50000)) {
+            throw new \InvalidArgumentException('invalid length for $description when calling SellerEventOfferUpdate., must be smaller than or equal to 50000.');
+        }
+
         $this->container['description'] = $description;
 
         return $this;
@@ -551,6 +636,181 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     public function setChannelAttributeList($channelAttributeList)
     {
         $this->container['channelAttributeList'] = $channelAttributeList;
+
+        return $this;
+    }
+
+    /**
+     * Gets sku
+     *
+     * @return string
+     */
+    public function getSku()
+    {
+        return $this->container['sku'];
+    }
+
+    /**
+     * Sets sku
+     *
+     * @param string $sku Stock keeping unit is a unique Id used to identify one product.
+     *
+     * @return $this
+     */
+    public function setSku($sku)
+    {
+        if ((mb_strlen($sku) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling SellerEventOfferUpdate., must be smaller than or equal to 100.');
+        }
+        if ((mb_strlen($sku) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling SellerEventOfferUpdate., must be bigger than or equal to 1.');
+        }
+
+        $this->container['sku'] = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Gets ean
+     *
+     * @return string|null
+     */
+    public function getEan()
+    {
+        return $this->container['ean'];
+    }
+
+    /**
+     * Sets ean
+     *
+     * @param string|null $ean ean
+     *
+     * @return $this
+     */
+    public function setEan($ean)
+    {
+        $this->container['ean'] = $ean;
+
+        return $this;
+    }
+
+    /**
+     * Gets gtin
+     *
+     * @return string|null
+     */
+    public function getGtin()
+    {
+        return $this->container['gtin'];
+    }
+
+    /**
+     * Sets gtin
+     *
+     * @param string|null $gtin gtin
+     *
+     * @return $this
+     */
+    public function setGtin($gtin)
+    {
+        $this->container['gtin'] = $gtin;
+
+        return $this;
+    }
+
+    /**
+     * Gets upc
+     *
+     * @return string|null
+     */
+    public function getUpc()
+    {
+        return $this->container['upc'];
+    }
+
+    /**
+     * Sets upc
+     *
+     * @param string|null $upc upc
+     *
+     * @return $this
+     */
+    public function setUpc($upc)
+    {
+        $this->container['upc'] = $upc;
+
+        return $this;
+    }
+
+    /**
+     * Gets isbn
+     *
+     * @return string|null
+     */
+    public function getIsbn()
+    {
+        return $this->container['isbn'];
+    }
+
+    /**
+     * Sets isbn
+     *
+     * @param string|null $isbn isbn
+     *
+     * @return $this
+     */
+    public function setIsbn($isbn)
+    {
+        $this->container['isbn'] = $isbn;
+
+        return $this;
+    }
+
+    /**
+     * Gets srp
+     *
+     * @return \JTL\SCX\Client\Channel\Model\Price|null
+     */
+    public function getSrp()
+    {
+        return $this->container['srp'];
+    }
+
+    /**
+     * Sets srp
+     *
+     * @param \JTL\SCX\Client\Channel\Model\Price|null $srp srp
+     *
+     * @return $this
+     */
+    public function setSrp($srp)
+    {
+        $this->container['srp'] = $srp;
+
+        return $this;
+    }
+
+    /**
+     * Gets productAttributeList
+     *
+     * @return object[]|null
+     */
+    public function getProductAttributeList()
+    {
+        return $this->container['productAttributeList'];
+    }
+
+    /**
+     * Sets productAttributeList
+     *
+     * @param object[]|null $productAttributeList productAttributeList
+     *
+     * @return $this
+     */
+    public function setProductAttributeList($productAttributeList)
+    {
+        $this->container['productAttributeList'] = $productAttributeList;
 
         return $this;
     }

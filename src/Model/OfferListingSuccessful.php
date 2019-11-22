@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use ArrayAccess;
-use JTL\SCX\Client\Channel\ObjectSerializer;
+use \ArrayAccess;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * OfferListingSuccessful Class Doc Comment
@@ -59,6 +59,7 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'sellerId' => 'string',
         'offerId' => 'int',
+        'channelOfferId' => 'string',
         'listedAt' => '\DateTime',
         'listingUrl' => 'string'
     ];
@@ -71,6 +72,7 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'sellerId' => null,
         'offerId' => 'int64',
+        'channelOfferId' => null,
         'listedAt' => 'date-time',
         'listingUrl' => null
     ];
@@ -104,6 +106,7 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'sellerId' => 'sellerId',
         'offerId' => 'offerId',
+        'channelOfferId' => 'channelOfferId',
         'listedAt' => 'listedAt',
         'listingUrl' => 'listingUrl'
     ];
@@ -116,6 +119,7 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
     protected static $setters = [
         'sellerId' => 'setSellerId',
         'offerId' => 'setOfferId',
+        'channelOfferId' => 'setChannelOfferId',
         'listedAt' => 'setListedAt',
         'listingUrl' => 'setListingUrl'
     ];
@@ -128,6 +132,7 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
     protected static $getters = [
         'sellerId' => 'getSellerId',
         'offerId' => 'getOfferId',
+        'channelOfferId' => 'getChannelOfferId',
         'listedAt' => 'getListedAt',
         'listingUrl' => 'getListingUrl'
     ];
@@ -194,6 +199,7 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
     {
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
+        $this->container['channelOfferId'] = isset($data['channelOfferId']) ? $data['channelOfferId'] : null;
         $this->container['listedAt'] = isset($data['listedAt']) ? $data['listedAt'] : null;
         $this->container['listingUrl'] = isset($data['listingUrl']) ? $data['listingUrl'] : null;
     }
@@ -219,6 +225,14 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
         }
         if (($this->container['offerId'] < 1)) {
             $invalidProperties[] = "invalid value for 'offerId', must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['channelOfferId']) && (mb_strlen($this->container['channelOfferId']) > 50)) {
+            $invalidProperties[] = "invalid value for 'channelOfferId', the character length must be smaller than or equal to 50.";
+        }
+
+        if (!is_null($this->container['channelOfferId']) && (mb_strlen($this->container['channelOfferId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'channelOfferId', the character length must be bigger than or equal to 1.";
         }
 
         if ($this->container['listedAt'] === null) {
@@ -293,6 +307,37 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
         }
 
         $this->container['offerId'] = $offerId;
+
+        return $this;
+    }
+
+    /**
+     * Gets channelOfferId
+     *
+     * @return string|null
+     */
+    public function getChannelOfferId()
+    {
+        return $this->container['channelOfferId'];
+    }
+
+    /**
+     * Sets channelOfferId
+     *
+     * @param string|null $channelOfferId Channel defined unique Offer Id to identify a Offer on a Sales Channel.
+     *
+     * @return $this
+     */
+    public function setChannelOfferId($channelOfferId)
+    {
+        if (!is_null($channelOfferId) && (mb_strlen($channelOfferId) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $channelOfferId when calling OfferListingSuccessful., must be smaller than or equal to 50.');
+        }
+        if (!is_null($channelOfferId) && (mb_strlen($channelOfferId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $channelOfferId when calling OfferListingSuccessful., must be bigger than or equal to 1.');
+        }
+
+        $this->container['channelOfferId'] = $channelOfferId;
 
         return $this;
     }

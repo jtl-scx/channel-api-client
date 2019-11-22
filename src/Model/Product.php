@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use ArrayAccess;
-use JTL\SCX\Client\Channel\ObjectSerializer;
+use \ArrayAccess;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * Product Class Doc Comment
@@ -66,11 +66,6 @@ class Product implements ModelInterface, ArrayAccess
         'upc' => 'string',
         'isbn' => 'string',
         'srp' => '\JTL\SCX\Client\Channel\Model\Price',
-        'serialNumber' => 'string',
-        'taric' => 'string',
-        'unNumber' => 'string',
-        'isBestBefore' => 'string',
-        'originCountry' => 'string',
         'productAttributeList' => 'object[]'
     ];
 
@@ -89,11 +84,6 @@ class Product implements ModelInterface, ArrayAccess
         'upc' => null,
         'isbn' => null,
         'srp' => null,
-        'serialNumber' => null,
-        'taric' => null,
-        'unNumber' => null,
-        'isBestBefore' => null,
-        'originCountry' => null,
         'productAttributeList' => null
     ];
 
@@ -133,11 +123,6 @@ class Product implements ModelInterface, ArrayAccess
         'upc' => 'upc',
         'isbn' => 'isbn',
         'srp' => 'srp',
-        'serialNumber' => 'serialNumber',
-        'taric' => 'taric',
-        'unNumber' => 'unNumber',
-        'isBestBefore' => 'isBestBefore',
-        'originCountry' => 'originCountry',
         'productAttributeList' => 'productAttributeList'
     ];
 
@@ -156,11 +141,6 @@ class Product implements ModelInterface, ArrayAccess
         'upc' => 'setUpc',
         'isbn' => 'setIsbn',
         'srp' => 'setSrp',
-        'serialNumber' => 'setSerialNumber',
-        'taric' => 'setTaric',
-        'unNumber' => 'setUnNumber',
-        'isBestBefore' => 'setIsBestBefore',
-        'originCountry' => 'setOriginCountry',
         'productAttributeList' => 'setProductAttributeList'
     ];
 
@@ -179,11 +159,6 @@ class Product implements ModelInterface, ArrayAccess
         'upc' => 'getUpc',
         'isbn' => 'getIsbn',
         'srp' => 'getSrp',
-        'serialNumber' => 'getSerialNumber',
-        'taric' => 'getTaric',
-        'unNumber' => 'getUnNumber',
-        'isBestBefore' => 'getIsBestBefore',
-        'originCountry' => 'getOriginCountry',
         'productAttributeList' => 'getProductAttributeList'
     ];
 
@@ -256,11 +231,6 @@ class Product implements ModelInterface, ArrayAccess
         $this->container['upc'] = isset($data['upc']) ? $data['upc'] : null;
         $this->container['isbn'] = isset($data['isbn']) ? $data['isbn'] : null;
         $this->container['srp'] = isset($data['srp']) ? $data['srp'] : null;
-        $this->container['serialNumber'] = isset($data['serialNumber']) ? $data['serialNumber'] : null;
-        $this->container['taric'] = isset($data['taric']) ? $data['taric'] : null;
-        $this->container['unNumber'] = isset($data['unNumber']) ? $data['unNumber'] : null;
-        $this->container['isBestBefore'] = isset($data['isBestBefore']) ? $data['isBestBefore'] : null;
-        $this->container['originCountry'] = isset($data['originCountry']) ? $data['originCountry'] : null;
         $this->container['productAttributeList'] = isset($data['productAttributeList']) ? $data['productAttributeList'] : null;
     }
 
@@ -549,126 +519,6 @@ class Product implements ModelInterface, ArrayAccess
     public function setSrp($srp)
     {
         $this->container['srp'] = $srp;
-
-        return $this;
-    }
-
-    /**
-     * Gets serialNumber
-     *
-     * @return string|null
-     */
-    public function getSerialNumber()
-    {
-        return $this->container['serialNumber'];
-    }
-
-    /**
-     * Sets serialNumber
-     *
-     * @param string|null $serialNumber serialNumber
-     *
-     * @return $this
-     */
-    public function setSerialNumber($serialNumber)
-    {
-        $this->container['serialNumber'] = $serialNumber;
-
-        return $this;
-    }
-
-    /**
-     * Gets taric
-     *
-     * @return string|null
-     */
-    public function getTaric()
-    {
-        return $this->container['taric'];
-    }
-
-    /**
-     * Sets taric
-     *
-     * @param string|null $taric taric
-     *
-     * @return $this
-     */
-    public function setTaric($taric)
-    {
-        $this->container['taric'] = $taric;
-
-        return $this;
-    }
-
-    /**
-     * Gets unNumber
-     *
-     * @return string|null
-     */
-    public function getUnNumber()
-    {
-        return $this->container['unNumber'];
-    }
-
-    /**
-     * Sets unNumber
-     *
-     * @param string|null $unNumber used to define hazardous properties
-     *
-     * @return $this
-     */
-    public function setUnNumber($unNumber)
-    {
-        $this->container['unNumber'] = $unNumber;
-
-        return $this;
-    }
-
-    /**
-     * Gets isBestBefore
-     *
-     * @return string|null
-     */
-    public function getIsBestBefore()
-    {
-        return $this->container['isBestBefore'];
-    }
-
-    /**
-     * Sets isBestBefore
-     *
-     * @param string|null $isBestBefore isBestBefore
-     *
-     * @return $this
-     */
-    public function setIsBestBefore($isBestBefore)
-    {
-        $this->container['isBestBefore'] = $isBestBefore;
-
-        return $this;
-    }
-
-    /**
-     * Gets originCountry
-     *
-     * @return string|null
-     */
-    public function getOriginCountry()
-    {
-        return $this->container['originCountry'];
-    }
-
-    /**
-     * Sets originCountry
-     *
-     * @param string|null $originCountry originCountry
-     *
-     * @return $this
-     */
-    public function setOriginCountry($originCountry)
-    {
-        $this->container['originCountry'] = $originCountry;
 
         return $this;
     }

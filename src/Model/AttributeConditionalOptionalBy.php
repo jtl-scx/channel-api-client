@@ -29,14 +29,13 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use ArrayAccess;
-use JTL\SCX\Client\Channel\ObjectSerializer;
+use \ArrayAccess;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * AttributeConditionalOptionalBy Class Doc Comment
  *
  * @category Class
- * @description This property defines conditional optional settings
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech

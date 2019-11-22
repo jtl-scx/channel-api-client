@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -28,6 +28,7 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * SellerEventTypeList Class Doc Comment
@@ -48,6 +49,8 @@ class SellerEventTypeList
     const SELLERORDER_SHIPPING = 'Seller:Order.Shipping';
     const SELLERORDER_PAYMENT = 'Seller:Order.Payment';
     const SELLERORDER_CANCELLED = 'Seller:Order.Cancelled';
+    const SELLEROFFER_NEW = 'Seller:Offer.New';
+    const SELLEROFFER_UPDATE = 'Seller:Offer.Update';
     const SELLEROFFER_END = 'Seller:Offer.End';
     
     /**
@@ -63,6 +66,8 @@ class SellerEventTypeList
             self::SELLERORDER_SHIPPING,
             self::SELLERORDER_PAYMENT,
             self::SELLERORDER_CANCELLED,
+            self::SELLEROFFER_NEW,
+            self::SELLEROFFER_UPDATE,
             self::SELLEROFFER_END,
         ];
     }

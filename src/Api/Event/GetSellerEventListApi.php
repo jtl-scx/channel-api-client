@@ -20,6 +20,7 @@ use JTL\SCX\Client\Auth\SessionTokenStorage;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
 use JTL\SCX\Client\Channel\Api\Event\Response\GetSellerEventListResponse;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
@@ -109,6 +110,8 @@ class GetSellerEventListApi extends AbstractAuthAwareApi
                 return ObjectSerializer::deserialize($data, SellerEventOrderCancelled::class);
             case 'Seller:Offer.End':
                 return ObjectSerializer::deserialize($data, SellerEventOfferEnd::class);
+            case 'Seller:Offer.New':
+                return ObjectSerializer::deserialize($data, SellerEventOfferNew::class);
         }
 
         return $data;

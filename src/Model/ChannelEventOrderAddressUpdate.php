@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use ArrayAccess;
-use JTL\SCX\Client\Channel\ObjectSerializer;
+use \ArrayAccess;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * ChannelEventOrderAddressUpdate Class Doc Comment
@@ -58,6 +58,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'channel' => 'string',
+        'sellerId' => 'string',
         'orderId' => 'string',
         'billingAddress' => '\JTL\SCX\Client\Channel\Model\Address',
         'shippingAddress' => '\JTL\SCX\Client\Channel\Model\Address'
@@ -70,6 +71,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'channel' => null,
+        'sellerId' => null,
         'orderId' => null,
         'billingAddress' => null,
         'shippingAddress' => null
@@ -103,6 +105,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'channel' => 'channel',
+        'sellerId' => 'sellerId',
         'orderId' => 'orderId',
         'billingAddress' => 'billingAddress',
         'shippingAddress' => 'shippingAddress'
@@ -115,6 +118,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'channel' => 'setChannel',
+        'sellerId' => 'setSellerId',
         'orderId' => 'setOrderId',
         'billingAddress' => 'setBillingAddress',
         'shippingAddress' => 'setShippingAddress'
@@ -127,6 +131,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'channel' => 'getChannel',
+        'sellerId' => 'getSellerId',
         'orderId' => 'getOrderId',
         'billingAddress' => 'getBillingAddress',
         'shippingAddress' => 'getShippingAddress'
@@ -193,6 +198,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['channel'] = isset($data['channel']) ? $data['channel'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
         $this->container['billingAddress'] = isset($data['billingAddress']) ? $data['billingAddress'] : null;
         $this->container['shippingAddress'] = isset($data['shippingAddress']) ? $data['shippingAddress'] : null;
@@ -214,6 +220,16 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'channel', must be conform to the pattern /^\\w{5,15}$/.";
         }
 
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
+        }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        }
+
+        if ($this->container['orderId'] === null) {
+            $invalidProperties[] = "'orderId' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -259,9 +275,38 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets sellerId
+     *
+     * @return string
+     */
+    public function getSellerId()
+    {
+        return $this->container['sellerId'];
+    }
+
+    /**
+     * Sets sellerId
+     *
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     *
+     * @return $this
+     */
+    public function setSellerId($sellerId)
+    {
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling ChannelEventOrderAddressUpdate., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
+
+        return $this;
+    }
+
+    /**
      * Gets orderId
      *
-     * @return string|null
+     * @return string
      */
     public function getOrderId()
     {
@@ -271,7 +316,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets orderId
      *
-     * @param string|null $orderId orderId
+     * @param string $orderId orderId
      *
      * @return $this
      */

@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use ArrayAccess;
-use JTL\SCX\Client\Channel\ObjectSerializer;
+use \ArrayAccess;
+use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * SystemEventNotification Class Doc Comment
@@ -57,8 +57,7 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'message' => 'string',
-        'severity' => 'string'
+        'channel' => 'string'
     ];
 
     /**
@@ -67,8 +66,7 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'message' => null,
-        'severity' => null
+        'channel' => null
     ];
 
     /**
@@ -98,8 +96,7 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'message' => 'message',
-        'severity' => 'severity'
+        'channel' => 'channel'
     ];
 
     /**
@@ -108,8 +105,7 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'message' => 'setMessage',
-        'severity' => 'setSeverity'
+        'channel' => 'setChannel'
     ];
 
     /**
@@ -118,8 +114,7 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'message' => 'getMessage',
-        'severity' => 'getSeverity'
+        'channel' => 'getChannel'
     ];
 
     /**
@@ -163,25 +158,8 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
-    const SEVERITY_INFO = 'INFO';
-    const SEVERITY_WARNING = 'WARNING';
-    const SEVERITY_ERROR = 'ERROR';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getSeverityAllowableValues()
-    {
-        return [
-            self::SEVERITY_INFO,
-            self::SEVERITY_WARNING,
-            self::SEVERITY_ERROR,
-        ];
-    }
     
 
     /**
@@ -199,8 +177,7 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
-        $this->container['severity'] = isset($data['severity']) ? $data['severity'] : null;
+        $this->container['channel'] = isset($data['channel']) ? $data['channel'] : null;
     }
 
     /**
@@ -212,18 +189,11 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if ($this->container['channel'] === null) {
+            $invalidProperties[] = "'channel' can't be null";
         }
-        if ($this->container['severity'] === null) {
-            $invalidProperties[] = "'severity' can't be null";
-        }
-        $allowedValues = $this->getSeverityAllowableValues();
-        if (!is_null($this->container['severity']) && !in_array($this->container['severity'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'severity', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
+        if (!preg_match("/^\\w{5,15}$/", $this->container['channel'])) {
+            $invalidProperties[] = "invalid value for 'channel', must be conform to the pattern /^\\w{5,15}$/.";
         }
 
         return $invalidProperties;
@@ -242,58 +212,30 @@ class SystemEventNotification implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets message
+     * Gets channel
      *
      * @return string
      */
-    public function getMessage()
+    public function getChannel()
     {
-        return $this->container['message'];
+        return $this->container['channel'];
     }
 
     /**
-     * Sets message
+     * Sets channel
      *
-     * @param string $message message
+     * @param string $channel This is the unqiue Channel name.
      *
      * @return $this
      */
-    public function setMessage($message)
+    public function setChannel($channel)
     {
-        $this->container['message'] = $message;
 
-        return $this;
-    }
-
-    /**
-     * Gets severity
-     *
-     * @return string
-     */
-    public function getSeverity()
-    {
-        return $this->container['severity'];
-    }
-
-    /**
-     * Sets severity
-     *
-     * @param string $severity severity
-     *
-     * @return $this
-     */
-    public function setSeverity($severity)
-    {
-        $allowedValues = $this->getSeverityAllowableValues();
-        if (!in_array($severity, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'severity', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
+        if ((!preg_match("/^\\w{5,15}$/", $channel))) {
+            throw new \InvalidArgumentException("invalid value for $channel when calling SystemEventNotification., must conform to the pattern /^\\w{5,15}$/.");
         }
-        $this->container['severity'] = $severity;
+
+        $this->container['channel'] = $channel;
 
         return $this;
     }
