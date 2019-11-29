@@ -68,7 +68,7 @@ class Attribute implements ModelInterface, ArrayAccess
         'required' => 'bool',
         'section' => 'string',
         'sectionPosition' => 'int',
-        'subSection' => 'int',
+        'subSection' => 'string',
         'subSectionPosition' => 'int',
         'description' => 'string',
         'isVariationDimension' => 'bool'
@@ -303,8 +303,8 @@ class Attribute implements ModelInterface, ArrayAccess
         if ($this->container['attributeId'] === null) {
             $invalidProperties[] = "'attributeId' can't be null";
         }
-        if ((mb_strlen($this->container['attributeId']) > 32)) {
-            $invalidProperties[] = "invalid value for 'attributeId', the character length must be smaller than or equal to 32.";
+        if ((mb_strlen($this->container['attributeId']) > 128)) {
+            $invalidProperties[] = "invalid value for 'attributeId', the character length must be smaller than or equal to 128.";
         }
 
         if ((mb_strlen($this->container['attributeId']) < 1)) {
@@ -360,8 +360,8 @@ class Attribute implements ModelInterface, ArrayAccess
      */
     public function setAttributeId($attributeId)
     {
-        if ((mb_strlen($attributeId) > 32)) {
-            throw new \InvalidArgumentException('invalid length for $attributeId when calling Attribute., must be smaller than or equal to 32.');
+        if ((mb_strlen($attributeId) > 128)) {
+            throw new \InvalidArgumentException('invalid length for $attributeId when calling Attribute., must be smaller than or equal to 128.');
         }
         if ((mb_strlen($attributeId) < 1)) {
             throw new \InvalidArgumentException('invalid length for $attributeId when calling Attribute., must be bigger than or equal to 1.');
@@ -628,7 +628,7 @@ class Attribute implements ModelInterface, ArrayAccess
     /**
      * Gets subSection
      *
-     * @return int|null
+     * @return string|null
      */
     public function getSubSection()
     {
@@ -638,7 +638,7 @@ class Attribute implements ModelInterface, ArrayAccess
     /**
      * Sets subSection
      *
-     * @param int|null $subSection A sub section can be used to build a group of attributes inside a section.
+     * @param string|null $subSection A sub section can be used to build a group of attributes inside a section.
      *
      * @return $this
      */
