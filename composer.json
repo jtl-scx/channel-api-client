@@ -23,11 +23,13 @@
     "mockery/mockery": "^1.2",
     "phpunit/phpunit": "^8.3",
     "guzzlehttp/guzzle": "^6.3",
-    "jtl/scx-api-client": "^0.0.1"
+    "jtl/scx-api-client": "^0.0.1",
+    "myclabs/php-enum": "^1.7"
   },
   "suggest": {
     "guzzlehttp/guzzle": "Require this for making HTTP calls",
-    "jtl/scx-api-client": "Require this for working with SCX API"
+    "jtl/scx-api-client": "Require this for working with SCX API",
+    "myclabs/php-enum": "Require this for working with Helper Code"
   },
   "scripts": {
     "phpcs": [

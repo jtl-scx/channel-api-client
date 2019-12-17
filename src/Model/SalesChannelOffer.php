@@ -61,7 +61,7 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'offerId' => 'int',
         'channelCategoryId' => 'string',
         'quantity' => 'string',
-        'priceList' => 'object[]',
+        'priceList' => '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
         'title' => 'string',
         'subTitle' => 'string',
         'description' => 'string',
@@ -390,7 +390,7 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     /**
      * Gets priceList
      *
-     * @return object[]
+     * @return \JTL\SCX\Client\Channel\Model\PriceContainer[]
      */
     public function getPriceList()
     {
@@ -400,7 +400,7 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     /**
      * Sets priceList
      *
-     * @param object[] $priceList priceList
+     * @param \JTL\SCX\Client\Channel\Model\PriceContainer[] $priceList priceList
      *
      * @return $this
      */
