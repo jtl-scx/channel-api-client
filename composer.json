@@ -18,18 +18,19 @@
       "url": "git@gitlab.jtl-software.com:ea/scx/scx-api-client.git"
     }
   ],
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.15",
-    "mockery/mockery": "^1.2",
-    "phpunit/phpunit": "^8.3",
-    "guzzlehttp/guzzle": "^6.3",
-    "jtl/scx-api-client": "^0.0.1",
+  "require": {
+    "jtl/php-generic-collection": "^0.2",
+    "jtl/scx-api-client": "^0.0",
     "myclabs/php-enum": "^1.7"
   },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.15",
+    "guzzlehttp/guzzle": "^6.3",
+    "mockery/mockery": "^1.2",
+    "phpunit/phpunit": "^8.3"
+  },
   "suggest": {
-    "guzzlehttp/guzzle": "Require this for making HTTP calls",
-    "jtl/scx-api-client": "Require this for working with SCX API",
-    "myclabs/php-enum": "Require this for working with Helper Code"
+    "guzzlehttp/guzzle": "Require this for making HTTP calls"
   },
   "scripts": {
     "phpcs": [
@@ -38,5 +39,8 @@
     "phpcs-dry": [
       "vendor/bin/php-cs-fixer fix --config=./.php_cs.dist --dry-run"
     ]
+  },
+  "config": {
+    "sort-packages": true
   }
 }

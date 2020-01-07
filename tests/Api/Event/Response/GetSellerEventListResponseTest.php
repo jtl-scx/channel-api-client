@@ -9,20 +9,20 @@
 namespace JTL\SCX\Client\Channel\Api\Event\Response;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
-use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
-use Mockery;
+use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 
 /**
  * Class GetSellerEventListResponseTest
  * @package JTL\SCX\Client\Channel\Api\Event\Response
  *
  * @covers \JTL\SCX\Client\Channel\Api\Event\Response\GetSellerEventListResponse
+ * @covers \JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList
  */
 class GetSellerEventListResponseTest extends AbstractTestCase
 {
     public function testCanBeCreated(): void
     {
-        $eventList = [Mockery::mock(EventContainer::class)];
+        $eventList = new EventContainerList();
         $statusCode = random_int(1, 1000);
 
         $response = new GetSellerEventListResponse($eventList, $statusCode);

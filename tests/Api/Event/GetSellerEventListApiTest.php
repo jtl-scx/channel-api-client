@@ -13,6 +13,7 @@ use JTL\SCX\Client\Api\Auth\AuthApi;
 use JTL\SCX\Client\Auth\SessionTokenStorage;
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
@@ -143,7 +144,7 @@ class GetSellerEventListApiTest extends AbstractTestCase
             ->with($this->responseBody, false)
             ->once()
             ->andReturn($data);
-        
+
         $this->objectSerializer->shouldReceive('deserialize')
             ->with($this->event->event, SystemEventNotification::class)
             ->once()
@@ -298,6 +299,31 @@ class GetSellerEventListApiTest extends AbstractTestCase
         $this->assertSame(200, $response->getStatusCode());
         $this->assertSame($eventMock, $response->getEventList()[0]->getEvent());
     }
+
+    public function testCanGetSellerEventOfferNew(): void
+    {
+        $this->event->type = 'Seller:Offer.New';
+        $eventMock = Mockery::mock(SellerEventOfferNew::class);
+
+        $data = new \stdClass();
+        $data->eventList = [$this->event];
+
+        $this->jsonSerializer->shouldReceive('deserialize')
+            ->with($this->responseBody, false)
+            ->once()
+            ->andReturn($data);
+
+        $this->objectSerializer->shouldReceive('deserialize')
+            ->with($this->event->event, SellerEventOfferNew::class)
+            ->once()
+            ->andReturn($eventMock);
+
+        $response = $this->api->getEventList();
+
+        $this->assertSame(200, $response->getStatusCode());
+        $this->assertSame($eventMock, $response->getEventList()[0]->getEvent());
+    }
+
 
     public function testCanGetStdClassIfEventUnknown(): void
     {

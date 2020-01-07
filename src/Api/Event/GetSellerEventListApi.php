@@ -18,6 +18,7 @@ use JTL\SCX\Client\Api\Auth\AuthApi;
 use JTL\SCX\Client\Api\Configuration;
 use JTL\SCX\Client\Auth\SessionTokenStorage;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
+use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Channel\Api\Event\Response\GetSellerEventListResponse;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
@@ -73,7 +74,7 @@ class GetSellerEventListApi extends AbstractAuthAwareApi
     {
         $responseData = $this->request();
         $data = $this->jsonSerializer->deserialize($responseData->getBody()->getContents(), false);
-        $eventList = [];
+        $eventList = new EventContainerList();
 
         foreach ($data->eventList as $event) {
             $eventContainer = new EventContainer(
@@ -82,7 +83,7 @@ class GetSellerEventListApi extends AbstractAuthAwareApi
                 $event->type,
                 is_array($event->event) ? null : $this->createEventByType($event->type, $event->event)
             );
-            $eventList[] = $eventContainer;
+            $eventList->add($eventContainer);
         }
 
         return new GetSellerEventListResponse($eventList, $responseData->getStatusCode());

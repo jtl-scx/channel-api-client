@@ -8,31 +8,31 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event\Response;
 
-use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
+use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Response\AbstractResponse;
 
 class GetSellerEventListResponse extends AbstractResponse
 {
     /**
-     * @var EventContainer[]
+     * @var EventContainerList
      */
     private $eventList;
 
     /**
      * GetSellerEventListResponse constructor.
-     * @param EventContainer[] $eventList
+     * @param EventContainerList $eventList
      * @param int $statusCode
      */
-    public function __construct(array $eventList, int $statusCode)
+    public function __construct(EventContainerList $eventList, int $statusCode)
     {
         $this->eventList = $eventList;
         parent::__construct($statusCode);
     }
 
     /**
-     * @return EventContainer[]
+     * @return EventContainerList
      */
-    public function getEventList(): array
+    public function getEventList(): EventContainerList
     {
         return $this->eventList;
     }
