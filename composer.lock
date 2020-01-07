@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ccebf01e72bb9390260fe5123d2a7aaf",
+    "content-hash": "3608e03ab03c3aa62a4cdba2df9779f9",
     "packages": [
         {
             "name": "jtl/php-generic-collection",
-            "version": "0.2.5",
+            "version": "0.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jtl-software/php-generic-collection.git",
-                "reference": "c5ed5d17fc12371fd487a575db33a6e45421985a"
+                "reference": "730bd74011eea2b2525f0b6aa460eafa49a4fecd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jtl-software/php-generic-collection/zipball/c5ed5d17fc12371fd487a575db33a6e45421985a",
-                "reference": "c5ed5d17fc12371fd487a575db33a6e45421985a",
+                "url": "https://api.github.com/repos/jtl-software/php-generic-collection/zipball/730bd74011eea2b2525f0b6aa460eafa49a4fecd",
+                "reference": "730bd74011eea2b2525f0b6aa460eafa49a4fecd",
                 "shasum": ""
             },
             "require-dev": {
@@ -36,7 +36,7 @@
                 "MIT"
             ],
             "description": "An implementation of a generic collection for PHP",
-            "time": "2019-12-12T16:09:08+00:00"
+            "time": "2020-01-07T14:23:54+00:00"
         },
         {
             "name": "jtl/scx-api-client",

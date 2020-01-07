@@ -19,7 +19,7 @@
     }
   ],
   "require": {
-    "jtl/php-generic-collection": "^0.2",
+    "jtl/php-generic-collection": "^0.3",
     "jtl/scx-api-client": "^0.0",
     "myclabs/php-enum": "^1.7"
   },
