@@ -13,7 +13,6 @@ use JTL\SCX\Client\Channel\Model\QuantityPrice;
 
 class PriceSelector
 {
-
     public function priceContainerByType(array $priceList, PriceType $priceType): ?PriceContainer
     {
         foreach ($priceList as $priceContainer) {

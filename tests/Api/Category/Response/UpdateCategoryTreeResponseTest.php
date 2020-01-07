@@ -8,7 +8,6 @@
 
 namespace JTL\SCX\Client\Channel\Api\Category\Response;
 
-
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Model\CategoryTreeVersion;
 use JTL\SCX\Client\Response\AbstractResponse;

@@ -18,7 +18,6 @@ use PHPUnit\Framework\TestCase;
  */
 class PriceSelectorTest extends TestCase
 {
-
     public function testCanSelectPriceContainerByType()
     {
         $expectedType = PriceType::B2C();
