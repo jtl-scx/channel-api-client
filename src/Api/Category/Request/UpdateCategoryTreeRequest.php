@@ -10,9 +10,9 @@ namespace JTL\SCX\Client\Channel\Api\Category\Request;
 
 use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
-use JTL\SCX\Client\Request\AbstractRequest;
+use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
-class UpdateCategoryTreeRequest extends AbstractRequest
+class UpdateCategoryTreeRequest extends AbstractScxApiRequest
 {
     /**
      * @var ChannelCategoryTree

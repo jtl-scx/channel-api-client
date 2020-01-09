@@ -9,9 +9,9 @@
 namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
 use JTL\SCX\Client\Channel\Model\OrderList;
-use JTL\SCX\Client\Request\AbstractRequest;
+use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
-class CreateOrdersRequest extends AbstractRequest
+class CreateOrdersRequest extends AbstractScxApiRequest
 {
     /**
      * @var OrderList

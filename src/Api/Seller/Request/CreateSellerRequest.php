@@ -10,9 +10,9 @@ namespace JTL\SCX\Client\Channel\Api\Seller\Request;
 
 use JTL\SCX\Client\Channel\Model\CreateSeller;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
-use JTL\SCX\Client\Request\AbstractRequest;
+use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
-class CreateSellerRequest extends AbstractRequest
+class CreateSellerRequest extends AbstractScxApiRequest
 {
     /**
      * @var CreateSeller

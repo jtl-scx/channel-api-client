@@ -59,7 +59,7 @@ class OfferListingFailed implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'sellerId' => 'string',
         'offerId' => 'int',
-        'errorList' => '\JTL\SCX\Client\Channel\Model\OfferListingFailedErrorList[]',
+        'errorList' => '\JTL\SCX\Client\Channel\Model\OfferListingFailedError[]',
         'failedAt' => '\DateTime'
     ];
 
@@ -303,7 +303,7 @@ class OfferListingFailed implements ModelInterface, ArrayAccess
     /**
      * Gets errorList
      *
-     * @return \JTL\SCX\Client\Channel\Model\OfferListingFailedErrorList[]
+     * @return \JTL\SCX\Client\Channel\Model\OfferListingFailedError[]
      */
     public function getErrorList()
     {
@@ -313,7 +313,7 @@ class OfferListingFailed implements ModelInterface, ArrayAccess
     /**
      * Sets errorList
      *
-     * @param \JTL\SCX\Client\Channel\Model\OfferListingFailedErrorList[] $errorList errorList
+     * @param \JTL\SCX\Client\Channel\Model\OfferListingFailedError[] $errorList errorList
      *
      * @return $this
      */

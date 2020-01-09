@@ -8,9 +8,9 @@
 
 namespace JTL\SCX\Client\Channel\Api\Attribute\Request;
 
-use JTL\SCX\Client\Request\AbstractRequest;
+use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
-class DeleteGlobalAttributeRequest extends AbstractRequest
+class DeleteGlobalAttributeRequest extends AbstractScxApiRequest
 {
     /**
      * @var string

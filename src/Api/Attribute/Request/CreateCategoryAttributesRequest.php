@@ -10,9 +10,9 @@ namespace JTL\SCX\Client\Channel\Api\Attribute\Request;
 
 use JTL\SCX\Client\Channel\Model\AttributeList;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
-use JTL\SCX\Client\Request\AbstractRequest;
+use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
-class CreateCategoryAttributesRequest extends AbstractRequest
+class CreateCategoryAttributesRequest extends AbstractScxApiRequest
 {
     /**
      * @var string

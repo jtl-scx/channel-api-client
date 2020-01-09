@@ -1,6 +1,6 @@
 <?php
 /**
- * OfferListingFailedErrorList
+ * OfferListingFailedError
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OfferListingFailedErrorList Class Doc Comment
+ * OfferListingFailedError Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OfferListingFailedErrorList implements ModelInterface, ArrayAccess
+class OfferListingFailedError implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OfferListingFailedErrorList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OfferListingFailed_errorList';
+    protected static $openAPIModelName = 'OfferListingFailedError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization

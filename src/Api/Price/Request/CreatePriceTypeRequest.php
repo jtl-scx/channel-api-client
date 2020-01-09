@@ -10,9 +10,9 @@ namespace JTL\SCX\Client\Channel\Api\Price\Request;
 
 use JTL\SCX\Client\Channel\Model\PriceType;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
-use JTL\SCX\Client\Request\AbstractRequest;
+use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
-class CreatePriceTypeRequest extends AbstractRequest
+class CreatePriceTypeRequest extends AbstractScxApiRequest
 {
     /**
      * @var PriceType
