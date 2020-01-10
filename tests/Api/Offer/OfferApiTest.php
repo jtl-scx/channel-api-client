@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
 
 class OfferApiTest extends TestCase
 {
-
     public function testCanMarkInProgress()
     {
         $requestMock = $this->createMock(MarkListingInProgressRequest::class);
@@ -25,7 +24,6 @@ class OfferApiTest extends TestCase
 
         $api = new OfferApi($apiClientMock);
         $api->markInProgress($requestMock);
-
     }
 
     public function testMarkListingFailed()

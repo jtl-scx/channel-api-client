@@ -14,35 +14,25 @@ use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
 class CreateGlobalAttributesRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var AttributeList
-     */
-    private $attributeList;
+    private AttributeList $attributeList;
 
-    /**
-     * CreateGlobalAttributesRequest constructor.
-     * @param AttributeList $attributeList
-     */
     public function __construct(AttributeList $attributeList)
     {
         $this->attributeList = $attributeList;
     }
 
-    /**
-     * @return AttributeList
-     */
-    public function getAttributeList(): AttributeList
+    public function getBody(): ?string
     {
-        return $this->attributeList;
+        return (string)$this->attributeList;
     }
 
-    /**
-     * @throws RequestValidationFailedException
-     */
-    public function validate(): void
+    public function getUrl(): string
     {
-        foreach ($this->attributeList->getAttributeList() as $attribute) {
-            $this->validateModel($attribute);
-        }
+        return '/channel/attribute/global';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return self::HTTP_METHOD_PUT;
     }
 }

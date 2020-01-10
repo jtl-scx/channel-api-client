@@ -8,7 +8,6 @@
 
 namespace JTL\SCX\Client\Channel\Api\Offer;
 
-
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Offer\Request\MarkListingAsFailedRequest;

@@ -14,51 +14,38 @@ use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
 class CreateSellerAttributesRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var string
-     */
-    private $sellerId;
+    private string $sellerId;
 
-    /**
-     * @var AttributeList
-     */
-    private $attributeList;
+    private AttributeList $attributeList;
 
-    /**
-     * CreateSellerAttributesRequest constructor.
-     * @param string $sellerId
-     * @param AttributeList $attributeList
-     */
     public function __construct(string $sellerId, AttributeList $attributeList)
     {
         $this->sellerId = $sellerId;
         $this->attributeList = $attributeList;
     }
 
-    /**
-     * @return string
-     */
     public function getSellerId(): string
     {
         return $this->sellerId;
     }
 
-    /**
-     * @return AttributeList
-     */
-    public function getAttributeList(): AttributeList
+    public function getParams(): array
     {
-        return $this->attributeList;
+        return ['sellerId' => $this->sellerId];
     }
 
-
-    /**
-     * @throws RequestValidationFailedException
-     */
-    public function validate(): void
+    public function getBody(): ?string
     {
-        foreach ($this->attributeList->getAttributeList() as $attribute) {
-            $this->validateModel($attribute);
-        }
+        return (string)$this->attributeList;
+    }
+
+    public function getUrl(): string
+    {
+        return '/channel/attribute/seller/{sellerId}';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return self::HTTP_METHOD_PUT;
     }
 }

@@ -8,7 +8,6 @@
 
 namespace JTL\SCX\Client\Channel\Api\Offer\Request;
 
-
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 use JTL\SCX\Client\Channel\Model\OfferListingInProgress;
 use JTL\SCX\Client\Channel\Model\OfferListingInProgressList;

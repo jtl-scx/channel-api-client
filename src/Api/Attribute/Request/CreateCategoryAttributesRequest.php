@@ -9,55 +9,42 @@
 namespace JTL\SCX\Client\Channel\Api\Attribute\Request;
 
 use JTL\SCX\Client\Channel\Model\AttributeList;
-use JTL\SCX\Client\Exception\RequestValidationFailedException;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
 class CreateCategoryAttributesRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var string
-     */
-    private $categoryId;
+    private string $categoryId;
 
-    /**
-     * @var AttributeList
-     */
-    private $attributeList;
+    private AttributeList $attributeList;
 
-    /**
-     * CreateCategoryAttributesRequest constructor.
-     * @param string $categoryId
-     * @param AttributeList $attributeList
-     */
     public function __construct(string $categoryId, AttributeList $attributeList)
     {
         $this->categoryId = $categoryId;
         $this->attributeList = $attributeList;
     }
 
-    /**
-     * @return string
-     */
     public function getCategoryId(): string
     {
         return $this->categoryId;
     }
 
-    /**
-     * @return AttributeList
-     */
-    public function getAttributeList(): AttributeList
+    public function getParams(): array
     {
-        return $this->attributeList;
+        return ['categoryId' => $this->getCategoryId()];
     }
 
-    /**
-     * @throws RequestValidationFailedException
-     */
-    public function validate(): void
+    public function getBody(): ?string
     {
-        foreach ($this->attributeList->getAttributeList() as $attribute) {
-            $this->validateModel($attribute);
-        }
+        return (string)$this->attributeList;
+    }
+
+    public function getUrl(): string
+    {
+        return '/channel/attribute/category/{categoryId}';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return self::HTTP_METHOD_PUT;
     }
 }

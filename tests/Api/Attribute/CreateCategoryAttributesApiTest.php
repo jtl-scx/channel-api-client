@@ -22,7 +22,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class CreateCategoryAttributesApiTest
  * @package JTL\SCX\Client\Channel\Api\Attribute
  *
- * @covers \JTL\SCX\Client\Channel\Api\Attribute\CreateCategoryAttributesApi
+ * @covers \JTL\SCX\Client\Channel\Api\Attribute\AttributesApi
  */
 class CreateCategoryAttributesApiTest extends AbstractTestCase
 {
@@ -65,7 +65,7 @@ class CreateCategoryAttributesApiTest extends AbstractTestCase
         );
         $requestFactory = $this->createRequestFactoryMock(AbstractApi::HTTP_METHOD_PUT, $body);
 
-        $api = new CreateCategoryAttributesApi(
+        $api = new AttributesApi(
             $configuration,
             $tokenStorage,
             $client,

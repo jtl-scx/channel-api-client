@@ -12,29 +12,25 @@ use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 
 class DeleteGlobalAttributeRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var string
-     */
-    private $attributeId;
+    private string $attributeId;
 
-    /**
-     * DeleteGlobalAttributeRequest constructor.
-     * @param string $attributeId
-     */
     public function __construct(string $attributeId)
     {
         $this->attributeId = $attributeId;
     }
 
-    /**
-     * @return string
-     */
-    public function getAttributeId(): string
+    public function getParams(): array
     {
-        return $this->attributeId;
+        return ['attributeId' => $this->attributeId];
     }
 
-    public function validate(): void
+    public function getUrl(): string
     {
+        return '/channel/attribute/global/{attributeId}';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return self::HTTP_METHOD_DELETE;
     }
 }

@@ -12,7 +12,6 @@ use JTL\SCX\Client\Request\ScxApiRequest;
 
 abstract class AbstractScxApiRequest implements ScxApiRequest
 {
-
     public function getContentType(): string
     {
         return ScxApiRequest::CONTENT_TYPE_JSON;

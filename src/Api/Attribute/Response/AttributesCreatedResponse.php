@@ -10,6 +10,10 @@ namespace JTL\SCX\Client\Channel\Api\Attribute\Response;
 
 use JTL\SCX\Client\Response\AbstractResponse;
 
-class DeleteGlobalAttributeResponse extends AbstractResponse
+class AttributesCreatedResponse extends AbstractResponse
 {
+    public function isSuccessful(): bool
+    {
+        return $this->getStatusCode() === 201;
+    }
 }

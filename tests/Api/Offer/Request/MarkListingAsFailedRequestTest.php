@@ -18,7 +18,6 @@ use PHPUnit\Framework\TestCase;
  */
 class MarkListingAsFailedRequestTest extends TestCase
 {
-
     public function testCanInitiateWithOfferListModel()
     {
         $model = new OfferListingFailedList(['offerList' => [new OfferListingFailed(['offerId' => 'failedOffer'])]]);
