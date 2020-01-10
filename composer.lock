@@ -40,11 +40,11 @@
         },
         {
             "name": "jtl/scx-api-client",
-            "version": "0.3.1",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.jtl-software.com:ea/scx/scx-api-client.git",
-                "reference": "d8647b6890230de926fa16dda3050b8789ae31aa"
+                "reference": "f6a7ca34bd43f4c9e35dad52c9b829019c5b999e"
             },
             "require": {
                 "ext-json": "*",
@@ -79,7 +79,7 @@
                 ]
             },
             "description": "SCX-Client Base",
-            "time": "2020-01-10T06:08:40+00:00"
+            "time": "2020-01-10T14:53:04+00:00"
         },
         {
             "name": "myclabs/php-enum",

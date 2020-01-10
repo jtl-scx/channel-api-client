@@ -9,15 +9,12 @@
 namespace JTL\SCX\Client\Channel\Api\Category\Request;
 
 use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
-use JTL\SCX\Client\Exception\RequestValidationFailedException;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Request\ScxApiRequest;
 
 class UpdateCategoryTreeRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var ChannelCategoryTree
-     */
-    private $channelCategoryTree;
+    private ChannelCategoryTree $channelCategoryTree;
 
     /**
      * UpdateCategoryTreeRequest constructor.
@@ -28,21 +25,23 @@ class UpdateCategoryTreeRequest extends AbstractScxApiRequest
         $this->channelCategoryTree = $channelCategoryTree;
     }
 
-    /**
-     * @return ChannelCategoryTree
-     */
     public function getChannelCategoryTree(): ChannelCategoryTree
     {
         return $this->channelCategoryTree;
     }
 
-    /**
-     * @throws RequestValidationFailedException
-     */
-    public function validate(): void
+    public function getUrl(): string
     {
-        foreach ($this->channelCategoryTree->getCategoryList() as $category) {
-            $this->validateModel($category);
-        }
+        return '/channel/categories';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return ScxApiRequest::HTTP_METHOD_PUT;
+    }
+
+    public function getBody():string
+    {
+        return (string)$this->getChannelCategoryTree();
     }
 }

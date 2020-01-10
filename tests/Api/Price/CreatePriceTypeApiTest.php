@@ -19,7 +19,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class CreatePriceTypeApiTest
  * @package JTL\SCX\Client\Channel\Api\Price
  *
- * @covers \JTL\SCX\Client\Channel\Api\Price\CreatePriceTypeApi
+ * @covers \JTL\SCX\Client\Channel\Api\Price\PriceApi
  */
 class CreatePriceTypeApiTest extends AbstractTestCase
 {
@@ -53,7 +53,7 @@ class CreatePriceTypeApiTest extends AbstractTestCase
         $urlFactory = $this->createUrlFactoryMock('/channel/price');
         [$tokenStorage, $authApi] = $this->createAuthMocks();
 
-        $api = new CreatePriceTypeApi(
+        $api = new PriceApi(
             $configuration,
             $tokenStorage,
             $client,

@@ -9,38 +9,35 @@
 namespace JTL\SCX\Client\Channel\Api\Price\Request;
 
 use JTL\SCX\Client\Channel\Model\PriceType;
-use JTL\SCX\Client\Exception\RequestValidationFailedException;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Request\ScxApiRequest;
 
 class CreatePriceTypeRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var PriceType
-     */
-    private $priceType;
+    private PriceType $priceType;
 
-    /**
-     * CreatePriceTypeRequest constructor.
-     * @param PriceType $priceType
-     */
     public function __construct(PriceType $priceType)
     {
         $this->priceType = $priceType;
     }
 
-    /**
-     * @return PriceType
-     */
     public function getPriceType(): PriceType
     {
         return $this->priceType;
     }
 
-    /**
-     * @throws RequestValidationFailedException
-     */
-    public function validate(): void
+    public function getUrl(): string
     {
-        $this->validateModel($this->priceType);
+        return '/channel/price';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return ScxApiRequest::HTTP_METHOD_POST;
+    }
+
+    public function getBody(): string
+    {
+        return (string)$this->getPriceType();
     }
 }

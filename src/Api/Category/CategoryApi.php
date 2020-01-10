@@ -9,17 +9,24 @@
 namespace JTL\SCX\Client\Channel\Api\Category;
 
 use GuzzleHttp\Exception\GuzzleException;
-use JTL\SCX\Client\Api\AbstractApi;
-use JTL\SCX\Client\Api\AbstractAuthAwareApi;
+use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest;
 use JTL\SCX\Client\Channel\Api\Category\Response\UpdateCategoryTreeResponse;
 use JTL\SCX\Client\Channel\Model\CategoryTreeVersion;
-use JTL\SCX\Client\Channel\ObjectSerializer;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
+use JTL\SCX\Client\ResponseDeserializer;
 
-class UpdateCategoryTreeApi extends AbstractAuthAwareApi
+class CategoryApi
 {
+    private AuthAwareApiClient $apiClient;
+    private ResponseDeserializer $responseDeserializer;
+
+    public function __construct(AuthAwareApiClient $apiClient, ResponseDeserializer $responseDeserializer)
+    {
+        $this->apiClient = $apiClient;
+        $this->responseDeserializer = $responseDeserializer;
+    }
     /**
      * @param UpdateCategoryTreeRequest $request
      * @return UpdateCategoryTreeResponse
@@ -27,28 +34,11 @@ class UpdateCategoryTreeApi extends AbstractAuthAwareApi
      * @throws RequestValidationFailedException
      * @throws GuzzleException
      */
-    public function update(UpdateCategoryTreeRequest $request): UpdateCategoryTreeResponse
+    public function updateCategoryTree(UpdateCategoryTreeRequest $request): UpdateCategoryTreeResponse
     {
-        $request->validate();
-        $response = $this->request((string)$request->getChannelCategoryTree());
-        $categoryTreeVersion = ObjectSerializer::deserialize($response->getBody()->getContents(), CategoryTreeVersion::class);
+        $response = $this->apiClient->request($request);
+        $categoryTreeVersion = $this->responseDeserializer->deserialize($response, CategoryTreeVersion::class);
 
         return new UpdateCategoryTreeResponse($response->getStatusCode(), $categoryTreeVersion);
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUrl(): string
-    {
-        return '/channel/categories';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getHttpMethod(): string
-    {
-        return AbstractApi::HTTP_METHOD_PUT;
     }
 }

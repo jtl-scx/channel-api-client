@@ -19,7 +19,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class UpdateChannelApiTest
  * @package JTL\SCX\Client\Channel\Api\Channel
  *
- * @covers \JTL\SCX\Client\Channel\Api\Channel\UpdateChannelApi
+ * @covers \JTL\SCX\Client\Channel\Api\Channel\ChannelApi
  */
 class UpdateChannelApiTest extends AbstractTestCase
 {
@@ -49,7 +49,7 @@ class UpdateChannelApiTest extends AbstractTestCase
             ->once()
             ->andReturn(200);
 
-        $api = new UpdateChannelApi(
+        $api = new ChannelApi(
             $configuration,
             $tokenStorage,
             $client,

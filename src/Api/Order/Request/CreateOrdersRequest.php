@@ -10,33 +10,34 @@ namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
 use JTL\SCX\Client\Channel\Model\OrderList;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Request\ScxApiRequest;
 
 class CreateOrdersRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var OrderList
-     */
-    private $orderList;
+    private OrderList $orderList;
 
-    /**
-     * CreateOrdersRequest constructor.
-     * @param OrderList $orderList
-     */
     public function __construct(OrderList $orderList)
     {
         $this->orderList = $orderList;
     }
 
-    /**
-     * @return OrderList
-     */
     public function getOrderList(): OrderList
     {
         return $this->orderList;
     }
 
-
-    public function validate(): void
+    public function getUrl(): string
     {
+        return '/channel/order';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return ScxApiRequest::HTTP_METHOD_POST;
+    }
+
+    public function getBody(): ?string
+    {
+        return (string)$this->getOrderList();
     }
 }

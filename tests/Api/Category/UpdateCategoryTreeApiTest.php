@@ -20,7 +20,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class UpdateCategoryTreeApiTest
  * @package JTL\SCX\Client\Channel\Api\Category
  *
- * @covers \JTL\SCX\Client\Channel\Api\Category\UpdateCategoryTreeApi
+ * @covers \JTL\SCX\Client\Channel\Api\Category\CategoryApi
  * @runTestsInSeparateProcesses
  */
 class UpdateCategoryTreeApiTest extends AbstractTestCase
@@ -54,7 +54,7 @@ class UpdateCategoryTreeApiTest extends AbstractTestCase
         $response->shouldReceive('getBody->getContents')->andReturn('{"categoryTreeVersion": "1559721549-ajifn"}');
 
 
-        $api = new UpdateCategoryTreeApi(
+        $api = new CategoryApi(
             $configuration,
             $tokenStorage,
             $client,

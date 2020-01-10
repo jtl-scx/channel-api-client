@@ -9,39 +9,36 @@
 namespace JTL\SCX\Client\Channel\Api\Event\Request;
 
 use JTL\SCX\Client\Channel\Model\EventIdList;
-use JTL\SCX\Client\Exception\RequestValidationFailedException;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Request\ScxApiRequest;
 
 class AcknowledgeEventIdListRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var EventIdList
-     */
-    private $eventIdListModel;
+    private EventIdList $eventIdListModel;
 
-    /**
-     * AcknowledgeEventIdListRequest constructor.
-     * @param string[] $eventIdList
-     */
     public function __construct(array $eventIdList)
     {
         $this->eventIdListModel = new EventIdList();
         $this->eventIdListModel->setEventIdList($eventIdList);
     }
 
-    /**
-     * @return EventIdList
-     */
     public function getEventIdListModel(): EventIdList
     {
         return $this->eventIdListModel;
     }
 
-    /**
-     * @throws RequestValidationFailedException
-     */
-    public function validate(): void
+    public function getUrl(): string
     {
-        $this->validateModel($this->getEventIdListModel());
+        return '/channel/event';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return ScxApiRequest::HTTP_METHOD_DELETE;
+    }
+
+    public function getBody(): ?string
+    {
+        return (string)$this->getEventIdListModel();
     }
 }

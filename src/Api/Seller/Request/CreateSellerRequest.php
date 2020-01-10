@@ -9,38 +9,35 @@
 namespace JTL\SCX\Client\Channel\Api\Seller\Request;
 
 use JTL\SCX\Client\Channel\Model\CreateSeller;
-use JTL\SCX\Client\Exception\RequestValidationFailedException;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Request\ScxApiRequest;
 
 class CreateSellerRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var CreateSeller
-     */
-    private $createSellerModel;
+    private CreateSeller $createSellerModel;
 
-    /**
-     * CreateSellerRequest constructor.
-     * @param CreateSeller $createSellerModel
-     */
     public function __construct(CreateSeller $createSellerModel)
     {
         $this->createSellerModel = $createSellerModel;
     }
 
-    /**
-     * @return CreateSeller
-     */
     public function getCreateSellerModel(): CreateSeller
     {
         return $this->createSellerModel;
     }
 
-    /**
-     * @throws RequestValidationFailedException
-     */
-    public function validate(): void
+    public function getUrl(): string
     {
-        $this->validateModel($this->createSellerModel);
+        return '/channel/seller';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return ScxApiRequest::HTTP_METHOD_POST;
+    }
+
+    public function getBody(): string
+    {
+        return (string)$this->getCreateSellerModel();
     }
 }

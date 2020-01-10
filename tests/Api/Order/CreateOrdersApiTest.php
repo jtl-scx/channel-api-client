@@ -19,7 +19,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class CreateOrdersApiTest
  * @package JTL\SCX\Client\Channel\Api\Order
  *
- * @covers \JTL\SCX\Client\Channel\Api\Order\CreateOrdersApi
+ * @covers \JTL\SCX\Client\Channel\Api\Order\OrdersApi
  */
 class CreateOrdersApiTest extends AbstractTestCase
 {
@@ -51,7 +51,7 @@ class CreateOrdersApiTest extends AbstractTestCase
             ->once()
             ->andReturn(200);
 
-        $api = new CreateOrdersApi(
+        $api = new OrdersApi(
             $configuration,
             $tokenStorage,
             $client,

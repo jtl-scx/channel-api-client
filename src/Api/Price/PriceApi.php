@@ -9,15 +9,20 @@
 namespace JTL\SCX\Client\Channel\Api\Price;
 
 use GuzzleHttp\Exception\GuzzleException;
-use JTL\SCX\Client\Api\AbstractApi;
-use JTL\SCX\Client\Api\AbstractAuthAwareApi;
+use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Price\Request\CreatePriceTypeRequest;
 use JTL\SCX\Client\Channel\Api\Price\Response\CreatePriceTypeResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\Exception\RequestValidationFailedException;
 
-class CreatePriceTypeApi extends AbstractAuthAwareApi
+class PriceApi
 {
+    private AuthAwareApiClient $client;
+
+    public function __construct(AuthAwareApiClient $client)
+    {
+        $this->client = $client;
+    }
     /**
      * @param CreatePriceTypeRequest $request
      * @return CreatePriceTypeResponse
@@ -27,24 +32,7 @@ class CreatePriceTypeApi extends AbstractAuthAwareApi
      */
     public function create(CreatePriceTypeRequest $request): CreatePriceTypeResponse
     {
-        $request->validate();
-        $response = $this->request((string)$request->getPriceType());
+        $response = $this->client->request($request);
         return new CreatePriceTypeResponse($response->getStatusCode());
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUrl(): string
-    {
-        return '/channel/price';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getHttpMethod(): string
-    {
-        return AbstractApi::HTTP_METHOD_POST;
     }
 }

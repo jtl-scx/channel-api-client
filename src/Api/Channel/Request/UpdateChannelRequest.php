@@ -9,38 +9,35 @@
 namespace JTL\SCX\Client\Channel\Api\Channel\Request;
 
 use JTL\SCX\Client\Channel\Model\ChannelUpdate;
-use JTL\SCX\Client\Exception\RequestValidationFailedException;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Request\ScxApiRequest;
 
 class UpdateChannelRequest extends AbstractScxApiRequest
 {
-    /**
-     * @var ChannelUpdate
-     */
-    private $channelUpdate;
+    private ChannelUpdate $channelUpdate;
 
-    /**
-     * UpdateChannelRequest constructor.
-     * @param ChannelUpdate $channelUpdate
-     */
     public function __construct(ChannelUpdate $channelUpdate)
     {
         $this->channelUpdate = $channelUpdate;
     }
 
-    /**
-     * @return ChannelUpdate
-     */
     public function getChannelUpdate(): ChannelUpdate
     {
         return $this->channelUpdate;
     }
 
-    /**
-     * @throws RequestValidationFailedException
-     */
-    public function validate(): void
+    public function getUrl(): string
     {
-        $this->validateModel($this->channelUpdate);
+        return '/channel';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return ScxApiRequest::HTTP_METHOD_PATCH;
+    }
+
+    public function getBody():string
+    {
+        return (string)$this->getChannelUpdate();
     }
 }

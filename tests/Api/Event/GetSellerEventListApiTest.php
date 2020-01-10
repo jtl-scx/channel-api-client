@@ -29,7 +29,7 @@ use Psr\Http\Message\ResponseInterface;
  * Class GetSellerEventListApiTest
  * @package JTL\SCX\Client\Channel\Api\Event
  *
- * @covers \JTL\SCX\Client\Channel\Api\Event\GetSellerEventListApi
+ * @covers \JTL\SCX\Client\Channel\Api\Event\EventApi
  * @runInSeparateProcess
  * @preserveGlobalState
  */
@@ -66,7 +66,7 @@ class GetSellerEventListApiTest extends AbstractTestCase
     private $urlFactory;
 
     /**
-     * @var GetSellerEventListApi
+     * @var EventApi
      */
     private $api;
 
@@ -116,7 +116,7 @@ class GetSellerEventListApiTest extends AbstractTestCase
         $this->objectSerializer = Mockery::mock('alias:'. ObjectSerializer::class);
         [$this->tokenStorage, $this->authApi] = $this->createAuthMocks();
 
-        $this->api = new GetSellerEventListApi(
+        $this->api = new EventApi(
             $this->configuration,
             $this->tokenStorage,
             $this->client,

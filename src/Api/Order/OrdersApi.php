@@ -9,14 +9,20 @@
 namespace JTL\SCX\Client\Channel\Api\Order;
 
 use GuzzleHttp\Exception\GuzzleException;
-use JTL\SCX\Client\Api\AbstractApi;
-use JTL\SCX\Client\Api\AbstractAuthAwareApi;
+use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrdersRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 
-class CreateOrdersApi extends AbstractAuthAwareApi
+class OrdersApi
 {
+    private AuthAwareApiClient $client;
+
+    public function __construct(AuthAwareApiClient $client)
+    {
+        $this->client = $client;
+    }
+
     /**
      * @param CreateOrdersRequest $request
      * @return CreateOrdersResponse
@@ -25,25 +31,8 @@ class CreateOrdersApi extends AbstractAuthAwareApi
      */
     public function create(CreateOrdersRequest $request): CreateOrdersResponse
     {
-        $request->validate();
-        $response = $this->request((string)$request->getOrderList());
+        $response = $this->client->request($request);
 
         return new CreateOrdersResponse($response->getStatusCode());
-    }
-
-    /**
-     * @return string
-     */
-    protected function getUrl(): string
-    {
-        return '/channel/order';
-    }
-
-    /**
-     * @return string
-     */
-    protected function getHttpMethod(): string
-    {
-        return AbstractApi::HTTP_METHOD_POST;
     }
 }
