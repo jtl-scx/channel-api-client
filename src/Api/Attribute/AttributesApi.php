@@ -15,6 +15,7 @@ use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateGlobalAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateSellerAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\DeleteGlobalAttributeRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\AttributesCreatedResponse;
+use JTL\SCX\Client\Channel\Api\Attribute\Response\AttributesDeletedResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 
 class AttributesApi
@@ -68,9 +69,9 @@ class AttributesApi
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function deleteGlobalAttribute(DeleteGlobalAttributeRequest $request): AttributesCreatedResponse
+    public function deleteGlobalAttribute(DeleteGlobalAttributeRequest $request): AttributesDeletedResponse
     {
         $response = $this->apiClient->request($request);
-        return new AttributesCreatedResponse($response->getStatusCode());
+        return new AttributesDeletedResponse($response->getStatusCode());
     }
 }
