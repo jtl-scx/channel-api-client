@@ -21,21 +21,17 @@ use Mockery;
  */
 class UpdateCategoryTreeRequestTest extends AbstractTestCase
 {
-    public function testCanBeCreatedAndValidated(): void
+    public function testCanBeCreatedAndUsed(): void
     {
-        $channelCategoryTree = Mockery::mock(ChannelCategoryTree::class);
-        $category = Mockery::mock(Category::class);
-
-        $channelCategoryTree->shouldReceive('getCategoryList')
-            ->once()
-            ->andReturn([$category]);
-
-        $category->shouldReceive('valid')
-            ->once()
-            ->andReturnTrue();
+        $bodyStr = uniqid('body', true);
+        $channelCategoryTree = $this->createMock(ChannelCategoryTree::class);
+        $channelCategoryTree->expects($this->once())->method('__toString')->willReturn($bodyStr);
 
         $request = new UpdateCategoryTreeRequest($channelCategoryTree);
-        $request->validate();
+
         $this->assertSame($channelCategoryTree, $request->getChannelCategoryTree());
+        $this->assertSame($bodyStr, $request->getBody());
+        $this->assertSame('PUT', $request->getHttpMethod());
+        $this->assertSame('/channel/categories', $request->getUrl());
     }
 }

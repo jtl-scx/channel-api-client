@@ -20,17 +20,17 @@ use Mockery;
  */
 class UpdateChannelRequestTest extends AbstractTestCase
 {
-    public function testCanBeCreatedAndValidated(): void
+    public function testCanBeCreatedAndUsed(): void
     {
-        $channelUpdate = Mockery::mock(ChannelUpdate::class);
+        $bodyStr = uniqid('body', true);
 
-        $request = new UpdateChannelRequest($channelUpdate);
+        $channelUpdateMock = $this->createMock(ChannelUpdate::class);
+        $channelUpdateMock->expects($this->once())->method('__toString')->willReturn($bodyStr);
 
-        $channelUpdate->shouldReceive('valid')
-            ->once()
-            ->andReturnTrue();
+        $request = new UpdateChannelRequest($channelUpdateMock);
 
-        $request->validate();
-        $this->assertSame($channelUpdate, $request->getChannelUpdate());
+        $this->assertSame($bodyStr, $request->getBody());
+        $this->assertSame('PATCH', $request->getHttpMethod());
+        $this->assertSame('/channel', $request->getUrl());
     }
 }

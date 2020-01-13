@@ -20,11 +20,14 @@ class DeleteGlobalAttributeRequestTest extends AbstractTestCase
 {
     public function testCanBeCreatedAndValidated(): void
     {
-        $attributeId = uniqid('attributeId', true);
+        $bodyStr = uniqid('body', true);
 
-        $request = new DeleteGlobalAttributeRequest($attributeId);
+        $attrId = uniqid('attrId', true);
 
-        $this->assertSame($attributeId, $request->getAttributeId());
-        $request->validate();
+        $request = new DeleteGlobalAttributeRequest($attrId);
+
+        $this->assertSame(['attributeId' => $attrId], $request->getParams());
+        $this->assertSame('DELETE', $request->getHttpMethod());
+        $this->assertSame('/channel/attribute/global/{attributeId}', $request->getUrl());
     }
 }

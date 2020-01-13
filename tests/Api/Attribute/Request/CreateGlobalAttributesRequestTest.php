@@ -23,21 +23,15 @@ class CreateGlobalAttributesRequestTest extends AbstractTestCase
 {
     public function testCanBeCreatedAndValidated(): void
     {
-        $attributeList = Mockery::mock(AttributeList::class);
-        $attribute = Mockery::mock(Attribute::class);
+        $bodyStr = uniqid('body', true);
 
-        $attributeList->shouldReceive('getAttributeList')
-            ->once()
-            ->andReturn([$attribute]);
+        $attrList = $this->createMock(AttributeList::class);
+        $attrList->expects($this->once())->method('__toString')->willReturn($bodyStr);
 
-        $attribute->shouldReceive('valid')
-            ->once()
-            ->andReturnTrue();
+        $request = new CreateGlobalAttributesRequest($attrList);
 
-        $request = new CreateGlobalAttributesRequest($attributeList);
-
-        $request->validate();
-
-        $this->assertSame($attributeList, $request->getAttributeList());
+        $this->assertSame($bodyStr, $request->getBody());
+        $this->assertSame('PUT', $request->getHttpMethod());
+        $this->assertSame('/channel/attribute/global', $request->getUrl());
     }
 }

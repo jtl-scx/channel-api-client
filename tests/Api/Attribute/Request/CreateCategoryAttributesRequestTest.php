@@ -23,23 +23,17 @@ class CreateCategoryAttributesRequestTest extends AbstractTestCase
 {
     public function testCanBeCreatedAndValidated(): void
     {
-        $attributeList = Mockery::mock(AttributeList::class);
-        $categoryId = uniqid('categoryId');
-        $attribute = Mockery::mock(Attribute::class);
+        $bodyStr = uniqid('body', true);
+        $categoryId = uniqid('catId', true);
 
-        $attributeList->shouldReceive('getAttributeList')
-            ->once()
-            ->andReturn([$attribute]);
+        $attrList = $this->createMock(AttributeList::class);
+        $attrList->expects($this->once())->method('__toString')->willReturn($bodyStr);
 
-        $attribute->shouldReceive('valid')
-            ->once()
-            ->andReturnTrue();
+        $request = new CreateCategoryAttributesRequest($categoryId, $attrList);
 
-        $request = new CreateCategoryAttributesRequest($categoryId, $attributeList);
-
-        $request->validate();
-
-        $this->assertSame($categoryId, $request->getCategoryId());
-        $this->assertSame($attributeList, $request->getAttributeList());
+        $this->assertSame(['categoryId' => $categoryId], $request->getParams());
+        $this->assertSame($bodyStr, $request->getBody());
+        $this->assertSame('PUT', $request->getHttpMethod());
+        $this->assertSame('/channel/attribute/category/{categoryId}', $request->getUrl());
     }
 }

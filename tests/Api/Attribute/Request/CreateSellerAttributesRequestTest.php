@@ -23,23 +23,18 @@ class CreateSellerAttributesRequestTest extends AbstractTestCase
 {
     public function testCanBeCreatedAndValidated(): void
     {
-        $attributeList = Mockery::mock(AttributeList::class);
-        $sellerId = uniqid('sellerId');
-        $attribute = Mockery::mock(Attribute::class);
+        $bodyStr = uniqid('body', true);
+        $sellerId = uniqid('catId', true);
 
-        $attributeList->shouldReceive('getAttributeList')
-            ->once()
-            ->andReturn([$attribute]);
+        $attrList = $this->createMock(AttributeList::class);
+        $attrList->expects($this->once())->method('__toString')->willReturn($bodyStr);
 
-        $attribute->shouldReceive('valid')
-            ->once()
-            ->andReturnTrue();
-
-        $request = new CreateSellerAttributesRequest($sellerId, $attributeList);
-
-        $request->validate();
+        $request = new CreateSellerAttributesRequest($sellerId, $attrList);
 
         $this->assertSame($sellerId, $request->getSellerId());
-        $this->assertSame($attributeList, $request->getAttributeList());
+        $this->assertSame(['sellerId' => $sellerId], $request->getParams());
+        $this->assertSame($bodyStr, $request->getBody());
+        $this->assertSame('PUT', $request->getHttpMethod());
+        $this->assertSame('/channel/attribute/seller/{sellerId}', $request->getUrl());
     }
 }
