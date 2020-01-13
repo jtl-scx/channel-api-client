@@ -10,7 +10,6 @@ namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Model\OrderList;
-use Mockery;
 
 /**
  * Class CreateOrdersRequestTest
@@ -20,12 +19,15 @@ use Mockery;
  */
 class CreateOrdersRequestTest extends AbstractTestCase
 {
-    public function testCanBeCreatedAndValidated(): void
+    public function testCanBeCreatedAndUsed(): void
     {
-        $orderList = Mockery::mock(OrderList::class);
+        $orderList = $this->createMock(OrderList::class);
+
         $request = new CreateOrdersRequest($orderList);
 
-        $request->validate();
         $this->assertSame($orderList, $request->getOrderList());
+        $this->assertSame((string)$orderList, $request->getBody());
+        $this->assertSame('POST', $request->getHttpMethod());
+        $this->assertSame('/channel/order', $request->getUrl());
     }
 }

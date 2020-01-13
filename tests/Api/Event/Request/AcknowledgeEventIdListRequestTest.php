@@ -8,9 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event\Request;
 
-use JTL\Generic\StringCollection;
 use JTL\SCX\Client\Channel\Model\EventIdList;
-use JTL\SCX\Client\Exception\RequestValidationFailedException;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,5 +21,8 @@ class AcknowledgeEventIdListRequestTest extends TestCase
         $request = new AcknowledgeEventIdListRequest(['id1', 'id2']);
         $model = $request->getEventIdListModel();
         $this->assertInstanceOf(EventIdList::class, $model);
+        $this->assertSame((string)$model, $request->getBody());
+        $this->assertSame('/channel/event', $request->getUrl());
+        $this->assertSame('DELETE', $request->getHttpMethod());
     }
 }

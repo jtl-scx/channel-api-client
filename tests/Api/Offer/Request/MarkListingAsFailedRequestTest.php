@@ -14,7 +14,7 @@ use JTL\SCX\Client\Request\ScxApiRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \JTL\SCX\Client\Channel\Api\Offer\Request\MarkListingAsFailedRequestTest
+ * @covers \JTL\SCX\Client\Channel\Api\Offer\Request\MarkListingAsFailedRequest
  */
 class MarkListingAsFailedRequestTest extends TestCase
 {

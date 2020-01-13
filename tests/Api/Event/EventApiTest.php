@@ -38,7 +38,7 @@ class EventApiTest extends TestCase
     /**
      * @dataProvider eventProvider
      */
-    public function testCanGetEventList(string $eventType, string $eventClass)
+    public function testCanGetEventList(string $eventType, string $eventClass, bool $isEvent = true)
     {
         $status = 201;
         $eventData = new \stdClass();
@@ -67,7 +67,7 @@ class EventApiTest extends TestCase
         $jsonDeserializerMock = $this->createMock(JsonSerializer::class);
         $jsonDeserializerMock->expects($this->once())->method('deserialize')->with($jsonContent)->willReturn($data);
         $serializerMock = $this->createMock(ResponseDeserializer::class);
-        $serializerMock->expects($this->atLeastOnce())->method('deserializeObject')->with($eventData->event, $eventClass)->willReturn($eventMock);
+        $serializerMock->expects($this->exactly($isEvent?1:0))->method('deserializeObject')->with($eventData->event, $eventClass)->willReturn($eventMock);
 
         $client = new EventApi($apiClientMock, $jsonDeserializerMock, $serializerMock);
         $response = $client->getEventList($requestMock);
@@ -89,6 +89,7 @@ class EventApiTest extends TestCase
             ['Seller:Order.Cancelled', SellerEventOrderCancelled::class],
             ['Seller:Offer.End', SellerEventOfferEnd::class],
             ['Seller:Offer.New', SellerEventOfferNew::class],
+            ['unknown', \stdClass::class, false],
         ];
     }
 

@@ -10,7 +10,6 @@ namespace JTL\SCX\Client\Channel\Api\Price\Request;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Model\PriceType;
-use Mockery;
 
 /**
  * Class CreatePriceTypeRequestTest
@@ -20,17 +19,15 @@ use Mockery;
  */
 class CreatePriceTypeRequestTest extends AbstractTestCase
 {
-    public function testCanBeCreatedAndValidated(): void
+    public function testCanBeCreatedAndUsed(): void
     {
-        $priceType = Mockery::mock(PriceType::class);
+        $bodyStr =uniqid('body', true);
+        $priceTypeMock = $this->createMock(PriceType::class);
+        $priceTypeMock->expects($this->atLeastOnce())->method('__toString')->willReturn($bodyStr);
 
-        $priceType->shouldReceive('valid')
-            ->once()
-            ->andReturnTrue();
-
-        $request = new CreatePriceTypeRequest($priceType);
-        $request->validate();
-
-        $this->assertSame($priceType, $request->getPriceType());
+        $request = new CreatePriceTypeRequest($priceTypeMock);
+        $this->assertSame($bodyStr, $request->getBody());
+        $this->assertSame('POST', $request->getHttpMethod());
+        $this->assertSame('/channel/price', $request->getUrl());
     }
 }

@@ -10,7 +10,6 @@ namespace JTL\SCX\Client\Channel\Api\Seller\Request;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Model\CreateSeller;
-use Mockery;
 
 /**
  * Class CreateSellerRequestTest
@@ -22,14 +21,13 @@ class CreateSellerRequestTest extends AbstractTestCase
 {
     public function testCanBeCreatedAndValidated(): void
     {
-        $createSeller = Mockery::mock(CreateSeller::class);
-        $createSeller->shouldReceive('valid')
-            ->once()
-            ->andReturnTrue();
+        $bodyStr = uniqid('body', true);
+        $createSellerMock = $this->createMock(CreateSeller::class);
+        $createSellerMock->expects($this->atLeastOnce())->method('__toString')->willReturn($bodyStr);
 
-        $request = new CreateSellerRequest($createSeller);
-        $request->validate();
-
-        $this->assertSame($createSeller, $request->getCreateSellerModel());
+        $request = new CreateSellerRequest($createSellerMock);
+        $this->assertSame($bodyStr, $request->getBody());
+        $this->assertSame('/channel/seller', $request->getUrl());
+        $this->assertSame('POST', $request->getHttpMethod());
     }
 }

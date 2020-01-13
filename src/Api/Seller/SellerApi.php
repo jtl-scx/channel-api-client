@@ -14,7 +14,7 @@ use JTL\SCX\Client\Channel\Api\Seller\Request\CreateSellerRequest;
 use JTL\SCX\Client\Channel\Api\Seller\Response\CreateSellerResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 
-class CreateSellerApi
+class SellerApi
 {
     private AuthAwareApiClient $client;
 

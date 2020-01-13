@@ -14,6 +14,12 @@ use JTL\SCX\Client\Channel\Api\Offer\Request\MarkListingInProgressRequest;
 use JTL\SCX\Client\Channel\Api\Offer\Request\MarkListingSuccessfulRequest;
 use PHPUnit\Framework\TestCase;
 
+/**
+ * Class OfferApiTest
+ * @package JTL\SCX\Client\Channel\Api\Offer
+ *
+ * @covers \JTL\SCX\Client\Channel\Api\Offer\OfferApi
+ */
 class OfferApiTest extends TestCase
 {
     public function testCanMarkInProgress()
