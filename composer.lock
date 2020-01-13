@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a6f72f808a2f1c4037c9b8c2fffc2b18",
+    "content-hash": "dd7550464d9bc25d79b0368adda24159",
     "packages": [
         {
             "name": "jtl/php-generic-collection",
@@ -40,11 +40,11 @@
         },
         {
             "name": "jtl/scx-api-client",
-            "version": "0.3.3",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.jtl-software.com:ea/scx/scx-api-client.git",
-                "reference": "f6a7ca34bd43f4c9e35dad52c9b829019c5b999e"
+                "reference": "a8cdda8127e34ab7360b68317c4511dc8f4cfbc1"
             },
             "require": {
                 "ext-json": "*",
@@ -79,7 +79,7 @@
                 ]
             },
             "description": "SCX-Client Base",
-            "time": "2020-01-10T14:53:04+00:00"
+            "time": "2020-01-13T15:09:26+00:00"
         },
         {
             "name": "myclabs/php-enum",
@@ -3347,7 +3347,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "jtl/scx-api-client": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
