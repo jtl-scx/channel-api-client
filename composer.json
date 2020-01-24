@@ -21,7 +21,7 @@
   "require": {
     "php": "^7.4",
     "jtl/php-generic-collection": "^0.3",
-    "jtl/scx-api-client": "dev-master",
+    "jtl/scx-api-client": "^0.3",
     "myclabs/php-enum": "^1.7"
   },
   "require-dev": {
