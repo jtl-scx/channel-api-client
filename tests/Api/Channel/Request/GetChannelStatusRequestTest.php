@@ -15,7 +15,6 @@ use PHPUnit\Framework\TestCase;
  */
 class GetChannelStatusRequestTest extends TestCase
 {
-
     public function testCanBeCreatedAndUsed()
     {
         $request = new GetChannelStatusRequest();

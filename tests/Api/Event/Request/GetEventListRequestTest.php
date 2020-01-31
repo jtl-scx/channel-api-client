@@ -18,7 +18,6 @@ use PHPUnit\Framework\TestCase;
  */
 class GetEventListRequestTest extends TestCase
 {
-
     public function testCanGetUrlAndHttpMethod()
     {
         $request = new GetEventListRequest();

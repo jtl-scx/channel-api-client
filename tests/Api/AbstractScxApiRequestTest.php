@@ -39,5 +39,4 @@ class TestRequest extends AbstractScxApiRequest
     {
         return '';
     }
-
 }

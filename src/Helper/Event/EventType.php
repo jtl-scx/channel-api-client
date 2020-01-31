@@ -8,7 +8,6 @@
 
 namespace JTL\SCX\Client\Channel\Helper\Event;
 
-
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
@@ -19,7 +18,6 @@ use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use MyCLabs\Enum\Enum;
-
 
 /**
  * Class EventType

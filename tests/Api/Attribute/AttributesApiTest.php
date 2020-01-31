@@ -24,7 +24,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class AttributesApiTest extends TestCase
 {
-
     public function testCreateSellerAttributes()
     {
         $status = 201;

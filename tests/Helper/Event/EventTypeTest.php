@@ -24,7 +24,6 @@ use PHPUnit\Framework\TestCase;
  */
 class EventTypeTest extends TestCase
 {
-
     public function mapProvider(): array
     {
         return [
