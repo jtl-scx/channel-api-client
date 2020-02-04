@@ -1,46 +1,47 @@
 {
-  "name": "jtl/channel-api-client",
-  "type": "library",
-  "description": "API Client for SCX Channel API",
-  "autoload": {
-    "psr-4": {
-      "JTL\\SCX\\Client\\Channel\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "JTL\\SCX\\Client\\Channel\\": "tests/"
-    }
-  },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "git@gitlab.jtl-software.com:ea/scx/scx-api-client.git"
-    }
-  ],
-  "require": {
-    "php": "^7.4",
-    "jtl/php-generic-collection": "^0.3",
-    "jtl/scx-api-client": "^0.3",
-    "myclabs/php-enum": "^1.7"
-  },
-  "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.15",
-    "guzzlehttp/guzzle": "^6.3",
-    "phpunit/phpunit": "^8.3"
-  },
-  "suggest": {
-    "guzzlehttp/guzzle": "Require this for making HTTP calls"
-  },
-  "scripts": {
-    "phpcs": [
-      "vendor/bin/php-cs-fixer fix --config=./.php_cs.dist"
+    "name": "jtl/channel-api-client",
+    "type": "library",
+    "description": "API Client for SCX Channel API",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "git@gitlab.jtl-software.com:ea/scx/scx-api-client.git"
+        }
     ],
-    "phpcs-dry": [
-      "vendor/bin/php-cs-fixer fix --config=./.php_cs.dist --dry-run"
-    ]
-  },
-  "config": {
-    "sort-packages": true
-  }
+    "require": {
+        "php": "^7.4",
+        "myclabs/php-enum": "^1.7",
+        "jtl/php-generic-collection": "^0.3"
+    },
+    "require-dev": {
+        "jtl/scx-api-client": "^0.3",
+        "friendsofphp/php-cs-fixer": "^2.15",
+        "guzzlehttp/guzzle": "^6.3",
+        "phpunit/phpunit": "^8.3"
+    },
+    "suggest": {
+        "jtl/scx-api-client": "Required. Installed it!",
+        "guzzlehttp/guzzle": "Require this for making HTTP calls"
+    },
+    "autoload": {
+        "psr-4": {
+            "JTL\\SCX\\Client\\Channel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "JTL\\SCX\\Client\\Channel\\": "tests/"
+        }
+    },
+    "scripts": {
+        "phpcs": [
+            "vendor/bin/php-cs-fixer fix --config=./.php_cs.dist"
+        ],
+        "phpcs-dry": [
+            "vendor/bin/php-cs-fixer fix --config=./.php_cs.dist --dry-run"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    }
 }
