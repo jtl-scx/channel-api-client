@@ -9,9 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Attribute\Request;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
-use JTL\SCX\Client\Channel\Model\Attribute;
 use JTL\SCX\Client\Channel\Model\AttributeList;
-use Mockery;
 
 /**
  * Class CreateCategoryAttributesRequestTest

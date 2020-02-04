@@ -10,7 +10,6 @@ namespace JTL\SCX\Client\Channel\Api\Channel\Request;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Model\ChannelUpdate;
-use Mockery;
 
 /**
  * Class UpdateChannelRequestTest

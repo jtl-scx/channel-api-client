@@ -22,7 +22,7 @@ class UpdateCategoryTreeResponseTest extends AbstractTestCase
 {
     public function testCanBeCreated(): void
     {
-        $response = new UpdateCategoryTreeResponse(200, \Mockery::mock(CategoryTreeVersion::class));
+        $response = new UpdateCategoryTreeResponse(200, $this->createStub(CategoryTreeVersion::class));
 
         $this->assertInstanceOf(UpdateCategoryTreeResponse::class, $response);
         $this->assertInstanceOf(AbstractResponse::class, $response);
@@ -30,7 +30,7 @@ class UpdateCategoryTreeResponseTest extends AbstractTestCase
 
     public function testCanGetVersion(): void
     {
-        $categoryTreeVersion = \Mockery::mock(CategoryTreeVersion::class);
+        $categoryTreeVersion = $this->createStub(CategoryTreeVersion::class);
         $response = new UpdateCategoryTreeResponse(200, $categoryTreeVersion);
 
         $this->assertSame($categoryTreeVersion, $response->getCategoryTreeVersion());

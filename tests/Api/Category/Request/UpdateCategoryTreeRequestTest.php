@@ -9,9 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Category\Request;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
-use JTL\SCX\Client\Channel\Model\Category;
 use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
-use Mockery;
 
 /**
  * Class UpdateCategoryTreeRequestTest

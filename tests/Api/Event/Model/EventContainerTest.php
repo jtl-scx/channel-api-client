@@ -10,7 +10,6 @@ namespace JTL\SCX\Client\Channel\Api\Event\Model;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
-use Mockery;
 
 /**
  * Class EventContainerTest
@@ -25,7 +24,7 @@ class EventContainerTest extends AbstractTestCase
         $id = uniqid('id', true);
         $createdAt = new \DateTimeImmutable();
         $type = uniqid('type', true);
-        $event = Mockery::mock(SellerEventOfferEnd::class);
+        $event = $this->createStub(SellerEventOfferEnd::class);
 
         $eventContainer = new EventContainer($id, $createdAt, $type, $event);
 

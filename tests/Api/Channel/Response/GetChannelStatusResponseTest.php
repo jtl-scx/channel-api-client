@@ -9,7 +9,6 @@
 namespace JTL\SCX\Client\Channel\Api\Channel\Response;
 
 use JTL\SCX\Client\Channel\Model\SalesChannelData;
-use Mockery;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,14 +19,9 @@ use PHPUnit\Framework\TestCase;
  */
 class GetChannelStatusResponseTest extends TestCase
 {
-    public function tearDown(): void
-    {
-        \Mockery::close();
-    }
-
     public function testCanGetData(): void
     {
-        $salesChannelData = Mockery::mock(SalesChannelData::class);
+        $salesChannelData = $this->createStub(SalesChannelData::class);
         $statusCode = random_int(1, 1000);
 
         $response = new GetChannelStatusResponse($salesChannelData, $statusCode);
