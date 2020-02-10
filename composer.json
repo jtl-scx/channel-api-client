@@ -14,9 +14,10 @@
         "jtl/php-generic-collection": "^0.3"
     },
     "require-dev": {
-        "jtl/scx-api-client": "^0.3",
         "friendsofphp/php-cs-fixer": "^2.15",
         "guzzlehttp/guzzle": "^6.3",
+        "jtl/scx-api-client": "^0.3",
+        "mockery/mockery": "^1.2",
         "phpunit/phpunit": "^8.3"
     },
     "suggest": {
