@@ -58,7 +58,7 @@ class SellerEventOfferStockUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sellerId' => '\JTL\SCX\Client\Channel\Model\EventSellerRelated',
+        'sellerId' => 'string',
         'offerId' => 'int',
         'quantity' => 'string'
     ];
@@ -205,6 +205,10 @@ class SellerEventOfferStockUpdate implements ModelInterface, ArrayAccess
         if ($this->container['sellerId'] === null) {
             $invalidProperties[] = "'sellerId' can't be null";
         }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        }
+
         if ($this->container['offerId'] === null) {
             $invalidProperties[] = "'offerId' can't be null";
         }
@@ -233,7 +237,7 @@ class SellerEventOfferStockUpdate implements ModelInterface, ArrayAccess
     /**
      * Gets sellerId
      *
-     * @return \JTL\SCX\Client\Channel\Model\EventSellerRelated
+     * @return string
      */
     public function getSellerId()
     {
@@ -243,12 +247,17 @@ class SellerEventOfferStockUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets sellerId
      *
-     * @param \JTL\SCX\Client\Channel\Model\EventSellerRelated $sellerId sellerId
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
     public function setSellerId($sellerId)
     {
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling SellerEventOfferStockUpdate., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
         $this->container['sellerId'] = $sellerId;
 
         return $this;
