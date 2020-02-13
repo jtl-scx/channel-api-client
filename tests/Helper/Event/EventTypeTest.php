@@ -10,6 +10,8 @@ namespace JTL\SCX\Client\Channel\Helper\Event;
 
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
@@ -36,6 +38,8 @@ class EventTypeTest extends TestCase
             [SellerEventOfferNew::class, EventType::SellerOfferNew()],
             [SellerEventOfferUpdate::class, EventType::SellerOfferUpdate()],
             [SellerEventOfferEnd::class, EventType::SellerOfferEnd()],
+            [SellerEventOfferStockUpdate::class, EventType::SellerOfferStockUpdate()],
+            [SellerEventOfferPriceUpdate::class, EventType::SellerOfferPriceUpdate()],
             [\stdClass::class, new EventType('FooBarEvent')],
         ];
     }

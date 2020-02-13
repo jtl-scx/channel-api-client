@@ -57,6 +57,6 @@ class MarkListingInProgressRequestTest extends TestCase
     public function testEndpointUrlIsCorrect()
     {
         $request = new MarkListingInProgressRequest();
-        $this->assertEquals('/channel/offer/received', $request->getUrl());
+        $this->assertEquals('/channel/offer/in-progress', $request->getUrl());
     }
 }

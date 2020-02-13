@@ -51,6 +51,8 @@ class SellerEventTypeList
     const SELLEROFFER_NEW = 'Seller:Offer.New';
     const SELLEROFFER_UPDATE = 'Seller:Offer.Update';
     const SELLEROFFER_END = 'Seller:Offer.End';
+    const SELLEROFFER_STOCK_UPDATE = 'Seller:Offer.StockUpdate';
+    const SELLEROFFER_PRICE_UPDATE = 'Seller:Offer.PriceUpdate';
 
     /**
      * Gets allowable values of the enum
@@ -68,6 +70,8 @@ class SellerEventTypeList
             self::SELLEROFFER_NEW,
             self::SELLEROFFER_UPDATE,
             self::SELLEROFFER_END,
+            self::SELLEROFFER_STOCK_UPDATE,
+            self::SELLEROFFER_PRICE_UPDATE,
         ];
     }
 }

@@ -8,7 +8,6 @@
 
 namespace JTL\SCX\Client\Channel\Helper\Attributes;
 
-
 use JTL\SCX\Client\Channel\Model\ChannelAttribute;
 
 class AttributeSelector
@@ -45,5 +44,4 @@ class AttributeSelector
         }
         return null;
     }
-
 }

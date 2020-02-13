@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class AttributeSelectorTest extends TestCase
 {
-
     public function testGetValueListById()
     {
         $testId = uniqid('testid');
@@ -87,6 +86,4 @@ class AttributeSelectorTest extends TestCase
         $this->assertEquals('first', $result);
         $this->assertNotEquals('second', $result);
     }
-
-
 }

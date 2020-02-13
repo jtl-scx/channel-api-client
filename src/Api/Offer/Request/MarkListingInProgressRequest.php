@@ -39,7 +39,7 @@ class MarkListingInProgressRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/offer/received';
+        return '/channel/offer/in-progress';
     }
 
     public function getHttpMethod(): string

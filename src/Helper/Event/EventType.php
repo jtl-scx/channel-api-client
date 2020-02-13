@@ -10,6 +10,8 @@ namespace JTL\SCX\Client\Channel\Helper\Event;
 
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
@@ -30,8 +32,8 @@ use MyCLabs\Enum\Enum;
  * @method static EventType SellerOfferNew()
  * @method static EventType SellerOfferUpdate()
  * @method static EventType SellerOfferEnd()
- * @______method static EventType SellerOfferStockUpdate()
- * @______method static EventType SellerOfferPriceUpdate()
+ * @method static EventType SellerOfferStockUpdate()
+ * @method static EventType SellerOfferPriceUpdate()
  */
 class EventType extends Enum
 {
@@ -44,10 +46,8 @@ class EventType extends Enum
     const SellerOfferNew = 'Seller:Offer.New';
     const SellerOfferUpdate = 'Seller:Offer.Update';
     const SellerOfferEnd = 'Seller:Offer.End';
-
-    // reserved for future release
-    // const SellerOfferStockUpdate = 'Seller:Offer.StockUpdate';
-    // const SellerOfferPriceUpdate = 'Seller:Offer.PriceUpdate';
+    const SellerOfferStockUpdate = 'Seller:Offer.StockUpdate';
+    const SellerOfferPriceUpdate = 'Seller:Offer.PriceUpdate';
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -83,6 +83,10 @@ class EventType extends Enum
                 return SellerEventOfferUpdate::class;
             case $this::SellerOfferEnd():
                 return SellerEventOfferEnd::class;
+            case $this::SellerOfferStockUpdate():
+                return SellerEventOfferStockUpdate::class;
+            case $this::SellerOfferPriceUpdate():
+                return SellerEventOfferPriceUpdate::class;
         }
 
         return \stdClass::class;

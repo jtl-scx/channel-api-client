@@ -60,7 +60,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
         'id' => 'string',
         'createdAt' => '\DateTime',
         'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSystemEventNotificationSellerEventOrderConfirmedSellerEventOrderShippingSellerEventOrderPaymentSellerEventOrderCancelledSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventTest'
+        'event' => 'OneOfSystemEventNotificationSellerEventOrderConfirmedSellerEventOrderShippingSellerEventOrderPaymentSellerEventOrderCancelledSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTest'
     ];
 
     /**
@@ -309,7 +309,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     /**
      * Gets event
      *
-     * @return OneOfSystemEventNotificationSellerEventOrderConfirmedSellerEventOrderShippingSellerEventOrderPaymentSellerEventOrderCancelledSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventTest
+     * @return OneOfSystemEventNotificationSellerEventOrderConfirmedSellerEventOrderShippingSellerEventOrderPaymentSellerEventOrderCancelledSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTest
      */
     public function getEvent()
     {
@@ -319,7 +319,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     /**
      * Sets event
      *
-     * @param OneOfSystemEventNotificationSellerEventOrderConfirmedSellerEventOrderShippingSellerEventOrderPaymentSellerEventOrderCancelledSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventTest $event event
+     * @param OneOfSystemEventNotificationSellerEventOrderConfirmedSellerEventOrderShippingSellerEventOrderPaymentSellerEventOrderCancelledSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTest $event event
      *
      * @return $this
      */

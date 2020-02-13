@@ -195,6 +195,12 @@ class PriceContainer implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
+        if ($this->container['quantityPriceList'] === null) {
+            $invalidProperties[] = "'quantityPriceList' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -213,7 +219,7 @@ class PriceContainer implements ModelInterface, ArrayAccess
     /**
      * Gets id
      *
-     * @return string|null
+     * @return string
      */
     public function getId()
     {
@@ -223,7 +229,7 @@ class PriceContainer implements ModelInterface, ArrayAccess
     /**
      * Sets id
      *
-     * @param string|null $id id
+     * @param string $id id
      *
      * @return $this
      */
@@ -237,7 +243,7 @@ class PriceContainer implements ModelInterface, ArrayAccess
     /**
      * Gets quantityPriceList
      *
-     * @return \JTL\SCX\Client\Channel\Model\QuantityPrice[]|null
+     * @return \JTL\SCX\Client\Channel\Model\QuantityPrice[]
      */
     public function getQuantityPriceList()
     {
@@ -247,7 +253,7 @@ class PriceContainer implements ModelInterface, ArrayAccess
     /**
      * Sets quantityPriceList
      *
-     * @param \JTL\SCX\Client\Channel\Model\QuantityPrice[]|null $quantityPriceList quantityPriceList
+     * @param \JTL\SCX\Client\Channel\Model\QuantityPrice[] $quantityPriceList quantityPriceList
      *
      * @return $this
      */
