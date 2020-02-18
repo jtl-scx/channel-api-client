@@ -13,17 +13,11 @@ use JTL\SCX\Client\Request\ScxApiRequest;
 
 class GetChannelStatusRequest extends AbstractScxApiRequest
 {
-    /**
-     * @return string
-     */
     public function getUrl(): string
     {
         return '/channel';
     }
 
-    /**
-     * @return string
-     */
     public function getHttpMethod(): string
     {
         return ScxApiRequest::HTTP_METHOD_GET;

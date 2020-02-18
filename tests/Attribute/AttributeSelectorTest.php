@@ -6,13 +6,13 @@
  * Date: 2/10/20
  */
 
-namespace JTL\SCX\Client\Channel\Helper\Attributes;
+namespace JTL\SCX\Client\Channel\Attribute;
 
 use JTL\SCX\Client\Channel\Model\ChannelAttribute;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \JTL\SCX\Client\Channel\Helper\Attributes\AttributeSelector
+ * @covers \JTL\SCX\Client\Channel\Attribute\AttributeSelector
  */
 class AttributeSelectorTest extends TestCase
 {

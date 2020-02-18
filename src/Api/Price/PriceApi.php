@@ -13,7 +13,6 @@ use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Price\Request\CreatePriceTypeRequest;
 use JTL\SCX\Client\Channel\Api\Price\Response\CreatePriceTypeResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
-use JTL\SCX\Client\Exception\RequestValidationFailedException;
 
 class PriceApi
 {
@@ -23,12 +22,12 @@ class PriceApi
     {
         $this->client = $client;
     }
+
     /**
      * @param CreatePriceTypeRequest $request
      * @return CreatePriceTypeResponse
-     * @throws RequestFailedException
-     * @throws RequestValidationFailedException
      * @throws GuzzleException
+     * @throws RequestFailedException
      */
     public function create(CreatePriceTypeRequest $request): CreatePriceTypeResponse
     {

@@ -8,8 +8,8 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event\Request;
 
-use JTL\SCX\Client\Channel\Model\EventIdList;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Channel\Model\EventIdList;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
 class AcknowledgeEventIdListRequest extends AbstractScxApiRequest

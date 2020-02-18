@@ -65,7 +65,7 @@ class AttributesApi
 
     /**
      * @param DeleteGlobalAttributeRequest $request
-     * @return AttributesCreatedResponse
+     * @return AttributesDeletedResponse
      * @throws GuzzleException
      * @throws RequestFailedException
      */

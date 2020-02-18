@@ -9,8 +9,6 @@
 namespace JTL\SCX\Client\Channel\Api\Channel;
 
 use GuzzleHttp\Exception\GuzzleException;
-use JTL\SCX\Client\Api\AbstractApi;
-use JTL\SCX\Client\Api\AbstractAuthAwareApi;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Channel\Request\GetChannelStatusRequest;
 use JTL\SCX\Client\Channel\Api\Channel\Request\UpdateChannelRequest;

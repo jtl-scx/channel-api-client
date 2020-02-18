@@ -6,7 +6,7 @@
  * Date: 12/17/19
  */
 
-namespace JTL\SCX\Client\Channel\Helper\Price;
+namespace JTL\SCX\Client\Channel\Price;
 
 use JTL\SCX\Client\Channel\Model\PriceContainer;
 use JTL\SCX\Client\Channel\Model\QuantityPrice;
@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Class PriceSelectorTest
- * @covers \JTL\SCX\Client\Channel\Helper\Price\PriceSelector
+ * @covers \JTL\SCX\Client\Channel\Price\PriceSelector
  */
 class PriceSelectorTest extends TestCase
 {

@@ -6,7 +6,7 @@
  * Date: 2/10/20
  */
 
-namespace JTL\SCX\Client\Channel\Helper\Attributes;
+namespace JTL\SCX\Client\Channel\Attribute;
 
 use JTL\SCX\Client\Channel\Model\ChannelAttribute;
 
@@ -32,7 +32,7 @@ class AttributeSelector
     /**
      * @param string $attributeId
      * @param array $channelAttributeList
-     * @return mixed|null
+     * @return string|null
      */
     public function getValueById(string $attributeId, array $channelAttributeList):?string
     {

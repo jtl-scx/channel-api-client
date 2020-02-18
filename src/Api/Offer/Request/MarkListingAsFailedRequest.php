@@ -26,7 +26,7 @@ class MarkListingAsFailedRequest extends AbstractScxApiRequest
         $this->offerList = $offerList;
     }
 
-    public function addOffer(OfferListingFailed $offer)
+    public function addOffer(OfferListingFailed $offer): void
     {
         $newOfferList = $this->offerList->getOfferList() ?? [];
         $newOfferList[] = $offer;

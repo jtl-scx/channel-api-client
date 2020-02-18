@@ -8,8 +8,8 @@
 
 namespace JTL\SCX\Client\Channel\Api\Category\Request;
 
-use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
 class UpdateCategoryTreeRequest extends AbstractScxApiRequest

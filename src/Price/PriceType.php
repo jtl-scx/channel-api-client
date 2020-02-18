@@ -6,7 +6,7 @@
  * Date: 12/17/19
  */
 
-namespace JTL\SCX\Client\Channel\Helper\Price;
+namespace JTL\SCX\Client\Channel\Price;
 
 use MyCLabs\Enum\Enum;
 

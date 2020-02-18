@@ -6,7 +6,7 @@
  * Date: 1/31/20
  */
 
-namespace JTL\SCX\Client\Channel\Helper\Event;
+namespace JTL\SCX\Client\Channel\Event;
 
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
@@ -22,7 +22,7 @@ use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \JTL\SCX\Client\Channel\Helper\Event\EventType
+ * @covers \JTL\SCX\Client\Channel\Event\EventType
  */
 class EventTypeTest extends TestCase
 {

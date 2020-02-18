@@ -8,8 +8,8 @@
 
 namespace JTL\SCX\Client\Channel\Api\Seller\Request;
 
-use JTL\SCX\Client\Channel\Model\CreateSeller;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Channel\Model\CreateSeller;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
 class CreateSellerRequest extends AbstractScxApiRequest

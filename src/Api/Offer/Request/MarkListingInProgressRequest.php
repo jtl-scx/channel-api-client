@@ -25,7 +25,7 @@ class MarkListingInProgressRequest extends AbstractScxApiRequest
         $this->offerList = $offerList;
     }
 
-    public function addOffer(OfferListingInProgress $offer)
+    public function addOffer(OfferListingInProgress $offer): void
     {
         $newOfferList = $this->offerList->getOfferList() ?? [];
         $newOfferList[] = $offer;

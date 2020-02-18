@@ -27,9 +27,6 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
 /**
- * Class EventApiTest
- * @package JTL\SCX\Client\Channel\Api\Event
- *
  * @covers \JTL\SCX\Client\Channel\Api\Event\EventApi
  */
 class EventApiTest extends TestCase

@@ -8,8 +8,8 @@
 
 namespace JTL\SCX\Client\Channel\Api\Price\Request;
 
-use JTL\SCX\Client\Channel\Model\PriceType;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Channel\Model\PriceType;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
 class CreatePriceTypeRequest extends AbstractScxApiRequest

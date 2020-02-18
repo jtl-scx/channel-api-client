@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event\Model;
 
+use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
@@ -47,7 +48,7 @@ class EventContainer
     }
 
     /**
-     * @return SellerEventOrderCancelled|SellerEventOrderConfirmed|SellerEventOrderPayment|SellerEventOrderShipping|SellerEventTest|SystemEventNotification|SellerEventOfferNew|null
+     * @return SellerEventOrderCancelled|SellerEventOrderConfirmed|SellerEventOrderPayment|SellerEventOrderShipping|SellerEventTest|SystemEventNotification|SellerEventOfferNew|SellerEventOfferEnd|null
      */
     public function getEvent()
     {

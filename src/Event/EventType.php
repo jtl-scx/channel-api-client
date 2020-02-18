@@ -6,7 +6,7 @@
  * Date: 1/31/20
  */
 
-namespace JTL\SCX\Client\Channel\Helper\Event;
+namespace JTL\SCX\Client\Channel\Event;
 
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
@@ -37,17 +37,17 @@ use MyCLabs\Enum\Enum;
  */
 class EventType extends Enum
 {
-    const SystemNotification = 'System:Notification';
-    const SellerEventTest = 'System:Test';
-    const SellerOrderConfirmed = 'Seller:Order.Confirmed';
-    const SellerOrderShipping = 'Seller:Order.Shipping';
-    const SellerOrderPayment = 'Seller:Order.Payment';
-    const SellerOrderCancelled = 'Seller:Order.Cancelled';
-    const SellerOfferNew = 'Seller:Offer.New';
-    const SellerOfferUpdate = 'Seller:Offer.Update';
-    const SellerOfferEnd = 'Seller:Offer.End';
-    const SellerOfferStockUpdate = 'Seller:Offer.StockUpdate';
-    const SellerOfferPriceUpdate = 'Seller:Offer.PriceUpdate';
+    public const SystemNotification = 'System:Notification';
+    public const SellerEventTest = 'System:Test';
+    public const SellerOrderConfirmed = 'Seller:Order.Confirmed';
+    public const SellerOrderShipping = 'Seller:Order.Shipping';
+    public const SellerOrderPayment = 'Seller:Order.Payment';
+    public const SellerOrderCancelled = 'Seller:Order.Cancelled';
+    public const SellerOfferNew = 'Seller:Offer.New';
+    public const SellerOfferUpdate = 'Seller:Offer.Update';
+    public const SellerOfferEnd = 'Seller:Offer.End';
+    public const SellerOfferStockUpdate = 'Seller:Offer.StockUpdate';
+    public const SellerOfferPriceUpdate = 'Seller:Offer.PriceUpdate';
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -56,7 +56,7 @@ class EventType extends Enum
      * @param $value
      * @return bool
      */
-    public static function isValid($value)
+    public static function isValid($value): bool
     {
         // allow to build object with unknown event types
         return true;

@@ -9,8 +9,6 @@
 namespace JTL\SCX\Client\Channel\Api\Offer\Request;
 
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
-use JTL\SCX\Client\Channel\Model\OfferListingInProgress;
-use JTL\SCX\Client\Channel\Model\OfferListingInProgressList;
 use JTL\SCX\Client\Channel\Model\OfferListingSuccessful;
 use JTL\SCX\Client\Channel\Model\OfferListingSuccessfulList;
 use JTL\SCX\Client\Request\ScxApiRequest;
@@ -27,7 +25,7 @@ class MarkListingSuccessfulRequest extends AbstractScxApiRequest
         $this->offerList = $offerList;
     }
 
-    public function addOffer(OfferListingSuccessful $offer)
+    public function addOffer(OfferListingSuccessful $offer): void
     {
         $newOfferList = $this->offerList->getOfferList() ?? [];
         $newOfferList[] = $offer;

@@ -8,8 +8,8 @@
 
 namespace JTL\SCX\Client\Channel\Api\Channel\Request;
 
-use JTL\SCX\Client\Channel\Model\ChannelUpdate;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Channel\Model\ChannelUpdate;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
 class UpdateChannelRequest extends AbstractScxApiRequest

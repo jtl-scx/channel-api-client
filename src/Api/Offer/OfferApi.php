@@ -29,7 +29,7 @@ class OfferApi
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function markInProgress(MarkListingInProgressRequest $request)
+    public function markInProgress(MarkListingInProgressRequest $request): void
     {
         $this->apiClient->request($request);
     }
@@ -39,7 +39,7 @@ class OfferApi
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function markListed(MarkListingSuccessfulRequest $request)
+    public function markListed(MarkListingSuccessfulRequest $request): void
     {
         $this->apiClient->request($request);
     }
@@ -49,7 +49,7 @@ class OfferApi
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function markListingFailed(MarkListingAsFailedRequest $request)
+    public function markListingFailed(MarkListingAsFailedRequest $request): void
     {
         $this->apiClient->request($request);
     }

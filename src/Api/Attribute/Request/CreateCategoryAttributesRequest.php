@@ -8,8 +8,8 @@
 
 namespace JTL\SCX\Client\Channel\Api\Attribute\Request;
 
-use JTL\SCX\Client\Channel\Model\AttributeList;
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Channel\Model\AttributeList;
 
 class CreateCategoryAttributesRequest extends AbstractScxApiRequest
 {

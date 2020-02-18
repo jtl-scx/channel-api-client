@@ -15,7 +15,7 @@ use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Channel\Api\Event\Request\AcknowledgeEventIdListRequest;
 use JTL\SCX\Client\Channel\Api\Event\Request\GetEventListRequest;
 use JTL\SCX\Client\Channel\Api\Event\Response\GetSellerEventListResponse;
-use JTL\SCX\Client\Channel\Helper\Event\EventType;
+use JTL\SCX\Client\Channel\Event\EventType;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\JsonSerializer;
 use JTL\SCX\Client\ResponseDeserializer;
@@ -39,6 +39,7 @@ class EventApi
     /**
      * @param GetEventListRequest $request
      * @return GetSellerEventListResponse
+     * @throws \Exception
      * @throws GuzzleException
      * @throws RequestFailedException
      */
@@ -75,7 +76,7 @@ class EventApi
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function ack(AcknowledgeEventIdListRequest $request)
+    public function ack(AcknowledgeEventIdListRequest $request): void
     {
         $this->client->request($request);
     }
