@@ -1,5 +1,5 @@
 {
-    "name": "jtl/channel-api-client",
+    "name": "jtl-scx/channel-api-client",
     "type": "library",
     "description": "API Client for SCX Channel API",
     "require": {
