@@ -1,4 +1,12 @@
-# SCX Channel API Client
+<div align="center">
+  <img src="https://user-images.githubusercontent.com/1415186/75040771-2ed7df80-54b3-11ea-8657-41a0cae9dafc.png">
+</div>
+
+# SCX PHP-Channel-API-Client
+
+[![Build Status](https://travis-ci.org/jtl-scx/channel-api-client.svg?branch=master)](https://travis-ci.org/jtl-scx/channel-api-client)
+
+SCX Channel-API Client repository for JTL-Sales-Channel-Extension based on PHP. 
 
 ## Example usage
 ```php
