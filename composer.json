@@ -2,6 +2,7 @@
     "name": "jtl-scx/channel-api-client",
     "type": "library",
     "description": "API Client for SCX Channel API",
+    "license": "MIT",
     "require": {
         "php": "^7.4",
         "myclabs/php-enum": "^1.7",
