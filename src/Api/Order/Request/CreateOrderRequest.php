@@ -12,7 +12,7 @@ use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 use JTL\SCX\Client\Channel\Model\OrderList;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
-class CreateOrdersRequest extends AbstractScxApiRequest
+class CreateOrderRequest extends AbstractScxApiRequest
 {
     private OrderList $orderList;
 

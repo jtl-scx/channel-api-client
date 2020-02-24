@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event\Model;
 
+use JTL\SCX\Client\Channel\Event\EventType;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
@@ -21,10 +22,10 @@ class EventContainer
 {
     private string $id;
     private \DateTimeImmutable $createdAt;
-    private string $type;
+    private EventType $type;
     private $event;
 
-    public function __construct(string $id, \DateTimeImmutable $createdAt, string $type, $event)
+    public function __construct(string $id, \DateTimeImmutable $createdAt, EventType $type, $event)
     {
         $this->id = $id;
         $this->createdAt = $createdAt;
@@ -42,7 +43,7 @@ class EventContainer
         return $this->createdAt;
     }
 
-    public function getType(): string
+    public function getType(): EventType
     {
         return $this->type;
     }

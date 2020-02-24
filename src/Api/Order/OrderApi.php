@@ -10,11 +10,11 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrdersRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 
-class OrdersApi
+class OrderApi
 {
     private AuthAwareApiClient $client;
 
@@ -24,12 +24,12 @@ class OrdersApi
     }
 
     /**
-     * @param CreateOrdersRequest $request
+     * @param CreateOrderRequest $request
      * @return CreateOrdersResponse
      * @throws RequestFailedException
      * @throws GuzzleException
      */
-    public function create(CreateOrdersRequest $request): CreateOrdersResponse
+    public function create(CreateOrderRequest $request): CreateOrdersResponse
     {
         $response = $this->client->request($request);
 

@@ -15,7 +15,7 @@ use JTL\SCX\Client\Channel\Model\OrderList;
  * Class CreateOrdersRequestTest
  * @package JTL\SCX\Client\Channel\Api\Order\Request
  *
- * @covers \JTL\SCX\Client\Channel\Api\Order\Request\CreateOrdersRequest
+ * @covers \JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest
  */
 class CreateOrdersRequestTest extends AbstractTestCase
 {
@@ -23,7 +23,7 @@ class CreateOrdersRequestTest extends AbstractTestCase
     {
         $orderList = $this->createMock(OrderList::class);
 
-        $request = new CreateOrdersRequest($orderList);
+        $request = new CreateOrderRequest($orderList);
 
         $this->assertSame($orderList, $request->getOrderList());
         $this->assertSame((string)$orderList, $request->getBody());
