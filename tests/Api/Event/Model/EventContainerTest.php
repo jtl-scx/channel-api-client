@@ -9,6 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Event\Model;
 
 use JTL\SCX\Client\Channel\AbstractTestCase;
+use JTL\SCX\Client\Channel\Event\EventType;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 
 /**
@@ -23,7 +24,7 @@ class EventContainerTest extends AbstractTestCase
     {
         $id = uniqid('id', true);
         $createdAt = new \DateTimeImmutable();
-        $type = uniqid('type', true);
+        $type = $this->createStub(EventType::class);
         $event = $this->createStub(SellerEventOfferEnd::class);
 
         $eventContainer = new EventContainer($id, $createdAt, $type, $event);

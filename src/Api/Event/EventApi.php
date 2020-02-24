@@ -10,6 +10,7 @@ namespace JTL\SCX\Client\Channel\Api\Event;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
+use JTL\SCX\Client\ApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Channel\Api\Event\Request\AcknowledgeEventIdListRequest;
@@ -28,12 +29,12 @@ class EventApi
 
     public function __construct(
         AuthAwareApiClient $client,
-        JsonSerializer $jsonSerializer,
-        ResponseDeserializer $responseDeserializer
+        JsonSerializer $jsonSerializer = null,
+        ResponseDeserializer $responseDeserializer = null
     ) {
         $this->client = $client;
-        $this->jsonSerializer = $jsonSerializer;
-        $this->responseDeserializer = $responseDeserializer;
+        $this->jsonSerializer = $jsonSerializer ?? new JsonSerializer();
+        $this->responseDeserializer = $responseDeserializer ?? new ApiResponseDeserializer();
     }
 
     /**
@@ -51,24 +52,18 @@ class EventApi
 
         foreach ($data->eventList as $event) {
             $eventType = new EventType($event->type);
+
             $eventContainer = new EventContainer(
                 $event->id,
                 new \DateTimeImmutable($event->createdAt),
-                $eventType->getValue(),
+                $eventType,
                 is_array($event->event) ? null : $this->createEventByType($eventType, $event->event)
             );
+
             $eventList->add($eventContainer);
         }
 
         return new GetSellerEventListResponse($eventList, $responseData->getStatusCode());
-    }
-
-    private function createEventByType(EventType $type, \stdClass $data)
-    {
-        if ($type->isUnknownEventType()) {
-            return $data;
-        }
-        return $this->responseDeserializer->deserializeObject($data, $type->getEventModelClass());
     }
 
     /**
@@ -79,5 +74,13 @@ class EventApi
     public function ack(AcknowledgeEventIdListRequest $request): void
     {
         $this->client->request($request);
+    }
+
+    private function createEventByType(EventType $type, \stdClass $data)
+    {
+        if ($type->isUnknownEventType()) {
+            return $data;
+        }
+        return $this->responseDeserializer->deserializeObject($data, $type->getEventModelClass());
     }
 }
