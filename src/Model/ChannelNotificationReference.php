@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderWithSeller
+ * ChannelNotificationReference
  *
  * PHP version 5
  *
@@ -28,17 +28,19 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
+
+use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderWithSeller Class Doc Comment
+ * ChannelNotificationReference Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderWithSeller extends OrderBase 
+class ChannelNotificationReference implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,7 +49,7 @@ class OrderWithSeller extends OrderBase
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderWithSeller';
+    protected static $openAPIModelName = 'ChannelNotificationReference';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +57,8 @@ class OrderWithSeller extends OrderBase
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sellerId' => 'string'
+        'type' => 'string',
+        'id' => 'string'
     ];
 
     /**
@@ -64,7 +67,8 @@ class OrderWithSeller extends OrderBase
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'sellerId' => null
+        'type' => null,
+        'id' => null
     ];
 
     /**
@@ -74,7 +78,7 @@ class OrderWithSeller extends OrderBase
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes + parent::openAPITypes();
+        return self::$openAPITypes;
     }
 
     /**
@@ -84,7 +88,7 @@ class OrderWithSeller extends OrderBase
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats + parent::openAPIFormats();
+        return self::$openAPIFormats;
     }
 
     /**
@@ -94,7 +98,8 @@ class OrderWithSeller extends OrderBase
      * @var string[]
      */
     protected static $attributeMap = [
-        'sellerId' => 'sellerId'
+        'type' => 'type',
+        'id' => 'id'
     ];
 
     /**
@@ -103,7 +108,8 @@ class OrderWithSeller extends OrderBase
      * @var string[]
      */
     protected static $setters = [
-        'sellerId' => 'setSellerId'
+        'type' => 'setType',
+        'id' => 'setId'
     ];
 
     /**
@@ -112,7 +118,8 @@ class OrderWithSeller extends OrderBase
      * @var string[]
      */
     protected static $getters = [
-        'sellerId' => 'getSellerId'
+        'type' => 'getType',
+        'id' => 'getId'
     ];
 
     /**
@@ -123,7 +130,7 @@ class OrderWithSeller extends OrderBase
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -133,7 +140,7 @@ class OrderWithSeller extends OrderBase
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -143,7 +150,7 @@ class OrderWithSeller extends OrderBase
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -156,10 +163,29 @@ class OrderWithSeller extends OrderBase
         return self::$openAPIModelName;
     }
 
+    const TYPE_OFFER = 'OFFER';
     
 
     
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTypeAllowableValues()
+    {
+        return [
+            self::TYPE_OFFER,
+        ];
+    }
+    
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -169,9 +195,8 @@ class OrderWithSeller extends OrderBase
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
     }
 
     /**
@@ -181,13 +206,14 @@ class OrderWithSeller extends OrderBase
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if ($this->container['sellerId'] === null) {
-            $invalidProperties[] = "'sellerId' can't be null";
-        }
-        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
-            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'type', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
         }
 
         return $invalidProperties;
@@ -206,30 +232,58 @@ class OrderWithSeller extends OrderBase
 
 
     /**
-     * Gets sellerId
+     * Gets type
      *
-     * @return string
+     * @return string|null
      */
-    public function getSellerId()
+    public function getType()
     {
-        return $this->container['sellerId'];
+        return $this->container['type'];
     }
 
     /**
-     * Sets sellerId
+     * Sets type
      *
-     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param string|null $type type
      *
      * @return $this
      */
-    public function setSellerId($sellerId)
+    public function setType($type)
     {
-
-        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderWithSeller., must conform to the pattern /^\\w{1,50}$/.");
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($type) && !in_array($type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'type', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
         }
+        $this->container['type'] = $type;
 
-        $this->container['sellerId'] = $sellerId;
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return string|null
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string|null $id id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
         return $this;
     }

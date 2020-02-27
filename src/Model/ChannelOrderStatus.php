@@ -1,6 +1,6 @@
 <?php
 /**
- * PaymentStatus
+ * ChannelOrderStatus
  *
  * PHP version 5
  *
@@ -31,22 +31,25 @@ namespace JTL\SCX\Client\Channel\Model;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * PaymentStatus Class Doc Comment
+ * ChannelOrderStatus Class Doc Comment
  *
  * @category Class
- * @description The current payment status  * **PENDING**: Order is not yet paid. * **PAID**: Order is complete paid. * **PARTIALLY_PAID**: Order is partially paid.
+ * @description The current order status.  * **CREATED**: Order is created but not yet completed. * **ACCEPTED**: Order is placed and checkout process is complete but not yet shipped. * **SHIPPED**: All items in the order have been shipped * **PARTIALLY_SHIPPED**: Some items (but not all) have been shipped. * **CANCELED_BY_SELLER**: Order is canceled by seller. * **CANCELED_BY_BUYER**: Order is canceled by buyer.
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class PaymentStatus
+class ChannelOrderStatus
 {
     /**
      * Possible values of this enum
      */
-    const PENDING = 'PENDING';
-    const PAID = 'PAID';
-    const PARTIALLY_PAID = 'PARTIALLY_PAID';
+    const CREATED = 'CREATED';
+    const ACCEPTED = 'ACCEPTED';
+    const SHIPPED = 'SHIPPED';
+    const PARTIALLY_SHIPPED = 'PARTIALLY_SHIPPED';
+    const CANCELED_BY_SELLER = 'CANCELED_BY_SELLER';
+    const CANCELED_BY_BUYER = 'CANCELED_BY_BUYER';
     
     /**
      * Gets allowable values of the enum
@@ -55,9 +58,12 @@ class PaymentStatus
     public static function getAllowableEnumValues()
     {
         return [
-            self::PENDING,
-            self::PAID,
-            self::PARTIALLY_PAID,
+            self::CREATED,
+            self::ACCEPTED,
+            self::SHIPPED,
+            self::PARTIALLY_SHIPPED,
+            self::CANCELED_BY_SELLER,
+            self::CANCELED_BY_BUYER,
         ];
     }
 }

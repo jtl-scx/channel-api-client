@@ -1,6 +1,6 @@
 <?php
 /**
- * ChannelEventOrderStatusUpdateRequest
+ * ChannelEventNotification
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * ChannelEventOrderStatusUpdateRequest Class Doc Comment
+ * ChannelEventNotification Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAccess
+class ChannelEventNotification implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ChannelEventOrderStatusUpdateRequest';
+    protected static $openAPIModelName = 'ChannelEventNotification';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,9 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
       */
     protected static $openAPITypes = [
         'sellerId' => 'string',
-        'orderId' => '\JTL\SCX\Client\Channel\Model\OrderStatus',
-        'paymentStatus' => 'PaymentStatus'
+        'severity' => 'string',
+        'message' => 'string',
+        'reference' => '\JTL\SCX\Client\Channel\Model\ChannelNotificationReference'
     ];
 
     /**
@@ -69,8 +70,9 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
       */
     protected static $openAPIFormats = [
         'sellerId' => null,
-        'orderId' => null,
-        'paymentStatus' => null
+        'severity' => null,
+        'message' => null,
+        'reference' => null
     ];
 
     /**
@@ -101,8 +103,9 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
      */
     protected static $attributeMap = [
         'sellerId' => 'sellerId',
-        'orderId' => 'orderId',
-        'paymentStatus' => 'paymentStatus'
+        'severity' => 'severity',
+        'message' => 'message',
+        'reference' => 'reference'
     ];
 
     /**
@@ -112,8 +115,9 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
      */
     protected static $setters = [
         'sellerId' => 'setSellerId',
-        'orderId' => 'setOrderId',
-        'paymentStatus' => 'setPaymentStatus'
+        'severity' => 'setSeverity',
+        'message' => 'setMessage',
+        'reference' => 'setReference'
     ];
 
     /**
@@ -123,8 +127,9 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
      */
     protected static $getters = [
         'sellerId' => 'getSellerId',
-        'orderId' => 'getOrderId',
-        'paymentStatus' => 'getPaymentStatus'
+        'severity' => 'getSeverity',
+        'message' => 'getMessage',
+        'reference' => 'getReference'
     ];
 
     /**
@@ -168,8 +173,25 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
         return self::$openAPIModelName;
     }
 
+    const SEVERITY_INFO = 'INFO';
+    const SEVERITY_WARNING = 'WARNING';
+    const SEVERITY_ERROR = 'ERROR';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSeverityAllowableValues()
+    {
+        return [
+            self::SEVERITY_INFO,
+            self::SEVERITY_WARNING,
+            self::SEVERITY_ERROR,
+        ];
+    }
     
 
     /**
@@ -188,8 +210,9 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
     public function __construct(array $data = null)
     {
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['paymentStatus'] = isset($data['paymentStatus']) ? $data['paymentStatus'] : null;
+        $this->container['severity'] = isset($data['severity']) ? $data['severity'] : 'INFO';
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
     }
 
     /**
@@ -208,8 +231,16 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
-        if ($this->container['orderId'] === null) {
-            $invalidProperties[] = "'orderId' can't be null";
+        $allowedValues = $this->getSeverityAllowableValues();
+        if (!is_null($this->container['severity']) && !in_array($this->container['severity'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'severity', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
         }
         return $invalidProperties;
     }
@@ -247,7 +278,7 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling ChannelEventOrderStatusUpdateRequest., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling ChannelEventNotification., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -256,49 +287,82 @@ class ChannelEventOrderStatusUpdateRequest implements ModelInterface, ArrayAcces
     }
 
     /**
-     * Gets orderId
+     * Gets severity
      *
-     * @return \JTL\SCX\Client\Channel\Model\OrderStatus
+     * @return string|null
      */
-    public function getOrderId()
+    public function getSeverity()
     {
-        return $this->container['orderId'];
+        return $this->container['severity'];
     }
 
     /**
-     * Sets orderId
+     * Sets severity
      *
-     * @param \JTL\SCX\Client\Channel\Model\OrderStatus $orderId orderId
+     * @param string|null $severity severity
      *
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setSeverity($severity)
     {
-        $this->container['orderId'] = $orderId;
+        $allowedValues = $this->getSeverityAllowableValues();
+        if (!is_null($severity) && !in_array($severity, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'severity', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['severity'] = $severity;
 
         return $this;
     }
 
     /**
-     * Gets paymentStatus
+     * Gets message
      *
-     * @return PaymentStatus|null
+     * @return string
      */
-    public function getPaymentStatus()
+    public function getMessage()
     {
-        return $this->container['paymentStatus'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets paymentStatus
+     * Sets message
      *
-     * @param PaymentStatus|null $paymentStatus paymentStatus
+     * @param string $message message
      *
      * @return $this
      */
-    public function setPaymentStatus($paymentStatus)
+    public function setMessage($message)
     {
-        $this->container['paymentStatus'] = $paymentStatus;
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets reference
+     *
+     * @return \JTL\SCX\Client\Channel\Model\ChannelNotificationReference|null
+     */
+    public function getReference()
+    {
+        return $this->container['reference'];
+    }
+
+    /**
+     * Sets reference
+     *
+     * @param \JTL\SCX\Client\Channel\Model\ChannelNotificationReference|null $reference reference
+     *
+     * @return $this
+     */
+    public function setReference($reference)
+    {
+        $this->container['reference'] = $reference;
 
         return $this;
     }

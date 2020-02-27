@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderItemBase
+ * OrderAddressUpdate
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderItemBase Class Doc Comment
+ * OrderAddressUpdate Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderItemBase implements ModelInterface, ArrayAccess
+class OrderAddressUpdate implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderItemBase implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderItemBase';
+    protected static $openAPIModelName = 'OrderAddressUpdate';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,10 @@ class OrderItemBase implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'orderItemId' => 'string'
+        'sellerId' => 'string',
+        'orderId' => 'string',
+        'billingAddress' => '\JTL\SCX\Client\Channel\Model\Address',
+        'shippingAddress' => '\JTL\SCX\Client\Channel\Model\Address'
     ];
 
     /**
@@ -66,7 +69,10 @@ class OrderItemBase implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'orderItemId' => null
+        'sellerId' => null,
+        'orderId' => null,
+        'billingAddress' => null,
+        'shippingAddress' => null
     ];
 
     /**
@@ -96,7 +102,10 @@ class OrderItemBase implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'orderItemId' => 'orderItemId'
+        'sellerId' => 'sellerId',
+        'orderId' => 'orderId',
+        'billingAddress' => 'billingAddress',
+        'shippingAddress' => 'shippingAddress'
     ];
 
     /**
@@ -105,7 +114,10 @@ class OrderItemBase implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'orderItemId' => 'setOrderItemId'
+        'sellerId' => 'setSellerId',
+        'orderId' => 'setOrderId',
+        'billingAddress' => 'setBillingAddress',
+        'shippingAddress' => 'setShippingAddress'
     ];
 
     /**
@@ -114,7 +126,10 @@ class OrderItemBase implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'orderItemId' => 'getOrderItemId'
+        'sellerId' => 'getSellerId',
+        'orderId' => 'getOrderId',
+        'billingAddress' => 'getBillingAddress',
+        'shippingAddress' => 'getShippingAddress'
     ];
 
     /**
@@ -177,7 +192,10 @@ class OrderItemBase implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['orderItemId'] = isset($data['orderItemId']) ? $data['orderItemId'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
+        $this->container['billingAddress'] = isset($data['billingAddress']) ? $data['billingAddress'] : null;
+        $this->container['shippingAddress'] = isset($data['shippingAddress']) ? $data['shippingAddress'] : null;
     }
 
     /**
@@ -189,13 +207,16 @@ class OrderItemBase implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['orderItemId'] === null) {
-            $invalidProperties[] = "'orderItemId' can't be null";
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
         }
-        if ((mb_strlen($this->container['orderItemId']) > 50)) {
-            $invalidProperties[] = "invalid value for 'orderItemId', the character length must be smaller than or equal to 50.";
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
+        if ($this->container['orderId'] === null) {
+            $invalidProperties[] = "'orderId' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -212,29 +233,102 @@ class OrderItemBase implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets orderItemId
+     * Gets sellerId
      *
      * @return string
      */
-    public function getOrderItemId()
+    public function getSellerId()
     {
-        return $this->container['orderItemId'];
+        return $this->container['sellerId'];
     }
 
     /**
-     * Sets orderItemId
+     * Sets sellerId
      *
-     * @param string $orderItemId A unique identifier to identify a order item. This ID is provided by the Channel itself an should be used to identify a order item id.
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
-    public function setOrderItemId($orderItemId)
+    public function setSellerId($sellerId)
     {
-        if ((mb_strlen($orderItemId) > 50)) {
-            throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderItemBase., must be smaller than or equal to 50.');
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderAddressUpdate., must conform to the pattern /^\\w{1,50}$/.");
         }
 
-        $this->container['orderItemId'] = $orderItemId;
+        $this->container['sellerId'] = $sellerId;
+
+        return $this;
+    }
+
+    /**
+     * Gets orderId
+     *
+     * @return string
+     */
+    public function getOrderId()
+    {
+        return $this->container['orderId'];
+    }
+
+    /**
+     * Sets orderId
+     *
+     * @param string $orderId orderId
+     *
+     * @return $this
+     */
+    public function setOrderId($orderId)
+    {
+        $this->container['orderId'] = $orderId;
+
+        return $this;
+    }
+
+    /**
+     * Gets billingAddress
+     *
+     * @return \JTL\SCX\Client\Channel\Model\Address|null
+     */
+    public function getBillingAddress()
+    {
+        return $this->container['billingAddress'];
+    }
+
+    /**
+     * Sets billingAddress
+     *
+     * @param \JTL\SCX\Client\Channel\Model\Address|null $billingAddress billingAddress
+     *
+     * @return $this
+     */
+    public function setBillingAddress($billingAddress)
+    {
+        $this->container['billingAddress'] = $billingAddress;
+
+        return $this;
+    }
+
+    /**
+     * Gets shippingAddress
+     *
+     * @return \JTL\SCX\Client\Channel\Model\Address|null
+     */
+    public function getShippingAddress()
+    {
+        return $this->container['shippingAddress'];
+    }
+
+    /**
+     * Sets shippingAddress
+     *
+     * @param \JTL\SCX\Client\Channel\Model\Address|null $shippingAddress shippingAddress
+     *
+     * @return $this
+     */
+    public function setShippingAddress($shippingAddress)
+    {
+        $this->container['shippingAddress'] = $shippingAddress;
 
         return $this;
     }

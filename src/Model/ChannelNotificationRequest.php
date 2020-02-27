@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderItemTypeDiscount
+ * ChannelNotificationRequest
  *
  * PHP version 5
  *
@@ -28,17 +28,19 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
+
+use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderItemTypeDiscount Class Doc Comment
+ * ChannelNotificationRequest Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderItemTypeDiscount extends OrderItemBase 
+class ChannelNotificationRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,7 +49,7 @@ class OrderItemTypeDiscount extends OrderItemBase
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderItemTypeDiscount';
+    protected static $openAPIModelName = 'ChannelNotificationRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,9 +57,10 @@ class OrderItemTypeDiscount extends OrderItemBase
       * @var string[]
       */
     protected static $openAPITypes = [
-        'type' => 'string',
-        'discount' => 'string',
-        'note' => 'string'
+        'sellerId' => 'string',
+        'severity' => 'string',
+        'message' => 'string',
+        'reference' => '\JTL\SCX\Client\Channel\Model\ChannelNotificationReference'
     ];
 
     /**
@@ -66,9 +69,10 @@ class OrderItemTypeDiscount extends OrderItemBase
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'type' => null,
-        'discount' => null,
-        'note' => null
+        'sellerId' => null,
+        'severity' => null,
+        'message' => null,
+        'reference' => null
     ];
 
     /**
@@ -78,7 +82,7 @@ class OrderItemTypeDiscount extends OrderItemBase
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes + parent::openAPITypes();
+        return self::$openAPITypes;
     }
 
     /**
@@ -88,7 +92,7 @@ class OrderItemTypeDiscount extends OrderItemBase
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats + parent::openAPIFormats();
+        return self::$openAPIFormats;
     }
 
     /**
@@ -98,9 +102,10 @@ class OrderItemTypeDiscount extends OrderItemBase
      * @var string[]
      */
     protected static $attributeMap = [
-        'type' => 'type',
-        'discount' => 'discount',
-        'note' => 'note'
+        'sellerId' => 'sellerId',
+        'severity' => 'severity',
+        'message' => 'message',
+        'reference' => 'reference'
     ];
 
     /**
@@ -109,9 +114,10 @@ class OrderItemTypeDiscount extends OrderItemBase
      * @var string[]
      */
     protected static $setters = [
-        'type' => 'setType',
-        'discount' => 'setDiscount',
-        'note' => 'setNote'
+        'sellerId' => 'setSellerId',
+        'severity' => 'setSeverity',
+        'message' => 'setMessage',
+        'reference' => 'setReference'
     ];
 
     /**
@@ -120,9 +126,10 @@ class OrderItemTypeDiscount extends OrderItemBase
      * @var string[]
      */
     protected static $getters = [
-        'type' => 'getType',
-        'discount' => 'getDiscount',
-        'note' => 'getNote'
+        'sellerId' => 'getSellerId',
+        'severity' => 'getSeverity',
+        'message' => 'getMessage',
+        'reference' => 'getReference'
     ];
 
     /**
@@ -133,7 +140,7 @@ class OrderItemTypeDiscount extends OrderItemBase
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -143,7 +150,7 @@ class OrderItemTypeDiscount extends OrderItemBase
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -153,7 +160,7 @@ class OrderItemTypeDiscount extends OrderItemBase
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -166,7 +173,9 @@ class OrderItemTypeDiscount extends OrderItemBase
         return self::$openAPIModelName;
     }
 
-    const TYPE_DISCOUNT = 'DISCOUNT';
+    const SEVERITY_INFO = 'INFO';
+    const SEVERITY_WARNING = 'WARNING';
+    const SEVERITY_ERROR = 'ERROR';
     
 
     
@@ -175,14 +184,22 @@ class OrderItemTypeDiscount extends OrderItemBase
      *
      * @return string[]
      */
-    public function getTypeAllowableValues()
+    public function getSeverityAllowableValues()
     {
         return [
-            self::TYPE_DISCOUNT,
+            self::SEVERITY_INFO,
+            self::SEVERITY_WARNING,
+            self::SEVERITY_ERROR,
         ];
     }
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -192,11 +209,10 @@ class OrderItemTypeDiscount extends OrderItemBase
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['discount'] = isset($data['discount']) ? $data['discount'] : null;
-        $this->container['note'] = isset($data['note']) ? $data['note'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['severity'] = isset($data['severity']) ? $data['severity'] : 'INFO';
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
     }
 
     /**
@@ -206,24 +222,25 @@ class OrderItemTypeDiscount extends OrderItemBase
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
         }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        }
+
+        $allowedValues = $this->getSeverityAllowableValues();
+        if (!is_null($this->container['severity']) && !in_array($this->container['severity'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
-                "invalid value for 'type', must be one of '%s'",
+                "invalid value for 'severity', must be one of '%s'",
                 implode("', '", $allowedValues)
             );
         }
 
-        if ($this->container['discount'] === null) {
-            $invalidProperties[] = "'discount' can't be null";
-        }
-        if ($this->container['note'] === null) {
-            $invalidProperties[] = "'note' can't be null";
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
         }
         return $invalidProperties;
     }
@@ -241,82 +258,111 @@ class OrderItemTypeDiscount extends OrderItemBase
 
 
     /**
-     * Gets type
+     * Gets sellerId
      *
      * @return string
      */
-    public function getType()
+    public function getSellerId()
     {
-        return $this->container['type'];
+        return $this->container['sellerId'];
     }
 
     /**
-     * Sets type
+     * Sets sellerId
      *
-     * @param string $type type
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
-    public function setType($type)
+    public function setSellerId($sellerId)
     {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling ChannelNotificationRequest., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
+
+        return $this;
+    }
+
+    /**
+     * Gets severity
+     *
+     * @return string|null
+     */
+    public function getSeverity()
+    {
+        return $this->container['severity'];
+    }
+
+    /**
+     * Sets severity
+     *
+     * @param string|null $severity severity
+     *
+     * @return $this
+     */
+    public function setSeverity($severity)
+    {
+        $allowedValues = $this->getSeverityAllowableValues();
+        if (!is_null($severity) && !in_array($severity, $allowedValues, true)) {
             throw new \InvalidArgumentException(
                 sprintf(
-                    "Invalid value for 'type', must be one of '%s'",
+                    "Invalid value for 'severity', must be one of '%s'",
                     implode("', '", $allowedValues)
                 )
             );
         }
-        $this->container['type'] = $type;
+        $this->container['severity'] = $severity;
 
         return $this;
     }
 
     /**
-     * Gets discount
+     * Gets message
      *
      * @return string
      */
-    public function getDiscount()
+    public function getMessage()
     {
-        return $this->container['discount'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets discount
+     * Sets message
      *
-     * @param string $discount discount
+     * @param string $message message
      *
      * @return $this
      */
-    public function setDiscount($discount)
+    public function setMessage($message)
     {
-        $this->container['discount'] = $discount;
+        $this->container['message'] = $message;
 
         return $this;
     }
 
     /**
-     * Gets note
+     * Gets reference
      *
-     * @return string
+     * @return \JTL\SCX\Client\Channel\Model\ChannelNotificationReference|null
      */
-    public function getNote()
+    public function getReference()
     {
-        return $this->container['note'];
+        return $this->container['reference'];
     }
 
     /**
-     * Sets note
+     * Sets reference
      *
-     * @param string $note note
+     * @param \JTL\SCX\Client\Channel\Model\ChannelNotificationReference|null $reference reference
      *
      * @return $this
      */
-    public function setNote($note)
+    public function setReference($reference)
     {
-        $this->container['note'] = $note;
+        $this->container['reference'] = $reference;
 
         return $this;
     }

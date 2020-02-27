@@ -1,6 +1,6 @@
 <?php
 /**
- * ChannelEventOrderAddressUpdate
+ * Order
  *
  * PHP version 5
  *
@@ -28,19 +28,17 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-
-use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * ChannelEventOrderAddressUpdate Class Doc Comment
+ * Order Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
+class Order extends OrderBase 
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +47,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ChannelEventOrderAddressUpdate';
+    protected static $openAPIModelName = 'Order';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,11 +55,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'channel' => 'string',
-        'sellerId' => 'string',
-        'orderId' => 'string',
-        'billingAddress' => '\JTL\SCX\Client\Channel\Model\Address',
-        'shippingAddress' => '\JTL\SCX\Client\Channel\Model\Address'
+        'sellerId' => 'string'
     ];
 
     /**
@@ -70,11 +64,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'channel' => null,
-        'sellerId' => null,
-        'orderId' => null,
-        'billingAddress' => null,
-        'shippingAddress' => null
+        'sellerId' => null
     ];
 
     /**
@@ -84,7 +74,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -94,7 +84,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -104,11 +94,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'channel' => 'channel',
-        'sellerId' => 'sellerId',
-        'orderId' => 'orderId',
-        'billingAddress' => 'billingAddress',
-        'shippingAddress' => 'shippingAddress'
+        'sellerId' => 'sellerId'
     ];
 
     /**
@@ -117,11 +103,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'channel' => 'setChannel',
-        'sellerId' => 'setSellerId',
-        'orderId' => 'setOrderId',
-        'billingAddress' => 'setBillingAddress',
-        'shippingAddress' => 'setShippingAddress'
+        'sellerId' => 'setSellerId'
     ];
 
     /**
@@ -130,11 +112,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'channel' => 'getChannel',
-        'sellerId' => 'getSellerId',
-        'orderId' => 'getOrderId',
-        'billingAddress' => 'getBillingAddress',
-        'shippingAddress' => 'getShippingAddress'
+        'sellerId' => 'getSellerId'
     ];
 
     /**
@@ -145,7 +123,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -155,7 +133,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -165,7 +143,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -182,12 +160,6 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -197,11 +169,9 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['channel'] = isset($data['channel']) ? $data['channel'] : null;
+        parent::__construct($data);
+
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['billingAddress'] = isset($data['billingAddress']) ? $data['billingAddress'] : null;
-        $this->container['shippingAddress'] = isset($data['shippingAddress']) ? $data['shippingAddress'] : null;
     }
 
     /**
@@ -211,14 +181,7 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if ($this->container['channel'] === null) {
-            $invalidProperties[] = "'channel' can't be null";
-        }
-        if (!preg_match("/^\\w{5,15}$/", $this->container['channel'])) {
-            $invalidProperties[] = "invalid value for 'channel', must be conform to the pattern /^\\w{5,15}$/.";
-        }
+        $invalidProperties = parent::listInvalidProperties();
 
         if ($this->container['sellerId'] === null) {
             $invalidProperties[] = "'sellerId' can't be null";
@@ -227,9 +190,6 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
-        if ($this->container['orderId'] === null) {
-            $invalidProperties[] = "'orderId' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -244,35 +204,6 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets channel
-     *
-     * @return string
-     */
-    public function getChannel()
-    {
-        return $this->container['channel'];
-    }
-
-    /**
-     * Sets channel
-     *
-     * @param string $channel This is the unqiue Channel name.
-     *
-     * @return $this
-     */
-    public function setChannel($channel)
-    {
-
-        if ((!preg_match("/^\\w{5,15}$/", $channel))) {
-            throw new \InvalidArgumentException("invalid value for $channel when calling ChannelEventOrderAddressUpdate., must conform to the pattern /^\\w{5,15}$/.");
-        }
-
-        $this->container['channel'] = $channel;
-
-        return $this;
-    }
 
     /**
      * Gets sellerId
@@ -295,82 +226,10 @@ class ChannelEventOrderAddressUpdate implements ModelInterface, ArrayAccess
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling ChannelEventOrderAddressUpdate., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling Order., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
-
-        return $this;
-    }
-
-    /**
-     * Gets orderId
-     *
-     * @return string
-     */
-    public function getOrderId()
-    {
-        return $this->container['orderId'];
-    }
-
-    /**
-     * Sets orderId
-     *
-     * @param string $orderId orderId
-     *
-     * @return $this
-     */
-    public function setOrderId($orderId)
-    {
-        $this->container['orderId'] = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * Gets billingAddress
-     *
-     * @return \JTL\SCX\Client\Channel\Model\Address|null
-     */
-    public function getBillingAddress()
-    {
-        return $this->container['billingAddress'];
-    }
-
-    /**
-     * Sets billingAddress
-     *
-     * @param \JTL\SCX\Client\Channel\Model\Address|null $billingAddress billingAddress
-     *
-     * @return $this
-     */
-    public function setBillingAddress($billingAddress)
-    {
-        $this->container['billingAddress'] = $billingAddress;
-
-        return $this;
-    }
-
-    /**
-     * Gets shippingAddress
-     *
-     * @return \JTL\SCX\Client\Channel\Model\Address|null
-     */
-    public function getShippingAddress()
-    {
-        return $this->container['shippingAddress'];
-    }
-
-    /**
-     * Sets shippingAddress
-     *
-     * @param \JTL\SCX\Client\Channel\Model\Address|null $shippingAddress shippingAddress
-     *
-     * @return $this
-     */
-    public function setShippingAddress($shippingAddress)
-    {
-        $this->container['shippingAddress'] = $shippingAddress;
 
         return $this;
     }
