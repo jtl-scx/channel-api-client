@@ -208,21 +208,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
-    const TYPE_ITEM = 'ITEM';
 
 
-
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getTypeAllowableValues()
-    {
-        return [
-            self::TYPE_ITEM,
-        ];
-    }
 
 
     /**
@@ -241,7 +228,7 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['orderItemId'] = isset($data['orderItemId']) ? $data['orderItemId'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
+        $this->container['type'] = isset($data['type']) ? $data['type'] : 'ITEM';
         $this->container['grossPrice'] = isset($data['grossPrice']) ? $data['grossPrice'] : null;
         $this->container['total'] = isset($data['total']) ? $data['total'] : null;
         $this->container['taxPercent'] = isset($data['taxPercent']) ? $data['taxPercent'] : null;
@@ -272,14 +259,6 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'type', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
-
         if ($this->container['grossPrice'] === null) {
             $invalidProperties[] = "'grossPrice' can't be null";
         }
@@ -363,15 +342,6 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
      */
     public function setType($type)
     {
-        $allowedValues = $this->getTypeAllowableValues();
-        if (!in_array($type, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'type', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
         $this->container['type'] = $type;
 
         return $this;
