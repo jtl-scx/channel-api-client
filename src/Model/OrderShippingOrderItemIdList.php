@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderShippingOfferIdList
+ * OrderShippingOrderItemIdList
  *
  * PHP version 5
  *
@@ -29,18 +29,18 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderShippingOfferIdList Class Doc Comment
+ * OrderShippingOrderItemIdList Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
+class OrderShippingOrderItemIdList implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderShipping_offerIdList';
+    protected static $openAPIModelName = 'OrderShipping_orderItemIdList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,7 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'offerId' => 'int',
+        'orderItemId' => 'int',
         'quantity' => 'int'
     ];
 
@@ -67,7 +67,7 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'offerId' => 'int64',
+        'orderItemId' => 'int64',
         'quantity' => null
     ];
 
@@ -98,7 +98,7 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'offerId' => 'offerId',
+        'orderItemId' => 'orderItemId',
         'quantity' => 'quantity'
     ];
 
@@ -108,7 +108,7 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'offerId' => 'setOfferId',
+        'orderItemId' => 'setOrderItemId',
         'quantity' => 'setQuantity'
     ];
 
@@ -118,7 +118,7 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'offerId' => 'getOfferId',
+        'orderItemId' => 'getOrderItemId',
         'quantity' => 'getQuantity'
     ];
 
@@ -182,7 +182,7 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
+        $this->container['orderItemId'] = isset($data['orderItemId']) ? $data['orderItemId'] : null;
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
     }
 
@@ -195,11 +195,8 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['offerId'] === null) {
-            $invalidProperties[] = "'offerId' can't be null";
-        }
-        if (($this->container['offerId'] < 1)) {
-            $invalidProperties[] = "invalid value for 'offerId', must be bigger than or equal to 1.";
+        if (!is_null($this->container['orderItemId']) && ($this->container['orderItemId'] < 1)) {
+            $invalidProperties[] = "invalid value for 'orderItemId', must be bigger than or equal to 1.";
         }
 
         if ($this->container['quantity'] === null) {
@@ -221,30 +218,30 @@ class OrderShippingOfferIdList implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets offerId
+     * Gets orderItemId
      *
-     * @return int
+     * @return int|null
      */
-    public function getOfferId()
+    public function getOrderItemId()
     {
-        return $this->container['offerId'];
+        return $this->container['orderItemId'];
     }
 
     /**
-     * Sets offerId
+     * Sets orderItemId
      *
-     * @param int $offerId Unique Offer Id to identify a Offer on a Sales Channel.
+     * @param int|null $orderItemId Unique OrderItem ID to identify an Order Item on a Sales Channel.
      *
      * @return $this
      */
-    public function setOfferId($offerId)
+    public function setOrderItemId($orderItemId)
     {
 
-        if (($offerId < 1)) {
-            throw new \InvalidArgumentException('invalid value for $offerId when calling OrderShippingOfferIdList., must be bigger than or equal to 1.');
+        if (!is_null($orderItemId) && ($orderItemId < 1)) {
+            throw new \InvalidArgumentException('invalid value for $orderItemId when calling OrderShippingOrderItemIdList., must be bigger than or equal to 1.');
         }
 
-        $this->container['offerId'] = $offerId;
+        $this->container['orderItemId'] = $orderItemId;
 
         return $this;
     }

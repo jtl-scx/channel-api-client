@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * OrderShippingShippingItems Class Doc Comment
@@ -57,7 +57,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'offerIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingOfferIdList[]',
+        'orderItemIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingOrderItemIdList[]',
         'trackingNumber' => 'string',
         'carrier' => 'string'
     ];
@@ -68,7 +68,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'offerIdList' => null,
+        'orderItemIdList' => null,
         'trackingNumber' => null,
         'carrier' => null
     ];
@@ -100,7 +100,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'offerIdList' => 'offerIdList',
+        'orderItemIdList' => 'orderItemIdList',
         'trackingNumber' => 'trackingNumber',
         'carrier' => 'carrier'
     ];
@@ -111,7 +111,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'offerIdList' => 'setOfferIdList',
+        'orderItemIdList' => 'setOrderItemIdList',
         'trackingNumber' => 'setTrackingNumber',
         'carrier' => 'setCarrier'
     ];
@@ -122,7 +122,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'offerIdList' => 'getOfferIdList',
+        'orderItemIdList' => 'getOrderItemIdList',
         'trackingNumber' => 'getTrackingNumber',
         'carrier' => 'getCarrier'
     ];
@@ -187,7 +187,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['offerIdList'] = isset($data['offerIdList']) ? $data['offerIdList'] : null;
+        $this->container['orderItemIdList'] = isset($data['orderItemIdList']) ? $data['orderItemIdList'] : null;
         $this->container['trackingNumber'] = isset($data['trackingNumber']) ? $data['trackingNumber'] : null;
         $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
     }
@@ -217,25 +217,25 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets offerIdList
+     * Gets orderItemIdList
      *
-     * @return \JTL\SCX\Client\Channel\Model\OrderShippingOfferIdList[]|null
+     * @return \JTL\SCX\Client\Channel\Model\OrderShippingOrderItemIdList[]|null
      */
-    public function getOfferIdList()
+    public function getOrderItemIdList()
     {
-        return $this->container['offerIdList'];
+        return $this->container['orderItemIdList'];
     }
 
     /**
-     * Sets offerIdList
+     * Sets orderItemIdList
      *
-     * @param \JTL\SCX\Client\Channel\Model\OrderShippingOfferIdList[]|null $offerIdList Container to describe what items are included.
+     * @param \JTL\SCX\Client\Channel\Model\OrderShippingOrderItemIdList[]|null $orderItemIdList Container to describe what items are included.
      *
      * @return $this
      */
-    public function setOfferIdList($offerIdList)
+    public function setOrderItemIdList($orderItemIdList)
     {
-        $this->container['offerIdList'] = $offerIdList;
+        $this->container['orderItemIdList'] = $orderItemIdList;
 
         return $this;
     }

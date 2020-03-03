@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * SellerEventOfferUpdate Class Doc Comment
@@ -393,7 +393,7 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
     /**
      * Sets offerId
      *
-     * @param int $offerId Unique Offer Id to identify a Offer on a Sales Channel.
+     * @param int $offerId Unique Offer Id to identify an Offer on a Sales Channel.
      *
      * @return $this
      */
