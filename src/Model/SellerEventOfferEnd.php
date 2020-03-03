@@ -28,7 +28,7 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * SellerEventOfferEnd Class Doc Comment
@@ -218,7 +218,7 @@ class SellerEventOfferEnd extends EventSellerRelated
     /**
      * Sets offerId
      *
-     * @param int $offerId Unique Offer Id to identify a Offer on a Sales Channel.
+     * @param int $offerId Unique Offer Id to identify an Offer on a Sales Channel.
      *
      * @return $this
      */

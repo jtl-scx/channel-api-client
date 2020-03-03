@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * OfferListingSuccessful Class Doc Comment
@@ -295,7 +295,7 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
     /**
      * Sets offerId
      *
-     * @param int $offerId Unique Offer Id to identify a Offer on a Sales Channel.
+     * @param int $offerId Unique Offer Id to identify an Offer on a Sales Channel.
      *
      * @return $this
      */
@@ -324,7 +324,7 @@ class OfferListingSuccessful implements ModelInterface, ArrayAccess
     /**
      * Sets channelOfferId
      *
-     * @param string|null $channelOfferId Channel defined unique Offer Id to identify a Offer on a Sales Channel.
+     * @param string|null $channelOfferId Channel defined unique Offer Id to identify an Offer on a Sales Channel.
      *
      * @return $this
      */
