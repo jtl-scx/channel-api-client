@@ -8,8 +8,6 @@
 
 namespace JTL\SCX\Client\Channel\Api\Order\Response;
 
-use JTL\SCX\Client\Response\AbstractResponse;
-
-class UpdateOrderAddressResponse extends AbstractResponse
+class UpdateOrderAddressResponse extends AbstractOrderResponse
 {
 }
