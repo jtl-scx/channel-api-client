@@ -10,23 +10,28 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
+use JTL\SCX\Client\ApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
+use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
-use JTL\SCX\Client\Channel\Model\OrderStatus;
-use JTL\SCX\Client\Channel\Model\OrderStatusList;
+use JTL\SCX\Client\Channel\Model\ErrorResponseList;
 use JTL\SCX\Client\Exception\RequestFailedException;
+use JTL\SCX\Client\ResponseDeserializer;
+use Psr\Http\Message\ResponseInterface;
 
 class OrderApi
 {
     private AuthAwareApiClient $client;
+    private ResponseDeserializer $responseDeserializer;
 
-    public function __construct(AuthAwareApiClient $client)
+    public function __construct(AuthAwareApiClient $client, ResponseDeserializer $responseDeserializer = null)
     {
         $this->client = $client;
+        $this->responseDeserializer = $responseDeserializer ?? new ApiResponseDeserializer();
     }
 
     /**
@@ -39,7 +44,7 @@ class OrderApi
     {
         $response = $this->client->request($request);
 
-        return new CreateOrdersResponse($response->getStatusCode());
+        return $this->createResponse($response, CreateOrdersResponse::class);
     }
 
     /**
@@ -52,7 +57,7 @@ class OrderApi
     {
         $response = $this->client->request($request);
 
-        return new UpdateOrderStatusResponse($response->getStatusCode());
+        return $this->createResponse($response, UpdateOrderStatusResponse::class);
     }
 
     /**
@@ -65,6 +70,23 @@ class OrderApi
     {
         $response = $this->client->request($request);
 
-        return new UpdateOrderAddressResponse($response->getStatusCode());
+        return $this->createResponse($response, UpdateOrderAddressResponse::class);
+    }
+
+    /**
+     * @param ResponseInterface $apiResponse
+     * @param string $responseClass
+     * @return AbstractOrderResponse|CreateOrdersResponse|UpdateOrderStatusResponse|UpdateOrderAddressResponse
+     */
+    private function createResponse(ResponseInterface $apiResponse, string $responseClass): AbstractOrderResponse
+    {
+        $responseBody = trim((string)$apiResponse->getBody()->getContents());
+        if (strlen($responseBody) > 0) {
+            /** @var ErrorResponseList $errorResponse */
+            $errorResponse = $this->responseDeserializer->deserializeObject($responseBody, ErrorResponseList::class);
+            $errorList = $errorResponse->getErrorList();
+        }
+
+        return new $responseClass($apiResponse->getStatusCode(), $errorList ?? null);
     }
 }
