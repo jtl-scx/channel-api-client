@@ -58,5 +58,4 @@ class AbstractOrderResponseTest extends TestCase
 
 class TestResponse extends AbstractOrderResponse
 {
-
 }

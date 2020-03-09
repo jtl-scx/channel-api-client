@@ -10,5 +10,4 @@ namespace JTL\SCX\Client\Channel\Api\Order\Response;
 
 class CreateOrdersResponse extends AbstractOrderResponse
 {
-
 }
