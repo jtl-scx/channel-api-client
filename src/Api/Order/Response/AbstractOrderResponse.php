@@ -8,19 +8,19 @@
 
 namespace JTL\SCX\Client\Channel\Api\Order\Response;
 
-use JTL\SCX\Client\Channel\Model\ErrorResponse;
+use JTL\SCX\Client\Channel\Model\Error;
 use JTL\SCX\Client\Response\AbstractResponse;
 
 abstract class AbstractOrderResponse extends AbstractResponse
 {
     /**
-     * @var ErrorResponse[]|null
+     * @var Error[]|null
      */
     private ?array $errorList = null;
 
     /**
      * @param int $statusCode
-     * @param ErrorResponse[] $errorList
+     * @param Error[] $errorList
      */
     public function __construct(int $statusCode, array $errorList = null)
     {
@@ -44,7 +44,7 @@ abstract class AbstractOrderResponse extends AbstractResponse
     }
 
     /**
-     * @return ErrorResponse[]|null
+     * @return Error[]|null
      */
     public function getErrorList(): ?array
     {

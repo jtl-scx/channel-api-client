@@ -17,6 +17,7 @@ use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
+use JTL\SCX\Client\Channel\Model\ErrorResponseList;
 use JTL\SCX\Client\Channel\Model\InlineResponse500;
 use JTL\SCX\Client\ResponseDeserializer;
 use Psr\Http\Message\ResponseInterface;
@@ -92,7 +93,7 @@ class OrderApiTest extends AbstractTestCase
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
         $apiClientMock->expects($this->once())->method('request')->with($requestMock)->willReturn($responseMock);
 
-        $errorResponse = $this->createMock(InlineResponse500::class);
+        $errorResponse = $this->createMock(ErrorResponseList::class);
         $errorResponse->expects($this->atLeastOnce())->method('getErrorList')->willReturn([]);
         $deserializerMock = $this->createMock(ResponseDeserializer::class);
         $deserializerMock->expects($this->once())->method('deserializeObject')->willReturn($errorResponse);

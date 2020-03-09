@@ -18,7 +18,7 @@ use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
-use JTL\SCX\Client\Channel\Model\InlineResponse500;
+use JTL\SCX\Client\Channel\Model\ErrorResponseList;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\ResponseDeserializer;
 use Psr\Http\Message\ResponseInterface;
@@ -82,8 +82,8 @@ class OrderApi
     {
         $responseBody = trim((string)$apiResponse->getBody()->getContents());
         if (strlen($responseBody) > 0) {
-            /** @var InlineResponse500 $errorResponse */
-            $errorResponse = $this->responseDeserializer->deserializeObject($responseBody, InlineResponse500::class);
+            /** @var ErrorResponseList $errorResponse */
+            $errorResponse = $this->responseDeserializer->deserializeObject($responseBody, ErrorResponseList::class);
             $errorList = $errorResponse->getErrorList();
         }
 
