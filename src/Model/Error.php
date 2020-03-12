@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * Error Class Doc Comment
@@ -59,7 +59,8 @@ class Error implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'code' => 'string',
         'message' => 'string',
-        'severity' => 'string'
+        'severity' => 'string',
+        'hint' => 'string'
     ];
 
     /**
@@ -70,7 +71,8 @@ class Error implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'code' => null,
         'message' => null,
-        'severity' => null
+        'severity' => null,
+        'hint' => null
     ];
 
     /**
@@ -102,7 +104,8 @@ class Error implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'code' => 'code',
         'message' => 'message',
-        'severity' => 'severity'
+        'severity' => 'severity',
+        'hint' => 'hint'
     ];
 
     /**
@@ -113,7 +116,8 @@ class Error implements ModelInterface, ArrayAccess
     protected static $setters = [
         'code' => 'setCode',
         'message' => 'setMessage',
-        'severity' => 'setSeverity'
+        'severity' => 'setSeverity',
+        'hint' => 'setHint'
     ];
 
     /**
@@ -124,7 +128,8 @@ class Error implements ModelInterface, ArrayAccess
     protected static $getters = [
         'code' => 'getCode',
         'message' => 'getMessage',
-        'severity' => 'getSeverity'
+        'severity' => 'getSeverity',
+        'hint' => 'getHint'
     ];
 
     /**
@@ -170,7 +175,6 @@ class Error implements ModelInterface, ArrayAccess
 
     const SEVERITY_ERROR = 'error';
     const SEVERITY_WARNING = 'warning';
-    const SEVERITY_NOTICE = 'notice';
     const SEVERITY_INFO = 'info';
     
 
@@ -185,7 +189,6 @@ class Error implements ModelInterface, ArrayAccess
         return [
             self::SEVERITY_ERROR,
             self::SEVERITY_WARNING,
-            self::SEVERITY_NOTICE,
             self::SEVERITY_INFO,
         ];
     }
@@ -209,6 +212,7 @@ class Error implements ModelInterface, ArrayAccess
         $this->container['code'] = isset($data['code']) ? $data['code'] : null;
         $this->container['message'] = isset($data['message']) ? $data['message'] : null;
         $this->container['severity'] = isset($data['severity']) ? $data['severity'] : 'error';
+        $this->container['hint'] = isset($data['hint']) ? $data['hint'] : null;
     }
 
     /**
@@ -320,6 +324,30 @@ class Error implements ModelInterface, ArrayAccess
             );
         }
         $this->container['severity'] = $severity;
+
+        return $this;
+    }
+
+    /**
+     * Gets hint
+     *
+     * @return string|null
+     */
+    public function getHint()
+    {
+        return $this->container['hint'];
+    }
+
+    /**
+     * Sets hint
+     *
+     * @param string|null $hint hint
+     *
+     * @return $this
+     */
+    public function setHint($hint)
+    {
+        $this->container['hint'] = $hint;
 
         return $this;
     }
