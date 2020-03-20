@@ -159,6 +159,7 @@ class SalesChannelBase extends ChannelBasedData
     const VISIBILITY_JTL = 'JTL';
     const VISIBILITY_THIRDPARTY = 'THIRDPARTY';
     const VISIBILITY_ONBOARDING = 'ONBOARDING';
+    const VISIBILITY_RESTRICTED = 'RESTRICTED';
     
 
     
@@ -173,6 +174,7 @@ class SalesChannelBase extends ChannelBasedData
             self::VISIBILITY_JTL,
             self::VISIBILITY_THIRDPARTY,
             self::VISIBILITY_ONBOARDING,
+            self::VISIBILITY_RESTRICTED,
         ];
     }
     
@@ -236,7 +238,7 @@ class SalesChannelBase extends ChannelBasedData
     /**
      * Sets visibility
      *
-     * @param string|null $visibility Sales Channel visibility.  * **JTL**: Channel provided directly by JTL * **THIRDPARTY**: Channel hostet, supported and accounted by a 3rd Party vendor * **ONBOARDING**: Channel is in on boarding process - these channels are only visible to selected user group * **(Deprecated) PUBLIC**: do not use * **(Deprecated) RESTRICTED**: do not use
+     * @param string|null $visibility Sales Channel visibility.  * **JTL**: Channel provided directly by JTL * **THIRDPARTY**: Channel hostet, supported and accounted by a 3rd Party vendor * **ONBOARDING**: Channel is in on boarding process - these channels are only visible to selected user group * **RESTRICTED**: Channel can only be shown to select sellers * **(Deprecated) PUBLIC**: do not use
      *
      * @return $this
      */
