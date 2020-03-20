@@ -164,6 +164,7 @@ class ChannelNotificationReference implements ModelInterface, ArrayAccess
     }
 
     const TYPE_OFFER = 'OFFER';
+    const TYPE_ORDERITEMID = 'ORDERITEMID';
     
 
     
@@ -176,6 +177,7 @@ class ChannelNotificationReference implements ModelInterface, ArrayAccess
     {
         return [
             self::TYPE_OFFER,
+            self::TYPE_ORDERITEMID,
         ];
     }
     
