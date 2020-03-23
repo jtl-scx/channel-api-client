@@ -61,7 +61,7 @@ class OrderShipping implements ModelInterface, ArrayAccess
         'orderId' => 'string',
         'shippingComplete' => 'bool',
         'shippedAt' => '\DateTime',
-        'shippingItems' => '\JTL\SCX\Client\Channel\Model\OrderShippingShippingItems[]'
+        'shippingItems' => '\JTL\SCX\Client\Channel\Model\OrderShippingPosition[]'
     ];
 
     /**
@@ -351,7 +351,7 @@ class OrderShipping implements ModelInterface, ArrayAccess
     /**
      * Gets shippingItems
      *
-     * @return \JTL\SCX\Client\Channel\Model\OrderShippingShippingItems[]
+     * @return \JTL\SCX\Client\Channel\Model\OrderShippingPosition[]
      */
     public function getShippingItems()
     {
@@ -361,7 +361,7 @@ class OrderShipping implements ModelInterface, ArrayAccess
     /**
      * Sets shippingItems
      *
-     * @param \JTL\SCX\Client\Channel\Model\OrderShippingShippingItems[] $shippingItems shippingItems
+     * @param \JTL\SCX\Client\Channel\Model\OrderShippingPosition[] $shippingItems shippingItems
      *
      * @return $this
      */
