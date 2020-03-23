@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderShippingOrderItemIdList
+ * OrderShippingPositionItem
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderShippingOrderItemIdList Class Doc Comment
+ * OrderShippingPositionItem Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderShippingOrderItemIdList implements ModelInterface, ArrayAccess
+class OrderShippingPositionItem implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderShippingOrderItemIdList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderShipping_orderItemIdList';
+    protected static $openAPIModelName = 'OrderShippingPositionItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,7 @@ class OrderShippingOrderItemIdList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'orderItemId' => 'int',
+        'orderItemId' => 'string',
         'quantity' => 'int'
     ];
 
@@ -195,10 +195,9 @@ class OrderShippingOrderItemIdList implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['orderItemId']) && ($this->container['orderItemId'] < 1)) {
-            $invalidProperties[] = "invalid value for 'orderItemId', must be bigger than or equal to 1.";
+        if ($this->container['orderItemId'] === null) {
+            $invalidProperties[] = "'orderItemId' can't be null";
         }
-
         if ($this->container['quantity'] === null) {
             $invalidProperties[] = "'quantity' can't be null";
         }
@@ -220,7 +219,7 @@ class OrderShippingOrderItemIdList implements ModelInterface, ArrayAccess
     /**
      * Gets orderItemId
      *
-     * @return int|null
+     * @return string
      */
     public function getOrderItemId()
     {
@@ -230,17 +229,12 @@ class OrderShippingOrderItemIdList implements ModelInterface, ArrayAccess
     /**
      * Sets orderItemId
      *
-     * @param int|null $orderItemId Unique OrderItem ID to identify an Order Item on a Sales Channel.
+     * @param string $orderItemId Unique OrderItem ID to identify an Order Item on a Sales Channel.
      *
      * @return $this
      */
     public function setOrderItemId($orderItemId)
     {
-
-        if (!is_null($orderItemId) && ($orderItemId < 1)) {
-            throw new \InvalidArgumentException('invalid value for $orderItemId when calling OrderShippingOrderItemIdList., must be bigger than or equal to 1.');
-        }
-
         $this->container['orderItemId'] = $orderItemId;
 
         return $this;

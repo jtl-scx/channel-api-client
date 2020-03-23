@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderShippingShippingItems
+ * OrderShippingPosition
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderShippingShippingItems Class Doc Comment
+ * OrderShippingPosition Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderShippingShippingItems implements ModelInterface, ArrayAccess
+class OrderShippingPosition implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderShipping_shippingItems';
+    protected static $openAPIModelName = 'OrderShippingPosition';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'orderItemIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingOrderItemIdList[]',
+        'orderItemIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]',
         'trackingNumber' => 'string',
         'carrier' => 'string'
     ];
@@ -219,7 +219,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
     /**
      * Gets orderItemIdList
      *
-     * @return \JTL\SCX\Client\Channel\Model\OrderShippingOrderItemIdList[]|null
+     * @return \JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]|null
      */
     public function getOrderItemIdList()
     {
@@ -229,7 +229,7 @@ class OrderShippingShippingItems implements ModelInterface, ArrayAccess
     /**
      * Sets orderItemIdList
      *
-     * @param \JTL\SCX\Client\Channel\Model\OrderShippingOrderItemIdList[]|null $orderItemIdList Container to describe what items are included.
+     * @param \JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]|null $orderItemIdList Container to describe what items are included.
      *
      * @return $this
      */
