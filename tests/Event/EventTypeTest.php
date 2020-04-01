@@ -57,7 +57,7 @@ class EventTypeTest extends TestCase
         $this->assertInstanceOf(EventType::class, new EventType('foobardingens'));
     }
 
-    public function isUnknownEventType()
+    public function testIsUnknownEventType()
     {
         $this->assertTrue((new EventType('foobardingens'))->isUnknownEventType());
         $this->assertFalse(EventType::SellerEventTest()->isUnknownEventType());
