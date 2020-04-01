@@ -69,7 +69,7 @@ use JTL\SCX\Client\Channel\Api\Event\Request\GetEventListRequest;
 $eventApi = new EventApi($authAwareApiClient);
 
 // read a bulk of unacknowledged events from SCX Channel Api
-$sellerEventList = $eventApi->get(new GetEventListRequest());
+$sellerEventList = $eventApi->get();
 foreach ($sellerEventList->getEventList() as $eventContainer) {
 
     // The Id of the event use this id to acknowledge event after processing
