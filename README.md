@@ -18,7 +18,7 @@ use JTL\SCX\Client\Api\Configuration;
 use JTL\SCX\Client\Channel\Api\Attribute\AttributesApi;
 use JTL\SCX\Client\Channel\Api\Category\CategoryApi;
 use JTL\SCX\Client\Channel\Api\Event\EventApi;
-use JTL\SCX\Client\Channel\Api\Notification\NotificationApi
+use JTL\SCX\Client\Channel\Api\Notification\NotificationApi;
 use JTL\SCX\Client\Channel\Api\Offer\OfferApi;
 use JTL\SCX\Client\Channel\Api\Order\OrderApi;
 use JTL\SCX\Client\Channel\Api\Price\PriceApi;
@@ -63,9 +63,13 @@ See `JTL\SCX\Client\Channel\Event\EventType` for a list of existing Events.
   
 
 ```php
+use JTL\SCX\Client\Channel\Api\Event\EventApi;
+use JTL\SCX\Client\Channel\Api\Event\Request\GetEventListRequest;
+
 $eventApi = new EventApi($authAwareApiClient);
 
-$sellerEventList = $eventApi->getEventList(new GetEventListRequest());
+// read a bulk of unacknowledged events from SCX Channel Api
+$sellerEventList = $eventApi->get(new GetEventListRequest());
 foreach ($sellerEventList->getEventList() as $eventContainer) {
 
     // The Id of the event use this id to acknowledge event after processing

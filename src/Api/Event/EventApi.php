@@ -40,11 +40,10 @@ class EventApi
     /**
      * @param GetEventListRequest $request
      * @return GetSellerEventListResponse
-     * @throws \Exception
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function getEventList(GetEventListRequest $request): GetSellerEventListResponse
+    public function get(GetEventListRequest $request): GetSellerEventListResponse
     {
         $responseData = $this->client->request($request);
         $data = $this->jsonSerializer->deserialize($responseData->getBody()->getContents(), false);

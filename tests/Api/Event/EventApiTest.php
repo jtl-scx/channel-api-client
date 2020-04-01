@@ -67,7 +67,7 @@ class EventApiTest extends TestCase
         $serializerMock->expects($this->exactly($isEvent?1:0))->method('deserializeObject')->with($eventData->event, $eventClass)->willReturn($eventMock);
 
         $client = new EventApi($apiClientMock, $jsonDeserializerMock, $serializerMock);
-        $response = $client->getEventList($requestMock);
+        $response = $client->get($requestMock);
 
         $this->assertSame($status, $response->getStatusCode());
         $eventList = $response->getEventList();
