@@ -18,6 +18,7 @@ use JTL\SCX\Client\Api\Configuration;
 use JTL\SCX\Client\Channel\Api\Attribute\AttributesApi;
 use JTL\SCX\Client\Channel\Api\Category\CategoryApi;
 use JTL\SCX\Client\Channel\Api\Event\EventApi;
+use JTL\SCX\Client\Channel\Api\Notification\NotificationApi
 use JTL\SCX\Client\Channel\Api\Offer\OfferApi;
 use JTL\SCX\Client\Channel\Api\Order\OrderApi;
 use JTL\SCX\Client\Channel\Api\Price\PriceApi;
@@ -28,7 +29,7 @@ $configuration = new Configuration(
     $_ENV['refreshToken']
 );
 
-// AuthAwareApiClient will perform authentication stuff
+// create a AuthAwareApiClient to handle authentication
 $client = new AuthAwareApiClient($configuration);
 
 // read and acknowledge seller events
@@ -47,6 +48,9 @@ $orderApi = new OrderApi($client);
 
 // manage offers (mark in progress, mark as listed, mark as listing failed)
 $offerApi = new OfferApi($client);
+
+// Send a notification message back to SCX Channel API.
+$notificationApi = new NotificationApi($client);
 ```
 
 ## Working with Events
