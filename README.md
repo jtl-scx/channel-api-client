@@ -22,6 +22,7 @@ use JTL\SCX\Client\Channel\Api\Notification\NotificationApi;
 use JTL\SCX\Client\Channel\Api\Offer\OfferApi;
 use JTL\SCX\Client\Channel\Api\Order\OrderApi;
 use JTL\SCX\Client\Channel\Api\Price\PriceApi;
+use JTL\SCX\Client\Channel\Api\Report\ReportApi;
 use JTL\SCX\Client\Channel\Api\Seller\SellerApi;
 
 $configuration = new Configuration(
@@ -51,6 +52,11 @@ $offerApi = new OfferApi($client);
 
 // Send a notification message back to SCX Channel API.
 $notificationApi = new NotificationApi($client);
+
+// Send requested Report back to SCX
+$reportingApi = new ReportApi($client);
+// Send SELLER_INVENTORY Report
+// see tests/Api/Report/Request/SendReportRequestTest.php
 ```
 
 ## Working with Events
