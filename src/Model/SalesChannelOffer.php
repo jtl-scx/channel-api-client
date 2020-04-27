@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * SalesChannelOffer Class Doc Comment
@@ -67,7 +67,8 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => 'string',
         'mainPicture' => 'string',
         'pictureList' => 'string[]',
-        'channelAttributeList' => '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]'
+        'channelAttributeList' => '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]',
+        'variationList' => '\JTL\SCX\Client\Channel\Model\Variation[]'
     ];
 
     /**
@@ -86,7 +87,8 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => null,
         'mainPicture' => null,
         'pictureList' => null,
-        'channelAttributeList' => null
+        'channelAttributeList' => null,
+        'variationList' => null
     ];
 
     /**
@@ -126,7 +128,8 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => 'description',
         'mainPicture' => 'mainPicture',
         'pictureList' => 'pictureList',
-        'channelAttributeList' => 'channelAttributeList'
+        'channelAttributeList' => 'channelAttributeList',
+        'variationList' => 'variationList'
     ];
 
     /**
@@ -145,7 +148,8 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => 'setDescription',
         'mainPicture' => 'setMainPicture',
         'pictureList' => 'setPictureList',
-        'channelAttributeList' => 'setChannelAttributeList'
+        'channelAttributeList' => 'setChannelAttributeList',
+        'variationList' => 'setVariationList'
     ];
 
     /**
@@ -164,7 +168,8 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         'description' => 'getDescription',
         'mainPicture' => 'getMainPicture',
         'pictureList' => 'getPictureList',
-        'channelAttributeList' => 'getChannelAttributeList'
+        'channelAttributeList' => 'getChannelAttributeList',
+        'variationList' => 'getVariationList'
     ];
 
     /**
@@ -238,6 +243,7 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
         $this->container['mainPicture'] = isset($data['mainPicture']) ? $data['mainPicture'] : null;
         $this->container['pictureList'] = isset($data['pictureList']) ? $data['pictureList'] : null;
         $this->container['channelAttributeList'] = isset($data['channelAttributeList']) ? $data['channelAttributeList'] : null;
+        $this->container['variationList'] = isset($data['variationList']) ? $data['variationList'] : null;
     }
 
     /**
@@ -551,6 +557,30 @@ class SalesChannelOffer implements ModelInterface, ArrayAccess
     public function setChannelAttributeList($channelAttributeList)
     {
         $this->container['channelAttributeList'] = $channelAttributeList;
+
+        return $this;
+    }
+
+    /**
+     * Gets variationList
+     *
+     * @return \JTL\SCX\Client\Channel\Model\Variation[]|null
+     */
+    public function getVariationList()
+    {
+        return $this->container['variationList'];
+    }
+
+    /**
+     * Sets variationList
+     *
+     * @param \JTL\SCX\Client\Channel\Model\Variation[]|null $variationList variationList
+     *
+     * @return $this
+     */
+    public function setVariationList($variationList)
+    {
+        $this->container['variationList'] = $variationList;
 
         return $this;
     }

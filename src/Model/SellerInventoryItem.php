@@ -1,6 +1,6 @@
 <?php
 /**
- * Notification
+ * SellerInventoryItem
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * Notification Class Doc Comment
+ * SellerInventoryItem Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class Notification implements ModelInterface, ArrayAccess
+class SellerInventoryItem implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class Notification implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Notification';
+    protected static $openAPIModelName = 'SellerInventoryItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,13 @@ class Notification implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sellerId' => 'string',
-        'severity' => 'string',
-        'message' => 'string',
-        'reference' => '\JTL\SCX\Client\Channel\Model\ChannelNotificationReference'
+        'offerId' => 'int',
+        'sku' => 'string',
+        'quantity' => 'string',
+        'priceList' => '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
+        'title' => 'string',
+        'channelCategoryId' => 'string',
+        'channelAttributeList' => '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]'
     ];
 
     /**
@@ -69,10 +72,13 @@ class Notification implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'sellerId' => null,
-        'severity' => null,
-        'message' => null,
-        'reference' => null
+        'offerId' => 'int64',
+        'sku' => null,
+        'quantity' => null,
+        'priceList' => null,
+        'title' => null,
+        'channelCategoryId' => null,
+        'channelAttributeList' => null
     ];
 
     /**
@@ -102,10 +108,13 @@ class Notification implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'sellerId' => 'sellerId',
-        'severity' => 'severity',
-        'message' => 'message',
-        'reference' => 'reference'
+        'offerId' => 'offerId',
+        'sku' => 'sku',
+        'quantity' => 'quantity',
+        'priceList' => 'priceList',
+        'title' => 'title',
+        'channelCategoryId' => 'channelCategoryId',
+        'channelAttributeList' => 'channelAttributeList'
     ];
 
     /**
@@ -114,10 +123,13 @@ class Notification implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'sellerId' => 'setSellerId',
-        'severity' => 'setSeverity',
-        'message' => 'setMessage',
-        'reference' => 'setReference'
+        'offerId' => 'setOfferId',
+        'sku' => 'setSku',
+        'quantity' => 'setQuantity',
+        'priceList' => 'setPriceList',
+        'title' => 'setTitle',
+        'channelCategoryId' => 'setChannelCategoryId',
+        'channelAttributeList' => 'setChannelAttributeList'
     ];
 
     /**
@@ -126,10 +138,13 @@ class Notification implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'sellerId' => 'getSellerId',
-        'severity' => 'getSeverity',
-        'message' => 'getMessage',
-        'reference' => 'getReference'
+        'offerId' => 'getOfferId',
+        'sku' => 'getSku',
+        'quantity' => 'getQuantity',
+        'priceList' => 'getPriceList',
+        'title' => 'getTitle',
+        'channelCategoryId' => 'getChannelCategoryId',
+        'channelAttributeList' => 'getChannelAttributeList'
     ];
 
     /**
@@ -173,25 +188,8 @@ class Notification implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
-    const SEVERITY_INFO = 'INFO';
-    const SEVERITY_WARNING = 'WARNING';
-    const SEVERITY_ERROR = 'ERROR';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getSeverityAllowableValues()
-    {
-        return [
-            self::SEVERITY_INFO,
-            self::SEVERITY_WARNING,
-            self::SEVERITY_ERROR,
-        ];
-    }
     
 
     /**
@@ -209,10 +207,13 @@ class Notification implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['severity'] = isset($data['severity']) ? $data['severity'] : 'INFO';
-        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
-        $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
+        $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
+        $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        $this->container['priceList'] = isset($data['priceList']) ? $data['priceList'] : null;
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        $this->container['channelCategoryId'] = isset($data['channelCategoryId']) ? $data['channelCategoryId'] : null;
+        $this->container['channelAttributeList'] = isset($data['channelAttributeList']) ? $data['channelAttributeList'] : null;
     }
 
     /**
@@ -224,24 +225,18 @@ class Notification implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['sellerId'] === null) {
-            $invalidProperties[] = "'sellerId' can't be null";
-        }
-        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
-            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        if (!is_null($this->container['offerId']) && ($this->container['offerId'] < 1)) {
+            $invalidProperties[] = "invalid value for 'offerId', must be bigger than or equal to 1.";
         }
 
-        $allowedValues = $this->getSeverityAllowableValues();
-        if (!is_null($this->container['severity']) && !in_array($this->container['severity'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'severity', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
+        if (!is_null($this->container['sku']) && (mb_strlen($this->container['sku']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 100.";
         }
 
-        if ($this->container['message'] === null) {
-            $invalidProperties[] = "'message' can't be null";
+        if (!is_null($this->container['sku']) && (mb_strlen($this->container['sku']) < 1)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be bigger than or equal to 1.";
         }
+
         return $invalidProperties;
     }
 
@@ -258,111 +253,181 @@ class Notification implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets sellerId
+     * Gets offerId
      *
-     * @return string
+     * @return int|null
      */
-    public function getSellerId()
+    public function getOfferId()
     {
-        return $this->container['sellerId'];
+        return $this->container['offerId'];
     }
 
     /**
-     * Sets sellerId
+     * Sets offerId
      *
-     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param int|null $offerId Unique Offer Id to identify an Offer on a Sales Channel.
      *
      * @return $this
      */
-    public function setSellerId($sellerId)
+    public function setOfferId($offerId)
     {
 
-        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling Notification., must conform to the pattern /^\\w{1,50}$/.");
+        if (!is_null($offerId) && ($offerId < 1)) {
+            throw new \InvalidArgumentException('invalid value for $offerId when calling SellerInventoryItem., must be bigger than or equal to 1.');
         }
 
-        $this->container['sellerId'] = $sellerId;
+        $this->container['offerId'] = $offerId;
 
         return $this;
     }
 
     /**
-     * Gets severity
+     * Gets sku
      *
      * @return string|null
      */
-    public function getSeverity()
+    public function getSku()
     {
-        return $this->container['severity'];
+        return $this->container['sku'];
     }
 
     /**
-     * Sets severity
+     * Sets sku
      *
-     * @param string|null $severity severity
+     * @param string|null $sku Stock keeping unit is a unique Id used to identify one product.
      *
      * @return $this
      */
-    public function setSeverity($severity)
+    public function setSku($sku)
     {
-        $allowedValues = $this->getSeverityAllowableValues();
-        if (!is_null($severity) && !in_array($severity, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'severity', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
+        if (!is_null($sku) && (mb_strlen($sku) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling SellerInventoryItem., must be smaller than or equal to 100.');
         }
-        $this->container['severity'] = $severity;
+        if (!is_null($sku) && (mb_strlen($sku) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling SellerInventoryItem., must be bigger than or equal to 1.');
+        }
+
+        $this->container['sku'] = $sku;
 
         return $this;
     }
 
     /**
-     * Gets message
+     * Gets quantity
      *
-     * @return string
+     * @return string|null
      */
-    public function getMessage()
+    public function getQuantity()
     {
-        return $this->container['message'];
+        return $this->container['quantity'];
     }
 
     /**
-     * Sets message
+     * Sets quantity
      *
-     * @param string $message message
+     * @param string|null $quantity quantity
      *
      * @return $this
      */
-    public function setMessage($message)
+    public function setQuantity($quantity)
     {
-        $this->container['message'] = $message;
+        $this->container['quantity'] = $quantity;
 
         return $this;
     }
 
     /**
-     * Gets reference
+     * Gets priceList
      *
-     * @return \JTL\SCX\Client\Channel\Model\ChannelNotificationReference|null
+     * @return \JTL\SCX\Client\Channel\Model\PriceContainer[]|null
      */
-    public function getReference()
+    public function getPriceList()
     {
-        return $this->container['reference'];
+        return $this->container['priceList'];
     }
 
     /**
-     * Sets reference
+     * Sets priceList
      *
-     * @param \JTL\SCX\Client\Channel\Model\ChannelNotificationReference|null $reference reference
+     * @param \JTL\SCX\Client\Channel\Model\PriceContainer[]|null $priceList priceList
      *
      * @return $this
      */
-    public function setReference($reference)
+    public function setPriceList($priceList)
     {
-        $this->container['reference'] = $reference;
+        $this->container['priceList'] = $priceList;
+
+        return $this;
+    }
+
+    /**
+     * Gets title
+     *
+     * @return string|null
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
+
+    /**
+     * Sets title
+     *
+     * @param string|null $title title
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets channelCategoryId
+     *
+     * @return string|null
+     */
+    public function getChannelCategoryId()
+    {
+        return $this->container['channelCategoryId'];
+    }
+
+    /**
+     * Sets channelCategoryId
+     *
+     * @param string|null $channelCategoryId channelCategoryId
+     *
+     * @return $this
+     */
+    public function setChannelCategoryId($channelCategoryId)
+    {
+        $this->container['channelCategoryId'] = $channelCategoryId;
+
+        return $this;
+    }
+
+    /**
+     * Gets channelAttributeList
+     *
+     * @return \JTL\SCX\Client\Channel\Model\ChannelAttribute[]|null
+     */
+    public function getChannelAttributeList()
+    {
+        return $this->container['channelAttributeList'];
+    }
+
+    /**
+     * Sets channelAttributeList
+     *
+     * @param \JTL\SCX\Client\Channel\Model\ChannelAttribute[]|null $channelAttributeList channelAttributeList
+     *
+     * @return $this
+     */
+    public function setChannelAttributeList($channelAttributeList)
+    {
+        $this->container['channelAttributeList'] = $channelAttributeList;
 
         return $this;
     }

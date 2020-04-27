@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventListEventList
+ * Variation
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventListEventList Class Doc Comment
+ * Variation Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventListEventList implements ModelInterface, ArrayAccess
+class Variation implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventList_eventList';
+    protected static $openAPIModelName = 'Variation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,12 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'createdAt' => '\DateTime',
-        'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed'
+        'offerId' => 'int',
+        'sku' => 'string',
+        'variationDimensionList' => '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]',
+        'quantity' => 'string',
+        'priceList' => '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
+        'pictureList' => 'string[]'
     ];
 
     /**
@@ -69,10 +71,12 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'createdAt' => 'date-time',
-        'type' => null,
-        'event' => null
+        'offerId' => 'int64',
+        'sku' => null,
+        'variationDimensionList' => null,
+        'quantity' => null,
+        'priceList' => null,
+        'pictureList' => null
     ];
 
     /**
@@ -102,10 +106,12 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'createdAt' => 'createdAt',
-        'type' => 'type',
-        'event' => 'event'
+        'offerId' => 'offerId',
+        'sku' => 'sku',
+        'variationDimensionList' => 'variationDimensionList',
+        'quantity' => 'quantity',
+        'priceList' => 'priceList',
+        'pictureList' => 'pictureList'
     ];
 
     /**
@@ -114,10 +120,12 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'createdAt' => 'setCreatedAt',
-        'type' => 'setType',
-        'event' => 'setEvent'
+        'offerId' => 'setOfferId',
+        'sku' => 'setSku',
+        'variationDimensionList' => 'setVariationDimensionList',
+        'quantity' => 'setQuantity',
+        'priceList' => 'setPriceList',
+        'pictureList' => 'setPictureList'
     ];
 
     /**
@@ -126,10 +134,12 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'createdAt' => 'getCreatedAt',
-        'type' => 'getType',
-        'event' => 'getEvent'
+        'offerId' => 'getOfferId',
+        'sku' => 'getSku',
+        'variationDimensionList' => 'getVariationDimensionList',
+        'quantity' => 'getQuantity',
+        'priceList' => 'getPriceList',
+        'pictureList' => 'getPictureList'
     ];
 
     /**
@@ -192,10 +202,12 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['createdAt'] = isset($data['createdAt']) ? $data['createdAt'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['event'] = isset($data['event']) ? $data['event'] : null;
+        $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
+        $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
+        $this->container['variationDimensionList'] = isset($data['variationDimensionList']) ? $data['variationDimensionList'] : null;
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        $this->container['priceList'] = isset($data['priceList']) ? $data['priceList'] : null;
+        $this->container['pictureList'] = isset($data['pictureList']) ? $data['pictureList'] : null;
     }
 
     /**
@@ -207,17 +219,32 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if ($this->container['offerId'] === null) {
+            $invalidProperties[] = "'offerId' can't be null";
         }
-        if ($this->container['createdAt'] === null) {
-            $invalidProperties[] = "'createdAt' can't be null";
+        if (($this->container['offerId'] < 1)) {
+            $invalidProperties[] = "invalid value for 'offerId', must be bigger than or equal to 1.";
         }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+
+        if ($this->container['sku'] === null) {
+            $invalidProperties[] = "'sku' can't be null";
         }
-        if ($this->container['event'] === null) {
-            $invalidProperties[] = "'event' can't be null";
+        if ((mb_strlen($this->container['sku']) > 100)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 100.";
+        }
+
+        if ((mb_strlen($this->container['sku']) < 1)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be bigger than or equal to 1.";
+        }
+
+        if ($this->container['variationDimensionList'] === null) {
+            $invalidProperties[] = "'variationDimensionList' can't be null";
+        }
+        if ($this->container['quantity'] === null) {
+            $invalidProperties[] = "'quantity' can't be null";
+        }
+        if ($this->container['priceList'] === null) {
+            $invalidProperties[] = "'priceList' can't be null";
         }
         return $invalidProperties;
     }
@@ -235,97 +262,157 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets offerId
+     *
+     * @return int
+     */
+    public function getOfferId()
+    {
+        return $this->container['offerId'];
+    }
+
+    /**
+     * Sets offerId
+     *
+     * @param int $offerId Unique Offer Id to identify an Offer on a Sales Channel.
+     *
+     * @return $this
+     */
+    public function setOfferId($offerId)
+    {
+
+        if (($offerId < 1)) {
+            throw new \InvalidArgumentException('invalid value for $offerId when calling Variation., must be bigger than or equal to 1.');
+        }
+
+        $this->container['offerId'] = $offerId;
+
+        return $this;
+    }
+
+    /**
+     * Gets sku
      *
      * @return string
      */
-    public function getId()
+    public function getSku()
     {
-        return $this->container['id'];
+        return $this->container['sku'];
     }
 
     /**
-     * Sets id
+     * Sets sku
      *
-     * @param string $id id
+     * @param string $sku Stock keeping unit is a unique Id used to identify one product.
      *
      * @return $this
      */
-    public function setId($id)
+    public function setSku($sku)
     {
-        $this->container['id'] = $id;
+        if ((mb_strlen($sku) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling Variation., must be smaller than or equal to 100.');
+        }
+        if ((mb_strlen($sku) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling Variation., must be bigger than or equal to 1.');
+        }
+
+        $this->container['sku'] = $sku;
 
         return $this;
     }
 
     /**
-     * Gets createdAt
+     * Gets variationDimensionList
      *
-     * @return \DateTime
+     * @return \JTL\SCX\Client\Channel\Model\ChannelAttribute[]
      */
-    public function getCreatedAt()
+    public function getVariationDimensionList()
     {
-        return $this->container['createdAt'];
+        return $this->container['variationDimensionList'];
     }
 
     /**
-     * Sets createdAt
+     * Sets variationDimensionList
      *
-     * @param \DateTime $createdAt createdAt
+     * @param \JTL\SCX\Client\Channel\Model\ChannelAttribute[] $variationDimensionList A List of SalesChannel related attributes. These attributes are used to define variation dimensions. You can use up to 10 dimensions to build a multi-variation listing.
      *
      * @return $this
      */
-    public function setCreatedAt($createdAt)
+    public function setVariationDimensionList($variationDimensionList)
     {
-        $this->container['createdAt'] = $createdAt;
+        $this->container['variationDimensionList'] = $variationDimensionList;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets quantity
      *
-     * @return \JTL\SCX\Client\Channel\Model\SellerEventTypeList
+     * @return string
      */
-    public function getType()
+    public function getQuantity()
     {
-        return $this->container['type'];
+        return $this->container['quantity'];
     }
 
     /**
-     * Sets type
+     * Sets quantity
      *
-     * @param \JTL\SCX\Client\Channel\Model\SellerEventTypeList $type type
+     * @param string $quantity Offer Quantity
      *
      * @return $this
      */
-    public function setType($type)
+    public function setQuantity($quantity)
     {
-        $this->container['type'] = $type;
+        $this->container['quantity'] = $quantity;
 
         return $this;
     }
 
     /**
-     * Gets event
+     * Gets priceList
      *
-     * @return OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed
+     * @return \JTL\SCX\Client\Channel\Model\PriceContainer[]
      */
-    public function getEvent()
+    public function getPriceList()
     {
-        return $this->container['event'];
+        return $this->container['priceList'];
     }
 
     /**
-     * Sets event
+     * Sets priceList
      *
-     * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed $event event
+     * @param \JTL\SCX\Client\Channel\Model\PriceContainer[] $priceList priceList
      *
      * @return $this
      */
-    public function setEvent($event)
+    public function setPriceList($priceList)
     {
-        $this->container['event'] = $event;
+        $this->container['priceList'] = $priceList;
+
+        return $this;
+    }
+
+    /**
+     * Gets pictureList
+     *
+     * @return string[]|null
+     */
+    public function getPictureList()
+    {
+        return $this->container['pictureList'];
+    }
+
+    /**
+     * Sets pictureList
+     *
+     * @param string[]|null $pictureList pictureList
+     *
+     * @return $this
+     */
+    public function setPictureList($pictureList)
+    {
+        $this->container['pictureList'] = $pictureList;
 
         return $this;
     }

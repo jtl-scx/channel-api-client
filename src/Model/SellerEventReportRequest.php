@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventListEventList
+ * SellerEventReportRequest
  *
  * PHP version 5
  *
@@ -28,19 +28,17 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-
-use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventListEventList Class Doc Comment
+ * SellerEventReportRequest Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventListEventList implements ModelInterface, ArrayAccess
+class SellerEventReportRequest extends ReportRequest 
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +47,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventList_eventList';
+    protected static $openAPIModelName = 'SellerEventReportRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +55,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'createdAt' => '\DateTime',
-        'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed'
+        'reportId' => 'string'
     ];
 
     /**
@@ -69,10 +64,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'createdAt' => 'date-time',
-        'type' => null,
-        'event' => null
+        'reportId' => null
     ];
 
     /**
@@ -82,7 +74,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -92,7 +84,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -102,10 +94,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'createdAt' => 'createdAt',
-        'type' => 'type',
-        'event' => 'event'
+        'reportId' => 'reportId'
     ];
 
     /**
@@ -114,10 +103,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'createdAt' => 'setCreatedAt',
-        'type' => 'setType',
-        'event' => 'setEvent'
+        'reportId' => 'setReportId'
     ];
 
     /**
@@ -126,10 +112,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'createdAt' => 'getCreatedAt',
-        'type' => 'getType',
-        'event' => 'getEvent'
+        'reportId' => 'getReportId'
     ];
 
     /**
@@ -140,7 +123,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -150,7 +133,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -160,7 +143,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -177,12 +160,6 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -192,10 +169,9 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['createdAt'] = isset($data['createdAt']) ? $data['createdAt'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['event'] = isset($data['event']) ? $data['event'] : null;
+        parent::__construct($data);
+
+        $this->container['reportId'] = isset($data['reportId']) ? $data['reportId'] : null;
     }
 
     /**
@@ -205,19 +181,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['createdAt'] === null) {
-            $invalidProperties[] = "'createdAt' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['event'] === null) {
-            $invalidProperties[] = "'event' can't be null";
+        if ($this->container['reportId'] === null) {
+            $invalidProperties[] = "'reportId' can't be null";
         }
         return $invalidProperties;
     }
@@ -235,97 +202,25 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets reportId
      *
      * @return string
      */
-    public function getId()
+    public function getReportId()
     {
-        return $this->container['id'];
+        return $this->container['reportId'];
     }
 
     /**
-     * Sets id
+     * Sets reportId
      *
-     * @param string $id id
+     * @param string $reportId A system wide unique Id to identify and download a report
      *
      * @return $this
      */
-    public function setId($id)
+    public function setReportId($reportId)
     {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime $createdAt createdAt
-     *
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return \JTL\SCX\Client\Channel\Model\SellerEventTypeList
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param \JTL\SCX\Client\Channel\Model\SellerEventTypeList $type type
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets event
-     *
-     * @return OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed
-     */
-    public function getEvent()
-    {
-        return $this->container['event'];
-    }
-
-    /**
-     * Sets event
-     *
-     * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed $event event
-     *
-     * @return $this
-     */
-    public function setEvent($event)
-    {
-        $this->container['event'] = $event;
+        $this->container['reportId'] = $reportId;
 
         return $this;
     }

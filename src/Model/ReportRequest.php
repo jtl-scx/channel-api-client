@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventListEventList
+ * ReportRequest
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventListEventList Class Doc Comment
+ * ReportRequest Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventListEventList implements ModelInterface, ArrayAccess
+class ReportRequest implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventList_eventList';
+    protected static $openAPIModelName = 'ReportRequest';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'createdAt' => '\DateTime',
-        'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed'
+        'sellerId' => 'string',
+        'reportType' => '\JTL\SCX\Client\Channel\Model\ReportType',
+        'startDate' => '\DateTime',
+        'endDate' => '\DateTime'
     ];
 
     /**
@@ -69,10 +69,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'createdAt' => 'date-time',
-        'type' => null,
-        'event' => null
+        'sellerId' => null,
+        'reportType' => null,
+        'startDate' => 'date',
+        'endDate' => 'date'
     ];
 
     /**
@@ -102,10 +102,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'createdAt' => 'createdAt',
-        'type' => 'type',
-        'event' => 'event'
+        'sellerId' => 'sellerId',
+        'reportType' => 'reportType',
+        'startDate' => 'startDate',
+        'endDate' => 'endDate'
     ];
 
     /**
@@ -114,10 +114,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'createdAt' => 'setCreatedAt',
-        'type' => 'setType',
-        'event' => 'setEvent'
+        'sellerId' => 'setSellerId',
+        'reportType' => 'setReportType',
+        'startDate' => 'setStartDate',
+        'endDate' => 'setEndDate'
     ];
 
     /**
@@ -126,10 +126,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'createdAt' => 'getCreatedAt',
-        'type' => 'getType',
-        'event' => 'getEvent'
+        'sellerId' => 'getSellerId',
+        'reportType' => 'getReportType',
+        'startDate' => 'getStartDate',
+        'endDate' => 'getEndDate'
     ];
 
     /**
@@ -192,10 +192,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['createdAt'] = isset($data['createdAt']) ? $data['createdAt'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['event'] = isset($data['event']) ? $data['event'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['reportType'] = isset($data['reportType']) ? $data['reportType'] : null;
+        $this->container['startDate'] = isset($data['startDate']) ? $data['startDate'] : null;
+        $this->container['endDate'] = isset($data['endDate']) ? $data['endDate'] : null;
     }
 
     /**
@@ -207,17 +207,15 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
         }
-        if ($this->container['createdAt'] === null) {
-            $invalidProperties[] = "'createdAt' can't be null";
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['event'] === null) {
-            $invalidProperties[] = "'event' can't be null";
+
+        if ($this->container['reportType'] === null) {
+            $invalidProperties[] = "'reportType' can't be null";
         }
         return $invalidProperties;
     }
@@ -235,97 +233,102 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets sellerId
      *
      * @return string
      */
-    public function getId()
+    public function getSellerId()
     {
-        return $this->container['id'];
+        return $this->container['sellerId'];
     }
 
     /**
-     * Sets id
+     * Sets sellerId
      *
-     * @param string $id id
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
-    public function setId($id)
+    public function setSellerId($sellerId)
     {
-        $this->container['id'] = $id;
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling ReportRequest., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
 
         return $this;
     }
 
     /**
-     * Gets createdAt
+     * Gets reportType
      *
-     * @return \DateTime
+     * @return \JTL\SCX\Client\Channel\Model\ReportType
      */
-    public function getCreatedAt()
+    public function getReportType()
     {
-        return $this->container['createdAt'];
+        return $this->container['reportType'];
     }
 
     /**
-     * Sets createdAt
+     * Sets reportType
      *
-     * @param \DateTime $createdAt createdAt
+     * @param \JTL\SCX\Client\Channel\Model\ReportType $reportType reportType
      *
      * @return $this
      */
-    public function setCreatedAt($createdAt)
+    public function setReportType($reportType)
     {
-        $this->container['createdAt'] = $createdAt;
+        $this->container['reportType'] = $reportType;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets startDate
      *
-     * @return \JTL\SCX\Client\Channel\Model\SellerEventTypeList
+     * @return \DateTime|null
      */
-    public function getType()
+    public function getStartDate()
     {
-        return $this->container['type'];
+        return $this->container['startDate'];
     }
 
     /**
-     * Sets type
+     * Sets startDate
      *
-     * @param \JTL\SCX\Client\Channel\Model\SellerEventTypeList $type type
+     * @param \DateTime|null $startDate startDate
      *
      * @return $this
      */
-    public function setType($type)
+    public function setStartDate($startDate)
     {
-        $this->container['type'] = $type;
+        $this->container['startDate'] = $startDate;
 
         return $this;
     }
 
     /**
-     * Gets event
+     * Gets endDate
      *
-     * @return OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed
+     * @return \DateTime|null
      */
-    public function getEvent()
+    public function getEndDate()
     {
-        return $this->container['event'];
+        return $this->container['endDate'];
     }
 
     /**
-     * Sets event
+     * Sets endDate
      *
-     * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmed $event event
+     * @param \DateTime|null $endDate endDate
      *
      * @return $this
      */
-    public function setEvent($event)
+    public function setEndDate($endDate)
     {
-        $this->container['event'] = $event;
+        $this->container['endDate'] = $endDate;
 
         return $this;
     }

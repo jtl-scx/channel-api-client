@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * SellerEventOfferUpdate Class Doc Comment
@@ -69,6 +69,7 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'mainPicture' => 'string',
         'pictureList' => 'string[]',
         'channelAttributeList' => '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]',
+        'variationList' => '\JTL\SCX\Client\Channel\Model\Variation[]',
         'sku' => 'string',
         'ean' => 'string',
         'gtin' => 'string',
@@ -95,6 +96,7 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'mainPicture' => null,
         'pictureList' => null,
         'channelAttributeList' => null,
+        'variationList' => null,
         'sku' => null,
         'ean' => null,
         'gtin' => null,
@@ -142,6 +144,7 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'mainPicture' => 'mainPicture',
         'pictureList' => 'pictureList',
         'channelAttributeList' => 'channelAttributeList',
+        'variationList' => 'variationList',
         'sku' => 'sku',
         'ean' => 'ean',
         'gtin' => 'gtin',
@@ -168,6 +171,7 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'mainPicture' => 'setMainPicture',
         'pictureList' => 'setPictureList',
         'channelAttributeList' => 'setChannelAttributeList',
+        'variationList' => 'setVariationList',
         'sku' => 'setSku',
         'ean' => 'setEan',
         'gtin' => 'setGtin',
@@ -194,6 +198,7 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'mainPicture' => 'getMainPicture',
         'pictureList' => 'getPictureList',
         'channelAttributeList' => 'getChannelAttributeList',
+        'variationList' => 'getVariationList',
         'sku' => 'getSku',
         'ean' => 'getEan',
         'gtin' => 'getGtin',
@@ -274,6 +279,7 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         $this->container['mainPicture'] = isset($data['mainPicture']) ? $data['mainPicture'] : null;
         $this->container['pictureList'] = isset($data['pictureList']) ? $data['pictureList'] : null;
         $this->container['channelAttributeList'] = isset($data['channelAttributeList']) ? $data['channelAttributeList'] : null;
+        $this->container['variationList'] = isset($data['variationList']) ? $data['variationList'] : null;
         $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
         $this->container['ean'] = isset($data['ean']) ? $data['ean'] : null;
         $this->container['gtin'] = isset($data['gtin']) ? $data['gtin'] : null;
@@ -636,6 +642,30 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
     public function setChannelAttributeList($channelAttributeList)
     {
         $this->container['channelAttributeList'] = $channelAttributeList;
+
+        return $this;
+    }
+
+    /**
+     * Gets variationList
+     *
+     * @return \JTL\SCX\Client\Channel\Model\Variation[]|null
+     */
+    public function getVariationList()
+    {
+        return $this->container['variationList'];
+    }
+
+    /**
+     * Sets variationList
+     *
+     * @param \JTL\SCX\Client\Channel\Model\Variation[]|null $variationList variationList
+     *
+     * @return $this
+     */
+    public function setVariationList($variationList)
+    {
+        $this->container['variationList'] = $variationList;
 
         return $this;
     }
