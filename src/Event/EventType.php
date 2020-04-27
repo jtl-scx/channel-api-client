@@ -17,6 +17,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
+use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use MyCLabs\Enum\Enum;
@@ -34,6 +35,7 @@ use MyCLabs\Enum\Enum;
  * @method static EventType SellerOfferEnd()
  * @method static EventType SellerOfferStockUpdate()
  * @method static EventType SellerOfferPriceUpdate()
+ * @method static EventType SellerReportRequest()
  */
 class EventType extends Enum
 {
@@ -48,6 +50,7 @@ class EventType extends Enum
     public const SellerOfferEnd = 'Seller:Offer.End';
     public const SellerOfferStockUpdate = 'Seller:Offer.StockUpdate';
     public const SellerOfferPriceUpdate = 'Seller:Offer.PriceUpdate';
+    public const SellerReportRequest = 'Seller:Report.Request';
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -87,6 +90,8 @@ class EventType extends Enum
                 return SellerEventOfferStockUpdate::class;
             case $this::SellerOfferPriceUpdate():
                 return SellerEventOfferPriceUpdate::class;
+            case $this::SellerReportRequest():
+                return SellerEventReportRequest::class;
         }
 
         return \stdClass::class;

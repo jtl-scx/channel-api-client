@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * OrderShippingPositionItem Class Doc Comment
@@ -67,7 +67,7 @@ class OrderShippingPositionItem implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'orderItemId' => 'int64',
+        'orderItemId' => null,
         'quantity' => null
     ];
 
@@ -198,6 +198,10 @@ class OrderShippingPositionItem implements ModelInterface, ArrayAccess
         if ($this->container['orderItemId'] === null) {
             $invalidProperties[] = "'orderItemId' can't be null";
         }
+        if ((mb_strlen($this->container['orderItemId']) > 50)) {
+            $invalidProperties[] = "invalid value for 'orderItemId', the character length must be smaller than or equal to 50.";
+        }
+
         if ($this->container['quantity'] === null) {
             $invalidProperties[] = "'quantity' can't be null";
         }
@@ -229,12 +233,16 @@ class OrderShippingPositionItem implements ModelInterface, ArrayAccess
     /**
      * Sets orderItemId
      *
-     * @param string $orderItemId Unique OrderItem ID to identify an Order Item on a Sales Channel.
+     * @param string $orderItemId A unique identifier to identify a order item. This ID is provided by the Channel itself an should be used to identify a order item id.
      *
      * @return $this
      */
     public function setOrderItemId($orderItemId)
     {
+        if ((mb_strlen($orderItemId) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderShippingPositionItem., must be smaller than or equal to 50.');
+        }
+
         $this->container['orderItemId'] = $orderItemId;
 
         return $this;
