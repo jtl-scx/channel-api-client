@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * SellerInventoryItem Class Doc Comment
@@ -59,6 +59,7 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'offerId' => 'int',
         'sku' => 'string',
+        'ean' => 'string',
         'quantity' => 'string',
         'priceList' => '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
         'title' => 'string',
@@ -74,6 +75,7 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'offerId' => 'int64',
         'sku' => null,
+        'ean' => null,
         'quantity' => null,
         'priceList' => null,
         'title' => null,
@@ -110,6 +112,7 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'offerId' => 'offerId',
         'sku' => 'sku',
+        'ean' => 'ean',
         'quantity' => 'quantity',
         'priceList' => 'priceList',
         'title' => 'title',
@@ -125,6 +128,7 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
     protected static $setters = [
         'offerId' => 'setOfferId',
         'sku' => 'setSku',
+        'ean' => 'setEan',
         'quantity' => 'setQuantity',
         'priceList' => 'setPriceList',
         'title' => 'setTitle',
@@ -140,6 +144,7 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
     protected static $getters = [
         'offerId' => 'getOfferId',
         'sku' => 'getSku',
+        'ean' => 'getEan',
         'quantity' => 'getQuantity',
         'priceList' => 'getPriceList',
         'title' => 'getTitle',
@@ -209,6 +214,7 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
     {
         $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
         $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
+        $this->container['ean'] = isset($data['ean']) ? $data['ean'] : null;
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
         $this->container['priceList'] = isset($data['priceList']) ? $data['priceList'] : null;
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
@@ -308,6 +314,30 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
         }
 
         $this->container['sku'] = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Gets ean
+     *
+     * @return string|null
+     */
+    public function getEan()
+    {
+        return $this->container['ean'];
+    }
+
+    /**
+     * Sets ean
+     *
+     * @param string|null $ean ean
+     *
+     * @return $this
+     */
+    public function setEan($ean)
+    {
+        $this->container['ean'] = $ean;
 
         return $this;
     }

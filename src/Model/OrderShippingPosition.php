@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * OrderShippingPosition Class Doc Comment
@@ -57,9 +57,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'orderItemIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]',
+        'carrier' => 'string',
         'trackingNumber' => 'string',
-        'carrier' => 'string'
+        'shippedAt' => '\DateTime',
+        'orderItemIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]'
     ];
 
     /**
@@ -68,9 +69,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'orderItemIdList' => null,
+        'carrier' => null,
         'trackingNumber' => null,
-        'carrier' => null
+        'shippedAt' => 'date-time',
+        'orderItemIdList' => null
     ];
 
     /**
@@ -100,9 +102,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'orderItemIdList' => 'orderItemIdList',
+        'carrier' => 'carrier',
         'trackingNumber' => 'trackingNumber',
-        'carrier' => 'carrier'
+        'shippedAt' => 'shippedAt',
+        'orderItemIdList' => 'orderItemIdList'
     ];
 
     /**
@@ -111,9 +114,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'orderItemIdList' => 'setOrderItemIdList',
+        'carrier' => 'setCarrier',
         'trackingNumber' => 'setTrackingNumber',
-        'carrier' => 'setCarrier'
+        'shippedAt' => 'setShippedAt',
+        'orderItemIdList' => 'setOrderItemIdList'
     ];
 
     /**
@@ -122,9 +126,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'orderItemIdList' => 'getOrderItemIdList',
+        'carrier' => 'getCarrier',
         'trackingNumber' => 'getTrackingNumber',
-        'carrier' => 'getCarrier'
+        'shippedAt' => 'getShippedAt',
+        'orderItemIdList' => 'getOrderItemIdList'
     ];
 
     /**
@@ -187,9 +192,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['orderItemIdList'] = isset($data['orderItemIdList']) ? $data['orderItemIdList'] : null;
-        $this->container['trackingNumber'] = isset($data['trackingNumber']) ? $data['trackingNumber'] : null;
         $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
+        $this->container['trackingNumber'] = isset($data['trackingNumber']) ? $data['trackingNumber'] : null;
+        $this->container['shippedAt'] = isset($data['shippedAt']) ? $data['shippedAt'] : null;
+        $this->container['orderItemIdList'] = isset($data['orderItemIdList']) ? $data['orderItemIdList'] : null;
     }
 
     /**
@@ -201,6 +207,9 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['carrier'] === null) {
+            $invalidProperties[] = "'carrier' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -217,25 +226,25 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets orderItemIdList
+     * Gets carrier
      *
-     * @return \JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]|null
+     * @return string
      */
-    public function getOrderItemIdList()
+    public function getCarrier()
     {
-        return $this->container['orderItemIdList'];
+        return $this->container['carrier'];
     }
 
     /**
-     * Sets orderItemIdList
+     * Sets carrier
      *
-     * @param \JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]|null $orderItemIdList Container to describe what items are included.
+     * @param string $carrier carrier
      *
      * @return $this
      */
-    public function setOrderItemIdList($orderItemIdList)
+    public function setCarrier($carrier)
     {
-        $this->container['orderItemIdList'] = $orderItemIdList;
+        $this->container['carrier'] = $carrier;
 
         return $this;
     }
@@ -265,25 +274,49 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets carrier
+     * Gets shippedAt
      *
-     * @return string|null
+     * @return \DateTime|null
      */
-    public function getCarrier()
+    public function getShippedAt()
     {
-        return $this->container['carrier'];
+        return $this->container['shippedAt'];
     }
 
     /**
-     * Sets carrier
+     * Sets shippedAt
      *
-     * @param string|null $carrier carrier
+     * @param \DateTime|null $shippedAt shippedAt
      *
      * @return $this
      */
-    public function setCarrier($carrier)
+    public function setShippedAt($shippedAt)
     {
-        $this->container['carrier'] = $carrier;
+        $this->container['shippedAt'] = $shippedAt;
+
+        return $this;
+    }
+
+    /**
+     * Gets orderItemIdList
+     *
+     * @return \JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]|null
+     */
+    public function getOrderItemIdList()
+    {
+        return $this->container['orderItemIdList'];
+    }
+
+    /**
+     * Sets orderItemIdList
+     *
+     * @param \JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]|null $orderItemIdList Container to describe what items are included.
+     *
+     * @return $this
+     */
+    public function setOrderItemIdList($orderItemIdList)
+    {
+        $this->container['orderItemIdList'] = $orderItemIdList;
 
         return $this;
     }

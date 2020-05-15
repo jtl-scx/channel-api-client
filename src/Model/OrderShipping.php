@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * OrderShipping Class Doc Comment
@@ -60,7 +60,6 @@ class OrderShipping implements ModelInterface, ArrayAccess
         'sellerId' => 'string',
         'orderId' => 'string',
         'shippingComplete' => 'bool',
-        'shippedAt' => '\DateTime',
         'shippingItems' => '\JTL\SCX\Client\Channel\Model\OrderShippingPosition[]'
     ];
 
@@ -73,7 +72,6 @@ class OrderShipping implements ModelInterface, ArrayAccess
         'sellerId' => null,
         'orderId' => null,
         'shippingComplete' => null,
-        'shippedAt' => 'date-time',
         'shippingItems' => null
     ];
 
@@ -107,7 +105,6 @@ class OrderShipping implements ModelInterface, ArrayAccess
         'sellerId' => 'sellerId',
         'orderId' => 'orderId',
         'shippingComplete' => 'shippingComplete',
-        'shippedAt' => 'shippedAt',
         'shippingItems' => 'shippingItems'
     ];
 
@@ -120,7 +117,6 @@ class OrderShipping implements ModelInterface, ArrayAccess
         'sellerId' => 'setSellerId',
         'orderId' => 'setOrderId',
         'shippingComplete' => 'setShippingComplete',
-        'shippedAt' => 'setShippedAt',
         'shippingItems' => 'setShippingItems'
     ];
 
@@ -133,7 +129,6 @@ class OrderShipping implements ModelInterface, ArrayAccess
         'sellerId' => 'getSellerId',
         'orderId' => 'getOrderId',
         'shippingComplete' => 'getShippingComplete',
-        'shippedAt' => 'getShippedAt',
         'shippingItems' => 'getShippingItems'
     ];
 
@@ -200,7 +195,6 @@ class OrderShipping implements ModelInterface, ArrayAccess
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
         $this->container['shippingComplete'] = isset($data['shippingComplete']) ? $data['shippingComplete'] : null;
-        $this->container['shippedAt'] = isset($data['shippedAt']) ? $data['shippedAt'] : null;
         $this->container['shippingItems'] = isset($data['shippingItems']) ? $data['shippingItems'] : null;
     }
 
@@ -225,9 +219,6 @@ class OrderShipping implements ModelInterface, ArrayAccess
         }
         if ($this->container['shippingComplete'] === null) {
             $invalidProperties[] = "'shippingComplete' can't be null";
-        }
-        if ($this->container['shippedAt'] === null) {
-            $invalidProperties[] = "'shippedAt' can't be null";
         }
         if ($this->container['shippingItems'] === null) {
             $invalidProperties[] = "'shippingItems' can't be null";
@@ -320,30 +311,6 @@ class OrderShipping implements ModelInterface, ArrayAccess
     public function setShippingComplete($shippingComplete)
     {
         $this->container['shippingComplete'] = $shippingComplete;
-
-        return $this;
-    }
-
-    /**
-     * Gets shippedAt
-     *
-     * @return \DateTime
-     */
-    public function getShippedAt()
-    {
-        return $this->container['shippedAt'];
-    }
-
-    /**
-     * Sets shippedAt
-     *
-     * @param \DateTime $shippedAt shippedAt
-     *
-     * @return $this
-     */
-    public function setShippedAt($shippedAt)
-    {
-        $this->container['shippedAt'] = $shippedAt;
 
         return $this;
     }

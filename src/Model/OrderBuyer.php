@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventOrderShipping
+ * OrderBuyer
  *
  * PHP version 5
  *
@@ -33,14 +33,15 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventOrderShipping Class Doc Comment
+ * OrderBuyer Class Doc Comment
  *
  * @category Class
+ * @description Buyer information
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventOrderShipping implements ModelInterface, ArrayAccess
+class OrderBuyer implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventOrderShipping';
+    protected static $openAPIModelName = 'Order_buyer';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +58,7 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sellerId' => 'string',
-        'orderId' => 'string',
-        'shippingComplete' => 'bool',
-        'shippingItems' => '\JTL\SCX\Client\Channel\Model\OrderShippingPosition[]'
+        'email' => 'string'
     ];
 
     /**
@@ -69,10 +67,7 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'sellerId' => null,
-        'orderId' => null,
-        'shippingComplete' => null,
-        'shippingItems' => null
+        'email' => 'email'
     ];
 
     /**
@@ -102,10 +97,7 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'sellerId' => 'sellerId',
-        'orderId' => 'orderId',
-        'shippingComplete' => 'shippingComplete',
-        'shippingItems' => 'shippingItems'
+        'email' => 'email'
     ];
 
     /**
@@ -114,10 +106,7 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'sellerId' => 'setSellerId',
-        'orderId' => 'setOrderId',
-        'shippingComplete' => 'setShippingComplete',
-        'shippingItems' => 'setShippingItems'
+        'email' => 'setEmail'
     ];
 
     /**
@@ -126,10 +115,7 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'sellerId' => 'getSellerId',
-        'orderId' => 'getOrderId',
-        'shippingComplete' => 'getShippingComplete',
-        'shippingItems' => 'getShippingItems'
+        'email' => 'getEmail'
     ];
 
     /**
@@ -192,10 +178,7 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['shippingComplete'] = isset($data['shippingComplete']) ? $data['shippingComplete'] : null;
-        $this->container['shippingItems'] = isset($data['shippingItems']) ? $data['shippingItems'] : null;
+        $this->container['email'] = isset($data['email']) ? $data['email'] : null;
     }
 
     /**
@@ -207,22 +190,6 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['sellerId'] === null) {
-            $invalidProperties[] = "'sellerId' can't be null";
-        }
-        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
-            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
-        }
-
-        if ($this->container['orderId'] === null) {
-            $invalidProperties[] = "'orderId' can't be null";
-        }
-        if ($this->container['shippingComplete'] === null) {
-            $invalidProperties[] = "'shippingComplete' can't be null";
-        }
-        if ($this->container['shippingItems'] === null) {
-            $invalidProperties[] = "'shippingItems' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -239,102 +206,25 @@ class SellerEventOrderShipping implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets sellerId
+     * Gets email
      *
-     * @return string
+     * @return string|null
      */
-    public function getSellerId()
+    public function getEmail()
     {
-        return $this->container['sellerId'];
+        return $this->container['email'];
     }
 
     /**
-     * Sets sellerId
+     * Sets email
      *
-     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param string|null $email email
      *
      * @return $this
      */
-    public function setSellerId($sellerId)
+    public function setEmail($email)
     {
-
-        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling SellerEventOrderShipping., must conform to the pattern /^\\w{1,50}$/.");
-        }
-
-        $this->container['sellerId'] = $sellerId;
-
-        return $this;
-    }
-
-    /**
-     * Gets orderId
-     *
-     * @return string
-     */
-    public function getOrderId()
-    {
-        return $this->container['orderId'];
-    }
-
-    /**
-     * Sets orderId
-     *
-     * @param string $orderId orderId
-     *
-     * @return $this
-     */
-    public function setOrderId($orderId)
-    {
-        $this->container['orderId'] = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * Gets shippingComplete
-     *
-     * @return bool
-     */
-    public function getShippingComplete()
-    {
-        return $this->container['shippingComplete'];
-    }
-
-    /**
-     * Sets shippingComplete
-     *
-     * @param bool $shippingComplete When shipping is completed set to \"true\".
-     *
-     * @return $this
-     */
-    public function setShippingComplete($shippingComplete)
-    {
-        $this->container['shippingComplete'] = $shippingComplete;
-
-        return $this;
-    }
-
-    /**
-     * Gets shippingItems
-     *
-     * @return \JTL\SCX\Client\Channel\Model\OrderShippingPosition[]
-     */
-    public function getShippingItems()
-    {
-        return $this->container['shippingItems'];
-    }
-
-    /**
-     * Sets shippingItems
-     *
-     * @param \JTL\SCX\Client\Channel\Model\OrderShippingPosition[] $shippingItems shippingItems
-     *
-     * @return $this
-     */
-    public function setShippingItems($shippingItems)
-    {
-        $this->container['shippingItems'] = $shippingItems;
+        $this->container['email'] = $email;
 
         return $this;
     }

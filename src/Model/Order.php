@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * Order Class Doc Comment
@@ -60,6 +60,8 @@ class Order implements ModelInterface, ArrayAccess
         'sellerId' => 'string',
         'orderStatus' => '\JTL\SCX\Client\Channel\Model\ChannelOrderStatus',
         'paymentStatus' => '\JTL\SCX\Client\Channel\Model\ChannelPaymentStatus',
+        'paymentMethod' => 'string',
+        'paymentReference' => 'string',
         'orderId' => 'string',
         'purchasedAt' => '\DateTime',
         'lastChangedAt' => '\DateTime',
@@ -67,7 +69,8 @@ class Order implements ModelInterface, ArrayAccess
         'orderItem' => '\JTL\SCX\Client\Channel\Model\OrderItem[]',
         'billingAddress' => '\JTL\SCX\Client\Channel\Model\Address',
         'shippingAddress' => '\JTL\SCX\Client\Channel\Model\Address',
-        'note' => 'string'
+        'note' => 'string',
+        'buyer' => '\JTL\SCX\Client\Channel\Model\OrderBuyer'
     ];
 
     /**
@@ -79,6 +82,8 @@ class Order implements ModelInterface, ArrayAccess
         'sellerId' => null,
         'orderStatus' => null,
         'paymentStatus' => null,
+        'paymentMethod' => null,
+        'paymentReference' => null,
         'orderId' => null,
         'purchasedAt' => 'date-time',
         'lastChangedAt' => 'date-time',
@@ -86,7 +91,8 @@ class Order implements ModelInterface, ArrayAccess
         'orderItem' => null,
         'billingAddress' => null,
         'shippingAddress' => null,
-        'note' => null
+        'note' => null,
+        'buyer' => null
     ];
 
     /**
@@ -119,6 +125,8 @@ class Order implements ModelInterface, ArrayAccess
         'sellerId' => 'sellerId',
         'orderStatus' => 'orderStatus',
         'paymentStatus' => 'paymentStatus',
+        'paymentMethod' => 'paymentMethod',
+        'paymentReference' => 'paymentReference',
         'orderId' => 'orderId',
         'purchasedAt' => 'purchasedAt',
         'lastChangedAt' => 'lastChangedAt',
@@ -126,7 +134,8 @@ class Order implements ModelInterface, ArrayAccess
         'orderItem' => 'orderItem',
         'billingAddress' => 'billingAddress',
         'shippingAddress' => 'shippingAddress',
-        'note' => 'note'
+        'note' => 'note',
+        'buyer' => 'buyer'
     ];
 
     /**
@@ -138,6 +147,8 @@ class Order implements ModelInterface, ArrayAccess
         'sellerId' => 'setSellerId',
         'orderStatus' => 'setOrderStatus',
         'paymentStatus' => 'setPaymentStatus',
+        'paymentMethod' => 'setPaymentMethod',
+        'paymentReference' => 'setPaymentReference',
         'orderId' => 'setOrderId',
         'purchasedAt' => 'setPurchasedAt',
         'lastChangedAt' => 'setLastChangedAt',
@@ -145,7 +156,8 @@ class Order implements ModelInterface, ArrayAccess
         'orderItem' => 'setOrderItem',
         'billingAddress' => 'setBillingAddress',
         'shippingAddress' => 'setShippingAddress',
-        'note' => 'setNote'
+        'note' => 'setNote',
+        'buyer' => 'setBuyer'
     ];
 
     /**
@@ -157,6 +169,8 @@ class Order implements ModelInterface, ArrayAccess
         'sellerId' => 'getSellerId',
         'orderStatus' => 'getOrderStatus',
         'paymentStatus' => 'getPaymentStatus',
+        'paymentMethod' => 'getPaymentMethod',
+        'paymentReference' => 'getPaymentReference',
         'orderId' => 'getOrderId',
         'purchasedAt' => 'getPurchasedAt',
         'lastChangedAt' => 'getLastChangedAt',
@@ -164,7 +178,8 @@ class Order implements ModelInterface, ArrayAccess
         'orderItem' => 'getOrderItem',
         'billingAddress' => 'getBillingAddress',
         'shippingAddress' => 'getShippingAddress',
-        'note' => 'getNote'
+        'note' => 'getNote',
+        'buyer' => 'getBuyer'
     ];
 
     /**
@@ -230,6 +245,8 @@ class Order implements ModelInterface, ArrayAccess
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderStatus'] = isset($data['orderStatus']) ? $data['orderStatus'] : null;
         $this->container['paymentStatus'] = isset($data['paymentStatus']) ? $data['paymentStatus'] : null;
+        $this->container['paymentMethod'] = isset($data['paymentMethod']) ? $data['paymentMethod'] : null;
+        $this->container['paymentReference'] = isset($data['paymentReference']) ? $data['paymentReference'] : null;
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
         $this->container['purchasedAt'] = isset($data['purchasedAt']) ? $data['purchasedAt'] : null;
         $this->container['lastChangedAt'] = isset($data['lastChangedAt']) ? $data['lastChangedAt'] : null;
@@ -238,6 +255,7 @@ class Order implements ModelInterface, ArrayAccess
         $this->container['billingAddress'] = isset($data['billingAddress']) ? $data['billingAddress'] : null;
         $this->container['shippingAddress'] = isset($data['shippingAddress']) ? $data['shippingAddress'] : null;
         $this->container['note'] = isset($data['note']) ? $data['note'] : null;
+        $this->container['buyer'] = isset($data['buyer']) ? $data['buyer'] : null;
     }
 
     /**
@@ -262,6 +280,14 @@ class Order implements ModelInterface, ArrayAccess
         if ($this->container['paymentStatus'] === null) {
             $invalidProperties[] = "'paymentStatus' can't be null";
         }
+        if (!is_null($this->container['paymentMethod']) && (mb_strlen($this->container['paymentMethod']) > 150)) {
+            $invalidProperties[] = "invalid value for 'paymentMethod', the character length must be smaller than or equal to 150.";
+        }
+
+        if (!is_null($this->container['paymentMethod']) && (mb_strlen($this->container['paymentMethod']) < 1)) {
+            $invalidProperties[] = "invalid value for 'paymentMethod', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['orderId'] === null) {
             $invalidProperties[] = "'orderId' can't be null";
         }
@@ -371,6 +397,61 @@ class Order implements ModelInterface, ArrayAccess
     public function setPaymentStatus($paymentStatus)
     {
         $this->container['paymentStatus'] = $paymentStatus;
+
+        return $this;
+    }
+
+    /**
+     * Gets paymentMethod
+     *
+     * @return string|null
+     */
+    public function getPaymentMethod()
+    {
+        return $this->container['paymentMethod'];
+    }
+
+    /**
+     * Sets paymentMethod
+     *
+     * @param string|null $paymentMethod paymentMethod
+     *
+     * @return $this
+     */
+    public function setPaymentMethod($paymentMethod)
+    {
+        if (!is_null($paymentMethod) && (mb_strlen($paymentMethod) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $paymentMethod when calling Order., must be smaller than or equal to 150.');
+        }
+        if (!is_null($paymentMethod) && (mb_strlen($paymentMethod) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $paymentMethod when calling Order., must be bigger than or equal to 1.');
+        }
+
+        $this->container['paymentMethod'] = $paymentMethod;
+
+        return $this;
+    }
+
+    /**
+     * Gets paymentReference
+     *
+     * @return string|null
+     */
+    public function getPaymentReference()
+    {
+        return $this->container['paymentReference'];
+    }
+
+    /**
+     * Sets paymentReference
+     *
+     * @param string|null $paymentReference Payment reference can be used to reference or identify a payment transaction
+     *
+     * @return $this
+     */
+    public function setPaymentReference($paymentReference)
+    {
+        $this->container['paymentReference'] = $paymentReference;
 
         return $this;
     }
@@ -563,6 +644,30 @@ class Order implements ModelInterface, ArrayAccess
     public function setNote($note)
     {
         $this->container['note'] = $note;
+
+        return $this;
+    }
+
+    /**
+     * Gets buyer
+     *
+     * @return \JTL\SCX\Client\Channel\Model\OrderBuyer|null
+     */
+    public function getBuyer()
+    {
+        return $this->container['buyer'];
+    }
+
+    /**
+     * Sets buyer
+     *
+     * @param \JTL\SCX\Client\Channel\Model\OrderBuyer|null $buyer buyer
+     *
+     * @return $this
+     */
+    public function setBuyer($buyer)
+    {
+        $this->container['buyer'] = $buyer;
 
         return $this;
     }
