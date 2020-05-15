@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * ChannelBasedData Class Doc Comment
@@ -57,6 +57,7 @@ class ChannelBasedData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
+        'currency' => 'string',
         'marketplaceList' => 'string[]',
         'supportedLanguages' => 'string[]',
         'displayName' => 'string',
@@ -73,6 +74,7 @@ class ChannelBasedData implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
+        'currency' => null,
         'marketplaceList' => null,
         'supportedLanguages' => null,
         'displayName' => null,
@@ -110,6 +112,7 @@ class ChannelBasedData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'currency' => 'currency',
         'marketplaceList' => 'marketplaceList',
         'supportedLanguages' => 'supportedLanguages',
         'displayName' => 'displayName',
@@ -126,6 +129,7 @@ class ChannelBasedData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'currency' => 'setCurrency',
         'marketplaceList' => 'setMarketplaceList',
         'supportedLanguages' => 'setSupportedLanguages',
         'displayName' => 'setDisplayName',
@@ -142,6 +146,7 @@ class ChannelBasedData implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'currency' => 'getCurrency',
         'marketplaceList' => 'getMarketplaceList',
         'supportedLanguages' => 'getSupportedLanguages',
         'displayName' => 'getDisplayName',
@@ -212,6 +217,7 @@ class ChannelBasedData implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['currency'] = isset($data['currency']) ? $data['currency'] : null;
         $this->container['marketplaceList'] = isset($data['marketplaceList']) ? $data['marketplaceList'] : null;
         $this->container['supportedLanguages'] = isset($data['supportedLanguages']) ? $data['supportedLanguages'] : null;
         $this->container['displayName'] = isset($data['displayName']) ? $data['displayName'] : null;
@@ -245,6 +251,30 @@ class ChannelBasedData implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets currency
+     *
+     * @return string|null
+     */
+    public function getCurrency()
+    {
+        return $this->container['currency'];
+    }
+
+    /**
+     * Sets currency
+     *
+     * @param string|null $currency Currency which are supported by the Channel. According to ISO-4217.
+     *
+     * @return $this
+     */
+    public function setCurrency($currency)
+    {
+        $this->container['currency'] = $currency;
+
+        return $this;
+    }
 
     /**
      * Gets marketplaceList
