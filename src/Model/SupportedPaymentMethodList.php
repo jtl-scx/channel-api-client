@@ -1,6 +1,6 @@
 <?php
 /**
- * ShippingRules
+ * SupportedPaymentMethodList
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * ShippingRules Class Doc Comment
+ * SupportedPaymentMethodList Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ShippingRules implements ModelInterface, ArrayAccess
+class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ShippingRules';
+    protected static $openAPIModelName = 'SupportedPaymentMethodList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,8 @@ class ShippingRules implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'supportedCarrierList' => '\JTL\SCX\Client\Channel\Model\SupportedCarrierList'
+        'paymentMethodId' => 'string',
+        'displayName' => 'string'
     ];
 
     /**
@@ -66,7 +67,8 @@ class ShippingRules implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'supportedCarrierList' => null
+        'paymentMethodId' => null,
+        'displayName' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class ShippingRules implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'supportedCarrierList' => 'supportedCarrierList'
+        'paymentMethodId' => 'paymentMethodId',
+        'displayName' => 'displayName'
     ];
 
     /**
@@ -105,7 +108,8 @@ class ShippingRules implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'supportedCarrierList' => 'setSupportedCarrierList'
+        'paymentMethodId' => 'setPaymentMethodId',
+        'displayName' => 'setDisplayName'
     ];
 
     /**
@@ -114,7 +118,8 @@ class ShippingRules implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'supportedCarrierList' => 'getSupportedCarrierList'
+        'paymentMethodId' => 'getPaymentMethodId',
+        'displayName' => 'getDisplayName'
     ];
 
     /**
@@ -177,7 +182,8 @@ class ShippingRules implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['supportedCarrierList'] = isset($data['supportedCarrierList']) ? $data['supportedCarrierList'] : null;
+        $this->container['paymentMethodId'] = isset($data['paymentMethodId']) ? $data['paymentMethodId'] : null;
+        $this->container['displayName'] = isset($data['displayName']) ? $data['displayName'] : null;
     }
 
     /**
@@ -188,6 +194,21 @@ class ShippingRules implements ModelInterface, ArrayAccess
     public function listInvalidProperties()
     {
         $invalidProperties = [];
+
+        if ($this->container['paymentMethodId'] === null) {
+            $invalidProperties[] = "'paymentMethodId' can't be null";
+        }
+        if ((mb_strlen($this->container['paymentMethodId']) > 100)) {
+            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be smaller than or equal to 100.";
+        }
+
+        if ((mb_strlen($this->container['paymentMethodId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['displayName']) && (mb_strlen($this->container['displayName']) > 150)) {
+            $invalidProperties[] = "invalid value for 'displayName', the character length must be smaller than or equal to 150.";
+        }
 
         return $invalidProperties;
     }
@@ -205,25 +226,60 @@ class ShippingRules implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets supportedCarrierList
+     * Gets paymentMethodId
      *
-     * @return \JTL\SCX\Client\Channel\Model\SupportedCarrierList|null
+     * @return string
      */
-    public function getSupportedCarrierList()
+    public function getPaymentMethodId()
     {
-        return $this->container['supportedCarrierList'];
+        return $this->container['paymentMethodId'];
     }
 
     /**
-     * Sets supportedCarrierList
+     * Sets paymentMethodId
      *
-     * @param \JTL\SCX\Client\Channel\Model\SupportedCarrierList|null $supportedCarrierList supportedCarrierList
+     * @param string $paymentMethodId paymentMethodId
      *
      * @return $this
      */
-    public function setSupportedCarrierList($supportedCarrierList)
+    public function setPaymentMethodId($paymentMethodId)
     {
-        $this->container['supportedCarrierList'] = $supportedCarrierList;
+        if ((mb_strlen($paymentMethodId) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethodList., must be smaller than or equal to 100.');
+        }
+        if ((mb_strlen($paymentMethodId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethodList., must be bigger than or equal to 1.');
+        }
+
+        $this->container['paymentMethodId'] = $paymentMethodId;
+
+        return $this;
+    }
+
+    /**
+     * Gets displayName
+     *
+     * @return string|null
+     */
+    public function getDisplayName()
+    {
+        return $this->container['displayName'];
+    }
+
+    /**
+     * Sets displayName
+     *
+     * @param string|null $displayName displayName
+     *
+     * @return $this
+     */
+    public function setDisplayName($displayName)
+    {
+        if (!is_null($displayName) && (mb_strlen($displayName) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $displayName when calling SupportedPaymentMethodList., must be smaller than or equal to 150.');
+        }
+
+        $this->container['displayName'] = $displayName;
 
         return $this;
     }

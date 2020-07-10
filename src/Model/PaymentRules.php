@@ -1,6 +1,6 @@
 <?php
 /**
- * ShippingRules
+ * PaymentRules
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * ShippingRules Class Doc Comment
+ * PaymentRules Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ShippingRules implements ModelInterface, ArrayAccess
+class PaymentRules implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ShippingRules';
+    protected static $openAPIModelName = 'PaymentRules';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'supportedCarrierList' => '\JTL\SCX\Client\Channel\Model\SupportedCarrierList'
+        'supportedPaymentMethodList' => '\JTL\SCX\Client\Channel\Model\SupportedPaymentMethodList[]'
     ];
 
     /**
@@ -66,7 +66,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'supportedCarrierList' => null
+        'supportedPaymentMethodList' => null
     ];
 
     /**
@@ -96,7 +96,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'supportedCarrierList' => 'supportedCarrierList'
+        'supportedPaymentMethodList' => 'supportedPaymentMethodList'
     ];
 
     /**
@@ -105,7 +105,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'supportedCarrierList' => 'setSupportedCarrierList'
+        'supportedPaymentMethodList' => 'setSupportedPaymentMethodList'
     ];
 
     /**
@@ -114,7 +114,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'supportedCarrierList' => 'getSupportedCarrierList'
+        'supportedPaymentMethodList' => 'getSupportedPaymentMethodList'
     ];
 
     /**
@@ -177,7 +177,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['supportedCarrierList'] = isset($data['supportedCarrierList']) ? $data['supportedCarrierList'] : null;
+        $this->container['supportedPaymentMethodList'] = isset($data['supportedPaymentMethodList']) ? $data['supportedPaymentMethodList'] : null;
     }
 
     /**
@@ -189,6 +189,9 @@ class ShippingRules implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['supportedPaymentMethodList'] === null) {
+            $invalidProperties[] = "'supportedPaymentMethodList' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -205,25 +208,25 @@ class ShippingRules implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets supportedCarrierList
+     * Gets supportedPaymentMethodList
      *
-     * @return \JTL\SCX\Client\Channel\Model\SupportedCarrierList|null
+     * @return \JTL\SCX\Client\Channel\Model\SupportedPaymentMethodList[]
      */
-    public function getSupportedCarrierList()
+    public function getSupportedPaymentMethodList()
     {
-        return $this->container['supportedCarrierList'];
+        return $this->container['supportedPaymentMethodList'];
     }
 
     /**
-     * Sets supportedCarrierList
+     * Sets supportedPaymentMethodList
      *
-     * @param \JTL\SCX\Client\Channel\Model\SupportedCarrierList|null $supportedCarrierList supportedCarrierList
+     * @param \JTL\SCX\Client\Channel\Model\SupportedPaymentMethodList[] $supportedPaymentMethodList supportedPaymentMethodList
      *
      * @return $this
      */
-    public function setSupportedCarrierList($supportedCarrierList)
+    public function setSupportedPaymentMethodList($supportedPaymentMethodList)
     {
-        $this->container['supportedCarrierList'] = $supportedCarrierList;
+        $this->container['supportedPaymentMethodList'] = $supportedPaymentMethodList;
 
         return $this;
     }
