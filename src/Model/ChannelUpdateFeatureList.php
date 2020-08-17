@@ -57,7 +57,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'variationsSupported' => 'bool'
+        'variationsSupported' => 'bool',
+        'remainingQuanitySupported' => 'bool'
     ];
 
     /**
@@ -66,7 +67,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'variationsSupported' => null
+        'variationsSupported' => null,
+        'remainingQuanitySupported' => null
     ];
 
     /**
@@ -96,7 +98,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'variationsSupported' => 'variationsSupported'
+        'variationsSupported' => 'variationsSupported',
+        'remainingQuanitySupported' => 'remainingQuanitySupported'
     ];
 
     /**
@@ -105,7 +108,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'variationsSupported' => 'setVariationsSupported'
+        'variationsSupported' => 'setVariationsSupported',
+        'remainingQuanitySupported' => 'setRemainingQuanitySupported'
     ];
 
     /**
@@ -114,7 +118,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'variationsSupported' => 'getVariationsSupported'
+        'variationsSupported' => 'getVariationsSupported',
+        'remainingQuanitySupported' => 'getRemainingQuanitySupported'
     ];
 
     /**
@@ -178,6 +183,7 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['variationsSupported'] = isset($data['variationsSupported']) ? $data['variationsSupported'] : false;
+        $this->container['remainingQuanitySupported'] = isset($data['remainingQuanitySupported']) ? $data['remainingQuanitySupported'] : false;
     }
 
     /**
@@ -224,6 +230,30 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
     public function setVariationsSupported($variationsSupported)
     {
         $this->container['variationsSupported'] = $variationsSupported;
+
+        return $this;
+    }
+
+    /**
+     * Gets remainingQuanitySupported
+     *
+     * @return bool|null
+     */
+    public function getRemainingQuanitySupported()
+    {
+        return $this->container['remainingQuanitySupported'];
+    }
+
+    /**
+     * Sets remainingQuanitySupported
+     *
+     * @param bool|null $remainingQuanitySupported Indecates if a channel is able to support a remaing quanity with each Order. The feature can be used by a connected client implementation (such as JTL-Wawi) to manage quanity updates on an channel.
+     *
+     * @return $this
+     */
+    public function setRemainingQuanitySupported($remainingQuanitySupported)
+    {
+        $this->container['remainingQuanitySupported'] = $remainingQuanitySupported;
 
         return $this;
     }

@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderShippingPosition
+ * SellerEventChannelUnlinked
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderShippingPosition Class Doc Comment
+ * SellerEventChannelUnlinked Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderShippingPosition implements ModelInterface, ArrayAccess
+class SellerEventChannelUnlinked implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderShippingPosition';
+    protected static $openAPIModelName = 'SellerEventChannelUnlinked';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'carrier' => 'string',
-        'trackingNumber' => 'string',
-        'shippedAt' => '\DateTime',
-        'orderItemIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]'
+        'sellerId' => 'string',
+        'reason' => 'string',
+        'unlinkedAt' => '\DateTime'
     ];
 
     /**
@@ -69,10 +68,9 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'carrier' => null,
-        'trackingNumber' => null,
-        'shippedAt' => 'date-time',
-        'orderItemIdList' => null
+        'sellerId' => null,
+        'reason' => null,
+        'unlinkedAt' => 'date-time'
     ];
 
     /**
@@ -102,10 +100,9 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'carrier' => 'carrier',
-        'trackingNumber' => 'trackingNumber',
-        'shippedAt' => 'shippedAt',
-        'orderItemIdList' => 'orderItemIdList'
+        'sellerId' => 'sellerId',
+        'reason' => 'reason',
+        'unlinkedAt' => 'unlinkedAt'
     ];
 
     /**
@@ -114,10 +111,9 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'carrier' => 'setCarrier',
-        'trackingNumber' => 'setTrackingNumber',
-        'shippedAt' => 'setShippedAt',
-        'orderItemIdList' => 'setOrderItemIdList'
+        'sellerId' => 'setSellerId',
+        'reason' => 'setReason',
+        'unlinkedAt' => 'setUnlinkedAt'
     ];
 
     /**
@@ -126,10 +122,9 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'carrier' => 'getCarrier',
-        'trackingNumber' => 'getTrackingNumber',
-        'shippedAt' => 'getShippedAt',
-        'orderItemIdList' => 'getOrderItemIdList'
+        'sellerId' => 'getSellerId',
+        'reason' => 'getReason',
+        'unlinkedAt' => 'getUnlinkedAt'
     ];
 
     /**
@@ -192,10 +187,9 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
-        $this->container['trackingNumber'] = isset($data['trackingNumber']) ? $data['trackingNumber'] : null;
-        $this->container['shippedAt'] = isset($data['shippedAt']) ? $data['shippedAt'] : null;
-        $this->container['orderItemIdList'] = isset($data['orderItemIdList']) ? $data['orderItemIdList'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
+        $this->container['unlinkedAt'] = isset($data['unlinkedAt']) ? $data['unlinkedAt'] : null;
     }
 
     /**
@@ -207,8 +201,18 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['carrier'] === null) {
-            $invalidProperties[] = "'carrier' can't be null";
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
+        }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        }
+
+        if ($this->container['reason'] === null) {
+            $invalidProperties[] = "'reason' can't be null";
+        }
+        if ($this->container['unlinkedAt'] === null) {
+            $invalidProperties[] = "'unlinkedAt' can't be null";
         }
         return $invalidProperties;
     }
@@ -226,97 +230,78 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets carrier
+     * Gets sellerId
      *
      * @return string
      */
-    public function getCarrier()
+    public function getSellerId()
     {
-        return $this->container['carrier'];
+        return $this->container['sellerId'];
     }
 
     /**
-     * Sets carrier
+     * Sets sellerId
      *
-     * @param string $carrier carrier
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
-    public function setCarrier($carrier)
+    public function setSellerId($sellerId)
     {
-        $this->container['carrier'] = $carrier;
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling SellerEventChannelUnlinked., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
 
         return $this;
     }
 
     /**
-     * Gets trackingNumber
+     * Gets reason
      *
-     * @return string|null
+     * @return string
      */
-    public function getTrackingNumber()
+    public function getReason()
     {
-        return $this->container['trackingNumber'];
+        return $this->container['reason'];
     }
 
     /**
-     * Sets trackingNumber
+     * Sets reason
      *
-     * @param string|null $trackingNumber trackingNumber
+     * @param string $reason reason
      *
      * @return $this
      */
-    public function setTrackingNumber($trackingNumber)
+    public function setReason($reason)
     {
-        $this->container['trackingNumber'] = $trackingNumber;
+        $this->container['reason'] = $reason;
 
         return $this;
     }
 
     /**
-     * Gets shippedAt
+     * Gets unlinkedAt
      *
-     * @return \DateTime|null
+     * @return \DateTime
      */
-    public function getShippedAt()
+    public function getUnlinkedAt()
     {
-        return $this->container['shippedAt'];
+        return $this->container['unlinkedAt'];
     }
 
     /**
-     * Sets shippedAt
+     * Sets unlinkedAt
      *
-     * @param \DateTime|null $shippedAt shippedAt
+     * @param \DateTime $unlinkedAt unlinkedAt
      *
      * @return $this
      */
-    public function setShippedAt($shippedAt)
+    public function setUnlinkedAt($unlinkedAt)
     {
-        $this->container['shippedAt'] = $shippedAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets orderItemIdList
-     *
-     * @return \JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]|null
-     */
-    public function getOrderItemIdList()
-    {
-        return $this->container['orderItemIdList'];
-    }
-
-    /**
-     * Sets orderItemIdList
-     *
-     * @param \JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]|null $orderItemIdList Container to describe what items are included.
-     *
-     * @return $this
-     */
-    public function setOrderItemIdList($orderItemIdList)
-    {
-        $this->container['orderItemIdList'] = $orderItemIdList;
+        $this->container['unlinkedAt'] = $unlinkedAt;
 
         return $this;
     }

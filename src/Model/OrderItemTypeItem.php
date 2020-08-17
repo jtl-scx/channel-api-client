@@ -63,11 +63,13 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'total' => 'string',
         'taxPercent' => 'string',
         'offerId' => 'int',
+        'channelOfferId' => 'string',
         'sku' => 'string',
         'quantity' => 'string',
         'title' => 'string',
         'estimatedShippingDate' => '\DateTime',
-        'estimatedDeliveryDate' => '\DateTime'
+        'estimatedDeliveryDate' => '\DateTime',
+        'remainingQuantity' => 'string'
     ];
 
     /**
@@ -82,11 +84,13 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'total' => null,
         'taxPercent' => null,
         'offerId' => 'int64',
+        'channelOfferId' => null,
         'sku' => null,
         'quantity' => null,
         'title' => null,
         'estimatedShippingDate' => 'date-time',
-        'estimatedDeliveryDate' => 'date-time'
+        'estimatedDeliveryDate' => 'date-time',
+        'remainingQuantity' => null
     ];
 
     /**
@@ -122,11 +126,13 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'total' => 'total',
         'taxPercent' => 'taxPercent',
         'offerId' => 'offerId',
+        'channelOfferId' => 'channelOfferId',
         'sku' => 'sku',
         'quantity' => 'quantity',
         'title' => 'title',
         'estimatedShippingDate' => 'estimatedShippingDate',
-        'estimatedDeliveryDate' => 'estimatedDeliveryDate'
+        'estimatedDeliveryDate' => 'estimatedDeliveryDate',
+        'remainingQuantity' => 'remainingQuantity'
     ];
 
     /**
@@ -141,11 +147,13 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'total' => 'setTotal',
         'taxPercent' => 'setTaxPercent',
         'offerId' => 'setOfferId',
+        'channelOfferId' => 'setChannelOfferId',
         'sku' => 'setSku',
         'quantity' => 'setQuantity',
         'title' => 'setTitle',
         'estimatedShippingDate' => 'setEstimatedShippingDate',
-        'estimatedDeliveryDate' => 'setEstimatedDeliveryDate'
+        'estimatedDeliveryDate' => 'setEstimatedDeliveryDate',
+        'remainingQuantity' => 'setRemainingQuantity'
     ];
 
     /**
@@ -160,11 +168,13 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'total' => 'getTotal',
         'taxPercent' => 'getTaxPercent',
         'offerId' => 'getOfferId',
+        'channelOfferId' => 'getChannelOfferId',
         'sku' => 'getSku',
         'quantity' => 'getQuantity',
         'title' => 'getTitle',
         'estimatedShippingDate' => 'getEstimatedShippingDate',
-        'estimatedDeliveryDate' => 'getEstimatedDeliveryDate'
+        'estimatedDeliveryDate' => 'getEstimatedDeliveryDate',
+        'remainingQuantity' => 'getRemainingQuantity'
     ];
 
     /**
@@ -233,11 +243,13 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         $this->container['total'] = isset($data['total']) ? $data['total'] : null;
         $this->container['taxPercent'] = isset($data['taxPercent']) ? $data['taxPercent'] : null;
         $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
+        $this->container['channelOfferId'] = isset($data['channelOfferId']) ? $data['channelOfferId'] : null;
         $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : '1.0';
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['estimatedShippingDate'] = isset($data['estimatedShippingDate']) ? $data['estimatedShippingDate'] : null;
         $this->container['estimatedDeliveryDate'] = isset($data['estimatedDeliveryDate']) ? $data['estimatedDeliveryDate'] : null;
+        $this->container['remainingQuantity'] = isset($data['remainingQuantity']) ? $data['remainingQuantity'] : null;
     }
 
     /**
@@ -274,6 +286,14 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         }
         if (!is_null($this->container['offerId']) && ($this->container['offerId'] < 1)) {
             $invalidProperties[] = "invalid value for 'offerId', must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['channelOfferId']) && (mb_strlen($this->container['channelOfferId']) > 50)) {
+            $invalidProperties[] = "invalid value for 'channelOfferId', the character length must be smaller than or equal to 50.";
+        }
+
+        if (!is_null($this->container['channelOfferId']) && (mb_strlen($this->container['channelOfferId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'channelOfferId', the character length must be bigger than or equal to 1.";
         }
 
         if (!is_null($this->container['sku']) && (mb_strlen($this->container['sku']) > 100)) {
@@ -456,6 +476,37 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets channelOfferId
+     *
+     * @return string|null
+     */
+    public function getChannelOfferId()
+    {
+        return $this->container['channelOfferId'];
+    }
+
+    /**
+     * Sets channelOfferId
+     *
+     * @param string|null $channelOfferId Channel defined unique Offer Id to identify an Offer on a Sales Channel.
+     *
+     * @return $this
+     */
+    public function setChannelOfferId($channelOfferId)
+    {
+        if (!is_null($channelOfferId) && (mb_strlen($channelOfferId) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $channelOfferId when calling OrderItemTypeItem., must be smaller than or equal to 50.');
+        }
+        if (!is_null($channelOfferId) && (mb_strlen($channelOfferId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $channelOfferId when calling OrderItemTypeItem., must be bigger than or equal to 1.');
+        }
+
+        $this->container['channelOfferId'] = $channelOfferId;
+
+        return $this;
+    }
+
+    /**
      * Gets sku
      *
      * @return string|null
@@ -578,6 +629,30 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     public function setEstimatedDeliveryDate($estimatedDeliveryDate)
     {
         $this->container['estimatedDeliveryDate'] = $estimatedDeliveryDate;
+
+        return $this;
+    }
+
+    /**
+     * Gets remainingQuantity
+     *
+     * @return string|null
+     */
+    public function getRemainingQuantity()
+    {
+        return $this->container['remainingQuantity'];
+    }
+
+    /**
+     * Sets remainingQuantity
+     *
+     * @param string|null $remainingQuantity Includes the rest of the inventory available on the connected Marketplace. The remaining quanity can be used by a connected client implementation (such as JTL-Wawi) to manage quanity updates.
+     *
+     * @return $this
+     */
+    public function setRemainingQuantity($remainingQuantity)
+    {
+        $this->container['remainingQuantity'] = $remainingQuantity;
 
         return $this;
     }
