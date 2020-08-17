@@ -25,7 +25,7 @@ class PaymentRulesApiTest extends AbstractTestCase
         $requestMock = $this->createMock(CreatePaymentRulesRequest::class);
 
         $responseMock = $this->createMock(ResponseInterface::class);
-        $responseMock->method('getStatusCode')->willReturn(200);
+        $responseMock->method('getStatusCode')->willReturn(201);
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
         $apiClientMock->expects($this->once())->method('request')->with($requestMock)->willReturn($responseMock);
 

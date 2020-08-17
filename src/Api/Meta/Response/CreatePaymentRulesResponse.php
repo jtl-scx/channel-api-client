@@ -12,5 +12,8 @@ use JTL\SCX\Client\Response\AbstractResponse;
 
 class CreatePaymentRulesResponse extends AbstractResponse
 {
-
+    public function isSuccessful(): bool
+    {
+        return $this->getStatusCode() === 201;
+    }
 }
