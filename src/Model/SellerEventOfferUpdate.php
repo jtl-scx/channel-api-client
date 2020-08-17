@@ -71,10 +71,10 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'channelAttributeList' => '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]',
         'variationList' => '\JTL\SCX\Client\Channel\Model\Variation[]',
         'sku' => 'string',
-        'ean' => 'string',
         'gtin' => 'string',
-        'upc' => 'string',
+        'mpn' => 'string',
         'isbn' => 'string',
+        'brand' => 'string',
         'srp' => '\JTL\SCX\Client\Channel\Model\Price',
         'productAttributeList' => '\JTL\SCX\Client\Channel\Model\ProductAttribute[]'
     ];
@@ -98,10 +98,10 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'channelAttributeList' => null,
         'variationList' => null,
         'sku' => null,
-        'ean' => null,
         'gtin' => null,
-        'upc' => null,
+        'mpn' => null,
         'isbn' => null,
+        'brand' => null,
         'srp' => null,
         'productAttributeList' => null
     ];
@@ -146,10 +146,10 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'channelAttributeList' => 'channelAttributeList',
         'variationList' => 'variationList',
         'sku' => 'sku',
-        'ean' => 'ean',
         'gtin' => 'gtin',
-        'upc' => 'upc',
+        'mpn' => 'mpn',
         'isbn' => 'isbn',
+        'brand' => 'brand',
         'srp' => 'srp',
         'productAttributeList' => 'productAttributeList'
     ];
@@ -173,10 +173,10 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'channelAttributeList' => 'setChannelAttributeList',
         'variationList' => 'setVariationList',
         'sku' => 'setSku',
-        'ean' => 'setEan',
         'gtin' => 'setGtin',
-        'upc' => 'setUpc',
+        'mpn' => 'setMpn',
         'isbn' => 'setIsbn',
+        'brand' => 'setBrand',
         'srp' => 'setSrp',
         'productAttributeList' => 'setProductAttributeList'
     ];
@@ -200,10 +200,10 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         'channelAttributeList' => 'getChannelAttributeList',
         'variationList' => 'getVariationList',
         'sku' => 'getSku',
-        'ean' => 'getEan',
         'gtin' => 'getGtin',
-        'upc' => 'getUpc',
+        'mpn' => 'getMpn',
         'isbn' => 'getIsbn',
+        'brand' => 'getBrand',
         'srp' => 'getSrp',
         'productAttributeList' => 'getProductAttributeList'
     ];
@@ -281,10 +281,10 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
         $this->container['channelAttributeList'] = isset($data['channelAttributeList']) ? $data['channelAttributeList'] : null;
         $this->container['variationList'] = isset($data['variationList']) ? $data['variationList'] : null;
         $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
-        $this->container['ean'] = isset($data['ean']) ? $data['ean'] : null;
         $this->container['gtin'] = isset($data['gtin']) ? $data['gtin'] : null;
-        $this->container['upc'] = isset($data['upc']) ? $data['upc'] : null;
+        $this->container['mpn'] = isset($data['mpn']) ? $data['mpn'] : null;
         $this->container['isbn'] = isset($data['isbn']) ? $data['isbn'] : null;
+        $this->container['brand'] = isset($data['brand']) ? $data['brand'] : null;
         $this->container['srp'] = isset($data['srp']) ? $data['srp'] : null;
         $this->container['productAttributeList'] = isset($data['productAttributeList']) ? $data['productAttributeList'] : null;
     }
@@ -702,30 +702,6 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets ean
-     *
-     * @return string|null
-     */
-    public function getEan()
-    {
-        return $this->container['ean'];
-    }
-
-    /**
-     * Sets ean
-     *
-     * @param string|null $ean ean
-     *
-     * @return $this
-     */
-    public function setEan($ean)
-    {
-        $this->container['ean'] = $ean;
-
-        return $this;
-    }
-
-    /**
      * Gets gtin
      *
      * @return string|null
@@ -750,25 +726,25 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets upc
+     * Gets mpn
      *
      * @return string|null
      */
-    public function getUpc()
+    public function getMpn()
     {
-        return $this->container['upc'];
+        return $this->container['mpn'];
     }
 
     /**
-     * Sets upc
+     * Sets mpn
      *
-     * @param string|null $upc upc
+     * @param string|null $mpn mpn
      *
      * @return $this
      */
-    public function setUpc($upc)
+    public function setMpn($mpn)
     {
-        $this->container['upc'] = $upc;
+        $this->container['mpn'] = $mpn;
 
         return $this;
     }
@@ -793,6 +769,30 @@ class SellerEventOfferUpdate implements ModelInterface, ArrayAccess
     public function setIsbn($isbn)
     {
         $this->container['isbn'] = $isbn;
+
+        return $this;
+    }
+
+    /**
+     * Gets brand
+     *
+     * @return string|null
+     */
+    public function getBrand()
+    {
+        return $this->container['brand'];
+    }
+
+    /**
+     * Sets brand
+     *
+     * @param string|null $brand brand
+     *
+     * @return $this
+     */
+    public function setBrand($brand)
+    {
+        $this->container['brand'] = $brand;
 
         return $this;
     }
