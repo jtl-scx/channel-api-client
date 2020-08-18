@@ -33,7 +33,7 @@ class CreateShippingRulesRequest extends AbstractScxApiRequest
 
     public function getHttpMethod(): string
     {
-        return ScxApiRequest::HTTP_METHOD_POST;
+        return ScxApiRequest::HTTP_METHOD_PUT;
     }
 
     public function getBody(): string
