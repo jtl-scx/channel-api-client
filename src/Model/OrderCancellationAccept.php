@@ -38,7 +38,7 @@ use \JTL\SCX\Client\Channel\ObjectSerializer;
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderCancellationAccept extends AcceptByChannel 
+class OrderCancellationAccept extends CancellationAcceptByChannel 
 {
     const DISCRIMINATOR = null;
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * DeniedByChannel
+ * CancellationAcceptByChannel
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * DeniedByChannel Class Doc Comment
+ * CancellationAcceptByChannel Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class DeniedByChannel implements ModelInterface, ArrayAccess
+class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'DeniedByChannel';
+    protected static $openAPIModelName = 'CancellationAcceptByChannel';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,8 +58,7 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'sellerId' => 'string',
-        'orderCancellationRequestId' => 'string',
-        'reason' => 'Text'
+        'orderCancellationRequestId' => 'string'
     ];
 
     /**
@@ -69,8 +68,7 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'sellerId' => null,
-        'orderCancellationRequestId' => 'uuid',
-        'reason' => null
+        'orderCancellationRequestId' => 'uuid'
     ];
 
     /**
@@ -101,8 +99,7 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'sellerId' => 'sellerId',
-        'orderCancellationRequestId' => 'orderCancellationRequestId',
-        'reason' => 'reason'
+        'orderCancellationRequestId' => 'orderCancellationRequestId'
     ];
 
     /**
@@ -112,8 +109,7 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'sellerId' => 'setSellerId',
-        'orderCancellationRequestId' => 'setOrderCancellationRequestId',
-        'reason' => 'setReason'
+        'orderCancellationRequestId' => 'setOrderCancellationRequestId'
     ];
 
     /**
@@ -123,8 +119,7 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'sellerId' => 'getSellerId',
-        'orderCancellationRequestId' => 'getOrderCancellationRequestId',
-        'reason' => 'getReason'
+        'orderCancellationRequestId' => 'getOrderCancellationRequestId'
     ];
 
     /**
@@ -189,7 +184,6 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
     {
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
-        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
     }
 
     /**
@@ -210,9 +204,6 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
 
         if ($this->container['orderCancellationRequestId'] === null) {
             $invalidProperties[] = "'orderCancellationRequestId' can't be null";
-        }
-        if ($this->container['reason'] === null) {
-            $invalidProperties[] = "'reason' can't be null";
         }
         return $invalidProperties;
     }
@@ -250,7 +241,7 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling DeniedByChannel., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling CancellationAcceptByChannel., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -278,30 +269,6 @@ class DeniedByChannel implements ModelInterface, ArrayAccess
     public function setOrderCancellationRequestId($orderCancellationRequestId)
     {
         $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
-
-        return $this;
-    }
-
-    /**
-     * Gets reason
-     *
-     * @return Text
-     */
-    public function getReason()
-    {
-        return $this->container['reason'];
-    }
-
-    /**
-     * Sets reason
-     *
-     * @param Text $reason reason
-     *
-     * @return $this
-     */
-    public function setReason($reason)
-    {
-        $this->container['reason'] = $reason;
 
         return $this;
     }
