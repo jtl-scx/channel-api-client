@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventOrderCancelled
+ * OrderCancellationDenied
  *
  * PHP version 5
  *
@@ -31,14 +31,14 @@ namespace JTL\SCX\Client\Channel\Model;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventOrderCancelled Class Doc Comment
+ * OrderCancellationDenied Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventOrderCancelled extends EventSellerRelated 
+class OrderCancellationDenied extends DeniedByChannel 
 {
     const DISCRIMINATOR = null;
 
@@ -47,7 +47,7 @@ class SellerEventOrderCancelled extends EventSellerRelated
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventOrderCancelled';
+    protected static $openAPIModelName = 'OrderCancellationDenied';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,8 +55,7 @@ class SellerEventOrderCancelled extends EventSellerRelated
       * @var string[]
       */
     protected static $openAPITypes = [
-        'orderId' => 'string',
-        'reason' => 'string'
+        
     ];
 
     /**
@@ -65,8 +64,7 @@ class SellerEventOrderCancelled extends EventSellerRelated
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'orderId' => null,
-        'reason' => null
+        
     ];
 
     /**
@@ -96,8 +94,7 @@ class SellerEventOrderCancelled extends EventSellerRelated
      * @var string[]
      */
     protected static $attributeMap = [
-        'orderId' => 'orderId',
-        'reason' => 'reason'
+        
     ];
 
     /**
@@ -106,8 +103,7 @@ class SellerEventOrderCancelled extends EventSellerRelated
      * @var string[]
      */
     protected static $setters = [
-        'orderId' => 'setOrderId',
-        'reason' => 'setReason'
+        
     ];
 
     /**
@@ -116,8 +112,7 @@ class SellerEventOrderCancelled extends EventSellerRelated
      * @var string[]
      */
     protected static $getters = [
-        'orderId' => 'getOrderId',
-        'reason' => 'getReason'
+        
     ];
 
     /**
@@ -161,27 +156,8 @@ class SellerEventOrderCancelled extends EventSellerRelated
         return self::$openAPIModelName;
     }
 
-    const REASON_ORDER_MISTAKE = 'ORDER_MISTAKE';
-    const REASON_OUT_OF_STOCK = 'OUT_OF_STOCK';
-    const REASON_UNDELIVERABLE = 'UNDELIVERABLE';
-    const REASON_OTHER = 'OTHER';
     
 
-    
-    /**
-     * Gets allowable values of the enum
-     *
-     * @return string[]
-     */
-    public function getReasonAllowableValues()
-    {
-        return [
-            self::REASON_ORDER_MISTAKE,
-            self::REASON_OUT_OF_STOCK,
-            self::REASON_UNDELIVERABLE,
-            self::REASON_OTHER,
-        ];
-    }
     
 
 
@@ -195,8 +171,6 @@ class SellerEventOrderCancelled extends EventSellerRelated
     {
         parent::__construct($data);
 
-        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
     }
 
     /**
@@ -207,14 +181,6 @@ class SellerEventOrderCancelled extends EventSellerRelated
     public function listInvalidProperties()
     {
         $invalidProperties = parent::listInvalidProperties();
-
-        $allowedValues = $this->getReasonAllowableValues();
-        if (!is_null($this->container['reason']) && !in_array($this->container['reason'], $allowedValues, true)) {
-            $invalidProperties[] = sprintf(
-                "invalid value for 'reason', must be one of '%s'",
-                implode("', '", $allowedValues)
-            );
-        }
 
         return $invalidProperties;
     }
@@ -230,63 +196,6 @@ class SellerEventOrderCancelled extends EventSellerRelated
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets orderId
-     *
-     * @return string|null
-     */
-    public function getOrderId()
-    {
-        return $this->container['orderId'];
-    }
-
-    /**
-     * Sets orderId
-     *
-     * @param string|null $orderId orderId
-     *
-     * @return $this
-     */
-    public function setOrderId($orderId)
-    {
-        $this->container['orderId'] = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * Gets reason
-     *
-     * @return string|null
-     */
-    public function getReason()
-    {
-        return $this->container['reason'];
-    }
-
-    /**
-     * Sets reason
-     *
-     * @param string|null $reason reason
-     *
-     * @return $this
-     */
-    public function setReason($reason)
-    {
-        $allowedValues = $this->getReasonAllowableValues();
-        if (!is_null($reason) && !in_array($reason, $allowedValues, true)) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    "Invalid value for 'reason', must be one of '%s'",
-                    implode("', '", $allowedValues)
-                )
-            );
-        }
-        $this->container['reason'] = $reason;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

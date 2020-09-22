@@ -62,6 +62,7 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'grossPrice' => 'string',
         'total' => 'string',
         'taxPercent' => 'string',
+        'grossFee' => 'string',
         'offerId' => 'int',
         'channelOfferId' => 'string',
         'sku' => 'string',
@@ -83,6 +84,7 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'grossPrice' => null,
         'total' => null,
         'taxPercent' => null,
+        'grossFee' => null,
         'offerId' => 'int64',
         'channelOfferId' => null,
         'sku' => null,
@@ -125,6 +127,7 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'grossPrice' => 'grossPrice',
         'total' => 'total',
         'taxPercent' => 'taxPercent',
+        'grossFee' => 'grossFee',
         'offerId' => 'offerId',
         'channelOfferId' => 'channelOfferId',
         'sku' => 'sku',
@@ -146,6 +149,7 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'grossPrice' => 'setGrossPrice',
         'total' => 'setTotal',
         'taxPercent' => 'setTaxPercent',
+        'grossFee' => 'setGrossFee',
         'offerId' => 'setOfferId',
         'channelOfferId' => 'setChannelOfferId',
         'sku' => 'setSku',
@@ -167,6 +171,7 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         'grossPrice' => 'getGrossPrice',
         'total' => 'getTotal',
         'taxPercent' => 'getTaxPercent',
+        'grossFee' => 'getGrossFee',
         'offerId' => 'getOfferId',
         'channelOfferId' => 'getChannelOfferId',
         'sku' => 'getSku',
@@ -242,6 +247,7 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         $this->container['grossPrice'] = isset($data['grossPrice']) ? $data['grossPrice'] : null;
         $this->container['total'] = isset($data['total']) ? $data['total'] : null;
         $this->container['taxPercent'] = isset($data['taxPercent']) ? $data['taxPercent'] : null;
+        $this->container['grossFee'] = isset($data['grossFee']) ? $data['grossFee'] : null;
         $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
         $this->container['channelOfferId'] = isset($data['channelOfferId']) ? $data['channelOfferId'] : null;
         $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
@@ -268,8 +274,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'orderItemId', the character length must be smaller than or equal to 50.";
         }
 
-        if (($this->container['orderItemId'] < 1)) {
-            $invalidProperties[] = "invalid value for 'orderItemId', must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['orderItemId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'orderItemId', the character length must be bigger than or equal to 1.";
         }
 
         if ($this->container['type'] === null) {
@@ -341,8 +347,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
         if ((mb_strlen($orderItemId) > 50)) {
             throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderItemTypeItem., must be smaller than or equal to 50.');
         }
-        if (($orderItemId < 1)) {
-            throw new \InvalidArgumentException('invalid value for $orderItemId when calling OrderItemTypeItem., must be bigger than or equal to 1.');
+        if ((mb_strlen($orderItemId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderItemTypeItem., must be bigger than or equal to 1.');
         }
 
         $this->container['orderItemId'] = $orderItemId;
@@ -442,6 +448,30 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     public function setTaxPercent($taxPercent)
     {
         $this->container['taxPercent'] = $taxPercent;
+
+        return $this;
+    }
+
+    /**
+     * Gets grossFee
+     *
+     * @return string|null
+     */
+    public function getGrossFee()
+    {
+        return $this->container['grossFee'];
+    }
+
+    /**
+     * Sets grossFee
+     *
+     * @param string|null $grossFee The accrued sales charge (gross), which is levied by the marketplace. This property is optional and if a marketplace does not support sales fees then this property must be null or not present
+     *
+     * @return $this
+     */
+    public function setGrossFee($grossFee)
+    {
+        $this->container['grossFee'] = $grossFee;
 
         return $this;
     }

@@ -28,8 +28,6 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-
-use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
@@ -40,7 +38,7 @@ use \JTL\SCX\Client\Channel\ObjectSerializer;
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ChannelEventNotification implements ModelInterface, ArrayAccess
+class ChannelEventNotification extends ChannelRelatedEvent 
 {
     const DISCRIMINATOR = null;
 
@@ -82,7 +80,7 @@ class ChannelEventNotification implements ModelInterface, ArrayAccess
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -92,7 +90,7 @@ class ChannelEventNotification implements ModelInterface, ArrayAccess
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -140,7 +138,7 @@ class ChannelEventNotification implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -150,7 +148,7 @@ class ChannelEventNotification implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -160,7 +158,7 @@ class ChannelEventNotification implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -194,12 +192,6 @@ class ChannelEventNotification implements ModelInterface, ArrayAccess
     }
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -209,6 +201,8 @@ class ChannelEventNotification implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        parent::__construct($data);
+
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['severity'] = isset($data['severity']) ? $data['severity'] : 'INFO';
         $this->container['message'] = isset($data['message']) ? $data['message'] : null;
@@ -222,7 +216,7 @@ class ChannelEventNotification implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         if ($this->container['sellerId'] === null) {
             $invalidProperties[] = "'sellerId' can't be null";

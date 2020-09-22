@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderPayment
+ * ChannelRelatedEvent
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderPayment Class Doc Comment
+ * ChannelRelatedEvent Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderPayment implements ModelInterface, ArrayAccess
+class ChannelRelatedEvent implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderPayment';
+    protected static $openAPIModelName = 'ChannelRelatedEvent';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sellerId' => 'string',
-        'orderId' => 'string',
-        'paymentComplete' => 'bool',
-        'paidAt' => '\DateTime'
+        'channel' => 'string'
     ];
 
     /**
@@ -69,10 +66,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'sellerId' => null,
-        'orderId' => null,
-        'paymentComplete' => null,
-        'paidAt' => 'date-time'
+        'channel' => null
     ];
 
     /**
@@ -102,10 +96,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'sellerId' => 'sellerId',
-        'orderId' => 'orderId',
-        'paymentComplete' => 'paymentComplete',
-        'paidAt' => 'paidAt'
+        'channel' => 'channel'
     ];
 
     /**
@@ -114,10 +105,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'sellerId' => 'setSellerId',
-        'orderId' => 'setOrderId',
-        'paymentComplete' => 'setPaymentComplete',
-        'paidAt' => 'setPaidAt'
+        'channel' => 'setChannel'
     ];
 
     /**
@@ -126,10 +114,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'sellerId' => 'getSellerId',
-        'orderId' => 'getOrderId',
-        'paymentComplete' => 'getPaymentComplete',
-        'paidAt' => 'getPaidAt'
+        'channel' => 'getChannel'
     ];
 
     /**
@@ -192,10 +177,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['paymentComplete'] = isset($data['paymentComplete']) ? $data['paymentComplete'] : null;
-        $this->container['paidAt'] = isset($data['paidAt']) ? $data['paidAt'] : null;
+        $this->container['channel'] = isset($data['channel']) ? $data['channel'] : null;
     }
 
     /**
@@ -207,30 +189,13 @@ class OrderPayment implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['sellerId'] === null) {
-            $invalidProperties[] = "'sellerId' can't be null";
+        if ($this->container['channel'] === null) {
+            $invalidProperties[] = "'channel' can't be null";
         }
-        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
-            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
-        }
-
-        if ($this->container['orderId'] === null) {
-            $invalidProperties[] = "'orderId' can't be null";
-        }
-        if ((mb_strlen($this->container['orderId']) > 150)) {
-            $invalidProperties[] = "invalid value for 'orderId', the character length must be smaller than or equal to 150.";
+        if (!preg_match("/^\\w{5,15}$/", $this->container['channel'])) {
+            $invalidProperties[] = "invalid value for 'channel', must be conform to the pattern /^\\w{5,15}$/.";
         }
 
-        if ((mb_strlen($this->container['orderId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
-        }
-
-        if ($this->container['paymentComplete'] === null) {
-            $invalidProperties[] = "'paymentComplete' can't be null";
-        }
-        if ($this->container['paidAt'] === null) {
-            $invalidProperties[] = "'paidAt' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -247,109 +212,30 @@ class OrderPayment implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets sellerId
+     * Gets channel
      *
      * @return string
      */
-    public function getSellerId()
+    public function getChannel()
     {
-        return $this->container['sellerId'];
+        return $this->container['channel'];
     }
 
     /**
-     * Sets sellerId
+     * Sets channel
      *
-     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param string $channel This is the unqiue Channel name.
      *
      * @return $this
      */
-    public function setSellerId($sellerId)
+    public function setChannel($channel)
     {
 
-        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderPayment., must conform to the pattern /^\\w{1,50}$/.");
+        if ((!preg_match("/^\\w{5,15}$/", $channel))) {
+            throw new \InvalidArgumentException("invalid value for $channel when calling ChannelRelatedEvent., must conform to the pattern /^\\w{5,15}$/.");
         }
 
-        $this->container['sellerId'] = $sellerId;
-
-        return $this;
-    }
-
-    /**
-     * Gets orderId
-     *
-     * @return string
-     */
-    public function getOrderId()
-    {
-        return $this->container['orderId'];
-    }
-
-    /**
-     * Sets orderId
-     *
-     * @param string $orderId orderId
-     *
-     * @return $this
-     */
-    public function setOrderId($orderId)
-    {
-        if ((mb_strlen($orderId) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderPayment., must be smaller than or equal to 150.');
-        }
-        if ((mb_strlen($orderId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderPayment., must be bigger than or equal to 1.');
-        }
-
-        $this->container['orderId'] = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * Gets paymentComplete
-     *
-     * @return bool
-     */
-    public function getPaymentComplete()
-    {
-        return $this->container['paymentComplete'];
-    }
-
-    /**
-     * Sets paymentComplete
-     *
-     * @param bool $paymentComplete paymentComplete
-     *
-     * @return $this
-     */
-    public function setPaymentComplete($paymentComplete)
-    {
-        $this->container['paymentComplete'] = $paymentComplete;
-
-        return $this;
-    }
-
-    /**
-     * Gets paidAt
-     *
-     * @return \DateTime
-     */
-    public function getPaidAt()
-    {
-        return $this->container['paidAt'];
-    }
-
-    /**
-     * Sets paidAt
-     *
-     * @param \DateTime $paidAt paidAt
-     *
-     * @return $this
-     */
-    public function setPaidAt($paidAt)
-    {
-        $this->container['paidAt'] = $paidAt;
+        $this->container['channel'] = $channel;
 
         return $this;
     }

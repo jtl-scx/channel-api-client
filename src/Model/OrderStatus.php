@@ -211,6 +211,14 @@ class OrderStatus implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
+        if (!is_null($this->container['orderId']) && (mb_strlen($this->container['orderId']) > 150)) {
+            $invalidProperties[] = "invalid value for 'orderId', the character length must be smaller than or equal to 150.";
+        }
+
+        if (!is_null($this->container['orderId']) && (mb_strlen($this->container['orderId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -274,6 +282,13 @@ class OrderStatus implements ModelInterface, ArrayAccess
      */
     public function setOrderId($orderId)
     {
+        if (!is_null($orderId) && (mb_strlen($orderId) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderStatus., must be smaller than or equal to 150.');
+        }
+        if (!is_null($orderId) && (mb_strlen($orderId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderStatus., must be bigger than or equal to 1.');
+        }
+
         $this->container['orderId'] = $orderId;
 
         return $this;

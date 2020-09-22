@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventOrderConfirmed
+ * AcceptByChannel
  *
  * PHP version 5
  *
@@ -28,17 +28,19 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
+
+use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventOrderConfirmed Class Doc Comment
+ * AcceptByChannel Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventOrderConfirmed extends EventSellerRelated 
+class AcceptByChannel implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -47,7 +49,7 @@ class SellerEventOrderConfirmed extends EventSellerRelated
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventOrderConfirmed';
+    protected static $openAPIModelName = 'AcceptByChannel';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -55,7 +57,8 @@ class SellerEventOrderConfirmed extends EventSellerRelated
       * @var string[]
       */
     protected static $openAPITypes = [
-        'orderId' => 'string'
+        'sellerId' => 'string',
+        'orderCancellationRequestId' => 'string'
     ];
 
     /**
@@ -64,7 +67,8 @@ class SellerEventOrderConfirmed extends EventSellerRelated
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'orderId' => null
+        'sellerId' => null,
+        'orderCancellationRequestId' => 'uuid'
     ];
 
     /**
@@ -74,7 +78,7 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes + parent::openAPITypes();
+        return self::$openAPITypes;
     }
 
     /**
@@ -84,7 +88,7 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats + parent::openAPIFormats();
+        return self::$openAPIFormats;
     }
 
     /**
@@ -94,7 +98,8 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      * @var string[]
      */
     protected static $attributeMap = [
-        'orderId' => 'orderId'
+        'sellerId' => 'sellerId',
+        'orderCancellationRequestId' => 'orderCancellationRequestId'
     ];
 
     /**
@@ -103,7 +108,8 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      * @var string[]
      */
     protected static $setters = [
-        'orderId' => 'setOrderId'
+        'sellerId' => 'setSellerId',
+        'orderCancellationRequestId' => 'setOrderCancellationRequestId'
     ];
 
     /**
@@ -112,7 +118,8 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      * @var string[]
      */
     protected static $getters = [
-        'orderId' => 'getOrderId'
+        'sellerId' => 'getSellerId',
+        'orderCancellationRequestId' => 'getOrderCancellationRequestId'
     ];
 
     /**
@@ -123,7 +130,7 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -133,7 +140,7 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -143,7 +150,7 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -160,6 +167,12 @@ class SellerEventOrderConfirmed extends EventSellerRelated
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -169,9 +182,8 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
     }
 
     /**
@@ -181,8 +193,18 @@ class SellerEventOrderConfirmed extends EventSellerRelated
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
+        }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        }
+
+        if ($this->container['orderCancellationRequestId'] === null) {
+            $invalidProperties[] = "'orderCancellationRequestId' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -199,25 +221,54 @@ class SellerEventOrderConfirmed extends EventSellerRelated
 
 
     /**
-     * Gets orderId
+     * Gets sellerId
      *
-     * @return string|null
+     * @return string
      */
-    public function getOrderId()
+    public function getSellerId()
     {
-        return $this->container['orderId'];
+        return $this->container['sellerId'];
     }
 
     /**
-     * Sets orderId
+     * Sets sellerId
      *
-     * @param string|null $orderId orderId
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setSellerId($sellerId)
     {
-        $this->container['orderId'] = $orderId;
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling AcceptByChannel., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
+
+        return $this;
+    }
+
+    /**
+     * Gets orderCancellationRequestId
+     *
+     * @return string
+     */
+    public function getOrderCancellationRequestId()
+    {
+        return $this->container['orderCancellationRequestId'];
+    }
+
+    /**
+     * Sets orderCancellationRequestId
+     *
+     * @param string $orderCancellationRequestId A unique identifier for the order cancellation request. This ID should by used by Seller to identify the cancellation response from the Channel.
+     *
+     * @return $this
+     */
+    public function setOrderCancellationRequestId($orderCancellationRequestId)
+    {
+        $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
 
         return $this;
     }

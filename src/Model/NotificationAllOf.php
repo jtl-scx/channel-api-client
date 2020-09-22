@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderPayment
+ * NotificationAllOf
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderPayment Class Doc Comment
+ * NotificationAllOf Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderPayment implements ModelInterface, ArrayAccess
+class NotificationAllOf implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderPayment';
+    protected static $openAPIModelName = 'Notification_allOf';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,9 @@ class OrderPayment implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'sellerId' => 'string',
-        'orderId' => 'string',
-        'paymentComplete' => 'bool',
-        'paidAt' => '\DateTime'
+        'severity' => 'string',
+        'message' => 'string',
+        'reference' => '\JTL\SCX\Client\Channel\Model\ChannelNotificationReference'
     ];
 
     /**
@@ -70,9 +70,9 @@ class OrderPayment implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'sellerId' => null,
-        'orderId' => null,
-        'paymentComplete' => null,
-        'paidAt' => 'date-time'
+        'severity' => null,
+        'message' => null,
+        'reference' => null
     ];
 
     /**
@@ -103,9 +103,9 @@ class OrderPayment implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'sellerId' => 'sellerId',
-        'orderId' => 'orderId',
-        'paymentComplete' => 'paymentComplete',
-        'paidAt' => 'paidAt'
+        'severity' => 'severity',
+        'message' => 'message',
+        'reference' => 'reference'
     ];
 
     /**
@@ -115,9 +115,9 @@ class OrderPayment implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'sellerId' => 'setSellerId',
-        'orderId' => 'setOrderId',
-        'paymentComplete' => 'setPaymentComplete',
-        'paidAt' => 'setPaidAt'
+        'severity' => 'setSeverity',
+        'message' => 'setMessage',
+        'reference' => 'setReference'
     ];
 
     /**
@@ -127,9 +127,9 @@ class OrderPayment implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'sellerId' => 'getSellerId',
-        'orderId' => 'getOrderId',
-        'paymentComplete' => 'getPaymentComplete',
-        'paidAt' => 'getPaidAt'
+        'severity' => 'getSeverity',
+        'message' => 'getMessage',
+        'reference' => 'getReference'
     ];
 
     /**
@@ -173,8 +173,25 @@ class OrderPayment implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const SEVERITY_INFO = 'INFO';
+    const SEVERITY_WARNING = 'WARNING';
+    const SEVERITY_ERROR = 'ERROR';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getSeverityAllowableValues()
+    {
+        return [
+            self::SEVERITY_INFO,
+            self::SEVERITY_WARNING,
+            self::SEVERITY_ERROR,
+        ];
+    }
     
 
     /**
@@ -193,9 +210,9 @@ class OrderPayment implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['paymentComplete'] = isset($data['paymentComplete']) ? $data['paymentComplete'] : null;
-        $this->container['paidAt'] = isset($data['paidAt']) ? $data['paidAt'] : null;
+        $this->container['severity'] = isset($data['severity']) ? $data['severity'] : 'INFO';
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['reference'] = isset($data['reference']) ? $data['reference'] : null;
     }
 
     /**
@@ -207,30 +224,18 @@ class OrderPayment implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['sellerId'] === null) {
-            $invalidProperties[] = "'sellerId' can't be null";
-        }
-        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+        if (!is_null($this->container['sellerId']) && !preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
-        if ($this->container['orderId'] === null) {
-            $invalidProperties[] = "'orderId' can't be null";
-        }
-        if ((mb_strlen($this->container['orderId']) > 150)) {
-            $invalidProperties[] = "invalid value for 'orderId', the character length must be smaller than or equal to 150.";
-        }
-
-        if ((mb_strlen($this->container['orderId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
+        $allowedValues = $this->getSeverityAllowableValues();
+        if (!is_null($this->container['severity']) && !in_array($this->container['severity'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'severity', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
         }
 
-        if ($this->container['paymentComplete'] === null) {
-            $invalidProperties[] = "'paymentComplete' can't be null";
-        }
-        if ($this->container['paidAt'] === null) {
-            $invalidProperties[] = "'paidAt' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -249,7 +254,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
     /**
      * Gets sellerId
      *
-     * @return string
+     * @return string|null
      */
     public function getSellerId()
     {
@@ -259,15 +264,15 @@ class OrderPayment implements ModelInterface, ArrayAccess
     /**
      * Sets sellerId
      *
-     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param string|null $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
     public function setSellerId($sellerId)
     {
 
-        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderPayment., must conform to the pattern /^\\w{1,50}$/.");
+        if (!is_null($sellerId) && (!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling NotificationAllOf., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -276,80 +281,82 @@ class OrderPayment implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets orderId
+     * Gets severity
      *
-     * @return string
+     * @return string|null
      */
-    public function getOrderId()
+    public function getSeverity()
     {
-        return $this->container['orderId'];
+        return $this->container['severity'];
     }
 
     /**
-     * Sets orderId
+     * Sets severity
      *
-     * @param string $orderId orderId
+     * @param string|null $severity severity
      *
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setSeverity($severity)
     {
-        if ((mb_strlen($orderId) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderPayment., must be smaller than or equal to 150.');
+        $allowedValues = $this->getSeverityAllowableValues();
+        if (!is_null($severity) && !in_array($severity, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'severity', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
         }
-        if ((mb_strlen($orderId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderPayment., must be bigger than or equal to 1.');
-        }
-
-        $this->container['orderId'] = $orderId;
+        $this->container['severity'] = $severity;
 
         return $this;
     }
 
     /**
-     * Gets paymentComplete
+     * Gets message
      *
-     * @return bool
+     * @return string|null
      */
-    public function getPaymentComplete()
+    public function getMessage()
     {
-        return $this->container['paymentComplete'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets paymentComplete
+     * Sets message
      *
-     * @param bool $paymentComplete paymentComplete
+     * @param string|null $message message
      *
      * @return $this
      */
-    public function setPaymentComplete($paymentComplete)
+    public function setMessage($message)
     {
-        $this->container['paymentComplete'] = $paymentComplete;
+        $this->container['message'] = $message;
 
         return $this;
     }
 
     /**
-     * Gets paidAt
+     * Gets reference
      *
-     * @return \DateTime
+     * @return \JTL\SCX\Client\Channel\Model\ChannelNotificationReference|null
      */
-    public function getPaidAt()
+    public function getReference()
     {
-        return $this->container['paidAt'];
+        return $this->container['reference'];
     }
 
     /**
-     * Sets paidAt
+     * Sets reference
      *
-     * @param \DateTime $paidAt paidAt
+     * @param \JTL\SCX\Client\Channel\Model\ChannelNotificationReference|null $reference reference
      *
      * @return $this
      */
-    public function setPaidAt($paidAt)
+    public function setReference($reference)
     {
-        $this->container['paidAt'] = $paidAt;
+        $this->container['reference'] = $reference;
 
         return $this;
     }

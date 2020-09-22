@@ -57,8 +57,7 @@ class SupportedCarrierList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'carrierId' => 'string',
-        'displayName' => 'string'
+        
     ];
 
     /**
@@ -67,8 +66,7 @@ class SupportedCarrierList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'carrierId' => null,
-        'displayName' => null
+        
     ];
 
     /**
@@ -98,8 +96,7 @@ class SupportedCarrierList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'carrierId' => 'carrierId',
-        'displayName' => 'displayName'
+        
     ];
 
     /**
@@ -108,8 +105,7 @@ class SupportedCarrierList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'carrierId' => 'setCarrierId',
-        'displayName' => 'setDisplayName'
+        
     ];
 
     /**
@@ -118,8 +114,7 @@ class SupportedCarrierList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'carrierId' => 'getCarrierId',
-        'displayName' => 'getDisplayName'
+        
     ];
 
     /**
@@ -182,8 +177,6 @@ class SupportedCarrierList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['carrierId'] = isset($data['carrierId']) ? $data['carrierId'] : null;
-        $this->container['displayName'] = isset($data['displayName']) ? $data['displayName'] : null;
     }
 
     /**
@@ -193,22 +186,7 @@ class SupportedCarrierList implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if ($this->container['carrierId'] === null) {
-            $invalidProperties[] = "'carrierId' can't be null";
-        }
-        if ((mb_strlen($this->container['carrierId']) > 100)) {
-            $invalidProperties[] = "invalid value for 'carrierId', the character length must be smaller than or equal to 100.";
-        }
-
-        if ((mb_strlen($this->container['carrierId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'carrierId', the character length must be bigger than or equal to 1.";
-        }
-
-        if (!is_null($this->container['displayName']) && (mb_strlen($this->container['displayName']) > 150)) {
-            $invalidProperties[] = "invalid value for 'displayName', the character length must be smaller than or equal to 150.";
-        }
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -224,65 +202,6 @@ class SupportedCarrierList implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets carrierId
-     *
-     * @return string
-     */
-    public function getCarrierId()
-    {
-        return $this->container['carrierId'];
-    }
-
-    /**
-     * Sets carrierId
-     *
-     * @param string $carrierId carrierId
-     *
-     * @return $this
-     */
-    public function setCarrierId($carrierId)
-    {
-        if ((mb_strlen($carrierId) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $carrierId when calling SupportedCarrierList., must be smaller than or equal to 100.');
-        }
-        if ((mb_strlen($carrierId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $carrierId when calling SupportedCarrierList., must be bigger than or equal to 1.');
-        }
-
-        $this->container['carrierId'] = $carrierId;
-
-        return $this;
-    }
-
-    /**
-     * Gets displayName
-     *
-     * @return string|null
-     */
-    public function getDisplayName()
-    {
-        return $this->container['displayName'];
-    }
-
-    /**
-     * Sets displayName
-     *
-     * @param string|null $displayName displayName
-     *
-     * @return $this
-     */
-    public function setDisplayName($displayName)
-    {
-        if (!is_null($displayName) && (mb_strlen($displayName) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling SupportedCarrierList., must be smaller than or equal to 150.');
-        }
-
-        $this->container['displayName'] = $displayName;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

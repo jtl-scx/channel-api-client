@@ -202,8 +202,8 @@ class OrderShippingPositionItem implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'orderItemId', the character length must be smaller than or equal to 50.";
         }
 
-        if (($this->container['orderItemId'] < 1)) {
-            $invalidProperties[] = "invalid value for 'orderItemId', must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['orderItemId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'orderItemId', the character length must be bigger than or equal to 1.";
         }
 
         if ($this->container['quantity'] === null) {
@@ -246,8 +246,8 @@ class OrderShippingPositionItem implements ModelInterface, ArrayAccess
         if ((mb_strlen($orderItemId) > 50)) {
             throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderShippingPositionItem., must be smaller than or equal to 50.');
         }
-        if (($orderItemId < 1)) {
-            throw new \InvalidArgumentException('invalid value for $orderItemId when calling OrderShippingPositionItem., must be bigger than or equal to 1.');
+        if ((mb_strlen($orderItemId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderShippingPositionItem., must be bigger than or equal to 1.');
         }
 
         $this->container['orderItemId'] = $orderItemId;

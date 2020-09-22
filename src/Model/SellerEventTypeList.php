@@ -45,17 +45,15 @@ class SellerEventTypeList
      */
     const SYSTEMTEST = 'System:Test';
     const SYSTEMNOTIFICATION = 'System:Notification';
-    const SELLERORDER_CONFIRMED = 'Seller:Order.Confirmed';
     const SELLERORDER_SHIPPING = 'Seller:Order.Shipping';
     const SELLERORDER_PAYMENT = 'Seller:Order.Payment';
-    const SELLERORDER_CANCELLED = 'Seller:Order.Cancelled';
+    const SELLERORDER_CANCELLATION_REQUEST = 'Seller:Order.Cancellation.Request';
     const SELLEROFFER_NEW = 'Seller:Offer.New';
     const SELLEROFFER_UPDATE = 'Seller:Offer.Update';
     const SELLEROFFER_END = 'Seller:Offer.End';
     const SELLEROFFER_STOCK_UPDATE = 'Seller:Offer.StockUpdate';
     const SELLEROFFER_PRICE_UPDATE = 'Seller:Offer.PriceUpdate';
     const SELLERREPORT_REQUEST = 'Seller:Report.Request';
-    const SELLERCHANNEL_UNLINKED = 'Seller:Channel.Unlinked';
     
     /**
      * Gets allowable values of the enum
@@ -66,17 +64,15 @@ class SellerEventTypeList
         return [
             self::SYSTEMTEST,
             self::SYSTEMNOTIFICATION,
-            self::SELLERORDER_CONFIRMED,
             self::SELLERORDER_SHIPPING,
             self::SELLERORDER_PAYMENT,
-            self::SELLERORDER_CANCELLED,
+            self::SELLERORDER_CANCELLATION_REQUEST,
             self::SELLEROFFER_NEW,
             self::SELLEROFFER_UPDATE,
             self::SELLEROFFER_END,
             self::SELLEROFFER_STOCK_UPDATE,
             self::SELLEROFFER_PRICE_UPDATE,
             self::SELLERREPORT_REQUEST,
-            self::SELLERCHANNEL_UNLINKED,
         ];
     }
 }
