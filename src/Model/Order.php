@@ -291,6 +291,14 @@ class Order implements ModelInterface, ArrayAccess
         if ($this->container['orderId'] === null) {
             $invalidProperties[] = "'orderId' can't be null";
         }
+        if ((mb_strlen($this->container['orderId']) > 150)) {
+            $invalidProperties[] = "invalid value for 'orderId', the character length must be smaller than or equal to 150.";
+        }
+
+        if ((mb_strlen($this->container['orderId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['purchasedAt'] === null) {
             $invalidProperties[] = "'purchasedAt' can't be null";
         }
@@ -475,6 +483,13 @@ class Order implements ModelInterface, ArrayAccess
      */
     public function setOrderId($orderId)
     {
+        if ((mb_strlen($orderId) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $orderId when calling Order., must be smaller than or equal to 150.');
+        }
+        if ((mb_strlen($orderId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $orderId when calling Order., must be bigger than or equal to 1.');
+        }
+
         $this->container['orderId'] = $orderId;
 
         return $this;

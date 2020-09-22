@@ -60,7 +60,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
         'id' => 'string',
         'createdAt' => '\DateTime',
         'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmedSellerEventChannelUnlinked'
+        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventOrderCancellationRequest'
     ];
 
     /**
@@ -309,7 +309,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     /**
      * Gets event
      *
-     * @return OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmedSellerEventChannelUnlinked
+     * @return OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventOrderCancellationRequest
      */
     public function getEvent()
     {
@@ -319,7 +319,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     /**
      * Sets event
      *
-     * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSellerEventOrderCancelledSystemEventNotificationSellerEventOrderConfirmedSellerEventChannelUnlinked $event event
+     * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventOrderCancellationRequest $event event
      *
      * @return $this
      */

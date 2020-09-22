@@ -27,6 +27,7 @@ class CreatePaymentRulesRequest extends AbstractScxApiRequest
         return $this->paymentRules;
     }
 
+
     public function getUrl(): string
     {
         return '/channel/payment-rules';

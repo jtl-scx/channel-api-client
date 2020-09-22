@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderPayment
+ * CancellationAcceptByChannel
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderPayment Class Doc Comment
+ * CancellationAcceptByChannel Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderPayment implements ModelInterface, ArrayAccess
+class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderPayment';
+    protected static $openAPIModelName = 'CancellationAcceptByChannel';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -58,9 +58,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
       */
     protected static $openAPITypes = [
         'sellerId' => 'string',
-        'orderId' => 'string',
-        'paymentComplete' => 'bool',
-        'paidAt' => '\DateTime'
+        'orderCancellationRequestId' => 'string'
     ];
 
     /**
@@ -70,9 +68,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
       */
     protected static $openAPIFormats = [
         'sellerId' => null,
-        'orderId' => null,
-        'paymentComplete' => null,
-        'paidAt' => 'date-time'
+        'orderCancellationRequestId' => 'uuid'
     ];
 
     /**
@@ -103,9 +99,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
      */
     protected static $attributeMap = [
         'sellerId' => 'sellerId',
-        'orderId' => 'orderId',
-        'paymentComplete' => 'paymentComplete',
-        'paidAt' => 'paidAt'
+        'orderCancellationRequestId' => 'orderCancellationRequestId'
     ];
 
     /**
@@ -115,9 +109,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
      */
     protected static $setters = [
         'sellerId' => 'setSellerId',
-        'orderId' => 'setOrderId',
-        'paymentComplete' => 'setPaymentComplete',
-        'paidAt' => 'setPaidAt'
+        'orderCancellationRequestId' => 'setOrderCancellationRequestId'
     ];
 
     /**
@@ -127,9 +119,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
      */
     protected static $getters = [
         'sellerId' => 'getSellerId',
-        'orderId' => 'getOrderId',
-        'paymentComplete' => 'getPaymentComplete',
-        'paidAt' => 'getPaidAt'
+        'orderCancellationRequestId' => 'getOrderCancellationRequestId'
     ];
 
     /**
@@ -193,9 +183,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
     public function __construct(array $data = null)
     {
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['paymentComplete'] = isset($data['paymentComplete']) ? $data['paymentComplete'] : null;
-        $this->container['paidAt'] = isset($data['paidAt']) ? $data['paidAt'] : null;
+        $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
     }
 
     /**
@@ -214,22 +202,8 @@ class OrderPayment implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
-        if ($this->container['orderId'] === null) {
-            $invalidProperties[] = "'orderId' can't be null";
-        }
-        if ((mb_strlen($this->container['orderId']) > 150)) {
-            $invalidProperties[] = "invalid value for 'orderId', the character length must be smaller than or equal to 150.";
-        }
-
-        if ((mb_strlen($this->container['orderId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
-        }
-
-        if ($this->container['paymentComplete'] === null) {
-            $invalidProperties[] = "'paymentComplete' can't be null";
-        }
-        if ($this->container['paidAt'] === null) {
-            $invalidProperties[] = "'paidAt' can't be null";
+        if ($this->container['orderCancellationRequestId'] === null) {
+            $invalidProperties[] = "'orderCancellationRequestId' can't be null";
         }
         return $invalidProperties;
     }
@@ -267,7 +241,7 @@ class OrderPayment implements ModelInterface, ArrayAccess
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderPayment., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling CancellationAcceptByChannel., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -276,80 +250,25 @@ class OrderPayment implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets orderId
+     * Gets orderCancellationRequestId
      *
      * @return string
      */
-    public function getOrderId()
+    public function getOrderCancellationRequestId()
     {
-        return $this->container['orderId'];
+        return $this->container['orderCancellationRequestId'];
     }
 
     /**
-     * Sets orderId
+     * Sets orderCancellationRequestId
      *
-     * @param string $orderId orderId
+     * @param string $orderCancellationRequestId A unique identifier for the order cancellation request. This ID should by used by Seller to identify the cancellation response from the Channel.
      *
      * @return $this
      */
-    public function setOrderId($orderId)
+    public function setOrderCancellationRequestId($orderCancellationRequestId)
     {
-        if ((mb_strlen($orderId) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderPayment., must be smaller than or equal to 150.');
-        }
-        if ((mb_strlen($orderId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderPayment., must be bigger than or equal to 1.');
-        }
-
-        $this->container['orderId'] = $orderId;
-
-        return $this;
-    }
-
-    /**
-     * Gets paymentComplete
-     *
-     * @return bool
-     */
-    public function getPaymentComplete()
-    {
-        return $this->container['paymentComplete'];
-    }
-
-    /**
-     * Sets paymentComplete
-     *
-     * @param bool $paymentComplete paymentComplete
-     *
-     * @return $this
-     */
-    public function setPaymentComplete($paymentComplete)
-    {
-        $this->container['paymentComplete'] = $paymentComplete;
-
-        return $this;
-    }
-
-    /**
-     * Gets paidAt
-     *
-     * @return \DateTime
-     */
-    public function getPaidAt()
-    {
-        return $this->container['paidAt'];
-    }
-
-    /**
-     * Sets paidAt
-     *
-     * @param \DateTime $paidAt paidAt
-     *
-     * @return $this
-     */
-    public function setPaidAt($paidAt)
-    {
-        $this->container['paidAt'] = $paidAt;
+        $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
 
         return $this;
     }
