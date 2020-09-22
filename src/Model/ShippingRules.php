@@ -57,7 +57,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'supportedCarrierList' => '\JTL\SCX\Client\Channel\Model\SupportedCarrierList'
+        'supportedCarrierList' => '\JTL\SCX\Client\Channel\Model\SupportedCarrier[]'
     ];
 
     /**
@@ -207,7 +207,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
     /**
      * Gets supportedCarrierList
      *
-     * @return \JTL\SCX\Client\Channel\Model\SupportedCarrierList|null
+     * @return \JTL\SCX\Client\Channel\Model\SupportedCarrier[]|null
      */
     public function getSupportedCarrierList()
     {
@@ -217,7 +217,7 @@ class ShippingRules implements ModelInterface, ArrayAccess
     /**
      * Sets supportedCarrierList
      *
-     * @param \JTL\SCX\Client\Channel\Model\SupportedCarrierList|null $supportedCarrierList supportedCarrierList
+     * @param \JTL\SCX\Client\Channel\Model\SupportedCarrier[]|null $supportedCarrierList supportedCarrierList
      *
      * @return $this
      */

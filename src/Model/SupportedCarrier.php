@@ -1,6 +1,6 @@
 <?php
 /**
- * SupportedPaymentMethodList
+ * SupportedCarrier
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SupportedPaymentMethodList Class Doc Comment
+ * SupportedCarrier Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
+class SupportedCarrier implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SupportedPaymentMethodList';
+    protected static $openAPIModelName = 'SupportedCarrier';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,7 +57,7 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethodId' => 'string',
+        'carrierId' => 'string',
         'displayName' => 'string'
     ];
 
@@ -67,7 +67,7 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'paymentMethodId' => null,
+        'carrierId' => null,
         'displayName' => null
     ];
 
@@ -98,7 +98,7 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethodId' => 'paymentMethodId',
+        'carrierId' => 'carrierId',
         'displayName' => 'displayName'
     ];
 
@@ -108,7 +108,7 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethodId' => 'setPaymentMethodId',
+        'carrierId' => 'setCarrierId',
         'displayName' => 'setDisplayName'
     ];
 
@@ -118,7 +118,7 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethodId' => 'getPaymentMethodId',
+        'carrierId' => 'getCarrierId',
         'displayName' => 'getDisplayName'
     ];
 
@@ -182,7 +182,7 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['paymentMethodId'] = isset($data['paymentMethodId']) ? $data['paymentMethodId'] : null;
+        $this->container['carrierId'] = isset($data['carrierId']) ? $data['carrierId'] : null;
         $this->container['displayName'] = isset($data['displayName']) ? $data['displayName'] : null;
     }
 
@@ -195,15 +195,15 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
+        if ($this->container['carrierId'] === null) {
+            $invalidProperties[] = "'carrierId' can't be null";
         }
-        if ((mb_strlen($this->container['paymentMethodId']) > 100)) {
-            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be smaller than or equal to 100.";
+        if ((mb_strlen($this->container['carrierId']) > 100)) {
+            $invalidProperties[] = "invalid value for 'carrierId', the character length must be smaller than or equal to 100.";
         }
 
-        if ((mb_strlen($this->container['paymentMethodId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['carrierId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'carrierId', the character length must be bigger than or equal to 1.";
         }
 
         if (!is_null($this->container['displayName']) && (mb_strlen($this->container['displayName']) > 150)) {
@@ -226,32 +226,32 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets paymentMethodId
+     * Gets carrierId
      *
      * @return string
      */
-    public function getPaymentMethodId()
+    public function getCarrierId()
     {
-        return $this->container['paymentMethodId'];
+        return $this->container['carrierId'];
     }
 
     /**
-     * Sets paymentMethodId
+     * Sets carrierId
      *
-     * @param string $paymentMethodId paymentMethodId
+     * @param string $carrierId carrierId
      *
      * @return $this
      */
-    public function setPaymentMethodId($paymentMethodId)
+    public function setCarrierId($carrierId)
     {
-        if ((mb_strlen($paymentMethodId) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethodList., must be smaller than or equal to 100.');
+        if ((mb_strlen($carrierId) > 100)) {
+            throw new \InvalidArgumentException('invalid length for $carrierId when calling SupportedCarrier., must be smaller than or equal to 100.');
         }
-        if ((mb_strlen($paymentMethodId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethodList., must be bigger than or equal to 1.');
+        if ((mb_strlen($carrierId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $carrierId when calling SupportedCarrier., must be bigger than or equal to 1.');
         }
 
-        $this->container['paymentMethodId'] = $paymentMethodId;
+        $this->container['carrierId'] = $carrierId;
 
         return $this;
     }
@@ -276,7 +276,7 @@ class SupportedPaymentMethodList implements ModelInterface, ArrayAccess
     public function setDisplayName($displayName)
     {
         if (!is_null($displayName) && (mb_strlen($displayName) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling SupportedPaymentMethodList., must be smaller than or equal to 150.');
+            throw new \InvalidArgumentException('invalid length for $displayName when calling SupportedCarrier., must be smaller than or equal to 150.');
         }
 
         $this->container['displayName'] = $displayName;
