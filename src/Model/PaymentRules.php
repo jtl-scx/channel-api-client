@@ -57,7 +57,7 @@ class PaymentRules implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'supportedPaymentMethodList' => '\JTL\SCX\Client\Channel\Model\SupportedPaymentMethodList[]'
+        'supportedPaymentMethodList' => '\JTL\SCX\Client\Channel\Model\SupportedPaymentMethod[]'
     ];
 
     /**
@@ -210,7 +210,7 @@ class PaymentRules implements ModelInterface, ArrayAccess
     /**
      * Gets supportedPaymentMethodList
      *
-     * @return \JTL\SCX\Client\Channel\Model\SupportedPaymentMethodList[]
+     * @return \JTL\SCX\Client\Channel\Model\SupportedPaymentMethod[]
      */
     public function getSupportedPaymentMethodList()
     {
@@ -220,7 +220,7 @@ class PaymentRules implements ModelInterface, ArrayAccess
     /**
      * Sets supportedPaymentMethodList
      *
-     * @param \JTL\SCX\Client\Channel\Model\SupportedPaymentMethodList[] $supportedPaymentMethodList supportedPaymentMethodList
+     * @param \JTL\SCX\Client\Channel\Model\SupportedPaymentMethod[] $supportedPaymentMethodList supportedPaymentMethodList
      *
      * @return $this
      */
