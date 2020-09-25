@@ -14,8 +14,6 @@ use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
-use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
-use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
@@ -27,8 +25,10 @@ use MyCLabs\Enum\Enum;
  * Class EventType
  * @method static EventType SystemNotification()
  * @method static EventType SellerEventTest()
+ * @method static EventType SellerOrderConfirmed()
  * @method static EventType SellerOrderShipping()
  * @method static EventType SellerOrderPayment()
+ * @method static EventType SellerOrderCancelled()
  * @method static EventType SellerOfferNew()
  * @method static EventType SellerOfferUpdate()
  * @method static EventType SellerOfferEnd()
