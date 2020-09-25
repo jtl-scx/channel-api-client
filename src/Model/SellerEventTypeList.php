@@ -54,6 +54,7 @@ class SellerEventTypeList
     const SELLEROFFER_STOCK_UPDATE = 'Seller:Offer.StockUpdate';
     const SELLEROFFER_PRICE_UPDATE = 'Seller:Offer.PriceUpdate';
     const SELLERREPORT_REQUEST = 'Seller:Report.Request';
+    const SELLERCHANNEL_UNLINKED = 'Seller:Channel.Unlinked';
     
     /**
      * Gets allowable values of the enum
@@ -73,6 +74,7 @@ class SellerEventTypeList
             self::SELLEROFFER_STOCK_UPDATE,
             self::SELLEROFFER_PRICE_UPDATE,
             self::SELLERREPORT_REQUEST,
+            self::SELLERCHANNEL_UNLINKED,
         ];
     }
 }

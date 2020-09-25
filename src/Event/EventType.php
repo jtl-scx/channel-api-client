@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Event;
 
+use JTL\SCX\Client\Channel\Model\SellerEventChannelUnlinked;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate;
@@ -26,16 +27,15 @@ use MyCLabs\Enum\Enum;
  * Class EventType
  * @method static EventType SystemNotification()
  * @method static EventType SellerEventTest()
- * @method static EventType SellerOrderConfirmed()
  * @method static EventType SellerOrderShipping()
  * @method static EventType SellerOrderPayment()
- * @method static EventType SellerOrderCancelled()
  * @method static EventType SellerOfferNew()
  * @method static EventType SellerOfferUpdate()
  * @method static EventType SellerOfferEnd()
  * @method static EventType SellerOfferStockUpdate()
  * @method static EventType SellerOfferPriceUpdate()
  * @method static EventType SellerReportRequest()
+ * @method static EventType SellerChannelUnlinked()
  */
 class EventType extends Enum
 {
@@ -51,6 +51,7 @@ class EventType extends Enum
     public const SellerOfferStockUpdate = 'Seller:Offer.StockUpdate';
     public const SellerOfferPriceUpdate = 'Seller:Offer.PriceUpdate';
     public const SellerReportRequest = 'Seller:Report.Request';
+    public const SellerChannelUnlinked = 'Seller:Channel.Unlinked';
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -72,14 +73,10 @@ class EventType extends Enum
                 return SellerEventTest::class;
             case $this::SystemNotification():
                 return SystemEventNotification::class;
-            case $this::SellerOrderConfirmed():
-                return SellerEventOrderConfirmed::class;
             case $this::SellerOrderShipping():
                 return SellerEventOrderShipping::class;
             case $this::SellerOrderPayment():
                 return SellerEventOrderPayment::class;
-            case $this::SellerOrderCancelled():
-                return SellerEventOrderCancelled::class;
             case $this::SellerOfferNew():
                 return SellerEventOfferNew::class;
             case $this::SellerOfferUpdate():
@@ -92,6 +89,8 @@ class EventType extends Enum
                 return SellerEventOfferPriceUpdate::class;
             case $this::SellerReportRequest():
                 return SellerEventReportRequest::class;
+            case $this::SellerChannelUnlinked():
+                return SellerEventChannelUnlinked::class;
         }
 
         return \stdClass::class;

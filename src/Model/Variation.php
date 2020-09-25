@@ -59,10 +59,16 @@ class Variation implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'offerId' => 'int',
         'sku' => 'string',
+        'gtin' => 'string',
         'variationDimensionList' => '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]',
         'quantity' => 'string',
         'priceList' => '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
-        'pictureList' => 'string[]'
+        'taxPercent' => 'string',
+        'pictureList' => 'string[]',
+        'title' => 'string',
+        'subTitle' => 'string',
+        'description' => 'string',
+        'channelAttributeList' => '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]'
     ];
 
     /**
@@ -73,10 +79,16 @@ class Variation implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'offerId' => 'int64',
         'sku' => null,
+        'gtin' => null,
         'variationDimensionList' => null,
         'quantity' => null,
         'priceList' => null,
-        'pictureList' => null
+        'taxPercent' => null,
+        'pictureList' => null,
+        'title' => null,
+        'subTitle' => null,
+        'description' => null,
+        'channelAttributeList' => null
     ];
 
     /**
@@ -108,10 +120,16 @@ class Variation implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'offerId' => 'offerId',
         'sku' => 'sku',
+        'gtin' => 'gtin',
         'variationDimensionList' => 'variationDimensionList',
         'quantity' => 'quantity',
         'priceList' => 'priceList',
-        'pictureList' => 'pictureList'
+        'taxPercent' => 'taxPercent',
+        'pictureList' => 'pictureList',
+        'title' => 'title',
+        'subTitle' => 'subTitle',
+        'description' => 'description',
+        'channelAttributeList' => 'channelAttributeList'
     ];
 
     /**
@@ -122,10 +140,16 @@ class Variation implements ModelInterface, ArrayAccess
     protected static $setters = [
         'offerId' => 'setOfferId',
         'sku' => 'setSku',
+        'gtin' => 'setGtin',
         'variationDimensionList' => 'setVariationDimensionList',
         'quantity' => 'setQuantity',
         'priceList' => 'setPriceList',
-        'pictureList' => 'setPictureList'
+        'taxPercent' => 'setTaxPercent',
+        'pictureList' => 'setPictureList',
+        'title' => 'setTitle',
+        'subTitle' => 'setSubTitle',
+        'description' => 'setDescription',
+        'channelAttributeList' => 'setChannelAttributeList'
     ];
 
     /**
@@ -136,10 +160,16 @@ class Variation implements ModelInterface, ArrayAccess
     protected static $getters = [
         'offerId' => 'getOfferId',
         'sku' => 'getSku',
+        'gtin' => 'getGtin',
         'variationDimensionList' => 'getVariationDimensionList',
         'quantity' => 'getQuantity',
         'priceList' => 'getPriceList',
-        'pictureList' => 'getPictureList'
+        'taxPercent' => 'getTaxPercent',
+        'pictureList' => 'getPictureList',
+        'title' => 'getTitle',
+        'subTitle' => 'getSubTitle',
+        'description' => 'getDescription',
+        'channelAttributeList' => 'getChannelAttributeList'
     ];
 
     /**
@@ -204,10 +234,16 @@ class Variation implements ModelInterface, ArrayAccess
     {
         $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
         $this->container['sku'] = isset($data['sku']) ? $data['sku'] : null;
+        $this->container['gtin'] = isset($data['gtin']) ? $data['gtin'] : null;
         $this->container['variationDimensionList'] = isset($data['variationDimensionList']) ? $data['variationDimensionList'] : null;
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
         $this->container['priceList'] = isset($data['priceList']) ? $data['priceList'] : null;
+        $this->container['taxPercent'] = isset($data['taxPercent']) ? $data['taxPercent'] : null;
         $this->container['pictureList'] = isset($data['pictureList']) ? $data['pictureList'] : null;
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        $this->container['subTitle'] = isset($data['subTitle']) ? $data['subTitle'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['channelAttributeList'] = isset($data['channelAttributeList']) ? $data['channelAttributeList'] : null;
     }
 
     /**
@@ -229,8 +265,8 @@ class Variation implements ModelInterface, ArrayAccess
         if ($this->container['sku'] === null) {
             $invalidProperties[] = "'sku' can't be null";
         }
-        if ((mb_strlen($this->container['sku']) > 100)) {
-            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 100.";
+        if ((mb_strlen($this->container['sku']) > 150)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 150.";
         }
 
         if ((mb_strlen($this->container['sku']) < 1)) {
@@ -309,14 +345,38 @@ class Variation implements ModelInterface, ArrayAccess
      */
     public function setSku($sku)
     {
-        if ((mb_strlen($sku) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $sku when calling Variation., must be smaller than or equal to 100.');
+        if ((mb_strlen($sku) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling Variation., must be smaller than or equal to 150.');
         }
         if ((mb_strlen($sku) < 1)) {
             throw new \InvalidArgumentException('invalid length for $sku when calling Variation., must be bigger than or equal to 1.');
         }
 
         $this->container['sku'] = $sku;
+
+        return $this;
+    }
+
+    /**
+     * Gets gtin
+     *
+     * @return string|null
+     */
+    public function getGtin()
+    {
+        return $this->container['gtin'];
+    }
+
+    /**
+     * Sets gtin
+     *
+     * @param string|null $gtin gtin
+     *
+     * @return $this
+     */
+    public function setGtin($gtin)
+    {
+        $this->container['gtin'] = $gtin;
 
         return $this;
     }
@@ -394,6 +454,30 @@ class Variation implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets taxPercent
+     *
+     * @return string|null
+     */
+    public function getTaxPercent()
+    {
+        return $this->container['taxPercent'];
+    }
+
+    /**
+     * Sets taxPercent
+     *
+     * @param string|null $taxPercent taxPercent
+     *
+     * @return $this
+     */
+    public function setTaxPercent($taxPercent)
+    {
+        $this->container['taxPercent'] = $taxPercent;
+
+        return $this;
+    }
+
+    /**
      * Gets pictureList
      *
      * @return string[]|null
@@ -413,6 +497,102 @@ class Variation implements ModelInterface, ArrayAccess
     public function setPictureList($pictureList)
     {
         $this->container['pictureList'] = $pictureList;
+
+        return $this;
+    }
+
+    /**
+     * Gets title
+     *
+     * @return string|null
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
+
+    /**
+     * Sets title
+     *
+     * @param string|null $title Title used for this variation listing on SalesChannel. If no title is provided, the SalesChannelOffer title should be used.
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets subTitle
+     *
+     * @return string|null
+     */
+    public function getSubTitle()
+    {
+        return $this->container['subTitle'];
+    }
+
+    /**
+     * Sets subTitle
+     *
+     * @param string|null $subTitle Subtitle used for this variation listing on SalesChannel. If no subtitle is provided, the SalesChannelOffer Subtitel should be used.
+     *
+     * @return $this
+     */
+    public function setSubTitle($subTitle)
+    {
+        $this->container['subTitle'] = $subTitle;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string|null $description Description used for this variation listing on SalesChannel. If no description is provided, the SalesChannelOffer description should be used.
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets channelAttributeList
+     *
+     * @return \JTL\SCX\Client\Channel\Model\ChannelAttribute[]|null
+     */
+    public function getChannelAttributeList()
+    {
+        return $this->container['channelAttributeList'];
+    }
+
+    /**
+     * Sets channelAttributeList
+     *
+     * @param \JTL\SCX\Client\Channel\Model\ChannelAttribute[]|null $channelAttributeList A List of SalesChannel related attributes. Typicaly all required attributes need to be passed through this objects. Required (and also optinal) attributes can be requested using the /meta Data API endpoints.  A Channel should merge the SalesChannelOffer channelAttributeList with this Attribute List. This List extends the Attributes from the SalesChannelOffer channelAttributeList property and should be overwrite exisiting Attributes.
+     *
+     * @return $this
+     */
+    public function setChannelAttributeList($channelAttributeList)
+    {
+        $this->container['channelAttributeList'] = $channelAttributeList;
 
         return $this;
     }

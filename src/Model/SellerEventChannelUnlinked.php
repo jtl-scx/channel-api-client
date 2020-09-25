@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventListEventList
+ * SellerEventChannelUnlinked
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventListEventList Class Doc Comment
+ * SellerEventChannelUnlinked Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventListEventList implements ModelInterface, ArrayAccess
+class SellerEventChannelUnlinked implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventList_eventList';
+    protected static $openAPIModelName = 'SellerEventChannelUnlinked';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,9 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'createdAt' => '\DateTime',
-        'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventOrderCancellationRequest'
+        'sellerId' => 'string',
+        'reason' => 'string',
+        'unlinkedAt' => '\DateTime'
     ];
 
     /**
@@ -69,10 +68,9 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'createdAt' => 'date-time',
-        'type' => null,
-        'event' => null
+        'sellerId' => null,
+        'reason' => null,
+        'unlinkedAt' => 'date-time'
     ];
 
     /**
@@ -102,10 +100,9 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'createdAt' => 'createdAt',
-        'type' => 'type',
-        'event' => 'event'
+        'sellerId' => 'sellerId',
+        'reason' => 'reason',
+        'unlinkedAt' => 'unlinkedAt'
     ];
 
     /**
@@ -114,10 +111,9 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'createdAt' => 'setCreatedAt',
-        'type' => 'setType',
-        'event' => 'setEvent'
+        'sellerId' => 'setSellerId',
+        'reason' => 'setReason',
+        'unlinkedAt' => 'setUnlinkedAt'
     ];
 
     /**
@@ -126,10 +122,9 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'createdAt' => 'getCreatedAt',
-        'type' => 'getType',
-        'event' => 'getEvent'
+        'sellerId' => 'getSellerId',
+        'reason' => 'getReason',
+        'unlinkedAt' => 'getUnlinkedAt'
     ];
 
     /**
@@ -192,10 +187,9 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['createdAt'] = isset($data['createdAt']) ? $data['createdAt'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['event'] = isset($data['event']) ? $data['event'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
+        $this->container['unlinkedAt'] = isset($data['unlinkedAt']) ? $data['unlinkedAt'] : null;
     }
 
     /**
@@ -207,17 +201,18 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
         }
-        if ($this->container['createdAt'] === null) {
-            $invalidProperties[] = "'createdAt' can't be null";
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
+
+        if ($this->container['reason'] === null) {
+            $invalidProperties[] = "'reason' can't be null";
         }
-        if ($this->container['event'] === null) {
-            $invalidProperties[] = "'event' can't be null";
+        if ($this->container['unlinkedAt'] === null) {
+            $invalidProperties[] = "'unlinkedAt' can't be null";
         }
         return $invalidProperties;
     }
@@ -235,97 +230,78 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
+     * Gets sellerId
      *
      * @return string
      */
-    public function getId()
+    public function getSellerId()
     {
-        return $this->container['id'];
+        return $this->container['sellerId'];
     }
 
     /**
-     * Sets id
+     * Sets sellerId
      *
-     * @param string $id id
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
-    public function setId($id)
+    public function setSellerId($sellerId)
     {
-        $this->container['id'] = $id;
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling SellerEventChannelUnlinked., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
 
         return $this;
     }
 
     /**
-     * Gets createdAt
+     * Gets reason
+     *
+     * @return string
+     */
+    public function getReason()
+    {
+        return $this->container['reason'];
+    }
+
+    /**
+     * Sets reason
+     *
+     * @param string $reason reason
+     *
+     * @return $this
+     */
+    public function setReason($reason)
+    {
+        $this->container['reason'] = $reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets unlinkedAt
      *
      * @return \DateTime
      */
-    public function getCreatedAt()
+    public function getUnlinkedAt()
     {
-        return $this->container['createdAt'];
+        return $this->container['unlinkedAt'];
     }
 
     /**
-     * Sets createdAt
+     * Sets unlinkedAt
      *
-     * @param \DateTime $createdAt createdAt
+     * @param \DateTime $unlinkedAt unlinkedAt
      *
      * @return $this
      */
-    public function setCreatedAt($createdAt)
+    public function setUnlinkedAt($unlinkedAt)
     {
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return \JTL\SCX\Client\Channel\Model\SellerEventTypeList
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param \JTL\SCX\Client\Channel\Model\SellerEventTypeList $type type
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets event
-     *
-     * @return OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventOrderCancellationRequest
-     */
-    public function getEvent()
-    {
-        return $this->container['event'];
-    }
-
-    /**
-     * Sets event
-     *
-     * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventOrderCancellationRequest $event event
-     *
-     * @return $this
-     */
-    public function setEvent($event)
-    {
-        $this->container['event'] = $event;
+        $this->container['unlinkedAt'] = $unlinkedAt;
 
         return $this;
     }

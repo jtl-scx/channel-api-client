@@ -60,8 +60,10 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'sellerId' => 'string',
         'offerId' => 'int',
+        'parentOfferId' => 'int',
         'channelCategoryId' => 'string',
         'quantity' => 'string',
+        'taxPercent' => 'string',
         'priceList' => '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
         'title' => 'string',
         'subTitle' => 'string',
@@ -87,8 +89,10 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'sellerId' => null,
         'offerId' => 'int64',
+        'parentOfferId' => 'int64',
         'channelCategoryId' => null,
         'quantity' => null,
+        'taxPercent' => null,
         'priceList' => null,
         'title' => null,
         'subTitle' => null,
@@ -135,8 +139,10 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'sellerId' => 'sellerId',
         'offerId' => 'offerId',
+        'parentOfferId' => 'parentOfferId',
         'channelCategoryId' => 'channelCategoryId',
         'quantity' => 'quantity',
+        'taxPercent' => 'taxPercent',
         'priceList' => 'priceList',
         'title' => 'title',
         'subTitle' => 'subTitle',
@@ -162,8 +168,10 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
     protected static $setters = [
         'sellerId' => 'setSellerId',
         'offerId' => 'setOfferId',
+        'parentOfferId' => 'setParentOfferId',
         'channelCategoryId' => 'setChannelCategoryId',
         'quantity' => 'setQuantity',
+        'taxPercent' => 'setTaxPercent',
         'priceList' => 'setPriceList',
         'title' => 'setTitle',
         'subTitle' => 'setSubTitle',
@@ -189,8 +197,10 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
     protected static $getters = [
         'sellerId' => 'getSellerId',
         'offerId' => 'getOfferId',
+        'parentOfferId' => 'getParentOfferId',
         'channelCategoryId' => 'getChannelCategoryId',
         'quantity' => 'getQuantity',
+        'taxPercent' => 'getTaxPercent',
         'priceList' => 'getPriceList',
         'title' => 'getTitle',
         'subTitle' => 'getSubTitle',
@@ -270,8 +280,10 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
     {
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
+        $this->container['parentOfferId'] = isset($data['parentOfferId']) ? $data['parentOfferId'] : null;
         $this->container['channelCategoryId'] = isset($data['channelCategoryId']) ? $data['channelCategoryId'] : null;
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        $this->container['taxPercent'] = isset($data['taxPercent']) ? $data['taxPercent'] : null;
         $this->container['priceList'] = isset($data['priceList']) ? $data['priceList'] : null;
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['subTitle'] = isset($data['subTitle']) ? $data['subTitle'] : null;
@@ -312,6 +324,10 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'offerId', must be bigger than or equal to 1.";
         }
 
+        if (!is_null($this->container['parentOfferId']) && ($this->container['parentOfferId'] < 1)) {
+            $invalidProperties[] = "invalid value for 'parentOfferId', must be bigger than or equal to 1.";
+        }
+
         if ($this->container['priceList'] === null) {
             $invalidProperties[] = "'priceList' can't be null";
         }
@@ -334,8 +350,8 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
         if ($this->container['sku'] === null) {
             $invalidProperties[] = "'sku' can't be null";
         }
-        if ((mb_strlen($this->container['sku']) > 100)) {
-            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 100.";
+        if ((mb_strlen($this->container['sku']) > 150)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 150.";
         }
 
         if ((mb_strlen($this->container['sku']) < 1)) {
@@ -416,6 +432,35 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets parentOfferId
+     *
+     * @return int|null
+     */
+    public function getParentOfferId()
+    {
+        return $this->container['parentOfferId'];
+    }
+
+    /**
+     * Sets parentOfferId
+     *
+     * @param int|null $parentOfferId In case the current offer has an reference to a parent offer. This ParentOfferId must be used to identify the Parent Offer. The ParentOfferId has is coditional manadantory for variation Offers in case you add a new Item to a existing Variation Offer Listing.
+     *
+     * @return $this
+     */
+    public function setParentOfferId($parentOfferId)
+    {
+
+        if (!is_null($parentOfferId) && ($parentOfferId < 1)) {
+            throw new \InvalidArgumentException('invalid value for $parentOfferId when calling SellerEventOfferNew., must be bigger than or equal to 1.');
+        }
+
+        $this->container['parentOfferId'] = $parentOfferId;
+
+        return $this;
+    }
+
+    /**
      * Gets channelCategoryId
      *
      * @return string|null
@@ -459,6 +504,30 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
     public function setQuantity($quantity)
     {
         $this->container['quantity'] = $quantity;
+
+        return $this;
+    }
+
+    /**
+     * Gets taxPercent
+     *
+     * @return string|null
+     */
+    public function getTaxPercent()
+    {
+        return $this->container['taxPercent'];
+    }
+
+    /**
+     * Sets taxPercent
+     *
+     * @param string|null $taxPercent taxPercent
+     *
+     * @return $this
+     */
+    public function setTaxPercent($taxPercent)
+    {
+        $this->container['taxPercent'] = $taxPercent;
 
         return $this;
     }
@@ -689,8 +758,8 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
      */
     public function setSku($sku)
     {
-        if ((mb_strlen($sku) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $sku when calling SellerEventOfferNew., must be smaller than or equal to 100.');
+        if ((mb_strlen($sku) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling SellerEventOfferNew., must be smaller than or equal to 150.');
         }
         if ((mb_strlen($sku) < 1)) {
             throw new \InvalidArgumentException('invalid length for $sku when calling SellerEventOfferNew., must be bigger than or equal to 1.');
