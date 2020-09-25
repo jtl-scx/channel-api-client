@@ -249,8 +249,8 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'channelOfferId', the character length must be bigger than or equal to 1.";
         }
 
-        if (!is_null($this->container['sku']) && (mb_strlen($this->container['sku']) > 100)) {
-            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 100.";
+        if (!is_null($this->container['sku']) && (mb_strlen($this->container['sku']) > 150)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 150.";
         }
 
         if (!is_null($this->container['sku']) && (mb_strlen($this->container['sku']) < 1)) {
@@ -351,8 +351,8 @@ class SellerInventoryItem implements ModelInterface, ArrayAccess
      */
     public function setSku($sku)
     {
-        if (!is_null($sku) && (mb_strlen($sku) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $sku when calling SellerInventoryItem., must be smaller than or equal to 100.');
+        if (!is_null($sku) && (mb_strlen($sku) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling SellerInventoryItem., must be smaller than or equal to 150.');
         }
         if (!is_null($sku) && (mb_strlen($sku) < 1)) {
             throw new \InvalidArgumentException('invalid length for $sku when calling SellerInventoryItem., must be bigger than or equal to 1.');

@@ -246,8 +246,8 @@ class Product implements ModelInterface, ArrayAccess
         if ($this->container['sku'] === null) {
             $invalidProperties[] = "'sku' can't be null";
         }
-        if ((mb_strlen($this->container['sku']) > 100)) {
-            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 100.";
+        if ((mb_strlen($this->container['sku']) > 150)) {
+            $invalidProperties[] = "invalid value for 'sku', the character length must be smaller than or equal to 150.";
         }
 
         if ((mb_strlen($this->container['sku']) < 1)) {
@@ -304,8 +304,8 @@ class Product implements ModelInterface, ArrayAccess
      */
     public function setSku($sku)
     {
-        if ((mb_strlen($sku) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $sku when calling Product., must be smaller than or equal to 100.');
+        if ((mb_strlen($sku) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $sku when calling Product., must be smaller than or equal to 150.');
         }
         if ((mb_strlen($sku) < 1)) {
             throw new \InvalidArgumentException('invalid length for $sku when calling Product., must be bigger than or equal to 1.');
