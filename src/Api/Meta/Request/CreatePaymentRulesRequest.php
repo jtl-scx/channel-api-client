@@ -30,7 +30,7 @@ class CreatePaymentRulesRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/payment-rules';
+        return '/v1/channel/payment-rules';
     }
 
     public function getHttpMethod(): string

@@ -15,7 +15,7 @@ class GetChannelStatusRequest extends AbstractScxApiRequest
 {
     public function getUrl(): string
     {
-        return '/channel';
+        return '/v1/channel';
     }
 
     public function getHttpMethod(): string

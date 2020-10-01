@@ -28,7 +28,7 @@ class CreatePriceTypeRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/price';
+        return '/v1/channel/price';
     }
 
     public function getHttpMethod(): string

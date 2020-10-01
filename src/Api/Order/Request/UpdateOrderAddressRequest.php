@@ -28,7 +28,7 @@ class UpdateOrderAddressRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/order/address-update';
+        return '/v1/channel/order/address-update';
     }
 
     public function getOrderAddressList(): OrderAddressUpdateList

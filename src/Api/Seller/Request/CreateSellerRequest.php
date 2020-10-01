@@ -28,7 +28,7 @@ class CreateSellerRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/seller';
+        return '/v1/channel/seller';
     }
 
     public function getHttpMethod(): string

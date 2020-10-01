@@ -27,7 +27,7 @@ class UpdateOrderStatusRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/order/status';
+        return '/v1/channel/order/status';
     }
 
     public function getOrderStatusList(): OrderStatusList

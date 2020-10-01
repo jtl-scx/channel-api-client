@@ -40,7 +40,7 @@ class MarkListingAsFailedRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/offer/listing-failed';
+        return '/v1/channel/offer/listing-failed';
     }
 
     public function getHttpMethod(): string

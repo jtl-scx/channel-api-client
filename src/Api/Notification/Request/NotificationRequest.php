@@ -28,7 +28,7 @@ class NotificationRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/notification';
+        return '/v1/channel/notification';
     }
 
     public function getHttpMethod(): string

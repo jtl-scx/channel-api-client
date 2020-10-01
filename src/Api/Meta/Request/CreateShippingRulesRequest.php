@@ -28,7 +28,7 @@ class CreateShippingRulesRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/shipping-rules';
+        return '/v1/channel/shipping-rules';
     }
 
     public function getHttpMethod(): string
