@@ -39,7 +39,7 @@ class MarkListingSuccessfulRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/offer/listed';
+        return '/v1/channel/offer/listed';
     }
 
     public function getHttpMethod(): string

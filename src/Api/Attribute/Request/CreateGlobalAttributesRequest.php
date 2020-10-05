@@ -27,7 +27,7 @@ class CreateGlobalAttributesRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/attribute/global';
+        return '/v1/channel/attribute/global';
     }
 
     public function getHttpMethod(): string

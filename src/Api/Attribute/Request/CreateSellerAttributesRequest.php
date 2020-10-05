@@ -40,7 +40,7 @@ class CreateSellerAttributesRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/attribute/seller/{sellerId}';
+        return '/v1/channel/attribute/seller/{sellerId}';
     }
 
     public function getHttpMethod(): string

@@ -32,7 +32,7 @@ class UpdateCategoryTreeRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/categories';
+        return '/v1/channel/categories';
     }
 
     public function getHttpMethod(): string

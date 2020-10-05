@@ -36,7 +36,7 @@ class SendReportRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/report/{reportId}';
+        return '/v1/channel/report/{reportId}';
     }
 
     public function getHttpMethod(): string

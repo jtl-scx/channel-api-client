@@ -28,7 +28,7 @@ class CreateOrderRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/order';
+        return '/v1/channel/order';
     }
 
     public function getHttpMethod(): string

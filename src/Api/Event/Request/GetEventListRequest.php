@@ -15,7 +15,7 @@ class GetEventListRequest extends AbstractScxApiRequest
 {
     public function getUrl(): string
     {
-        return '/channel/event';
+        return '/v1/channel/event';
     }
 
     public function getHttpMethod(): string

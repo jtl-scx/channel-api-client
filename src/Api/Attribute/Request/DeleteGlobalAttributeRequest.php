@@ -26,7 +26,7 @@ class DeleteGlobalAttributeRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/attribute/global/{attributeId}';
+        return '/v1/channel/attribute/global/{attributeId}';
     }
 
     public function getHttpMethod(): string

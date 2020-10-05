@@ -40,7 +40,7 @@ class CreateCategoryAttributesRequest extends AbstractScxApiRequest
 
     public function getUrl(): string
     {
-        return '/channel/attribute/category/{categoryId}';
+        return '/v1/channel/attribute/category/{categoryId}';
     }
 
     public function getHttpMethod(): string
