@@ -30,6 +30,6 @@ class UpdateChannelRequestTest extends AbstractTestCase
 
         $this->assertSame($bodyStr, $request->getBody());
         $this->assertSame('PATCH', $request->getHttpMethod());
-        $this->assertSame('/channel', $request->getUrl());
+        $this->assertSame('/v1/channel', $request->getUrl());
     }
 }

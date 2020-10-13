@@ -25,7 +25,7 @@ class CreateShippingRulesRequestTest extends TestCase
 
         $request = new CreateShippingRulesRequest($shippingRules);
         $this->assertSame($bodyStr, $request->getBody());
-        $this->assertSame('POST', $request->getHttpMethod());
-        $this->assertSame('/channel/shipping-rules', $request->getUrl());
+        $this->assertSame('PUT', $request->getHttpMethod());
+        $this->assertSame('/v1/channel/shipping-rules', $request->getUrl());
     }
 }

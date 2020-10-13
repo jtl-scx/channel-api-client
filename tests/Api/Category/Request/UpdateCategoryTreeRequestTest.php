@@ -30,6 +30,6 @@ class UpdateCategoryTreeRequestTest extends AbstractTestCase
         $this->assertSame($channelCategoryTree, $request->getChannelCategoryTree());
         $this->assertSame($bodyStr, $request->getBody());
         $this->assertSame('PUT', $request->getHttpMethod());
-        $this->assertSame('/channel/categories', $request->getUrl());
+        $this->assertSame('/v1/channel/categories', $request->getUrl());
     }
 }

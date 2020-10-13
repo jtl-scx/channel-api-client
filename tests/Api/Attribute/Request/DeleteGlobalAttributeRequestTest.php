@@ -28,6 +28,6 @@ class DeleteGlobalAttributeRequestTest extends AbstractTestCase
 
         $this->assertSame(['attributeId' => $attrId], $request->getParams());
         $this->assertSame('DELETE', $request->getHttpMethod());
-        $this->assertSame('/channel/attribute/global/{attributeId}', $request->getUrl());
+        $this->assertSame('/v1/channel/attribute/global/{attributeId}', $request->getUrl());
     }
 }

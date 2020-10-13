@@ -28,6 +28,6 @@ class UpdateOrderStatusRequestTest extends TestCase
         $this->assertSame($orderStatusList, $request->getOrderStatusList());
         $this->assertSame((string)$orderStatusList, $request->getBody());
         $this->assertSame('PUT', $request->getHttpMethod());
-        $this->assertSame('/channel/order/status', $request->getUrl());
+        $this->assertSame('/v1/channel/order/status', $request->getUrl());
     }
 }

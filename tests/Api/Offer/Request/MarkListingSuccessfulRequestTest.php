@@ -57,6 +57,6 @@ class MarkListingSuccessfulRequestTest extends TestCase
     public function testEndpointUrlIsCorrect()
     {
         $request = new MarkListingSuccessfulRequest();
-        $this->assertEquals('/channel/offer/listed', $request->getUrl());
+        $this->assertEquals('/v1/channel/offer/listed', $request->getUrl());
     }
 }

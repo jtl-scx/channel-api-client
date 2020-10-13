@@ -28,6 +28,6 @@ class CreateOrdersRequestTest extends AbstractTestCase
         $this->assertSame($orderList, $request->getOrderList());
         $this->assertSame((string)$orderList, $request->getBody());
         $this->assertSame('POST', $request->getHttpMethod());
-        $this->assertSame('/channel/order', $request->getUrl());
+        $this->assertSame('/v1/channel/order', $request->getUrl());
     }
 }

@@ -33,6 +33,6 @@ class CreateSellerAttributesRequestTest extends AbstractTestCase
         $this->assertSame(['sellerId' => $sellerId], $request->getParams());
         $this->assertSame($bodyStr, $request->getBody());
         $this->assertSame('PUT', $request->getHttpMethod());
-        $this->assertSame('/channel/attribute/seller/{sellerId}', $request->getUrl());
+        $this->assertSame('/v1/channel/attribute/seller/{sellerId}', $request->getUrl());
     }
 }
