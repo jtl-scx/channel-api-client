@@ -6,6 +6,9 @@ jobs:
         steps:
             - uses: actions/checkout@v2
             - uses: php-actions/composer@v1
+            - name: ls
+              run: pwd; ls -la
+              shell: bash
             - uses: php-actions/phpunit@v8
               with:
                 configuration: phpunit.xml
