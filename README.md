@@ -4,7 +4,7 @@
 
 # SCX PHP-Channel-API-Client
 
-[![Build Status](https://travis-ci.org/jtl-scx/channel-api-client.svg?branch=master)](https://travis-ci.org/jtl-scx/channel-api-client)
+![PHPUnit](https://github.com/jtl-scx/channel-api-client/workflows/PHPUnit/badge.svg)
 
 SCX Channel-API Client repository for JTL-Sales-Channel-Extension based on PHP. 
 
