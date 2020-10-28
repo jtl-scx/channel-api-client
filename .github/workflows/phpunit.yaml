@@ -7,7 +7,7 @@ jobs:
             - uses: actions/checkout@v2
             - uses: php-actions/composer@v1
             - name: ls
-              run: php -r "include './vendor/autoload.php';class Test extends \JTL\SCX\Client\Channel\Api\AbstractScxApiRequest{function getUrl():string{return '';}function getHttpMethod():string{return '';}}echo 'success'"
+              run: php -r "include './vendor/autoload.php';class Test extends \JTL\SCX\Client\Channel\Api\AbstractScxApiRequest{function getUrl():string{return '';}function getHttpMethod():string{return '';}}echo 'success';"
               shell: bash
             - uses: php-actions/phpunit@v8
               with:
