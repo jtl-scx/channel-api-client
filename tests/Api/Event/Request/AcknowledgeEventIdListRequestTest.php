@@ -22,7 +22,7 @@ class AcknowledgeEventIdListRequestTest extends TestCase
         $model = $request->getEventIdListModel();
         $this->assertInstanceOf(EventIdList::class, $model);
         $this->assertSame((string)$model, $request->getBody());
-        $this->assertSame('/channel/event', $request->getUrl());
+        $this->assertSame('/v1/channel/event', $request->getUrl());
         $this->assertSame('DELETE', $request->getHttpMethod());
     }
 }

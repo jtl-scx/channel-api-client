@@ -20,6 +20,6 @@ class GetChannelStatusRequestTest extends TestCase
         $request = new GetChannelStatusRequest();
 
         $this->assertSame('GET', $request->getHttpMethod());
-        $this->assertSame('/channel', $request->getUrl());
+        $this->assertSame('/v1/channel', $request->getUrl());
     }
 }

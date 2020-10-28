@@ -21,7 +21,7 @@ class NotificationRequestTest extends TestCase
     public function testGetUrlIsCorrect()
     {
         $request = new NotificationRequest($this->createStub(Notification::class));
-        $this->assertEquals('/channel/notification', $request->getUrl());
+        $this->assertEquals('/v1/channel/notification', $request->getUrl());
     }
 
     public function testHttpMethodIsPost()

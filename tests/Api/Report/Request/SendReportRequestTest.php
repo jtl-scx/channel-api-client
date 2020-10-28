@@ -31,7 +31,7 @@ class SendReportRequestTest extends TestCase
         $request = new SendReportRequest($reportId, [$sellerInventoryItem], false);
         $this->assertSame('[{"offerId":123,"sku":"123","quantity":"1"}]', $request->getBody());
         $this->assertSame('POST', $request->getHttpMethod());
-        $this->assertSame('/channel/report/{reportId}', $request->getUrl());
+        $this->assertSame('/v1/channel/report/{reportId}', $request->getUrl());
         $this->assertSame(['reportId' => $reportId], $request->getParams());
     }
 }

@@ -30,6 +30,6 @@ class CreateGlobalAttributesRequestTest extends AbstractTestCase
 
         $this->assertSame($bodyStr, $request->getBody());
         $this->assertSame('PUT', $request->getHttpMethod());
-        $this->assertSame('/channel/attribute/global', $request->getUrl());
+        $this->assertSame('/v1/channel/attribute/global', $request->getUrl());
     }
 }

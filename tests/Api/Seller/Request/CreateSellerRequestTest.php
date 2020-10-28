@@ -27,7 +27,7 @@ class CreateSellerRequestTest extends AbstractTestCase
 
         $request = new CreateSellerRequest($createSellerMock);
         $this->assertSame($bodyStr, $request->getBody());
-        $this->assertSame('/channel/seller', $request->getUrl());
+        $this->assertSame('/v1/channel/seller', $request->getUrl());
         $this->assertSame('POST', $request->getHttpMethod());
     }
 }

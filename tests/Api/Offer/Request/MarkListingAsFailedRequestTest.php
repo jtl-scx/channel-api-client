@@ -57,6 +57,6 @@ class MarkListingAsFailedRequestTest extends TestCase
     public function testEndpointUrlIsCorrect()
     {
         $request = new MarkListingAsFailedRequest();
-        $this->assertEquals('/channel/offer/listing-failed', $request->getUrl());
+        $this->assertEquals('/v1/channel/offer/listing-failed', $request->getUrl());
     }
 }

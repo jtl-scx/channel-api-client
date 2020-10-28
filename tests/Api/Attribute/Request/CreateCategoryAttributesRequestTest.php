@@ -32,6 +32,6 @@ class CreateCategoryAttributesRequestTest extends AbstractTestCase
         $this->assertSame(['categoryId' => $categoryId], $request->getParams());
         $this->assertSame($bodyStr, $request->getBody());
         $this->assertSame('PUT', $request->getHttpMethod());
-        $this->assertSame('/channel/attribute/category/{categoryId}', $request->getUrl());
+        $this->assertSame('/v1/channel/attribute/category/{categoryId}', $request->getUrl());
     }
 }

@@ -28,6 +28,6 @@ class UpdateOrderAddressRequestTest extends TestCase
         $this->assertSame($orderAdressList, $request->getOrderAddressList());
         $this->assertSame((string)$orderAdressList, $request->getBody());
         $this->assertSame('PUT', $request->getHttpMethod());
-        $this->assertSame('/channel/order/address-update', $request->getUrl());
+        $this->assertSame('/v1/channel/order/address-update', $request->getUrl());
     }
 }

@@ -14,8 +14,6 @@ use JTL\SCX\Client\Channel\Api\Event\Request\AcknowledgeEventIdListRequest;
 use JTL\SCX\Client\Channel\Api\Event\Request\GetEventListRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
-use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
-use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
@@ -80,10 +78,8 @@ class EventApiTest extends TestCase
         return [
             ['System:Notification', SystemEventNotification::class],
             ['System:Test', SellerEventTest::class],
-            ['Seller:Order.Confirmed', SellerEventOrderConfirmed::class],
             ['Seller:Order.Shipping', SellerEventOrderShipping::class],
             ['Seller:Order.Payment', SellerEventOrderPayment::class],
-            ['Seller:Order.Cancelled', SellerEventOrderCancelled::class],
             ['Seller:Offer.End', SellerEventOfferEnd::class],
             ['Seller:Offer.New', SellerEventOfferNew::class],
             ['unknown', \stdClass::class, false],

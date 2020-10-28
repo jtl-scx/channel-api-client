@@ -28,6 +28,6 @@ class CreatePriceTypeRequestTest extends AbstractTestCase
         $request = new CreatePriceTypeRequest($priceTypeMock);
         $this->assertSame($bodyStr, $request->getBody());
         $this->assertSame('POST', $request->getHttpMethod());
-        $this->assertSame('/channel/price', $request->getUrl());
+        $this->assertSame('/v1/channel/price', $request->getUrl());
     }
 }

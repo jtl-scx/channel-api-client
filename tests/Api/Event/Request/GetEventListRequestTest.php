@@ -21,7 +21,7 @@ class GetEventListRequestTest extends TestCase
     public function testCanGetUrlAndHttpMethod()
     {
         $request = new GetEventListRequest();
-        $this->assertSame('/channel/event', $request->getUrl());
+        $this->assertSame('/v1/channel/event', $request->getUrl());
         $this->assertSame('GET', $request->getHttpMethod());
     }
 }

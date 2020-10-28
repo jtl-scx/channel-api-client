@@ -25,7 +25,7 @@ class CreatePaymentRulesRequestTest extends TestCase
 
         $request = new CreatePaymentRulesRequest($paymentRules);
         $this->assertSame($bodyStr, $request->getBody());
-        $this->assertSame('POST', $request->getHttpMethod());
-        $this->assertSame('/channel/payment-rules', $request->getUrl());
+        $this->assertSame('PUT', $request->getHttpMethod());
+        $this->assertSame('/v1/channel/payment-rules', $request->getUrl());
     }
 }
