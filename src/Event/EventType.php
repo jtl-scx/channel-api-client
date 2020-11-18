@@ -17,6 +17,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
+use JTL\SCX\Client\Channel\Model\SellerEventSellerAttributesUpdateRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use MyCLabs\Enum\Enum;
@@ -36,6 +37,7 @@ use MyCLabs\Enum\Enum;
  * @method static EventType SellerOfferPriceUpdate()
  * @method static EventType SellerReportRequest()
  * @method static EventType SellerChannelUnlinked()
+ * @method static EventType SellerMetaSellerAttributesUpdateRequest()
  */
 class EventType extends Enum
 {
@@ -52,6 +54,7 @@ class EventType extends Enum
     public const SellerOfferPriceUpdate = 'Seller:Offer.PriceUpdate';
     public const SellerReportRequest = 'Seller:Report.Request';
     public const SellerChannelUnlinked = 'Seller:Channel.Unlinked';
+    public const SellerMetaSellerAttributesUpdateRequest = 'Seller:Meta.SellerAttributesUpdateRequest';
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -91,6 +94,8 @@ class EventType extends Enum
                 return SellerEventReportRequest::class;
             case $this::SellerChannelUnlinked():
                 return SellerEventChannelUnlinked::class;
+            case $this::SellerMetaSellerAttributesUpdateRequest():
+                return SellerEventSellerAttributesUpdateRequest::class;
         }
 
         return \stdClass::class;
