@@ -15,6 +15,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
+use JTL\SCX\Client\Channel\Model\SellerEventSellerAttributesUpdateRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use PHPUnit\Framework\TestCase;
@@ -36,6 +37,7 @@ class EventTypeTest extends TestCase
             [SellerEventOfferEnd::class, EventType::SellerOfferEnd()],
             [SellerEventOfferStockUpdate::class, EventType::SellerOfferStockUpdate()],
             [SellerEventOfferPriceUpdate::class, EventType::SellerOfferPriceUpdate()],
+            [SellerEventSellerAttributesUpdateRequest::class, EventType::SellerMetaSellerAttributesUpdateRequest()],
             [\stdClass::class, new EventType('FooBarEvent')],
         ];
     }
