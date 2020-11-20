@@ -6,7 +6,6 @@
     "require": {
         "php": "^7.4",
         "jtl-scx/api-base-client": "^1.1",
-        "jtl/nachricht": "^0.11",
         "jtl/php-generic-collection": "^0.3",
         "myclabs/php-enum": "^1.7"
     },
