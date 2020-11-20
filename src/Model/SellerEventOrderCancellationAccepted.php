@@ -1,6 +1,6 @@
 <?php
 /**
- * CancellationAcceptByChannel
+ * SellerEventOrderCancellationAccepted
  *
  * PHP version 5
  *
@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * SCX Channel API
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -28,19 +28,17 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-
-use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * CancellationAcceptByChannel Class Doc Comment
+ * SellerEventOrderCancellationAccepted Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
+class SellerEventOrderCancellationAccepted extends CancellationAccept 
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +47,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CancellationAcceptByChannel';
+    protected static $openAPIModelName = 'SellerEventOrderCancellationAccepted';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +55,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sellerId' => 'string',
-        'orderCancellationRequestId' => 'string'
+        
     ];
 
     /**
@@ -67,8 +64,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'sellerId' => null,
-        'orderCancellationRequestId' => 'uuid'
+        
     ];
 
     /**
@@ -78,7 +74,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -88,7 +84,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -98,8 +94,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'sellerId' => 'sellerId',
-        'orderCancellationRequestId' => 'orderCancellationRequestId'
+        
     ];
 
     /**
@@ -108,8 +103,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'sellerId' => 'setSellerId',
-        'orderCancellationRequestId' => 'setOrderCancellationRequestId'
+        
     ];
 
     /**
@@ -118,8 +112,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'sellerId' => 'getSellerId',
-        'orderCancellationRequestId' => 'getOrderCancellationRequestId'
+        
     ];
 
     /**
@@ -130,7 +123,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -140,7 +133,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -150,7 +143,7 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -167,12 +160,6 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -182,8 +169,8 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
+        parent::__construct($data);
+
     }
 
     /**
@@ -193,18 +180,8 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['sellerId'] === null) {
-            $invalidProperties[] = "'sellerId' can't be null";
-        }
-        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
-            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
-        }
-
-        if ($this->container['orderCancellationRequestId'] === null) {
-            $invalidProperties[] = "'orderCancellationRequestId' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -219,59 +196,6 @@ class CancellationAcceptByChannel implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets sellerId
-     *
-     * @return string
-     */
-    public function getSellerId()
-    {
-        return $this->container['sellerId'];
-    }
-
-    /**
-     * Sets sellerId
-     *
-     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
-     *
-     * @return $this
-     */
-    public function setSellerId($sellerId)
-    {
-
-        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling CancellationAcceptByChannel., must conform to the pattern /^\\w{1,50}$/.");
-        }
-
-        $this->container['sellerId'] = $sellerId;
-
-        return $this;
-    }
-
-    /**
-     * Gets orderCancellationRequestId
-     *
-     * @return string
-     */
-    public function getOrderCancellationRequestId()
-    {
-        return $this->container['orderCancellationRequestId'];
-    }
-
-    /**
-     * Sets orderCancellationRequestId
-     *
-     * @param string $orderCancellationRequestId A unique identifier for the order cancellation request. This ID should by used by Seller to identify the cancellation response from the Channel.
-     *
-     * @return $this
-     */
-    public function setOrderCancellationRequestId($orderCancellationRequestId)
-    {
-        $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

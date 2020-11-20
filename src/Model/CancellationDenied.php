@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSeller
+ * CancellationDenied
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * CreateSeller Class Doc Comment
+ * CancellationDenied Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CreateSeller implements ModelInterface, ArrayAccess
+class CancellationDenied implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateSeller';
+    protected static $openAPIModelName = 'CancellationDenied';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'session' => 'string',
-        'sellerId' => 'string'
+        'sellerId' => 'string',
+        'orderCancellationRequestId' => 'string',
+        'reason' => 'Text'
     ];
 
     /**
@@ -67,8 +68,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'session' => 'uuid',
-        'sellerId' => null
+        'sellerId' => null,
+        'orderCancellationRequestId' => 'uuid',
+        'reason' => null
     ];
 
     /**
@@ -98,8 +100,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'session' => 'session',
-        'sellerId' => 'sellerId'
+        'sellerId' => 'sellerId',
+        'orderCancellationRequestId' => 'orderCancellationRequestId',
+        'reason' => 'reason'
     ];
 
     /**
@@ -108,8 +111,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'session' => 'setSession',
-        'sellerId' => 'setSellerId'
+        'sellerId' => 'setSellerId',
+        'orderCancellationRequestId' => 'setOrderCancellationRequestId',
+        'reason' => 'setReason'
     ];
 
     /**
@@ -118,8 +122,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'session' => 'getSession',
-        'sellerId' => 'getSellerId'
+        'sellerId' => 'getSellerId',
+        'orderCancellationRequestId' => 'getOrderCancellationRequestId',
+        'reason' => 'getReason'
     ];
 
     /**
@@ -182,8 +187,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['session'] = isset($data['session']) ? $data['session'] : null;
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
+        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
     }
 
     /**
@@ -195,10 +201,19 @@ class CreateSeller implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['sellerId']) && !preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
+        }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
+        if ($this->container['orderCancellationRequestId'] === null) {
+            $invalidProperties[] = "'orderCancellationRequestId' can't be null";
+        }
+        if ($this->container['reason'] === null) {
+            $invalidProperties[] = "'reason' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -215,33 +230,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets session
-     *
-     * @return string|null
-     */
-    public function getSession()
-    {
-        return $this->container['session'];
-    }
-
-    /**
-     * Sets session
-     *
-     * @param string|null $session session
-     *
-     * @return $this
-     */
-    public function setSession($session)
-    {
-        $this->container['session'] = $session;
-
-        return $this;
-    }
-
-    /**
      * Gets sellerId
      *
-     * @return string|null
+     * @return string
      */
     public function getSellerId()
     {
@@ -251,18 +242,66 @@ class CreateSeller implements ModelInterface, ArrayAccess
     /**
      * Sets sellerId
      *
-     * @param string|null $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
     public function setSellerId($sellerId)
     {
 
-        if (!is_null($sellerId) && (!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling CreateSeller., must conform to the pattern /^\\w{1,50}$/.");
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling CancellationDenied., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
+
+        return $this;
+    }
+
+    /**
+     * Gets orderCancellationRequestId
+     *
+     * @return string
+     */
+    public function getOrderCancellationRequestId()
+    {
+        return $this->container['orderCancellationRequestId'];
+    }
+
+    /**
+     * Sets orderCancellationRequestId
+     *
+     * @param string $orderCancellationRequestId A unique identifier for the order cancellation request. This ID should by used by Seller to identify the cancellation response from the Channel.
+     *
+     * @return $this
+     */
+    public function setOrderCancellationRequestId($orderCancellationRequestId)
+    {
+        $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
+
+        return $this;
+    }
+
+    /**
+     * Gets reason
+     *
+     * @return Text
+     */
+    public function getReason()
+    {
+        return $this->container['reason'];
+    }
+
+    /**
+     * Sets reason
+     *
+     * @param Text $reason reason
+     *
+     * @return $this
+     */
+    public function setReason($reason)
+    {
+        $this->container['reason'] = $reason;
 
         return $this;
     }

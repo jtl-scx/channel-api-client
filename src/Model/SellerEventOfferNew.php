@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * SCX Channel API
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -61,6 +61,7 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
         'sellerId' => 'string',
         'offerId' => 'int',
         'parentOfferId' => 'int',
+        'channelOfferId' => 'string',
         'channelCategoryId' => 'string',
         'quantity' => 'string',
         'taxPercent' => 'string',
@@ -90,6 +91,7 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
         'sellerId' => null,
         'offerId' => 'int64',
         'parentOfferId' => 'int64',
+        'channelOfferId' => null,
         'channelCategoryId' => null,
         'quantity' => null,
         'taxPercent' => null,
@@ -140,6 +142,7 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
         'sellerId' => 'sellerId',
         'offerId' => 'offerId',
         'parentOfferId' => 'parentOfferId',
+        'channelOfferId' => 'channelOfferId',
         'channelCategoryId' => 'channelCategoryId',
         'quantity' => 'quantity',
         'taxPercent' => 'taxPercent',
@@ -169,6 +172,7 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
         'sellerId' => 'setSellerId',
         'offerId' => 'setOfferId',
         'parentOfferId' => 'setParentOfferId',
+        'channelOfferId' => 'setChannelOfferId',
         'channelCategoryId' => 'setChannelCategoryId',
         'quantity' => 'setQuantity',
         'taxPercent' => 'setTaxPercent',
@@ -198,6 +202,7 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
         'sellerId' => 'getSellerId',
         'offerId' => 'getOfferId',
         'parentOfferId' => 'getParentOfferId',
+        'channelOfferId' => 'getChannelOfferId',
         'channelCategoryId' => 'getChannelCategoryId',
         'quantity' => 'getQuantity',
         'taxPercent' => 'getTaxPercent',
@@ -281,6 +286,7 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['offerId'] = isset($data['offerId']) ? $data['offerId'] : null;
         $this->container['parentOfferId'] = isset($data['parentOfferId']) ? $data['parentOfferId'] : null;
+        $this->container['channelOfferId'] = isset($data['channelOfferId']) ? $data['channelOfferId'] : null;
         $this->container['channelCategoryId'] = isset($data['channelCategoryId']) ? $data['channelCategoryId'] : null;
         $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
         $this->container['taxPercent'] = isset($data['taxPercent']) ? $data['taxPercent'] : null;
@@ -326,6 +332,14 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
 
         if (!is_null($this->container['parentOfferId']) && ($this->container['parentOfferId'] < 1)) {
             $invalidProperties[] = "invalid value for 'parentOfferId', must be bigger than or equal to 1.";
+        }
+
+        if (!is_null($this->container['channelOfferId']) && (mb_strlen($this->container['channelOfferId']) > 50)) {
+            $invalidProperties[] = "invalid value for 'channelOfferId', the character length must be smaller than or equal to 50.";
+        }
+
+        if (!is_null($this->container['channelOfferId']) && (mb_strlen($this->container['channelOfferId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'channelOfferId', the character length must be bigger than or equal to 1.";
         }
 
         if ($this->container['priceList'] === null) {
@@ -456,6 +470,37 @@ class SellerEventOfferNew implements ModelInterface, ArrayAccess
         }
 
         $this->container['parentOfferId'] = $parentOfferId;
+
+        return $this;
+    }
+
+    /**
+     * Gets channelOfferId
+     *
+     * @return string|null
+     */
+    public function getChannelOfferId()
+    {
+        return $this->container['channelOfferId'];
+    }
+
+    /**
+     * Sets channelOfferId
+     *
+     * @param string|null $channelOfferId Channel defined unique Offer Id to identify an Offer on a Sales Channel.
+     *
+     * @return $this
+     */
+    public function setChannelOfferId($channelOfferId)
+    {
+        if (!is_null($channelOfferId) && (mb_strlen($channelOfferId) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $channelOfferId when calling SellerEventOfferNew., must be smaller than or equal to 50.');
+        }
+        if (!is_null($channelOfferId) && (mb_strlen($channelOfferId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $channelOfferId when calling SellerEventOfferNew., must be bigger than or equal to 1.');
+        }
+
+        $this->container['channelOfferId'] = $channelOfferId;
 
         return $this;
     }

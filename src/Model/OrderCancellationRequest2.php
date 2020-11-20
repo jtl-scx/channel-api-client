@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderAddressUpdate
+ * OrderCancellationRequest2
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderAddressUpdate Class Doc Comment
+ * OrderCancellationRequest2 Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderAddressUpdate implements ModelInterface, ArrayAccess
+class OrderCancellationRequest2 implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderAddressUpdate';
+    protected static $openAPIModelName = 'OrderCancellationRequest_2';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,12 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
+        'orderCancellationRequestId' => 'string',
         'sellerId' => 'string',
         'orderId' => 'string',
-        'billingAddress' => '\JTL\SCX\Client\Channel\Model\Address',
-        'shippingAddress' => '\JTL\SCX\Client\Channel\Model\Address'
+        'orderItem' => '\JTL\SCX\Client\Channel\Model\OrderItem1[]',
+        'cancelReason' => 'string',
+        'message' => 'string'
     ];
 
     /**
@@ -69,10 +71,12 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
+        'orderCancellationRequestId' => 'uuid',
         'sellerId' => null,
         'orderId' => null,
-        'billingAddress' => null,
-        'shippingAddress' => null
+        'orderItem' => null,
+        'cancelReason' => null,
+        'message' => null
     ];
 
     /**
@@ -102,10 +106,12 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'orderCancellationRequestId' => 'orderCancellationRequestId',
         'sellerId' => 'sellerId',
         'orderId' => 'orderId',
-        'billingAddress' => 'billingAddress',
-        'shippingAddress' => 'shippingAddress'
+        'orderItem' => 'orderItem',
+        'cancelReason' => 'cancelReason',
+        'message' => 'message'
     ];
 
     /**
@@ -114,10 +120,12 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'orderCancellationRequestId' => 'setOrderCancellationRequestId',
         'sellerId' => 'setSellerId',
         'orderId' => 'setOrderId',
-        'billingAddress' => 'setBillingAddress',
-        'shippingAddress' => 'setShippingAddress'
+        'orderItem' => 'setOrderItem',
+        'cancelReason' => 'setCancelReason',
+        'message' => 'setMessage'
     ];
 
     /**
@@ -126,10 +134,12 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'orderCancellationRequestId' => 'getOrderCancellationRequestId',
         'sellerId' => 'getSellerId',
         'orderId' => 'getOrderId',
-        'billingAddress' => 'getBillingAddress',
-        'shippingAddress' => 'getShippingAddress'
+        'orderItem' => 'getOrderItem',
+        'cancelReason' => 'getCancelReason',
+        'message' => 'getMessage'
     ];
 
     /**
@@ -173,8 +183,33 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const CANCEL_REASON_BUYER_CANCELLED = 'BUYER_CANCELLED';
+    const CANCEL_REASON_UNDELIVERABLE_TO_SHIPPING_ADDRESS = 'UNDELIVERABLE_TO_SHIPPING_ADDRESS';
+    const CANCEL_REASON_UNDELIVERABLE_BY_CARRIER = 'UNDELIVERABLE_BY_CARRIER';
+    const CANCEL_REASON_OUT_OF_STOCK = 'OUT_OF_STOCK';
+    const CANCEL_REASON_DELAYED_INVENTORY = 'DELAYED_INVENTORY';
+    const CANCEL_REASON_PRICING_ERROR = 'PRICING_ERROR';
+    const CANCEL_REASON_OTHER = 'OTHER';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getCancelReasonAllowableValues()
+    {
+        return [
+            self::CANCEL_REASON_BUYER_CANCELLED,
+            self::CANCEL_REASON_UNDELIVERABLE_TO_SHIPPING_ADDRESS,
+            self::CANCEL_REASON_UNDELIVERABLE_BY_CARRIER,
+            self::CANCEL_REASON_OUT_OF_STOCK,
+            self::CANCEL_REASON_DELAYED_INVENTORY,
+            self::CANCEL_REASON_PRICING_ERROR,
+            self::CANCEL_REASON_OTHER,
+        ];
+    }
     
 
     /**
@@ -192,10 +227,12 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['billingAddress'] = isset($data['billingAddress']) ? $data['billingAddress'] : null;
-        $this->container['shippingAddress'] = isset($data['shippingAddress']) ? $data['shippingAddress'] : null;
+        $this->container['orderItem'] = isset($data['orderItem']) ? $data['orderItem'] : null;
+        $this->container['cancelReason'] = isset($data['cancelReason']) ? $data['cancelReason'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
     }
 
     /**
@@ -207,6 +244,9 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['orderCancellationRequestId'] === null) {
+            $invalidProperties[] = "'orderCancellationRequestId' can't be null";
+        }
         if ($this->container['sellerId'] === null) {
             $invalidProperties[] = "'sellerId' can't be null";
         }
@@ -225,6 +265,25 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
         }
 
+        if ($this->container['orderItem'] === null) {
+            $invalidProperties[] = "'orderItem' can't be null";
+        }
+        $allowedValues = $this->getCancelReasonAllowableValues();
+        if (!is_null($this->container['cancelReason']) && !in_array($this->container['cancelReason'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'cancelReason', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
+        if (!is_null($this->container['message']) && (mb_strlen($this->container['message']) > 1024)) {
+            $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 1024.";
+        }
+
+        if (!is_null($this->container['message']) && (mb_strlen($this->container['message']) < 0)) {
+            $invalidProperties[] = "invalid value for 'message', the character length must be bigger than or equal to 0.";
+        }
+
         return $invalidProperties;
     }
 
@@ -239,6 +298,30 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets orderCancellationRequestId
+     *
+     * @return string
+     */
+    public function getOrderCancellationRequestId()
+    {
+        return $this->container['orderCancellationRequestId'];
+    }
+
+    /**
+     * Sets orderCancellationRequestId
+     *
+     * @param string $orderCancellationRequestId A unique identifier for the order cancellation request. This ID should by used by Seller to identify the cancellation response from the Channel.
+     *
+     * @return $this
+     */
+    public function setOrderCancellationRequestId($orderCancellationRequestId)
+    {
+        $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
+
+        return $this;
+    }
 
     /**
      * Gets sellerId
@@ -261,7 +344,7 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderAddressUpdate., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderCancellationRequest2., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -289,10 +372,10 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
     public function setOrderId($orderId)
     {
         if ((mb_strlen($orderId) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderAddressUpdate., must be smaller than or equal to 150.');
+            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderCancellationRequest2., must be smaller than or equal to 150.');
         }
         if ((mb_strlen($orderId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderAddressUpdate., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderCancellationRequest2., must be bigger than or equal to 1.');
         }
 
         $this->container['orderId'] = $orderId;
@@ -301,49 +384,89 @@ class OrderAddressUpdate implements ModelInterface, ArrayAccess
     }
 
     /**
-     * Gets billingAddress
+     * Gets orderItem
      *
-     * @return \JTL\SCX\Client\Channel\Model\Address|null
+     * @return \JTL\SCX\Client\Channel\Model\OrderItem1[]
      */
-    public function getBillingAddress()
+    public function getOrderItem()
     {
-        return $this->container['billingAddress'];
+        return $this->container['orderItem'];
     }
 
     /**
-     * Sets billingAddress
+     * Sets orderItem
      *
-     * @param \JTL\SCX\Client\Channel\Model\Address|null $billingAddress billingAddress
+     * @param \JTL\SCX\Client\Channel\Model\OrderItem1[] $orderItem orderItem
      *
      * @return $this
      */
-    public function setBillingAddress($billingAddress)
+    public function setOrderItem($orderItem)
     {
-        $this->container['billingAddress'] = $billingAddress;
+        $this->container['orderItem'] = $orderItem;
 
         return $this;
     }
 
     /**
-     * Gets shippingAddress
+     * Gets cancelReason
      *
-     * @return \JTL\SCX\Client\Channel\Model\Address|null
+     * @return string|null
      */
-    public function getShippingAddress()
+    public function getCancelReason()
     {
-        return $this->container['shippingAddress'];
+        return $this->container['cancelReason'];
     }
 
     /**
-     * Sets shippingAddress
+     * Sets cancelReason
      *
-     * @param \JTL\SCX\Client\Channel\Model\Address|null $shippingAddress shippingAddress
+     * @param string|null $cancelReason * BUYER_CANCELLED: the buyer cancelled the order. * UNDELIVERABLE_TO_SHIPPING_ADDRESS: Could not deliver to the address given by the buyer. * UNDELIVERABLE_BY_CARRIER: Carrier do not ship to the buyerss location. * OUT_OF_STOCK: The item is out of stock, for example because you are temporarily or permenantly sold out. * DELAYED_INVENTORY: The item is not in your inventory and there is a delay in delivery by the supplier. * PRICING_ERROR: The price on the connected marketplace was incorrect. * OTHER: Well, objvoiusly there is some reason missing in this list.
      *
      * @return $this
      */
-    public function setShippingAddress($shippingAddress)
+    public function setCancelReason($cancelReason)
     {
-        $this->container['shippingAddress'] = $shippingAddress;
+        $allowedValues = $this->getCancelReasonAllowableValues();
+        if (!is_null($cancelReason) && !in_array($cancelReason, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'cancelReason', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['cancelReason'] = $cancelReason;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
+     *
+     * @return string|null
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /**
+     * Sets message
+     *
+     * @param string|null $message message
+     *
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        if (!is_null($message) && (mb_strlen($message) > 1024)) {
+            throw new \InvalidArgumentException('invalid length for $message when calling OrderCancellationRequest2., must be smaller than or equal to 1024.');
+        }
+        if (!is_null($message) && (mb_strlen($message) < 0)) {
+            throw new \InvalidArgumentException('invalid length for $message when calling OrderCancellationRequest2., must be bigger than or equal to 0.');
+        }
+
+        $this->container['message'] = $message;
 
         return $this;
     }

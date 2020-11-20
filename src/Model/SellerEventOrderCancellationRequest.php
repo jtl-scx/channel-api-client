@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * SCX Channel API
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -38,7 +38,7 @@ use \JTL\SCX\Client\Channel\ObjectSerializer;
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventOrderCancellationRequest extends OrderCancellationRequest 
+class SellerEventOrderCancellationRequest extends OrderCancellationRequest2 
 {
     const DISCRIMINATOR = null;
 
@@ -55,7 +55,7 @@ class SellerEventOrderCancellationRequest extends OrderCancellationRequest
       * @var string[]
       */
     protected static $openAPITypes = [
-        'orderCancellationRequestId' => 'string'
+        
     ];
 
     /**
@@ -64,7 +64,7 @@ class SellerEventOrderCancellationRequest extends OrderCancellationRequest
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'orderCancellationRequestId' => 'uuid'
+        
     ];
 
     /**
@@ -94,7 +94,7 @@ class SellerEventOrderCancellationRequest extends OrderCancellationRequest
      * @var string[]
      */
     protected static $attributeMap = [
-        'orderCancellationRequestId' => 'orderCancellationRequestId'
+        
     ];
 
     /**
@@ -103,7 +103,7 @@ class SellerEventOrderCancellationRequest extends OrderCancellationRequest
      * @var string[]
      */
     protected static $setters = [
-        'orderCancellationRequestId' => 'setOrderCancellationRequestId'
+        
     ];
 
     /**
@@ -112,7 +112,7 @@ class SellerEventOrderCancellationRequest extends OrderCancellationRequest
      * @var string[]
      */
     protected static $getters = [
-        'orderCancellationRequestId' => 'getOrderCancellationRequestId'
+        
     ];
 
     /**
@@ -171,7 +171,6 @@ class SellerEventOrderCancellationRequest extends OrderCancellationRequest
     {
         parent::__construct($data);
 
-        $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
     }
 
     /**
@@ -183,9 +182,6 @@ class SellerEventOrderCancellationRequest extends OrderCancellationRequest
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['orderCancellationRequestId'] === null) {
-            $invalidProperties[] = "'orderCancellationRequestId' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -200,30 +196,6 @@ class SellerEventOrderCancellationRequest extends OrderCancellationRequest
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets orderCancellationRequestId
-     *
-     * @return string
-     */
-    public function getOrderCancellationRequestId()
-    {
-        return $this->container['orderCancellationRequestId'];
-    }
-
-    /**
-     * Sets orderCancellationRequestId
-     *
-     * @param string $orderCancellationRequestId A unique identifier for the order cancellation request. This ID should by used by Seller to identify the cancellation response from the Channel.
-     *
-     * @return $this
-     */
-    public function setOrderCancellationRequestId($orderCancellationRequestId)
-    {
-        $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *
