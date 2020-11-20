@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSeller
+ * SellerEventOrderCancellationDenied
  *
  * PHP version 5
  *
@@ -28,19 +28,17 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-
-use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * CreateSeller Class Doc Comment
+ * SellerEventOrderCancellationDenied Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CreateSeller implements ModelInterface, ArrayAccess
+class SellerEventOrderCancellationDenied extends CancellationDenied 
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +47,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateSeller';
+    protected static $openAPIModelName = 'SellerEventOrderCancellationDenied';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +55,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'session' => 'string',
-        'sellerId' => 'string'
+        
     ];
 
     /**
@@ -67,8 +64,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'session' => 'uuid',
-        'sellerId' => null
+        
     ];
 
     /**
@@ -78,7 +74,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -88,7 +84,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -98,8 +94,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'session' => 'session',
-        'sellerId' => 'sellerId'
+        
     ];
 
     /**
@@ -108,8 +103,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'session' => 'setSession',
-        'sellerId' => 'setSellerId'
+        
     ];
 
     /**
@@ -118,8 +112,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'session' => 'getSession',
-        'sellerId' => 'getSellerId'
+        
     ];
 
     /**
@@ -130,7 +123,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -140,7 +133,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -150,7 +143,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -167,12 +160,6 @@ class CreateSeller implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -182,8 +169,8 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['session'] = isset($data['session']) ? $data['session'] : null;
-        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        parent::__construct($data);
+
     }
 
     /**
@@ -193,11 +180,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if (!is_null($this->container['sellerId']) && !preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
-            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
-        }
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -213,59 +196,6 @@ class CreateSeller implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets session
-     *
-     * @return string|null
-     */
-    public function getSession()
-    {
-        return $this->container['session'];
-    }
-
-    /**
-     * Sets session
-     *
-     * @param string|null $session session
-     *
-     * @return $this
-     */
-    public function setSession($session)
-    {
-        $this->container['session'] = $session;
-
-        return $this;
-    }
-
-    /**
-     * Gets sellerId
-     *
-     * @return string|null
-     */
-    public function getSellerId()
-    {
-        return $this->container['sellerId'];
-    }
-
-    /**
-     * Sets sellerId
-     *
-     * @param string|null $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
-     *
-     * @return $this
-     */
-    public function setSellerId($sellerId)
-    {
-
-        if (!is_null($sellerId) && (!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling CreateSeller., must conform to the pattern /^\\w{1,50}$/.");
-        }
-
-        $this->container['sellerId'] = $sellerId;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

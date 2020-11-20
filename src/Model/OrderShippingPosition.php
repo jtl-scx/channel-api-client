@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * SCX Channel API
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -59,8 +59,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'carrier' => 'string',
         'trackingNumber' => 'string',
+        'returnTracking' => '\JTL\SCX\Client\Channel\Model\OrderShippingReturnTracking',
         'shippedAt' => '\DateTime',
-        'orderItemIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]'
+        'orderItemIdList' => '\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]',
+        'shippedFrom' => '\JTL\SCX\Client\Channel\Model\OrderShippingShippedFrom'
     ];
 
     /**
@@ -71,8 +73,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'carrier' => null,
         'trackingNumber' => null,
+        'returnTracking' => null,
         'shippedAt' => 'date-time',
-        'orderItemIdList' => null
+        'orderItemIdList' => null,
+        'shippedFrom' => null
     ];
 
     /**
@@ -104,8 +108,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'carrier' => 'carrier',
         'trackingNumber' => 'trackingNumber',
+        'returnTracking' => 'returnTracking',
         'shippedAt' => 'shippedAt',
-        'orderItemIdList' => 'orderItemIdList'
+        'orderItemIdList' => 'orderItemIdList',
+        'shippedFrom' => 'shippedFrom'
     ];
 
     /**
@@ -116,8 +122,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     protected static $setters = [
         'carrier' => 'setCarrier',
         'trackingNumber' => 'setTrackingNumber',
+        'returnTracking' => 'setReturnTracking',
         'shippedAt' => 'setShippedAt',
-        'orderItemIdList' => 'setOrderItemIdList'
+        'orderItemIdList' => 'setOrderItemIdList',
+        'shippedFrom' => 'setShippedFrom'
     ];
 
     /**
@@ -128,8 +136,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     protected static $getters = [
         'carrier' => 'getCarrier',
         'trackingNumber' => 'getTrackingNumber',
+        'returnTracking' => 'getReturnTracking',
         'shippedAt' => 'getShippedAt',
-        'orderItemIdList' => 'getOrderItemIdList'
+        'orderItemIdList' => 'getOrderItemIdList',
+        'shippedFrom' => 'getShippedFrom'
     ];
 
     /**
@@ -194,8 +204,10 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     {
         $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
         $this->container['trackingNumber'] = isset($data['trackingNumber']) ? $data['trackingNumber'] : null;
+        $this->container['returnTracking'] = isset($data['returnTracking']) ? $data['returnTracking'] : null;
         $this->container['shippedAt'] = isset($data['shippedAt']) ? $data['shippedAt'] : null;
         $this->container['orderItemIdList'] = isset($data['orderItemIdList']) ? $data['orderItemIdList'] : null;
+        $this->container['shippedFrom'] = isset($data['shippedFrom']) ? $data['shippedFrom'] : null;
     }
 
     /**
@@ -274,6 +286,30 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets returnTracking
+     *
+     * @return \JTL\SCX\Client\Channel\Model\OrderShippingReturnTracking|null
+     */
+    public function getReturnTracking()
+    {
+        return $this->container['returnTracking'];
+    }
+
+    /**
+     * Sets returnTracking
+     *
+     * @param \JTL\SCX\Client\Channel\Model\OrderShippingReturnTracking|null $returnTracking returnTracking
+     *
+     * @return $this
+     */
+    public function setReturnTracking($returnTracking)
+    {
+        $this->container['returnTracking'] = $returnTracking;
+
+        return $this;
+    }
+
+    /**
      * Gets shippedAt
      *
      * @return \DateTime|null
@@ -317,6 +353,30 @@ class OrderShippingPosition implements ModelInterface, ArrayAccess
     public function setOrderItemIdList($orderItemIdList)
     {
         $this->container['orderItemIdList'] = $orderItemIdList;
+
+        return $this;
+    }
+
+    /**
+     * Gets shippedFrom
+     *
+     * @return \JTL\SCX\Client\Channel\Model\OrderShippingShippedFrom|null
+     */
+    public function getShippedFrom()
+    {
+        return $this->container['shippedFrom'];
+    }
+
+    /**
+     * Sets shippedFrom
+     *
+     * @param \JTL\SCX\Client\Channel\Model\OrderShippingShippedFrom|null $shippedFrom shippedFrom
+     *
+     * @return $this
+     */
+    public function setShippedFrom($shippedFrom)
+    {
+        $this->container['shippedFrom'] = $shippedFrom;
 
         return $this;
     }

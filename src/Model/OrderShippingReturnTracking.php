@@ -1,6 +1,6 @@
 <?php
 /**
- * CancellationDeniedByChannel
+ * OrderShippingReturnTracking
  *
  * PHP version 5
  *
@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * SCX Channel API
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -33,14 +33,15 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * CancellationDeniedByChannel Class Doc Comment
+ * OrderShippingReturnTracking Class Doc Comment
  *
  * @category Class
+ * @description The return tracking number and carrier for the return process. Each orderItemId may have its own return tracking.
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
+class OrderShippingReturnTracking implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CancellationDeniedByChannel';
+    protected static $openAPIModelName = 'OrderShipping_returnTracking';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +58,8 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'sellerId' => 'string',
-        'orderCancellationRequestId' => 'string',
-        'reason' => 'Text'
+        'carrier' => 'string',
+        'trackingNumber' => 'string'
     ];
 
     /**
@@ -68,9 +68,8 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'sellerId' => null,
-        'orderCancellationRequestId' => 'uuid',
-        'reason' => null
+        'carrier' => null,
+        'trackingNumber' => null
     ];
 
     /**
@@ -100,9 +99,8 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'sellerId' => 'sellerId',
-        'orderCancellationRequestId' => 'orderCancellationRequestId',
-        'reason' => 'reason'
+        'carrier' => 'carrier',
+        'trackingNumber' => 'trackingNumber'
     ];
 
     /**
@@ -111,9 +109,8 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'sellerId' => 'setSellerId',
-        'orderCancellationRequestId' => 'setOrderCancellationRequestId',
-        'reason' => 'setReason'
+        'carrier' => 'setCarrier',
+        'trackingNumber' => 'setTrackingNumber'
     ];
 
     /**
@@ -122,9 +119,8 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'sellerId' => 'getSellerId',
-        'orderCancellationRequestId' => 'getOrderCancellationRequestId',
-        'reason' => 'getReason'
+        'carrier' => 'getCarrier',
+        'trackingNumber' => 'getTrackingNumber'
     ];
 
     /**
@@ -187,9 +183,8 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
-        $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
-        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
+        $this->container['carrier'] = isset($data['carrier']) ? $data['carrier'] : null;
+        $this->container['trackingNumber'] = isset($data['trackingNumber']) ? $data['trackingNumber'] : null;
     }
 
     /**
@@ -201,18 +196,11 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['sellerId'] === null) {
-            $invalidProperties[] = "'sellerId' can't be null";
+        if ($this->container['carrier'] === null) {
+            $invalidProperties[] = "'carrier' can't be null";
         }
-        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
-            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
-        }
-
-        if ($this->container['orderCancellationRequestId'] === null) {
-            $invalidProperties[] = "'orderCancellationRequestId' can't be null";
-        }
-        if ($this->container['reason'] === null) {
-            $invalidProperties[] = "'reason' can't be null";
+        if ($this->container['trackingNumber'] === null) {
+            $invalidProperties[] = "'trackingNumber' can't be null";
         }
         return $invalidProperties;
     }
@@ -230,78 +218,49 @@ class CancellationDeniedByChannel implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets sellerId
+     * Gets carrier
      *
      * @return string
      */
-    public function getSellerId()
+    public function getCarrier()
     {
-        return $this->container['sellerId'];
+        return $this->container['carrier'];
     }
 
     /**
-     * Sets sellerId
+     * Sets carrier
      *
-     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param string $carrier carrier
      *
      * @return $this
      */
-    public function setSellerId($sellerId)
+    public function setCarrier($carrier)
     {
-
-        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling CancellationDeniedByChannel., must conform to the pattern /^\\w{1,50}$/.");
-        }
-
-        $this->container['sellerId'] = $sellerId;
+        $this->container['carrier'] = $carrier;
 
         return $this;
     }
 
     /**
-     * Gets orderCancellationRequestId
+     * Gets trackingNumber
      *
      * @return string
      */
-    public function getOrderCancellationRequestId()
+    public function getTrackingNumber()
     {
-        return $this->container['orderCancellationRequestId'];
+        return $this->container['trackingNumber'];
     }
 
     /**
-     * Sets orderCancellationRequestId
+     * Sets trackingNumber
      *
-     * @param string $orderCancellationRequestId A unique identifier for the order cancellation request. This ID should by used by Seller to identify the cancellation response from the Channel.
+     * @param string $trackingNumber trackingNumber
      *
      * @return $this
      */
-    public function setOrderCancellationRequestId($orderCancellationRequestId)
+    public function setTrackingNumber($trackingNumber)
     {
-        $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
-
-        return $this;
-    }
-
-    /**
-     * Gets reason
-     *
-     * @return Text
-     */
-    public function getReason()
-    {
-        return $this->container['reason'];
-    }
-
-    /**
-     * Sets reason
-     *
-     * @param Text $reason reason
-     *
-     * @return $this
-     */
-    public function setReason($reason)
-    {
-        $this->container['reason'] = $reason;
+        $this->container['trackingNumber'] = $trackingNumber;
 
         return $this;
     }

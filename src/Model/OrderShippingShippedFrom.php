@@ -1,6 +1,6 @@
 <?php
 /**
- * CreateSeller
+ * OrderShippingShippedFrom
  *
  * PHP version 5
  *
@@ -33,14 +33,15 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * CreateSeller Class Doc Comment
+ * OrderShippingShippedFrom Class Doc Comment
  *
  * @category Class
+ * @description The adress from where the shipment is sent.
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class CreateSeller implements ModelInterface, ArrayAccess
+class OrderShippingShippedFrom implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +50,7 @@ class CreateSeller implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'CreateSeller';
+    protected static $openAPIModelName = 'OrderShipping_shippedFrom';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +58,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'session' => 'string',
-        'sellerId' => 'string'
+        'city' => 'string',
+        'country' => 'string',
+        'postcode' => 'string'
     ];
 
     /**
@@ -67,8 +69,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'session' => 'uuid',
-        'sellerId' => null
+        'city' => null,
+        'country' => null,
+        'postcode' => null
     ];
 
     /**
@@ -98,8 +101,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'session' => 'session',
-        'sellerId' => 'sellerId'
+        'city' => 'city',
+        'country' => 'country',
+        'postcode' => 'postcode'
     ];
 
     /**
@@ -108,8 +112,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'session' => 'setSession',
-        'sellerId' => 'setSellerId'
+        'city' => 'setCity',
+        'country' => 'setCountry',
+        'postcode' => 'setPostcode'
     ];
 
     /**
@@ -118,8 +123,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'session' => 'getSession',
-        'sellerId' => 'getSellerId'
+        'city' => 'getCity',
+        'country' => 'getCountry',
+        'postcode' => 'getPostcode'
     ];
 
     /**
@@ -182,8 +188,9 @@ class CreateSeller implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['session'] = isset($data['session']) ? $data['session'] : null;
-        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['city'] = isset($data['city']) ? $data['city'] : null;
+        $this->container['country'] = isset($data['country']) ? $data['country'] : null;
+        $this->container['postcode'] = isset($data['postcode']) ? $data['postcode'] : null;
     }
 
     /**
@@ -195,10 +202,15 @@ class CreateSeller implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['sellerId']) && !preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
-            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        if ($this->container['city'] === null) {
+            $invalidProperties[] = "'city' can't be null";
         }
-
+        if ($this->container['country'] === null) {
+            $invalidProperties[] = "'country' can't be null";
+        }
+        if ($this->container['postcode'] === null) {
+            $invalidProperties[] = "'postcode' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -215,54 +227,73 @@ class CreateSeller implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets session
+     * Gets city
      *
-     * @return string|null
+     * @return string
      */
-    public function getSession()
+    public function getCity()
     {
-        return $this->container['session'];
+        return $this->container['city'];
     }
 
     /**
-     * Sets session
+     * Sets city
      *
-     * @param string|null $session session
+     * @param string $city city
      *
      * @return $this
      */
-    public function setSession($session)
+    public function setCity($city)
     {
-        $this->container['session'] = $session;
+        $this->container['city'] = $city;
 
         return $this;
     }
 
     /**
-     * Gets sellerId
+     * Gets country
      *
-     * @return string|null
+     * @return string
      */
-    public function getSellerId()
+    public function getCountry()
     {
-        return $this->container['sellerId'];
+        return $this->container['country'];
     }
 
     /**
-     * Sets sellerId
+     * Sets country
      *
-     * @param string|null $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param string $country country
      *
      * @return $this
      */
-    public function setSellerId($sellerId)
+    public function setCountry($country)
     {
+        $this->container['country'] = $country;
 
-        if (!is_null($sellerId) && (!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling CreateSeller., must conform to the pattern /^\\w{1,50}$/.");
-        }
+        return $this;
+    }
 
-        $this->container['sellerId'] = $sellerId;
+    /**
+     * Gets postcode
+     *
+     * @return string
+     */
+    public function getPostcode()
+    {
+        return $this->container['postcode'];
+    }
+
+    /**
+     * Sets postcode
+     *
+     * @param string $postcode postcode
+     *
+     * @return $this
+     */
+    public function setPostcode($postcode)
+    {
+        $this->container['postcode'] = $postcode;
 
         return $this;
     }

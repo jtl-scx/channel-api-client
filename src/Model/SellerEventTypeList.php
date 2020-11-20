@@ -13,7 +13,7 @@
 /**
  * SCX Channel API
  *
- * # Changelog  ## 2019-09-30  * add `/channel/order/address-update` to update address inforation of an existing order. (EA-2140)  ## 2019-08-27  * add `GET /channel/events` call to retrive all channels avaiable seller events through SCX platform. (EA-1985)
+ * SCX Channel API
  *
  * The version of the OpenAPI document: 1.0.0
  * 
@@ -48,6 +48,8 @@ class SellerEventTypeList
     const SELLERORDER_SHIPPING = 'Seller:Order.Shipping';
     const SELLERORDER_PAYMENT = 'Seller:Order.Payment';
     const SELLERORDER_CANCELLATION_REQUEST = 'Seller:Order.Cancellation.Request';
+    const SELLERORDER_CANCELLATION_ACCEPTED = 'Seller:Order.Cancellation.Accepted';
+    const SELLERORDER_CANCELLATION_DENIED = 'Seller:Order.Cancellation.Denied';
     const SELLEROFFER_NEW = 'Seller:Offer.New';
     const SELLEROFFER_UPDATE = 'Seller:Offer.Update';
     const SELLEROFFER_END = 'Seller:Offer.End';
@@ -55,6 +57,7 @@ class SellerEventTypeList
     const SELLEROFFER_PRICE_UPDATE = 'Seller:Offer.PriceUpdate';
     const SELLERREPORT_REQUEST = 'Seller:Report.Request';
     const SELLERCHANNEL_UNLINKED = 'Seller:Channel.Unlinked';
+    const SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST = 'Seller:Meta.SellerAttributesUpdateRequest';
     
     /**
      * Gets allowable values of the enum
@@ -68,6 +71,8 @@ class SellerEventTypeList
             self::SELLERORDER_SHIPPING,
             self::SELLERORDER_PAYMENT,
             self::SELLERORDER_CANCELLATION_REQUEST,
+            self::SELLERORDER_CANCELLATION_ACCEPTED,
+            self::SELLERORDER_CANCELLATION_DENIED,
             self::SELLEROFFER_NEW,
             self::SELLEROFFER_UPDATE,
             self::SELLEROFFER_END,
@@ -75,6 +80,7 @@ class SellerEventTypeList
             self::SELLEROFFER_PRICE_UPDATE,
             self::SELLERREPORT_REQUEST,
             self::SELLERCHANNEL_UNLINKED,
+            self::SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST,
         ];
     }
 }
