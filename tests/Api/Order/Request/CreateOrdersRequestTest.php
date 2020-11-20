@@ -8,7 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Model\OrderList;
 
 /**
@@ -17,7 +17,7 @@ use JTL\SCX\Client\Channel\Model\OrderList;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest
  */
-class CreateOrdersRequestTest extends AbstractTestCase
+class CreateOrdersRequestTest extends TestCase
 {
     public function testCanBeCreatedAndUsed(): void
     {

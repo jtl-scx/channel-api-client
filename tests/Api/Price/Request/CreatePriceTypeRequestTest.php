@@ -8,7 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Price\Request;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Model\PriceType;
 
 /**
@@ -17,7 +17,7 @@ use JTL\SCX\Client\Channel\Model\PriceType;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Price\Request\CreatePriceTypeRequest
  */
-class CreatePriceTypeRequestTest extends AbstractTestCase
+class CreatePriceTypeRequestTest extends TestCase
 {
     public function testCanBeCreatedAndUsed(): void
     {

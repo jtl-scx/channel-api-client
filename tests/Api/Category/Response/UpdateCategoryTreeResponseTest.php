@@ -8,7 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Category\Response;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Model\CategoryTreeVersion;
 use JTL\SCX\Client\Response\AbstractResponse;
 
@@ -18,7 +18,7 @@ use JTL\SCX\Client\Response\AbstractResponse;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Category\Response\UpdateCategoryTreeResponse
  */
-class UpdateCategoryTreeResponseTest extends AbstractTestCase
+class UpdateCategoryTreeResponseTest extends TestCase
 {
     public function testCanBeCreated(): void
     {

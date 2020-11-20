@@ -9,7 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Meta;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Meta\Request\CreateShippingRulesRequest;
 use JTL\SCX\Client\Channel\Api\Meta\Response\CreateShippingRulesResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -17,7 +17,7 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @covers \JTL\SCX\Client\Channel\Api\Meta\ShippingRulesApi
  */
-class ShippingRulesApiTest extends AbstractTestCase
+class ShippingRulesApiTest extends TestCase
 {
 
     public function testCanCreatePaymentRules():void

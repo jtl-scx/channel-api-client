@@ -9,7 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Price;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Price\Request\CreatePriceTypeRequest;
 use JTL\SCX\Client\Channel\Api\Price\Response\CreatePriceTypeResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -20,7 +20,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Price\PriceApi
  */
-class PriceApiTest extends AbstractTestCase
+class PriceApiTest extends TestCase
 {
     public function testCreatePriceType(): void
     {

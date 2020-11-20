@@ -9,7 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Order;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
@@ -29,7 +29,7 @@ use Psr\Http\Message\StreamInterface;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Order\OrderApi
  */
-class OrderApiTest extends AbstractTestCase
+class OrderApiTest extends TestCase
 {
     public function testCreate(): void
     {

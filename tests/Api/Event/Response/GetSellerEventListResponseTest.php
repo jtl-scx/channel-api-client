@@ -8,7 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event\Response;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 
 /**
@@ -18,7 +18,7 @@ use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
  * @covers \JTL\SCX\Client\Channel\Api\Event\Response\GetSellerEventListResponse
  * @covers \JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList
  */
-class GetSellerEventListResponseTest extends AbstractTestCase
+class GetSellerEventListResponseTest extends TestCase
 {
     public function testCanBeCreated(): void
     {

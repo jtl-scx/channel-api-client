@@ -8,7 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Attribute\Request;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Model\AttributeList;
 
 /**
@@ -17,7 +17,7 @@ use JTL\SCX\Client\Channel\Model\AttributeList;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Attribute\Request\CreateCategoryAttributesRequest
  */
-class CreateCategoryAttributesRequestTest extends AbstractTestCase
+class CreateCategoryAttributesRequestTest extends TestCase
 {
     public function testCanBeCreatedAndValidated(): void
     {

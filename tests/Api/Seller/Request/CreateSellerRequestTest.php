@@ -8,7 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Seller\Request;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Model\CreateSeller;
 
 /**
@@ -17,7 +17,7 @@ use JTL\SCX\Client\Channel\Model\CreateSeller;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Seller\Request\CreateSellerRequest
  */
-class CreateSellerRequestTest extends AbstractTestCase
+class CreateSellerRequestTest extends TestCase
 {
     public function testCanBeCreatedAndValidated(): void
     {

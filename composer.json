@@ -5,15 +5,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.4",
-        "myclabs/php-enum": "^1.7",
-        "jtl/php-generic-collection": "^0.3"
+        "jtl-scx/api-base-client": "^1.1",
+        "jtl/php-generic-collection": "^0.3",
+        "myclabs/php-enum": "^1.7"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.15",
-        "guzzlehttp/guzzle": "^6.3",
-        "jtl-scx/api-base-client": "^1.0",
-        "mockery/mockery": "^1.2",
-        "phpunit/phpunit": "^8.3"
+        "phpunit/phpunit": "^9.0"
     },
     "suggest": {
         "jtl/scx-api-client": "Required. Installed it!",

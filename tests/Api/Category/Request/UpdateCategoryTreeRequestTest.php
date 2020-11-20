@@ -8,7 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Category\Request;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
 
 /**
@@ -17,7 +17,7 @@ use JTL\SCX\Client\Channel\Model\ChannelCategoryTree;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest
  */
-class UpdateCategoryTreeRequestTest extends AbstractTestCase
+class UpdateCategoryTreeRequestTest extends TestCase
 {
     public function testCanBeCreatedAndUsed(): void
     {

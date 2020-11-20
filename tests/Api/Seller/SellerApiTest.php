@@ -9,7 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Seller;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Seller\Request\CreateSellerRequest;
 use JTL\SCX\Client\Channel\Api\Seller\Response\CreateSellerResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -20,7 +20,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Seller\SellerApi
  */
-class SellerApiTest extends AbstractTestCase
+class SellerApiTest extends TestCase
 {
     public function testCreateSeller(): void
     {

@@ -8,7 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Attribute\Request;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class DeleteGlobalAttributeRequestTest
@@ -16,7 +16,7 @@ use JTL\SCX\Client\Channel\AbstractTestCase;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Attribute\Request\DeleteGlobalAttributeRequest
  */
-class DeleteGlobalAttributeRequestTest extends AbstractTestCase
+class DeleteGlobalAttributeRequestTest extends TestCase
 {
     public function testCanBeCreatedAndValidated(): void
     {

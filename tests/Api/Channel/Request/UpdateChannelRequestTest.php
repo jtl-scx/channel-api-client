@@ -8,8 +8,9 @@
 
 namespace JTL\SCX\Client\Channel\Api\Channel\Request;
 
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Model\ChannelUpdate;
+
 
 /**
  * Class UpdateChannelRequestTest
@@ -17,7 +18,7 @@ use JTL\SCX\Client\Channel\Model\ChannelUpdate;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Channel\Request\UpdateChannelRequest
  */
-class UpdateChannelRequestTest extends AbstractTestCase
+class UpdateChannelRequestTest extends TestCase
 {
     public function testCanBeCreatedAndUsed(): void
     {

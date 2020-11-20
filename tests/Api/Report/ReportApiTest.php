@@ -9,7 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Report;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\Channel\AbstractTestCase;
+use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Report\Request\SendReportRequest;
 use JTL\SCX\Client\Channel\Api\Report\Response\SendReportResponse;
 use Psr\Http\Message\ResponseInterface;
@@ -20,7 +20,7 @@ use Psr\Http\Message\ResponseInterface;
  *
  * @covers \JTL\SCX\Client\Channel\Api\Report\ReportApi
  */
-class ReportApiTest extends AbstractTestCase
+class ReportApiTest extends TestCase
 {
     public function testSendReport(): void
     {
