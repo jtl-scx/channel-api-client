@@ -14,6 +14,8 @@ use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationAccepted;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
@@ -38,6 +40,8 @@ use MyCLabs\Enum\Enum;
  * @method static EventType SellerReportRequest()
  * @method static EventType SellerChannelUnlinked()
  * @method static EventType SellerMetaSellerAttributesUpdateRequest()
+ * @method static EventType SellerOrderCancellationAccept()
+ * @method static EventType SellerOrderCancellationDenied()
  */
 class EventType extends Enum
 {
@@ -55,6 +59,8 @@ class EventType extends Enum
     public const SellerReportRequest = 'Seller:Report.Request';
     public const SellerChannelUnlinked = 'Seller:Channel.Unlinked';
     public const SellerMetaSellerAttributesUpdateRequest = 'Seller:Meta.SellerAttributesUpdateRequest';
+    public const SellerOrderCancellationAccept = 'Seller:Order.Cancellation.Accept';
+    public const SellerOrderCancellationDenied = 'Seller:Order.Cancellation.Denied';
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -96,6 +102,10 @@ class EventType extends Enum
                 return SellerEventChannelUnlinked::class;
             case $this::SellerMetaSellerAttributesUpdateRequest():
                 return SellerEventSellerAttributesUpdateRequest::class;
+            case $this::SellerOrderCancellationAccept():
+                return SellerEventOrderCancellationAccepted::class;
+            case $this::SellerOrderCancellationDenied():
+                return SellerEventOrderCancellationDenied::class;
         }
 
         return \stdClass::class;
