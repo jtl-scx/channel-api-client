@@ -63,6 +63,7 @@ class Address implements ModelInterface, ArrayAccess
         'companyName' => 'string',
         'street' => 'string',
         'houseNumber' => 'string',
+        'addition' => 'string',
         'postcode' => 'string',
         'city' => 'string',
         'phone' => 'string',
@@ -81,6 +82,7 @@ class Address implements ModelInterface, ArrayAccess
         'companyName' => null,
         'street' => null,
         'houseNumber' => null,
+        'addition' => null,
         'postcode' => null,
         'city' => null,
         'phone' => null,
@@ -120,6 +122,7 @@ class Address implements ModelInterface, ArrayAccess
         'companyName' => 'companyName',
         'street' => 'street',
         'houseNumber' => 'houseNumber',
+        'addition' => 'addition',
         'postcode' => 'postcode',
         'city' => 'city',
         'phone' => 'phone',
@@ -138,6 +141,7 @@ class Address implements ModelInterface, ArrayAccess
         'companyName' => 'setCompanyName',
         'street' => 'setStreet',
         'houseNumber' => 'setHouseNumber',
+        'addition' => 'setAddition',
         'postcode' => 'setPostcode',
         'city' => 'setCity',
         'phone' => 'setPhone',
@@ -156,6 +160,7 @@ class Address implements ModelInterface, ArrayAccess
         'companyName' => 'getCompanyName',
         'street' => 'getStreet',
         'houseNumber' => 'getHouseNumber',
+        'addition' => 'getAddition',
         'postcode' => 'getPostcode',
         'city' => 'getCity',
         'phone' => 'getPhone',
@@ -245,6 +250,7 @@ class Address implements ModelInterface, ArrayAccess
         $this->container['companyName'] = isset($data['companyName']) ? $data['companyName'] : null;
         $this->container['street'] = isset($data['street']) ? $data['street'] : null;
         $this->container['houseNumber'] = isset($data['houseNumber']) ? $data['houseNumber'] : null;
+        $this->container['addition'] = isset($data['addition']) ? $data['addition'] : null;
         $this->container['postcode'] = isset($data['postcode']) ? $data['postcode'] : null;
         $this->container['city'] = isset($data['city']) ? $data['city'] : null;
         $this->container['phone'] = isset($data['phone']) ? $data['phone'] : null;
@@ -260,6 +266,9 @@ class Address implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['lastName'] === null) {
+            $invalidProperties[] = "'lastName' can't be null";
+        }
         $allowedValues = $this->getGenderAllowableValues();
         if (!is_null($this->container['gender']) && !in_array($this->container['gender'], $allowedValues, true)) {
             $invalidProperties[] = sprintf(
@@ -268,6 +277,15 @@ class Address implements ModelInterface, ArrayAccess
             );
         }
 
+        if ($this->container['street'] === null) {
+            $invalidProperties[] = "'street' can't be null";
+        }
+        if ($this->container['city'] === null) {
+            $invalidProperties[] = "'city' can't be null";
+        }
+        if ($this->container['country'] === null) {
+            $invalidProperties[] = "'country' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -310,7 +328,7 @@ class Address implements ModelInterface, ArrayAccess
     /**
      * Gets lastName
      *
-     * @return string|null
+     * @return string
      */
     public function getLastName()
     {
@@ -320,7 +338,7 @@ class Address implements ModelInterface, ArrayAccess
     /**
      * Sets lastName
      *
-     * @param string|null $lastName lastName
+     * @param string $lastName lastName
      *
      * @return $this
      */
@@ -391,7 +409,7 @@ class Address implements ModelInterface, ArrayAccess
     /**
      * Gets street
      *
-     * @return string|null
+     * @return string
      */
     public function getStreet()
     {
@@ -401,7 +419,7 @@ class Address implements ModelInterface, ArrayAccess
     /**
      * Sets street
      *
-     * @param string|null $street street
+     * @param string $street street
      *
      * @return $this
      */
@@ -437,6 +455,30 @@ class Address implements ModelInterface, ArrayAccess
     }
 
     /**
+     * Gets addition
+     *
+     * @return string|null
+     */
+    public function getAddition()
+    {
+        return $this->container['addition'];
+    }
+
+    /**
+     * Sets addition
+     *
+     * @param string|null $addition addition
+     *
+     * @return $this
+     */
+    public function setAddition($addition)
+    {
+        $this->container['addition'] = $addition;
+
+        return $this;
+    }
+
+    /**
      * Gets postcode
      *
      * @return string|null
@@ -463,7 +505,7 @@ class Address implements ModelInterface, ArrayAccess
     /**
      * Gets city
      *
-     * @return string|null
+     * @return string
      */
     public function getCity()
     {
@@ -473,7 +515,7 @@ class Address implements ModelInterface, ArrayAccess
     /**
      * Sets city
      *
-     * @param string|null $city city
+     * @param string $city city
      *
      * @return $this
      */
@@ -511,7 +553,7 @@ class Address implements ModelInterface, ArrayAccess
     /**
      * Gets country
      *
-     * @return string|null
+     * @return string
      */
     public function getCountry()
     {
@@ -521,7 +563,7 @@ class Address implements ModelInterface, ArrayAccess
     /**
      * Sets country
      *
-     * @param string|null $country country
+     * @param string $country country
      *
      * @return $this
      */
