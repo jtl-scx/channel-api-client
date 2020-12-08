@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderItem1
+ * OrderCancellationItem
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderItem1 Class Doc Comment
+ * OrderCancellationItem Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderItem1 implements ModelInterface, ArrayAccess
+class OrderCancellationItem implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderItem1 implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderItem_1';
+    protected static $openAPIModelName = 'OrderCancellationItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -241,10 +241,10 @@ class OrderItem1 implements ModelInterface, ArrayAccess
     public function setOrderItemId($orderItemId)
     {
         if ((mb_strlen($orderItemId) > 50)) {
-            throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderItem1., must be smaller than or equal to 50.');
+            throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderCancellationItem., must be smaller than or equal to 50.');
         }
         if ((mb_strlen($orderItemId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderItem1., must be bigger than or equal to 1.');
+            throw new \InvalidArgumentException('invalid length for $orderItemId when calling OrderCancellationItem., must be bigger than or equal to 1.');
         }
 
         $this->container['orderItemId'] = $orderItemId;
