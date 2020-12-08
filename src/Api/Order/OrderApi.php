@@ -11,10 +11,12 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\ApiResponseDeserializer;
+use JTL\SCX\Client\Channel\Api\Order\Request\CancelOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\CancelOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
@@ -71,6 +73,12 @@ class OrderApi
         $response = $this->client->request($request);
 
         return $this->createResponse($response, UpdateOrderAddressResponse::class);
+    }
+
+    public function cancel(CancelOrderRequest $request)
+    {
+        $response = $this->client->request($request);
+        return $this->createResponse($response, CancelOrdersResponse::class);
     }
 
     /**
