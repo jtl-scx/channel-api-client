@@ -16,7 +16,7 @@ use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
-use JTL\SCX\Client\Channel\Api\Order\Response\CancelOrdersResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\CancelOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
@@ -75,16 +75,16 @@ class OrderApi
         return $this->createResponse($response, UpdateOrderAddressResponse::class);
     }
 
-    public function cancel(CancelOrderRequest $request)
+    public function cancel(CancelOrderRequest $request): CancelOrderResponse
     {
         $response = $this->client->request($request);
-        return $this->createResponse($response, CancelOrdersResponse::class);
+        return $this->createResponse($response, CancelOrderResponse::class);
     }
 
     /**
      * @param ResponseInterface $apiResponse
      * @param string $responseClass
-     * @return AbstractOrderResponse|CreateOrdersResponse|UpdateOrderStatusResponse|UpdateOrderAddressResponse
+     * @return AbstractOrderResponse|CreateOrdersResponse|UpdateOrderStatusResponse|UpdateOrderAddressResponse|CancelOrderResponse
      */
     private function createResponse(ResponseInterface $apiResponse, string $responseClass): AbstractOrderResponse
     {

@@ -9,19 +9,19 @@
 namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
-use JTL\SCX\Client\Channel\Model\OrderCancellationRequest2;
+use JTL\SCX\Client\Channel\Model\OrderCancellationRequest;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
 class CancelOrderRequest extends AbstractScxApiRequest
 {
-    private OrderCancellationRequest2 $cancellationRequest;
+    private OrderCancellationRequest $cancellationRequest;
 
-    public function __construct(OrderCancellationRequest2 $cancellationRequest)
+    public function __construct(OrderCancellationRequest $cancellationRequest)
     {
         $this->cancellationRequest = $cancellationRequest;
     }
 
-    public function getCancellationRequest(): OrderCancellationRequest2
+    public function getCancellationRequest(): OrderCancellationRequest
     {
         return $this->cancellationRequest;
     }

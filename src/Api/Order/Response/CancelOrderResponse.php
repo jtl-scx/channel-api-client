@@ -8,6 +8,6 @@
 
 namespace JTL\SCX\Client\Channel\Api\Order\Response;
 
-class CancelOrdersResponse extends AbstractOrderResponse
+class CancelOrderResponse extends AbstractOrderResponse
 {
 }

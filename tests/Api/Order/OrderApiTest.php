@@ -9,6 +9,8 @@
 namespace JTL\SCX\Client\Channel\Api\Order;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
+use JTL\SCX\Client\Channel\Api\Order\Request\CancelOrderRequest;
+use JTL\SCX\Client\Channel\Api\Order\Response\CancelOrderResponse;
 use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
@@ -79,9 +81,25 @@ class OrderApiTest extends TestCase
         $this->assertInstanceOf(UpdateOrderAddressResponse::class, $client->updateAddress($requestMock));
     }
 
+    public function testCanCancelOrder(): void
+    {
+        $request = $this->createStub(CancelOrderRequest::class);
+        $streamMock = $this->createMock(StreamInterface::class);
+        $streamMock->method('getContents')->willReturn(null);
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock->method('getStatusCode')->willReturn(200);
+        $responseMock->method('getBody')->willReturn($streamMock);
+
+        $apiClientMock = $this->createMock(AuthAwareApiClient::class);
+        $apiClientMock->expects($this->once())->method('request')->with($request)->willReturn($responseMock);
+
+        $client = new OrderApi($apiClientMock);
+        $this->assertInstanceOf(CancelOrderResponse::class, $client->cancel($request));
+    }
+
     public function testCanRetrieveResponseWithError(): void
     {
-        $errorJson ='{"foo": "bar"}';
+        $errorJson = '{"foo": "bar"}';
 
         $requestMock = $this->createMock(CreateOrderRequest::class);
         $streamMock = $this->createMock(StreamInterface::class);
@@ -99,7 +117,7 @@ class OrderApiTest extends TestCase
         $deserializerMock->expects($this->once())->method('deserializeObject')->willReturn($errorResponse);
 
         $client = new OrderApi($apiClientMock, $deserializerMock);
-        $response= $client->create($requestMock);
+        $response = $client->create($requestMock);
         $this->assertInstanceOf(AbstractOrderResponse::class, $response);
         $this->assertTrue($response->hasError());
     }
