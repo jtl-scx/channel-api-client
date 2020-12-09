@@ -9,19 +9,19 @@
 namespace JTL\SCX\Client\Channel\Api\Order;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\Channel\Api\Order\Request\CancelOrderRequest;
-use JTL\SCX\Client\Channel\Api\Order\Response\CancelOrderResponse;
-use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\RequestOrderCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
 use JTL\SCX\Client\Channel\Model\ErrorResponseList;
 use JTL\SCX\Client\Channel\Model\InlineResponse500;
 use JTL\SCX\Client\ResponseDeserializer;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
 
@@ -81,9 +81,9 @@ class OrderApiTest extends TestCase
         $this->assertInstanceOf(UpdateOrderAddressResponse::class, $client->updateAddress($requestMock));
     }
 
-    public function testCanCancelOrder(): void
+    public function testCanRequestOrderCancellation(): void
     {
-        $request = $this->createStub(CancelOrderRequest::class);
+        $request = $this->createStub(RequestOrderCancellationRequest::class);
         $streamMock = $this->createMock(StreamInterface::class);
         $streamMock->method('getContents')->willReturn(null);
         $responseMock = $this->createMock(ResponseInterface::class);
@@ -94,7 +94,7 @@ class OrderApiTest extends TestCase
         $apiClientMock->expects($this->once())->method('request')->with($request)->willReturn($responseMock);
 
         $client = new OrderApi($apiClientMock);
-        $this->assertInstanceOf(CancelOrderResponse::class, $client->cancel($request));
+        $this->assertInstanceOf(RequestOrderCancellationResponse::class, $client->requestOrderCancellation($request));
     }
 
     public function testCanRetrieveResponseWithError(): void

@@ -8,6 +8,10 @@
 
 namespace JTL\SCX\Client\Channel\Api\Order\Response;
 
-class CancelOrderResponse extends AbstractOrderResponse
+class RequestOrderCancellationResponse extends AbstractOrderResponse
 {
+    public function isSuccessful(): bool
+    {
+        return $this->getStatusCode() === 201;
+    }
 }

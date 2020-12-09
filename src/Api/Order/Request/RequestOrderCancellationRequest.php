@@ -12,7 +12,7 @@ use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 use JTL\SCX\Client\Channel\Model\OrderCancellationRequest;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
-class CancelOrderRequest extends AbstractScxApiRequest
+class RequestOrderCancellationRequest extends AbstractScxApiRequest
 {
     private OrderCancellationRequest $cancellationRequest;
 

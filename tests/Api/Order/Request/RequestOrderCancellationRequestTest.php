@@ -12,16 +12,16 @@ use JTL\SCX\Client\Channel\Model\OrderCancellationRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \JTL\SCX\Client\Channel\Api\Order\Request\CancelOrderRequest
+ * @covers \JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest
  */
-class CancelOrderRequestTest extends TestCase
+class RequestOrderCancellationRequestTest extends TestCase
 {
 
     public function testCanBeCreatedAndUsed(): void
     {
         $cancellationRequest = $this->createMock(OrderCancellationRequest::class);
 
-        $request = new CancelOrderRequest($cancellationRequest);
+        $request = new RequestOrderCancellationRequest($cancellationRequest);
 
         $this->assertSame($cancellationRequest, $request->getCancellationRequest());
         $this->assertSame((string)$cancellationRequest, $request->getBody());
