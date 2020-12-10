@@ -11,13 +11,13 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\ApiResponseDeserializer;
-use JTL\SCX\Client\Channel\Api\Order\Request\CancelOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
-use JTL\SCX\Client\Channel\Api\Order\Response\CancelOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\RequestOrderCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
 use JTL\SCX\Client\Channel\Model\ErrorResponseList;
@@ -75,16 +75,22 @@ class OrderApi
         return $this->createResponse($response, UpdateOrderAddressResponse::class);
     }
 
-    public function cancel(CancelOrderRequest $request): CancelOrderResponse
+    /**
+     * @param RequestOrderCancellationRequest $request
+     * @return RequestOrderCancellationResponse
+     * @throws GuzzleException
+     * @throws RequestFailedException
+     */
+    public function requestOrderCancellation(RequestOrderCancellationRequest $request): RequestOrderCancellationResponse
     {
         $response = $this->client->request($request);
-        return $this->createResponse($response, CancelOrderResponse::class);
+        return $this->createResponse($response, RequestOrderCancellationResponse::class);
     }
 
     /**
      * @param ResponseInterface $apiResponse
      * @param string $responseClass
-     * @return AbstractOrderResponse|CreateOrdersResponse|UpdateOrderStatusResponse|UpdateOrderAddressResponse|CancelOrderResponse
+     * @return AbstractOrderResponse|CreateOrdersResponse|UpdateOrderStatusResponse|UpdateOrderAddressResponse|RequestOrderCancellationResponse
      */
     private function createResponse(ResponseInterface $apiResponse, string $responseClass): AbstractOrderResponse
     {
