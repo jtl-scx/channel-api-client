@@ -4,7 +4,7 @@
     "description": "API Client for SCX Channel API",
     "license": "MIT",
     "require": {
-        "php": "^7.4",
+        "php": "^7.4|8.0.*",
         "jtl-scx/api-base-client": "^1.2",
         "jtl/php-generic-collection": "^0.3",
         "myclabs/php-enum": "^1.7"
