@@ -1,6 +1,6 @@
 <?php
 /**
- * ChannelUpdateFeatureList
+ * SellerEventOrderInvoice
  *
  * PHP version 5
  *
@@ -28,19 +28,17 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-
-use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * ChannelUpdateFeatureList Class Doc Comment
+ * SellerEventOrderInvoice Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
+class SellerEventOrderInvoice extends InvoiceMetaData
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +47,7 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'ChannelUpdate_featureList';
+    protected static $openAPIModelName = 'SellerEventOrderInvoice';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,9 +55,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'quantityPriceSupported' => 'bool',
-        'remainingQuanitySupported' => 'bool',
-        'variationsSupported' => 'bool'
+        'documentId' => 'string',
+        'documentExpiresAt' => '\DateTime'
     ];
 
     /**
@@ -68,9 +65,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'quantityPriceSupported' => null,
-        'remainingQuanitySupported' => null,
-        'variationsSupported' => null
+        'documentId' => null,
+        'documentExpiresAt' => 'date-time'
     ];
 
     /**
@@ -80,7 +76,7 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -90,7 +86,7 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -100,9 +96,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'quantityPriceSupported' => 'quantityPriceSupported',
-        'remainingQuanitySupported' => 'remainingQuanitySupported',
-        'variationsSupported' => 'variationsSupported'
+        'documentId' => 'documentId',
+        'documentExpiresAt' => 'documentExpiresAt'
     ];
 
     /**
@@ -111,9 +106,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'quantityPriceSupported' => 'setQuantityPriceSupported',
-        'remainingQuanitySupported' => 'setRemainingQuanitySupported',
-        'variationsSupported' => 'setVariationsSupported'
+        'documentId' => 'setDocumentId',
+        'documentExpiresAt' => 'setDocumentExpiresAt'
     ];
 
     /**
@@ -122,9 +116,8 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'quantityPriceSupported' => 'getQuantityPriceSupported',
-        'remainingQuanitySupported' => 'getRemainingQuanitySupported',
-        'variationsSupported' => 'getVariationsSupported'
+        'documentId' => 'getDocumentId',
+        'documentExpiresAt' => 'getDocumentExpiresAt'
     ];
 
     /**
@@ -135,7 +128,7 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -145,7 +138,7 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -155,7 +148,7 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -172,12 +165,6 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
 
 
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -187,9 +174,10 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['quantityPriceSupported'] = isset($data['quantityPriceSupported']) ? $data['quantityPriceSupported'] : false;
-        $this->container['remainingQuanitySupported'] = isset($data['remainingQuanitySupported']) ? $data['remainingQuanitySupported'] : false;
-        $this->container['variationsSupported'] = isset($data['variationsSupported']) ? $data['variationsSupported'] : false;
+        parent::__construct($data);
+
+        $this->container['documentId'] = isset($data['documentId']) ? $data['documentId'] : null;
+        $this->container['documentExpiresAt'] = isset($data['documentExpiresAt']) ? $data['documentExpiresAt'] : null;
     }
 
     /**
@@ -199,8 +187,14 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['documentId'] === null) {
+            $invalidProperties[] = "'documentId' can't be null";
+        }
+        if ($this->container['documentExpiresAt'] === null) {
+            $invalidProperties[] = "'documentExpiresAt' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -217,73 +211,49 @@ class ChannelUpdateFeatureList implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets quantityPriceSupported
+     * Gets documentId
      *
-     * @return bool|null
+     * @return string
      */
-    public function getQuantityPriceSupported()
+    public function getDocumentId()
     {
-        return $this->container['quantityPriceSupported'];
+        return $this->container['documentId'];
     }
 
     /**
-     * Sets quantityPriceSupported
+     * Sets documentId
      *
-     * @param bool|null $quantityPriceSupported Does the channel supports quanity prices for a offer.
+     * @param string $documentId documentId
      *
      * @return $this
      */
-    public function setQuantityPriceSupported($quantityPriceSupported)
+    public function setDocumentId($documentId)
     {
-        $this->container['quantityPriceSupported'] = $quantityPriceSupported;
+        $this->container['documentId'] = $documentId;
 
         return $this;
     }
 
     /**
-     * Gets remainingQuanitySupported
+     * Gets documentExpiresAt
      *
-     * @return bool|null
+     * @return \DateTime
      */
-    public function getRemainingQuanitySupported()
+    public function getDocumentExpiresAt()
     {
-        return $this->container['remainingQuanitySupported'];
+        return $this->container['documentExpiresAt'];
     }
 
     /**
-     * Sets remainingQuanitySupported
+     * Sets documentExpiresAt
      *
-     * @param bool|null $remainingQuanitySupported Indicates if a channel is able to support a remaing quanity with each Order. The feature can be used by a connected client implementation (such as JTL-Wawi) to manage quanity updates on an channel.
+     * @param \DateTime $documentExpiresAt documentExpiresAt
      *
      * @return $this
      */
-    public function setRemainingQuanitySupported($remainingQuanitySupported)
+    public function setDocumentExpiresAt($documentExpiresAt)
     {
-        $this->container['remainingQuanitySupported'] = $remainingQuanitySupported;
-
-        return $this;
-    }
-
-    /**
-     * Gets variationsSupported
-     *
-     * @return bool|null
-     */
-    public function getVariationsSupported()
-    {
-        return $this->container['variationsSupported'];
-    }
-
-    /**
-     * Sets variationsSupported
-     *
-     * @param bool|null $variationsSupported Does the channel supports listing of variation offers. Variations are multiple similar (but not identical) items in a offer listing. For example, a single offer could contain multiple items of the same brand and model that vary by color and size (like \"Blue, Large\" and \"Black, Medium\"). Each variation can have its own quantity and price.
-     *
-     * @return $this
-     */
-    public function setVariationsSupported($variationsSupported)
-    {
-        $this->container['variationsSupported'] = $variationsSupported;
+        $this->container['documentExpiresAt'] = $documentExpiresAt;
 
         return $this;
     }

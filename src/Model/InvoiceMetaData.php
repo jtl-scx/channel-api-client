@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventListEventList
+ * InvoiceMetaData
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventListEventList Class Doc Comment
+ * InvoiceMetaData Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SellerEventListEventList implements ModelInterface, ArrayAccess
+class InvoiceMetaData implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventList_eventList';
+    protected static $openAPIModelName = 'InvoiceMetaData';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,10 +57,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'createdAt' => '\DateTime',
-        'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventSellerAttributesUpdateRequestSellerEventOrderCancellationRequestSellerEventOrderCancellationAcceptedSellerEventOrderCancellationDeniedSellerEventOrderInvoice'
+        'type' => 'string',
+        'sellerId' => 'string',
+        'orderId' => 'string',
+        'invoiceNumber' => 'string'
     ];
 
     /**
@@ -69,10 +69,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'createdAt' => 'date-time',
         'type' => null,
-        'event' => null
+        'sellerId' => null,
+        'orderId' => null,
+        'invoiceNumber' => null
     ];
 
     /**
@@ -102,10 +102,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'createdAt' => 'createdAt',
         'type' => 'type',
-        'event' => 'event'
+        'sellerId' => 'sellerId',
+        'orderId' => 'orderId',
+        'invoiceNumber' => 'invoiceNumber'
     ];
 
     /**
@@ -114,10 +114,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'createdAt' => 'setCreatedAt',
         'type' => 'setType',
-        'event' => 'setEvent'
+        'sellerId' => 'setSellerId',
+        'orderId' => 'setOrderId',
+        'invoiceNumber' => 'setInvoiceNumber'
     ];
 
     /**
@@ -126,10 +126,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'createdAt' => 'getCreatedAt',
         'type' => 'getType',
-        'event' => 'getEvent'
+        'sellerId' => 'getSellerId',
+        'orderId' => 'getOrderId',
+        'invoiceNumber' => 'getInvoiceNumber'
     ];
 
     /**
@@ -173,8 +173,23 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const TYPE_INVOICE = 'INVOICE';
+    const TYPE_CREDITNOTE = 'CREDITNOTE';
 
 
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTypeAllowableValues()
+    {
+        return [
+            self::TYPE_INVOICE,
+            self::TYPE_CREDITNOTE,
+        ];
+    }
 
 
     /**
@@ -192,10 +207,10 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['createdAt'] = isset($data['createdAt']) ? $data['createdAt'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['event'] = isset($data['event']) ? $data['event'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
+        $this->container['invoiceNumber'] = isset($data['invoiceNumber']) ? $data['invoiceNumber'] : null;
     }
 
     /**
@@ -207,18 +222,46 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['createdAt'] === null) {
-            $invalidProperties[] = "'createdAt' can't be null";
-        }
         if ($this->container['type'] === null) {
             $invalidProperties[] = "'type' can't be null";
         }
-        if ($this->container['event'] === null) {
-            $invalidProperties[] = "'event' can't be null";
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'type', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
         }
+
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
+        }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        }
+
+        if ($this->container['orderId'] === null) {
+            $invalidProperties[] = "'orderId' can't be null";
+        }
+        if ((mb_strlen($this->container['orderId']) > 150)) {
+            $invalidProperties[] = "invalid value for 'orderId', the character length must be smaller than or equal to 150.";
+        }
+
+        if ((mb_strlen($this->container['orderId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
+        }
+
+        if ($this->container['invoiceNumber'] === null) {
+            $invalidProperties[] = "'invoiceNumber' can't be null";
+        }
+        if ((mb_strlen($this->container['invoiceNumber']) > 128)) {
+            $invalidProperties[] = "invalid value for 'invoiceNumber', the character length must be smaller than or equal to 128.";
+        }
+
+        if ((mb_strlen($this->container['invoiceNumber']) < 1)) {
+            $invalidProperties[] = "invalid value for 'invoiceNumber', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -235,57 +278,9 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets id
-     *
-     * @return string
-     */
-    public function getId()
-    {
-        return $this->container['id'];
-    }
-
-    /**
-     * Sets id
-     *
-     * @param string $id id
-     *
-     * @return $this
-     */
-    public function setId($id)
-    {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets createdAt
-     *
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->container['createdAt'];
-    }
-
-    /**
-     * Sets createdAt
-     *
-     * @param \DateTime $createdAt createdAt
-     *
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->container['createdAt'] = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Gets type
      *
-     * @return \JTL\SCX\Client\Channel\Model\SellerEventTypeList
+     * @return string
      */
     public function getType()
     {
@@ -295,37 +290,113 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess
     /**
      * Sets type
      *
-     * @param \JTL\SCX\Client\Channel\Model\SellerEventTypeList $type type
+     * @param string $type type
      *
      * @return $this
      */
     public function setType($type)
     {
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!in_array($type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'type', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
         $this->container['type'] = $type;
 
         return $this;
     }
 
     /**
-     * Gets event
+     * Gets sellerId
      *
-     * @return OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventSellerAttributesUpdateRequestSellerEventOrderCancellationRequestSellerEventOrderCancellationAcceptedSellerEventOrderCancellationDeniedSellerEventOrderInvoice
+     * @return string
      */
-    public function getEvent()
+    public function getSellerId()
     {
-        return $this->container['event'];
+        return $this->container['sellerId'];
     }
 
     /**
-     * Sets event
+     * Sets sellerId
      *
-     * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventSellerAttributesUpdateRequestSellerEventOrderCancellationRequestSellerEventOrderCancellationAcceptedSellerEventOrderCancellationDeniedSellerEventOrderInvoice $event event
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
-    public function setEvent($event)
+    public function setSellerId($sellerId)
     {
-        $this->container['event'] = $event;
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling InvoiceMetaData., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
+
+        return $this;
+    }
+
+    /**
+     * Gets orderId
+     *
+     * @return string
+     */
+    public function getOrderId()
+    {
+        return $this->container['orderId'];
+    }
+
+    /**
+     * Sets orderId
+     *
+     * @param string $orderId orderId
+     *
+     * @return $this
+     */
+    public function setOrderId($orderId)
+    {
+        if ((mb_strlen($orderId) > 150)) {
+            throw new \InvalidArgumentException('invalid length for $orderId when calling InvoiceMetaData., must be smaller than or equal to 150.');
+        }
+        if ((mb_strlen($orderId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $orderId when calling InvoiceMetaData., must be bigger than or equal to 1.');
+        }
+
+        $this->container['orderId'] = $orderId;
+
+        return $this;
+    }
+
+    /**
+     * Gets invoiceNumber
+     *
+     * @return string
+     */
+    public function getInvoiceNumber()
+    {
+        return $this->container['invoiceNumber'];
+    }
+
+    /**
+     * Sets invoiceNumber
+     *
+     * @param string $invoiceNumber invoiceNumber
+     *
+     * @return $this
+     */
+    public function setInvoiceNumber($invoiceNumber)
+    {
+        if ((mb_strlen($invoiceNumber) > 128)) {
+            throw new \InvalidArgumentException('invalid length for $invoiceNumber when calling InvoiceMetaData., must be smaller than or equal to 128.');
+        }
+        if ((mb_strlen($invoiceNumber) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $invoiceNumber when calling InvoiceMetaData., must be bigger than or equal to 1.');
+        }
+
+        $this->container['invoiceNumber'] = $invoiceNumber;
 
         return $this;
     }
