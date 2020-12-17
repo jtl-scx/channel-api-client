@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class RequestOrderCancellationRequestTest extends TestCase
 {
-
     public function testCanBeCreatedAndUsed(): void
     {
         $cancellationRequest = $this->createMock(OrderCancellationRequest::class);

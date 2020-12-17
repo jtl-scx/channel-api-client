@@ -9,9 +9,9 @@
 namespace JTL\SCX\Client\Channel\Api\Meta;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Api\Meta\Request\CreatePaymentRulesRequest;
 use JTL\SCX\Client\Channel\Api\Meta\Response\CreatePaymentRulesResponse;
+use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -19,7 +19,6 @@ use Psr\Http\Message\ResponseInterface;
  */
 class PaymentRulesApiTest extends TestCase
 {
-
     public function testCanCreatePaymentRules():void
     {
         $requestMock = $this->createMock(CreatePaymentRulesRequest::class);

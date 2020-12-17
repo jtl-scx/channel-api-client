@@ -8,9 +8,8 @@
 
 namespace JTL\SCX\Client\Channel\Api\Channel\Request;
 
-use PHPUnit\Framework\TestCase;
 use JTL\SCX\Client\Channel\Model\ChannelUpdate;
-
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class UpdateChannelRequestTest

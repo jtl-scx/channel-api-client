@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class CreatePaymentRulesRequestTest extends TestCase
 {
-
     public function testCanBeCreatedAndUsed(): void
     {
         $bodyStr =uniqid('body', true);

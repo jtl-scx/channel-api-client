@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class CreateShippingRulesRequestTest extends TestCase
 {
-
     public function testCanBeCreatedAndUsed(): void
     {
         $bodyStr =uniqid('body', true);

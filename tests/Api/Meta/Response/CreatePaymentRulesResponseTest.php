@@ -15,7 +15,6 @@ use PHPUnit\Framework\TestCase;
  */
 class CreatePaymentRulesResponseTest extends TestCase
 {
-
     public function testIsSuccessful(): void
     {
         $response = new CreatePaymentRulesResponse(201);
