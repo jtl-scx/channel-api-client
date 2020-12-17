@@ -8,13 +8,18 @@
 
 namespace JTL\SCX\Client\Channel\Event;
 
+use JTL\SCX\Client\Channel\Model\SellerEventChannelUnlinked;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationAccepted;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
+use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventSellerAttributesUpdateRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
@@ -28,8 +33,8 @@ class EventTypeTest extends TestCase
     public function mapProvider(): array
     {
         return [
-            [SystemEventNotification::class, EventType::SystemNotification()],
             [SellerEventTest::class, EventType::SellerEventTest()],
+            [SystemEventNotification::class, EventType::SystemNotification()],
             [SellerEventOrderShipping::class, EventType::SellerOrderShipping()],
             [SellerEventOrderPayment::class, EventType::SellerOrderPayment()],
             [SellerEventOfferNew::class, EventType::SellerOfferNew()],
@@ -37,7 +42,12 @@ class EventTypeTest extends TestCase
             [SellerEventOfferEnd::class, EventType::SellerOfferEnd()],
             [SellerEventOfferStockUpdate::class, EventType::SellerOfferStockUpdate()],
             [SellerEventOfferPriceUpdate::class, EventType::SellerOfferPriceUpdate()],
+            [SellerEventReportRequest::class, EventType::SellerReportRequest()],
+            [SellerEventChannelUnlinked::class, EventType::SellerChannelUnlinked()],
             [SellerEventSellerAttributesUpdateRequest::class, EventType::SellerMetaSellerAttributesUpdateRequest()],
+            [SellerEventOrderCancellationAccepted::class, EventType::SellerOrderCancellationAccept()],
+            [SellerEventOrderCancellationDenied::class, EventType::SellerOrderCancellationDenied()],
+            [SellerEventOrderCancellationRequest::class, EventType::SellerOrderCancellationRequest()],
             [\stdClass::class, new EventType('FooBarEvent')],
         ];
     }

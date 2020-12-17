@@ -16,7 +16,7 @@ class GetSellerEventListResponse extends AbstractResponse
     /**
      * @var EventContainerList
      */
-    private $eventList;
+    private EventContainerList $eventList;
 
     /**
      * GetSellerEventListResponse constructor.

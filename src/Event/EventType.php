@@ -16,11 +16,13 @@ use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationAccepted;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventSellerAttributesUpdateRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
+use JTL\SCX\Client\Channel\Model\SellerEventTypeList as M;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use MyCLabs\Enum\Enum;
 
@@ -28,10 +30,9 @@ use MyCLabs\Enum\Enum;
  * Class EventType
  * @method static EventType SystemNotification()
  * @method static EventType SellerEventTest()
- * @method static EventType SellerOrderConfirmed()
  * @method static EventType SellerOrderShipping()
  * @method static EventType SellerOrderPayment()
- * @method static EventType SellerOrderCancelled()
+ * @method static EventType SellerOrderCancellationRequest()
  * @method static EventType SellerOfferNew()
  * @method static EventType SellerOfferUpdate()
  * @method static EventType SellerOfferEnd()
@@ -45,22 +46,22 @@ use MyCLabs\Enum\Enum;
  */
 class EventType extends Enum
 {
-    public const SystemNotification = 'System:Notification';
-    public const SellerEventTest = 'System:Test';
-    public const SellerOrderConfirmed = 'Seller:Order.Confirmed';
-    public const SellerOrderShipping = 'Seller:Order.Shipping';
-    public const SellerOrderPayment = 'Seller:Order.Payment';
-    public const SellerOrderCancelled = 'Seller:Order.Cancelled';
-    public const SellerOfferNew = 'Seller:Offer.New';
-    public const SellerOfferUpdate = 'Seller:Offer.Update';
-    public const SellerOfferEnd = 'Seller:Offer.End';
-    public const SellerOfferStockUpdate = 'Seller:Offer.StockUpdate';
-    public const SellerOfferPriceUpdate = 'Seller:Offer.PriceUpdate';
-    public const SellerReportRequest = 'Seller:Report.Request';
-    public const SellerChannelUnlinked = 'Seller:Channel.Unlinked';
-    public const SellerMetaSellerAttributesUpdateRequest = 'Seller:Meta.SellerAttributesUpdateRequest';
-    public const SellerOrderCancellationAccept = 'Seller:Order.Cancellation.Accept';
-    public const SellerOrderCancellationDenied = 'Seller:Order.Cancellation.Denied';
+    public const SellerEventTest = M::SYSTEMTEST;
+    public const SystemNotification = M::SYSTEMNOTIFICATION;
+    public const SellerOrderShipping = M::SELLERORDER_SHIPPING;
+    public const SellerOrderPayment = M::SELLERORDER_PAYMENT;
+    public const SellerOfferNew = M::SELLEROFFER_NEW;
+    public const SellerOfferUpdate = M::SELLEROFFER_UPDATE;
+    public const SellerOfferEnd = M::SELLEROFFER_END;
+    public const SellerOfferStockUpdate = M::SELLEROFFER_STOCK_UPDATE;
+    public const SellerOfferPriceUpdate = M::SELLEROFFER_PRICE_UPDATE;
+    public const SellerReportRequest = M::SELLERREPORT_REQUEST;
+    public const SellerChannelUnlinked = M::SELLERCHANNEL_UNLINKED;
+    public const SellerMetaSellerAttributesUpdateRequest = M::SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST;
+    public const SellerOrderCancellationAccept = M::SELLERORDER_CANCELLATION_ACCEPTED;
+    public const SellerOrderCancellationDenied = M::SELLERORDER_CANCELLATION_DENIED;
+    public const SellerOrderCancellationRequest = M::SELLERORDER_CANCELLATION_REQUEST;
+    # public const SellerOrderConfirmed = 'Seller:Order.Confirmed';
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -106,6 +107,8 @@ class EventType extends Enum
                 return SellerEventOrderCancellationAccepted::class;
             case $this::SellerOrderCancellationDenied():
                 return SellerEventOrderCancellationDenied::class;
+            case $this::SellerOrderCancellationRequest():
+                return SellerEventOrderCancellationRequest::class;
         }
 
         return \stdClass::class;

@@ -9,14 +9,21 @@
 namespace JTL\SCX\Client\Channel\Api\Event\Model;
 
 use JTL\SCX\Client\Channel\Event\EventType;
-use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
-use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
-use JTL\SCX\Client\Channel\Model\SellerEventOrderCancelled;
-use JTL\SCX\Client\Channel\Model\SellerEventOrderConfirmed;
-use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
-use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
-use JTL\SCX\Client\Channel\Model\SellerEventTest;
-use JTL\SCX\Client\Channel\Model\SystemEventNotification;
+use JTL\SCX\Client\Channel\Model\SellerEventChannelUnlinked as ChannelUnlinked;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd as OfferEnd;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferNew as OfferNew;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate as PriceUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate as StockUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate as OfferUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationAccepted as CancellationAccept;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied as CancellationDenied;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest as CancellationRequest;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment as Payment;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping as Shipping;
+use JTL\SCX\Client\Channel\Model\SellerEventReportRequest as ReportRequest;
+use JTL\SCX\Client\Channel\Model\SellerEventSellerAttributesUpdateRequest as SellerAttributeUpdateRequest;
+use JTL\SCX\Client\Channel\Model\SellerEventTest as Test;
+use JTL\SCX\Client\Channel\Model\SystemEventNotification as Notification;
 
 class EventContainer
 {
@@ -49,7 +56,7 @@ class EventContainer
     }
 
     /**
-     * @return SellerEventOrderCancelled|SellerEventOrderConfirmed|SellerEventOrderPayment|SellerEventOrderShipping|SellerEventTest|SystemEventNotification|SellerEventOfferNew|SellerEventOfferEnd|null
+     * @return Test|Notification|Shipping|Payment|OfferNew|OfferUpdate|OfferEnd|StockUpdate|PriceUpdate|ReportRequest|ChannelUnlinked|SellerAttributeUpdateRequest|CancellationAccept|CancellationDenied|CancellationRequest
      */
     public function getEvent()
     {
