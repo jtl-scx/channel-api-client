@@ -75,7 +75,7 @@ class EventApi
         $this->client->request($request);
     }
 
-    private function createEventByType(EventType $type, \stdClass $data)
+    private function createEventByType(EventType $type, \stdClass $data): object
     {
         if ($type->isUnknownEventType()) {
             return $data;

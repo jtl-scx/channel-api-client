@@ -14,6 +14,8 @@ use MyCLabs\Enum\Enum;
  * Class PriceTypeEnum
  * @method static PriceType B2C()
  * @method static PriceType B2B()
+ *
+ * @psalm-immutable
  */
 class PriceType extends Enum
 {
