@@ -8,7 +8,6 @@
 
 namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
-
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
 use JTL\SCX\Client\Request\ScxApiRequest;
 

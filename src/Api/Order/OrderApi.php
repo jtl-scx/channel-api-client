@@ -114,5 +114,4 @@ class OrderApi
 
         return new $responseClass($apiResponse->getStatusCode(), $errorList ?? null);
     }
-
 }

@@ -44,6 +44,4 @@ class GetInvoiceRequestTest extends TestCase
         $sut = new GetInvoiceRequest('foo');
         $this->assertEquals(ScxApiRequest::HTTP_METHOD_GET, $sut->getHttpMethod());
     }
-
-
 }

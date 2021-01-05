@@ -17,7 +17,6 @@ use Psr\Http\Message\StreamInterface;
  */
 class InvoiceResponseTest extends TestCase
 {
-
     public function testResponseIsConsideredAsSuccessfulOnStatusCode200()
     {
         $sut = new InvoiceResponse(200, $this->createStub(StreamInterface::class));
