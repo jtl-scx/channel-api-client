@@ -10,11 +10,13 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\GetInvoiceRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\InvoiceResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\RequestOrderCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
@@ -120,5 +122,29 @@ class OrderApiTest extends TestCase
         $response = $client->create($requestMock);
         $this->assertInstanceOf(AbstractOrderResponse::class, $response);
         $this->assertTrue($response->hasError());
+    }
+
+    public function testItCanDownloadAInvoiceSuccessfully(): void
+    {
+        $apiClientMock = $this->createMock(AuthAwareApiClient::class);
+        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+
+        $client = new OrderApi($apiClientMock, $deserializerStub);
+
+        $testDocument = $this->createStub(StreamInterface::class);
+
+        $request = $this->createMock(GetInvoiceRequest::class);
+
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock->method('getStatusCode')->willReturn(200);
+        $responseMock->method('getBody')->willReturn($testDocument);
+
+        $apiClientMock->expects($this->once())->method('request')->with($request)->willReturn($responseMock);
+
+        $response = $client->getInvoice($request);
+
+        $this->assertInstanceOf(InvoiceResponse::class, $response);
+        $this->assertTrue($response->isSuccessful());
+        $this->assertSame($testDocument, $response->getDocument());
     }
 }
