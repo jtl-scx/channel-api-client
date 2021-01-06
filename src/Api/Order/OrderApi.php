@@ -102,7 +102,7 @@ class OrderApi
 
     /**
      * @param UploadInvoiceRequest $request
-     * @return InvoiceResponse
+     * @return UploadInvoiceResponse
      * @throws GuzzleException
      * @throws RequestFailedException
      */
