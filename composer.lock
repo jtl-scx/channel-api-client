@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "980e7a624ac87f973734f1dcf2d6191f",
+    "content-hash": "131c2ee01c06bed361ee47ff039250ed",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -307,16 +307,16 @@
         },
         {
             "name": "jtl-scx/api-base-client",
-            "version": "1.2.0",
+            "version": "dev-EA-3353",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jtl-scx/api-base-client.git",
-                "reference": "e476601c3a0e7138895951c8b16cb69644c865ba"
+                "reference": "c62eefb1e8ce567f4e5c828f98474de510d461d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jtl-scx/api-base-client/zipball/e476601c3a0e7138895951c8b16cb69644c865ba",
-                "reference": "e476601c3a0e7138895951c8b16cb69644c865ba",
+                "url": "https://api.github.com/repos/jtl-scx/api-base-client/zipball/c62eefb1e8ce567f4e5c828f98474de510d461d6",
+                "reference": "c62eefb1e8ce567f4e5c828f98474de510d461d6",
                 "shasum": ""
             },
             "require": {
@@ -343,9 +343,9 @@
             "description": "SCX-API Base Client",
             "support": {
                 "issues": "https://github.com/jtl-scx/api-base-client/issues",
-                "source": "https://github.com/jtl-scx/api-base-client/tree/1.2.0"
+                "source": "https://github.com/jtl-scx/api-base-client/tree/EA-3353"
             },
-            "time": "2020-12-16T13:31:06+00:00"
+            "time": "2021-01-06T09:58:12+00:00"
         },
         {
             "name": "jtl/php-generic-collection",
@@ -5338,7 +5338,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "jtl-scx/api-base-client": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

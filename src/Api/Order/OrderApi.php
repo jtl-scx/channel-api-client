@@ -16,12 +16,14 @@ use JTL\SCX\Client\Channel\Api\Order\Request\GetInvoiceRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\UploadInvoiceRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\InvoiceResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\RequestOrderCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\UploadInvoiceResponse;
 use JTL\SCX\Client\Channel\Model\ErrorResponseList;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\ResponseDeserializer;
@@ -96,6 +98,18 @@ class OrderApi
     {
         $response = $this->client->request($request);
         return new InvoiceResponse($response->getStatusCode(), $response->getBody());
+    }
+
+    /**
+     * @param UploadInvoiceRequest $request
+     * @return InvoiceResponse
+     * @throws GuzzleException
+     * @throws RequestFailedException
+     */
+    public function uploadInvoice(UploadInvoiceRequest $request): UploadInvoiceResponse
+    {
+        $response = $this->client->request($request);
+        return new UploadInvoiceResponse($response->getStatusCode());
     }
 
     /**
