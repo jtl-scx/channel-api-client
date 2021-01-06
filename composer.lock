@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "385dc3e06487d00de27dce86642047a9",
+    "content-hash": "b2613b85da801c40a3ca63295f1acebe",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -307,16 +307,16 @@
         },
         {
             "name": "jtl-scx/api-base-client",
-            "version": "1.2.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jtl-scx/api-base-client.git",
-                "reference": "e476601c3a0e7138895951c8b16cb69644c865ba"
+                "reference": "b37fcd6f900bcc4616dc541deaa02d45e6174a17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jtl-scx/api-base-client/zipball/e476601c3a0e7138895951c8b16cb69644c865ba",
-                "reference": "e476601c3a0e7138895951c8b16cb69644c865ba",
+                "url": "https://api.github.com/repos/jtl-scx/api-base-client/zipball/b37fcd6f900bcc4616dc541deaa02d45e6174a17",
+                "reference": "b37fcd6f900bcc4616dc541deaa02d45e6174a17",
                 "shasum": ""
             },
             "require": {
@@ -343,9 +343,9 @@
             "description": "SCX-API Base Client",
             "support": {
                 "issues": "https://github.com/jtl-scx/api-base-client/issues",
-                "source": "https://github.com/jtl-scx/api-base-client/tree/1.2.0"
+                "source": "https://github.com/jtl-scx/api-base-client/tree/1.4.0"
             },
-            "time": "2020-12-16T13:31:06+00:00"
+            "time": "2021-01-06T15:24:18+00:00"
         },
         {
             "name": "jtl/php-generic-collection",
