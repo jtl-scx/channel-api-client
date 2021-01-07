@@ -4,6 +4,7 @@
 
 # SCX PHP-Channel-API-Client
 
+![Releases](https://img.shields.io/github/v/tag/jtl-scx/channel-api-client)
 ![Testing](https://github.com/jtl-scx/channel-api-client/workflows/Testing/badge.svg) [![codecov](https://codecov.io/gh/jtl-scx/channel-api-client/branch/master/graph/badge.svg?token=YNFA2ZRK96)](https://codecov.io/gh/jtl-scx/channel-api-client)
 
 SCX Channel-API Client repository for JTL-Sales-Channel-Extension based on PHP. 
