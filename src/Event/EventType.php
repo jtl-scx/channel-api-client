@@ -17,6 +17,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationAccepted;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderInvoice;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
@@ -43,6 +44,7 @@ use MyCLabs\Enum\Enum;
  * @method static EventType SellerMetaSellerAttributesUpdateRequest()
  * @method static EventType SellerOrderCancellationAccept()
  * @method static EventType SellerOrderCancellationDenied()
+ * @method static EventType SellerEventOrderInvoice()
  *
  * @psalm-immutable
  */
@@ -63,6 +65,7 @@ class EventType extends Enum
     public const SellerOrderCancellationAccept = M::SELLERORDER_CANCELLATION_ACCEPTED;
     public const SellerOrderCancellationDenied = M::SELLERORDER_CANCELLATION_DENIED;
     public const SellerOrderCancellationRequest = M::SELLERORDER_CANCELLATION_REQUEST;
+    public const SellerEventOrderInvoice = M::SELLERORDER_INVOICE;
     # public const SellerOrderConfirmed = 'Seller:Order.Confirmed';
 
     /**
@@ -113,6 +116,8 @@ class EventType extends Enum
                 return SellerEventOrderCancellationDenied::class;
             case $this::SellerOrderCancellationRequest():
                 return SellerEventOrderCancellationRequest::class;
+            case $this::SellerEventOrderInvoice():
+                return SellerEventOrderInvoice::class;
         }
 
         return \stdClass::class;
