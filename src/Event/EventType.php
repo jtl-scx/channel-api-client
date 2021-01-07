@@ -43,6 +43,8 @@ use MyCLabs\Enum\Enum;
  * @method static EventType SellerMetaSellerAttributesUpdateRequest()
  * @method static EventType SellerOrderCancellationAccept()
  * @method static EventType SellerOrderCancellationDenied()
+ *
+ * @psalm-immutable
  */
 class EventType extends Enum
 {
@@ -66,6 +68,8 @@ class EventType extends Enum
     /**
      * Allow EventType to build event there is an unknown event type.
      * New Event Types may be realistic scenario when working with SCX Channel API
+     *
+     * @psalm-suppress MissingImmutableAnnotation
      *
      * @param $value
      * @return bool

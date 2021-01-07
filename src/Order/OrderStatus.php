@@ -18,6 +18,8 @@ use MyCLabs\Enum\Enum;
  * @method static OrderStatus PARTIALLY_SHIPPED()
  * @method static OrderStatus CANCELED_BY_SELLER()
  * @method static OrderStatus CANCELED_BY_BUYER()
+ *
+ * @psalm-immutable
  */
 class OrderStatus extends Enum
 {
