@@ -11,14 +11,18 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\ApiResponseDeserializer;
+use JTL\SCX\Client\Channel\Api\Order\Request\AcceptCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\DenyCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\GetInvoiceRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UploadInvoiceRequest;
 use JTL\SCX\Client\Channel\Api\Order\Response\AbstractOrderResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\AcceptCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\DenyCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\InvoiceResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\RequestOrderCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
@@ -86,6 +90,30 @@ class OrderApi
     {
         $response = $this->client->request($request);
         return $this->createResponse($response, RequestOrderCancellationResponse::class);
+    }
+
+    /**
+     * @param AcceptCancellationRequest $request
+     * @return AcceptCancellationResponse
+     * @throws GuzzleException
+     * @throws RequestFailedException
+     */
+    public function acceptOrderCancellation(AcceptCancellationRequest $request): AcceptCancellationResponse
+    {
+        $response = $this->client->request($request);
+        return new AcceptCancellationResponse($response->getStatusCode());
+    }
+
+    /**
+     * @param DenyCancellationRequest $request
+     * @return DenyCancellationResponse
+     * @throws GuzzleException
+     * @throws RequestFailedException
+     */
+    public function denyOrderCancellation(DenyCancellationRequest $request): DenyCancellationResponse
+    {
+        $response = $this->client->request($request);
+        return new DenyCancellationResponse($response->getStatusCode());
     }
 
     /**

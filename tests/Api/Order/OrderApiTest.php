@@ -9,7 +9,9 @@
 namespace JTL\SCX\Client\Channel\Api\Order;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
+use JTL\SCX\Client\Channel\Api\Order\Request\AcceptCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\DenyCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\GetInvoiceRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
@@ -124,6 +126,44 @@ class OrderApiTest extends TestCase
         $response = $client->create($requestMock);
         $this->assertInstanceOf(AbstractOrderResponse::class, $response);
         $this->assertTrue($response->hasError());
+    }
+
+    public function testCanSendAcceptCancellationRequest(): void
+    {
+        $apiClientMock = $this->createMock(AuthAwareApiClient::class);
+        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+
+        $sut = new OrderApi($apiClientMock, $deserializerStub);
+
+        $request = new AcceptCancellationRequest("A_SELLER", "A_ID");
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock->method('getStatusCode')->willReturn(201);
+
+        $apiClientMock->expects($this->once())->method('request')
+            ->with($request)
+            ->willReturn($responseMock);
+
+        $response = $sut->acceptOrderCancellation($request);
+        $this->assertTrue($response->isSuccessful());
+    }
+
+    public function testCanSendDenyCancellationRequest(): void
+    {
+        $apiClientMock = $this->createMock(AuthAwareApiClient::class);
+        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+
+        $sut = new OrderApi($apiClientMock, $deserializerStub);
+
+        $request = new DenyCancellationRequest("A_SELLER", "A_ID", "Reason");
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock->method('getStatusCode')->willReturn(201);
+
+        $apiClientMock->expects($this->once())->method('request')
+            ->with($request)
+            ->willReturn($responseMock);
+
+        $response = $sut->denyOrderCancellation($request);
+        $this->assertTrue($response->isSuccessful());
     }
 
     public function testItCanDownloadAInvoiceSuccessfully(): void

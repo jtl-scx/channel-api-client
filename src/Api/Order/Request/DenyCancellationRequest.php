@@ -1,0 +1,41 @@
+<?php declare(strict_types=1);
+/**
+ * This File is part of JTL-Software
+ *
+ * User: rherrgesell
+ * Date: 1/12/21
+ */
+
+namespace JTL\SCX\Client\Channel\Api\Order\Request;
+
+use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
+use JTL\SCX\Client\Channel\Model\OrderCancellationDenied;
+
+class DenyCancellationRequest extends AbstractScxApiRequest
+{
+    private OrderCancellationDenied $denied;
+
+    public function __construct(string $sellerId, string $orderCancellationRequestId, string $reason)
+    {
+        $this->denied = new OrderCancellationDenied([
+            'sellerId' => $sellerId,
+            'orderCancellationRequestId' => $orderCancellationRequestId,
+            'reason' => $reason
+        ]);
+    }
+
+    public function getUrl(): string
+    {
+        return '/v1/channel/order/cancellation-denied';
+    }
+
+    public function getHttpMethod(): string
+    {
+        return self::HTTP_METHOD_PUT;
+    }
+
+    public function getBody(): ?string
+    {
+        return (string)$this->denied;
+    }
+}
