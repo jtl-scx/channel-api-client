@@ -12,6 +12,7 @@ use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Channel\Api\Event\Request\AcknowledgeEventIdListRequest;
 use JTL\SCX\Client\Channel\Api\Event\Request\GetEventListRequest;
+use JTL\SCX\Client\Channel\Api\Event\Response\AcknowledgeEventIdListResponse;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferEnd;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
@@ -62,7 +63,10 @@ class EventApiTest extends TestCase
         $jsonDeserializerMock = $this->createMock(JsonSerializer::class);
         $jsonDeserializerMock->expects($this->once())->method('deserialize')->with($jsonContent)->willReturn($data);
         $serializerMock = $this->createMock(ResponseDeserializer::class);
-        $serializerMock->expects($this->exactly($isEvent?1:0))->method('deserializeObject')->with($eventData->event, $eventClass)->willReturn($eventMock);
+        $serializerMock->expects($this->exactly($isEvent ? 1 : 0))->method('deserializeObject')->with(
+            $eventData->event,
+            $eventClass
+        )->willReturn($eventMock);
 
         $client = new EventApi($apiClientMock, $jsonDeserializerMock, $serializerMock);
         $response = $client->get($requestMock);
@@ -88,15 +92,22 @@ class EventApiTest extends TestCase
 
     public function testCanAck()
     {
-        $requestMock = $this->createMock(AcknowledgeEventIdListRequest::class);
-        $responseMock = $this->createMock(ResponseInterface::class);
+        $request = new AcknowledgeEventIdListRequest(['1', '2']);
+
+        $responseMock = $this->createStub(ResponseInterface::class);
+        $responseMock->method('getStatusCode')->willReturn(204);
 
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
-        $apiClientMock->expects($this->once())->method('request')->with($requestMock)->willReturn($responseMock);
+        $apiClientMock->expects($this->once())->method('request')
+            ->with($request)
+            ->willReturn($responseMock);
+
         $jsonDeserializerMock = $this->createMock(JsonSerializer::class);
         $serializerMock = $this->createMock(ResponseDeserializer::class);
 
         $client = new EventApi($apiClientMock, $jsonDeserializerMock, $serializerMock);
-        $client->ack($requestMock);
+
+        $response = $client->ack($request);
+        $this->assertInstanceOf(AcknowledgeEventIdListResponse::class, $response);
     }
 }

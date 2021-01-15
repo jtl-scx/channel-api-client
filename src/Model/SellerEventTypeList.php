@@ -44,6 +44,7 @@ class SellerEventTypeList
      */
     const SYSTEMTEST = 'System:Test';
     const SYSTEMNOTIFICATION = 'System:Notification';
+    const SELLERORDER_ACCEPTED = 'Seller:Order.Accepted';
     const SELLERORDER_SHIPPING = 'Seller:Order.Shipping';
     const SELLERORDER_PAYMENT = 'Seller:Order.Payment';
     const SELLERORDER_CANCELLATION_REQUEST = 'Seller:Order.Cancellation.Request';
@@ -68,6 +69,7 @@ class SellerEventTypeList
         return [
             self::SYSTEMTEST,
             self::SYSTEMNOTIFICATION,
+            self::SELLERORDER_ACCEPTED,
             self::SELLERORDER_SHIPPING,
             self::SELLERORDER_PAYMENT,
             self::SELLERORDER_CANCELLATION_REQUEST,
