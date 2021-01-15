@@ -14,6 +14,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderAccept;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationAccepted;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest;
@@ -31,6 +32,7 @@ use MyCLabs\Enum\Enum;
  * Class EventType
  * @method static EventType SystemNotification()
  * @method static EventType SellerEventTest()
+ * @method static EventType SellerOrderAccept()
  * @method static EventType SellerOrderShipping()
  * @method static EventType SellerOrderPayment()
  * @method static EventType SellerOrderCancellationRequest()
@@ -52,6 +54,7 @@ class EventType extends Enum
 {
     public const SellerEventTest = M::SYSTEMTEST;
     public const SystemNotification = M::SYSTEMNOTIFICATION;
+    public const SellerOrderAccept = M::SELLERORDER_ACCEPTED;
     public const SellerOrderShipping = M::SELLERORDER_SHIPPING;
     public const SellerOrderPayment = M::SELLERORDER_PAYMENT;
     public const SellerOfferNew = M::SELLEROFFER_NEW;
@@ -66,7 +69,6 @@ class EventType extends Enum
     public const SellerOrderCancellationDenied = M::SELLERORDER_CANCELLATION_DENIED;
     public const SellerOrderCancellationRequest = M::SELLERORDER_CANCELLATION_REQUEST;
     public const SellerEventOrderInvoice = M::SELLERORDER_INVOICE;
-    # public const SellerOrderConfirmed = 'Seller:Order.Confirmed';
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -90,6 +92,8 @@ class EventType extends Enum
                 return SellerEventTest::class;
             case $this::SystemNotification():
                 return SystemEventNotification::class;
+            case $this::SellerOrderAccept():
+                return SellerEventOrderAccept::class;
             case $this::SellerOrderShipping():
                 return SellerEventOrderShipping::class;
             case $this::SellerOrderPayment():

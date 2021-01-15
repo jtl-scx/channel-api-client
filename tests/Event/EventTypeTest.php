@@ -14,6 +14,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOfferNew;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferPriceUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferStockUpdate;
 use JTL\SCX\Client\Channel\Model\SellerEventOfferUpdate;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderAccept;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationAccepted;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest;
@@ -36,6 +37,7 @@ class EventTypeTest extends TestCase
         return [
             [SellerEventTest::class, EventType::SellerEventTest()],
             [SystemEventNotification::class, EventType::SystemNotification()],
+            [SellerEventOrderAccept::class, EventType::SellerOrderAccept()],
             [SellerEventOrderShipping::class, EventType::SellerOrderShipping()],
             [SellerEventOrderPayment::class, EventType::SellerOrderPayment()],
             [SellerEventOfferNew::class, EventType::SellerOfferNew()],

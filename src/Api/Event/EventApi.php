@@ -15,6 +15,7 @@ use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Channel\Api\Event\Request\AcknowledgeEventIdListRequest;
 use JTL\SCX\Client\Channel\Api\Event\Request\GetEventListRequest;
+use JTL\SCX\Client\Channel\Api\Event\Response\AcknowledgeEventIdListResponse;
 use JTL\SCX\Client\Channel\Api\Event\Response\GetSellerEventListResponse;
 use JTL\SCX\Client\Channel\Event\EventType;
 use JTL\SCX\Client\Exception\RequestFailedException;
@@ -67,12 +68,14 @@ class EventApi
 
     /**
      * @param AcknowledgeEventIdListRequest $request
+     * @return AcknowledgeEventIdListResponse
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function ack(AcknowledgeEventIdListRequest $request): void
+    public function ack(AcknowledgeEventIdListRequest $request): AcknowledgeEventIdListResponse
     {
-        $this->client->request($request);
+        $response = $this->client->request($request);
+        return new AcknowledgeEventIdListResponse($response->getStatusCode());
     }
 
     private function createEventByType(EventType $type, \stdClass $data): object

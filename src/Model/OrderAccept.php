@@ -1,6 +1,6 @@
 <?php
 /**
- * OrderCancellationRequest
+ * OrderAccept
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * OrderCancellationRequest Class Doc Comment
+ * OrderAccept Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class OrderCancellationRequest implements ModelInterface, ArrayAccess
+class OrderAccept implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'OrderCancellationRequest';
+    protected static $openAPIModelName = 'OrderAccept';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,12 +57,10 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'orderCancellationRequestId' => 'string',
         'sellerId' => 'string',
         'orderId' => 'string',
-        'orderItem' => '\JTL\SCX\Client\Channel\Model\OrderCancellationItem[]',
-        'cancelReason' => '\JTL\SCX\Client\Channel\Model\CancelReason',
-        'message' => 'string'
+        'orderAccepted' => 'bool',
+        'reason' => '\JTL\SCX\Client\Channel\Model\CancelReason'
     ];
 
     /**
@@ -71,12 +69,10 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'orderCancellationRequestId' => 'uuid',
         'sellerId' => null,
         'orderId' => null,
-        'orderItem' => null,
-        'cancelReason' => null,
-        'message' => null
+        'orderAccepted' => null,
+        'reason' => null
     ];
 
     /**
@@ -106,12 +102,10 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'orderCancellationRequestId' => 'orderCancellationRequestId',
         'sellerId' => 'sellerId',
         'orderId' => 'orderId',
-        'orderItem' => 'orderItem',
-        'cancelReason' => 'cancelReason',
-        'message' => 'message'
+        'orderAccepted' => 'orderAccepted',
+        'reason' => 'reason'
     ];
 
     /**
@@ -120,12 +114,10 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'orderCancellationRequestId' => 'setOrderCancellationRequestId',
         'sellerId' => 'setSellerId',
         'orderId' => 'setOrderId',
-        'orderItem' => 'setOrderItem',
-        'cancelReason' => 'setCancelReason',
-        'message' => 'setMessage'
+        'orderAccepted' => 'setOrderAccepted',
+        'reason' => 'setReason'
     ];
 
     /**
@@ -134,12 +126,10 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'orderCancellationRequestId' => 'getOrderCancellationRequestId',
         'sellerId' => 'getSellerId',
         'orderId' => 'getOrderId',
-        'orderItem' => 'getOrderItem',
-        'cancelReason' => 'getCancelReason',
-        'message' => 'getMessage'
+        'orderAccepted' => 'getOrderAccepted',
+        'reason' => 'getReason'
     ];
 
     /**
@@ -202,12 +192,10 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['orderCancellationRequestId'] = isset($data['orderCancellationRequestId']) ? $data['orderCancellationRequestId'] : null;
         $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
-        $this->container['orderItem'] = isset($data['orderItem']) ? $data['orderItem'] : null;
-        $this->container['cancelReason'] = isset($data['cancelReason']) ? $data['cancelReason'] : null;
-        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['orderAccepted'] = isset($data['orderAccepted']) ? $data['orderAccepted'] : null;
+        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
     }
 
     /**
@@ -219,9 +207,6 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['orderCancellationRequestId'] === null) {
-            $invalidProperties[] = "'orderCancellationRequestId' can't be null";
-        }
         if ($this->container['sellerId'] === null) {
             $invalidProperties[] = "'sellerId' can't be null";
         }
@@ -232,25 +217,6 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
         if ($this->container['orderId'] === null) {
             $invalidProperties[] = "'orderId' can't be null";
         }
-        if ((mb_strlen($this->container['orderId']) > 150)) {
-            $invalidProperties[] = "invalid value for 'orderId', the character length must be smaller than or equal to 150.";
-        }
-
-        if ((mb_strlen($this->container['orderId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
-        }
-
-        if ($this->container['orderItem'] === null) {
-            $invalidProperties[] = "'orderItem' can't be null";
-        }
-        if (!is_null($this->container['message']) && (mb_strlen($this->container['message']) > 1024)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 1024.";
-        }
-
-        if (!is_null($this->container['message']) && (mb_strlen($this->container['message']) < 0)) {
-            $invalidProperties[] = "invalid value for 'message', the character length must be bigger than or equal to 0.";
-        }
-
         return $invalidProperties;
     }
 
@@ -265,30 +231,6 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets orderCancellationRequestId
-     *
-     * @return string
-     */
-    public function getOrderCancellationRequestId()
-    {
-        return $this->container['orderCancellationRequestId'];
-    }
-
-    /**
-     * Sets orderCancellationRequestId
-     *
-     * @param string $orderCancellationRequestId A unique identifier for the order cancellation request. This ID should by used by Seller to identify the cancellation response from the Channel.
-     *
-     * @return $this
-     */
-    public function setOrderCancellationRequestId($orderCancellationRequestId)
-    {
-        $this->container['orderCancellationRequestId'] = $orderCancellationRequestId;
-
-        return $this;
-    }
 
     /**
      * Gets sellerId
@@ -311,7 +253,7 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
     {
 
         if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
-            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderCancellationRequest., must conform to the pattern /^\\w{1,50}$/.");
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderAccept., must conform to the pattern /^\\w{1,50}$/.");
         }
 
         $this->container['sellerId'] = $sellerId;
@@ -338,93 +280,55 @@ class OrderCancellationRequest implements ModelInterface, ArrayAccess
      */
     public function setOrderId($orderId)
     {
-        if ((mb_strlen($orderId) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderCancellationRequest., must be smaller than or equal to 150.');
-        }
-        if ((mb_strlen($orderId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $orderId when calling OrderCancellationRequest., must be bigger than or equal to 1.');
-        }
-
         $this->container['orderId'] = $orderId;
 
         return $this;
     }
 
     /**
-     * Gets orderItem
+     * Gets orderAccepted
      *
-     * @return \JTL\SCX\Client\Channel\Model\OrderCancellationItem[]
+     * @return bool|null
      */
-    public function getOrderItem()
+    public function getOrderAccepted()
     {
-        return $this->container['orderItem'];
+        return $this->container['orderAccepted'];
     }
 
     /**
-     * Sets orderItem
+     * Sets orderAccepted
      *
-     * @param \JTL\SCX\Client\Channel\Model\OrderCancellationItem[] $orderItem orderItem
+     * @param bool|null $orderAccepted orderAccepted
      *
      * @return $this
      */
-    public function setOrderItem($orderItem)
+    public function setOrderAccepted($orderAccepted)
     {
-        $this->container['orderItem'] = $orderItem;
+        $this->container['orderAccepted'] = $orderAccepted;
 
         return $this;
     }
 
     /**
-     * Gets cancelReason
+     * Gets reason
      *
      * @return \JTL\SCX\Client\Channel\Model\CancelReason|null
      */
-    public function getCancelReason()
+    public function getReason()
     {
-        return $this->container['cancelReason'];
+        return $this->container['reason'];
     }
 
     /**
-     * Sets cancelReason
+     * Sets reason
      *
-     * @param \JTL\SCX\Client\Channel\Model\CancelReason|null $cancelReason cancelReason
+     * @param \JTL\SCX\Client\Channel\Model\CancelReason|null $reason reason
      *
      * @return $this
      */
-    public function setCancelReason($cancelReason)
+    public function setReason($reason)
     {
-        $this->container['cancelReason'] = $cancelReason;
-
-        return $this;
-    }
-
-    /**
-     * Gets message
-     *
-     * @return string|null
-     */
-    public function getMessage()
-    {
-        return $this->container['message'];
-    }
-
-    /**
-     * Sets message
-     *
-     * @param string|null $message message
-     *
-     * @return $this
-     */
-    public function setMessage($message)
-    {
-        if (!is_null($message) && (mb_strlen($message) > 1024)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling OrderCancellationRequest., must be smaller than or equal to 1024.');
-        }
-        if (!is_null($message) && (mb_strlen($message) < 0)) {
-            throw new \InvalidArgumentException('invalid length for $message when calling OrderCancellationRequest., must be bigger than or equal to 0.');
-        }
-
-        $this->container['message'] = $message;
+        $this->container['reason'] = $reason;
 
         return $this;
     }
