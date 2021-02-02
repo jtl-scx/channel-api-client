@@ -60,7 +60,8 @@ class OrderStatus implements ModelInterface, ArrayAccess
         'sellerId' => 'string',
         'orderId' => 'string',
         'orderStatus' => '\JTL\SCX\Client\Channel\Model\ChannelOrderStatus',
-        'paymentStatus' => '\JTL\SCX\Client\Channel\Model\ChannelPaymentStatus'
+        'paymentStatus' => '\JTL\SCX\Client\Channel\Model\ChannelPaymentStatus',
+        'orderItems' => '\JTL\SCX\Client\Channel\Model\OrderStatusOrderItems[]'
     ];
 
     /**
@@ -72,7 +73,8 @@ class OrderStatus implements ModelInterface, ArrayAccess
         'sellerId' => null,
         'orderId' => null,
         'orderStatus' => null,
-        'paymentStatus' => null
+        'paymentStatus' => null,
+        'orderItems' => null
     ];
 
     /**
@@ -105,7 +107,8 @@ class OrderStatus implements ModelInterface, ArrayAccess
         'sellerId' => 'sellerId',
         'orderId' => 'orderId',
         'orderStatus' => 'orderStatus',
-        'paymentStatus' => 'paymentStatus'
+        'paymentStatus' => 'paymentStatus',
+        'orderItems' => 'orderItems'
     ];
 
     /**
@@ -117,7 +120,8 @@ class OrderStatus implements ModelInterface, ArrayAccess
         'sellerId' => 'setSellerId',
         'orderId' => 'setOrderId',
         'orderStatus' => 'setOrderStatus',
-        'paymentStatus' => 'setPaymentStatus'
+        'paymentStatus' => 'setPaymentStatus',
+        'orderItems' => 'setOrderItems'
     ];
 
     /**
@@ -129,7 +133,8 @@ class OrderStatus implements ModelInterface, ArrayAccess
         'sellerId' => 'getSellerId',
         'orderId' => 'getOrderId',
         'orderStatus' => 'getOrderStatus',
-        'paymentStatus' => 'getPaymentStatus'
+        'paymentStatus' => 'getPaymentStatus',
+        'orderItems' => 'getOrderItems'
     ];
 
     /**
@@ -196,6 +201,7 @@ class OrderStatus implements ModelInterface, ArrayAccess
         $this->container['orderId'] = isset($data['orderId']) ? $data['orderId'] : null;
         $this->container['orderStatus'] = isset($data['orderStatus']) ? $data['orderStatus'] : null;
         $this->container['paymentStatus'] = isset($data['paymentStatus']) ? $data['paymentStatus'] : null;
+        $this->container['orderItems'] = isset($data['orderItems']) ? $data['orderItems'] : null;
     }
 
     /**
@@ -207,18 +213,27 @@ class OrderStatus implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if (!is_null($this->container['sellerId']) && !preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
+        }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
             $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
         }
 
-        if (!is_null($this->container['orderId']) && (mb_strlen($this->container['orderId']) > 150)) {
+        if ($this->container['orderId'] === null) {
+            $invalidProperties[] = "'orderId' can't be null";
+        }
+        if ((mb_strlen($this->container['orderId']) > 150)) {
             $invalidProperties[] = "invalid value for 'orderId', the character length must be smaller than or equal to 150.";
         }
 
-        if (!is_null($this->container['orderId']) && (mb_strlen($this->container['orderId']) < 1)) {
+        if ((mb_strlen($this->container['orderId']) < 1)) {
             $invalidProperties[] = "invalid value for 'orderId', the character length must be bigger than or equal to 1.";
         }
 
+        if ($this->container['orderStatus'] === null) {
+            $invalidProperties[] = "'orderStatus' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -237,7 +252,7 @@ class OrderStatus implements ModelInterface, ArrayAccess
     /**
      * Gets sellerId
      *
-     * @return string|null
+     * @return string
      */
     public function getSellerId()
     {
@@ -247,14 +262,14 @@ class OrderStatus implements ModelInterface, ArrayAccess
     /**
      * Sets sellerId
      *
-     * @param string|null $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
      *
      * @return $this
      */
     public function setSellerId($sellerId)
     {
 
-        if (!is_null($sellerId) && (!preg_match("/^\\w{1,50}$/", $sellerId))) {
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
             throw new \InvalidArgumentException("invalid value for $sellerId when calling OrderStatus., must conform to the pattern /^\\w{1,50}$/.");
         }
 
@@ -266,7 +281,7 @@ class OrderStatus implements ModelInterface, ArrayAccess
     /**
      * Gets orderId
      *
-     * @return string|null
+     * @return string
      */
     public function getOrderId()
     {
@@ -276,16 +291,16 @@ class OrderStatus implements ModelInterface, ArrayAccess
     /**
      * Sets orderId
      *
-     * @param string|null $orderId orderId
+     * @param string $orderId orderId
      *
      * @return $this
      */
     public function setOrderId($orderId)
     {
-        if (!is_null($orderId) && (mb_strlen($orderId) > 150)) {
+        if ((mb_strlen($orderId) > 150)) {
             throw new \InvalidArgumentException('invalid length for $orderId when calling OrderStatus., must be smaller than or equal to 150.');
         }
-        if (!is_null($orderId) && (mb_strlen($orderId) < 1)) {
+        if ((mb_strlen($orderId) < 1)) {
             throw new \InvalidArgumentException('invalid length for $orderId when calling OrderStatus., must be bigger than or equal to 1.');
         }
 
@@ -297,7 +312,7 @@ class OrderStatus implements ModelInterface, ArrayAccess
     /**
      * Gets orderStatus
      *
-     * @return \JTL\SCX\Client\Channel\Model\ChannelOrderStatus|null
+     * @return \JTL\SCX\Client\Channel\Model\ChannelOrderStatus
      */
     public function getOrderStatus()
     {
@@ -307,7 +322,7 @@ class OrderStatus implements ModelInterface, ArrayAccess
     /**
      * Sets orderStatus
      *
-     * @param \JTL\SCX\Client\Channel\Model\ChannelOrderStatus|null $orderStatus orderStatus
+     * @param \JTL\SCX\Client\Channel\Model\ChannelOrderStatus $orderStatus orderStatus
      *
      * @return $this
      */
@@ -338,6 +353,30 @@ class OrderStatus implements ModelInterface, ArrayAccess
     public function setPaymentStatus($paymentStatus)
     {
         $this->container['paymentStatus'] = $paymentStatus;
+
+        return $this;
+    }
+
+    /**
+     * Gets orderItems
+     *
+     * @return \JTL\SCX\Client\Channel\Model\OrderStatusOrderItems[]|null
+     */
+    public function getOrderItems()
+    {
+        return $this->container['orderItems'];
+    }
+
+    /**
+     * Sets orderItems
+     *
+     * @param \JTL\SCX\Client\Channel\Model\OrderStatusOrderItems[]|null $orderItems orderItems
+     *
+     * @return $this
+     */
+    public function setOrderItems($orderItems)
+    {
+        $this->container['orderItems'] = $orderItems;
 
         return $this;
     }

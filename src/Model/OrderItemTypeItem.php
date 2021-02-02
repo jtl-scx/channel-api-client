@@ -59,6 +59,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'orderItemId' => 'string',
         'type' => 'string',
+        'itemStatus' => '\JTL\SCX\Client\Channel\Model\OrderItemStatus',
+        'itemPaymentStatus' => '\JTL\SCX\Client\Channel\Model\OrderItemPaymentStatus',
         'grossPrice' => 'string',
         'total' => 'string',
         'taxPercent' => 'string',
@@ -81,6 +83,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     protected static $openAPIFormats = [
         'orderItemId' => 'string',
         'type' => null,
+        'itemStatus' => null,
+        'itemPaymentStatus' => null,
         'grossPrice' => null,
         'total' => null,
         'taxPercent' => null,
@@ -124,6 +128,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     protected static $attributeMap = [
         'orderItemId' => 'orderItemId',
         'type' => 'type',
+        'itemStatus' => 'itemStatus',
+        'itemPaymentStatus' => 'itemPaymentStatus',
         'grossPrice' => 'grossPrice',
         'total' => 'total',
         'taxPercent' => 'taxPercent',
@@ -146,6 +152,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     protected static $setters = [
         'orderItemId' => 'setOrderItemId',
         'type' => 'setType',
+        'itemStatus' => 'setItemStatus',
+        'itemPaymentStatus' => 'setItemPaymentStatus',
         'grossPrice' => 'setGrossPrice',
         'total' => 'setTotal',
         'taxPercent' => 'setTaxPercent',
@@ -168,6 +176,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     protected static $getters = [
         'orderItemId' => 'getOrderItemId',
         'type' => 'getType',
+        'itemStatus' => 'getItemStatus',
+        'itemPaymentStatus' => 'getItemPaymentStatus',
         'grossPrice' => 'getGrossPrice',
         'total' => 'getTotal',
         'taxPercent' => 'getTaxPercent',
@@ -244,6 +254,8 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     {
         $this->container['orderItemId'] = isset($data['orderItemId']) ? $data['orderItemId'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : 'ITEM';
+        $this->container['itemStatus'] = isset($data['itemStatus']) ? $data['itemStatus'] : null;
+        $this->container['itemPaymentStatus'] = isset($data['itemPaymentStatus']) ? $data['itemPaymentStatus'] : null;
         $this->container['grossPrice'] = isset($data['grossPrice']) ? $data['grossPrice'] : null;
         $this->container['total'] = isset($data['total']) ? $data['total'] : null;
         $this->container['taxPercent'] = isset($data['taxPercent']) ? $data['taxPercent'] : null;
@@ -376,6 +388,54 @@ class OrderItemTypeItem implements ModelInterface, ArrayAccess
     public function setType($type)
     {
         $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets itemStatus
+     *
+     * @return \JTL\SCX\Client\Channel\Model\OrderItemStatus|null
+     */
+    public function getItemStatus()
+    {
+        return $this->container['itemStatus'];
+    }
+
+    /**
+     * Sets itemStatus
+     *
+     * @param \JTL\SCX\Client\Channel\Model\OrderItemStatus|null $itemStatus itemStatus
+     *
+     * @return $this
+     */
+    public function setItemStatus($itemStatus)
+    {
+        $this->container['itemStatus'] = $itemStatus;
+
+        return $this;
+    }
+
+    /**
+     * Gets itemPaymentStatus
+     *
+     * @return \JTL\SCX\Client\Channel\Model\OrderItemPaymentStatus|null
+     */
+    public function getItemPaymentStatus()
+    {
+        return $this->container['itemPaymentStatus'];
+    }
+
+    /**
+     * Sets itemPaymentStatus
+     *
+     * @param \JTL\SCX\Client\Channel\Model\OrderItemPaymentStatus|null $itemPaymentStatus itemPaymentStatus
+     *
+     * @return $this
+     */
+    public function setItemPaymentStatus($itemPaymentStatus)
+    {
+        $this->container['itemPaymentStatus'] = $itemPaymentStatus;
 
         return $this;
     }
