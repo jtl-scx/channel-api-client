@@ -1,6 +1,6 @@
 <?php
 /**
- * Category
+ * SellerEventOfferNewAllOf
  *
  * PHP version 7.2
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * Category Class Doc Comment
+ * SellerEventOfferNewAllOf Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
@@ -43,7 +43,7 @@ use \JTL\SCX\Client\Channel\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null  
  */
-class Category implements ModelInterface, ArrayAccess, \JsonSerializable
+class SellerEventOfferNewAllOf implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Category';
+    protected static $openAPIModelName = 'SellerEventOfferNew_allOf';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,10 +60,7 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'categoryId' => 'string',
-        'displayName' => 'string',
-        'listingAllowed' => 'bool',
-        'parentCategoryId' => 'string'
+        'offerId' => 'int'
     ];
 
     /**
@@ -74,10 +71,7 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'categoryId' => null,
-        'displayName' => null,
-        'listingAllowed' => null,
-        'parentCategoryId' => null
+        'offerId' => 'int64'
     ];
 
     /**
@@ -107,10 +101,7 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'categoryId' => 'categoryId',
-        'displayName' => 'displayName',
-        'listingAllowed' => 'listingAllowed',
-        'parentCategoryId' => 'parentCategoryId'
+        'offerId' => 'offerId'
     ];
 
     /**
@@ -119,10 +110,7 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'categoryId' => 'setCategoryId',
-        'displayName' => 'setDisplayName',
-        'listingAllowed' => 'setListingAllowed',
-        'parentCategoryId' => 'setParentCategoryId'
+        'offerId' => 'setOfferId'
     ];
 
     /**
@@ -131,10 +119,7 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'categoryId' => 'getCategoryId',
-        'displayName' => 'getDisplayName',
-        'listingAllowed' => 'getListingAllowed',
-        'parentCategoryId' => 'getParentCategoryId'
+        'offerId' => 'getOfferId'
     ];
 
     /**
@@ -197,10 +182,7 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['categoryId'] = $data['categoryId'] ?? null;
-        $this->container['displayName'] = $data['displayName'] ?? null;
-        $this->container['listingAllowed'] = $data['listingAllowed'] ?? true;
-        $this->container['parentCategoryId'] = $data['parentCategoryId'] ?? null;
+        $this->container['offerId'] = $data['offerId'] ?? null;
     }
 
     /**
@@ -212,34 +194,8 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['categoryId'] === null) {
-            $invalidProperties[] = "'categoryId' can't be null";
-        }
-        if ((mb_strlen($this->container['categoryId']) > 32)) {
-            $invalidProperties[] = "invalid value for 'categoryId', the character length must be smaller than or equal to 32.";
-        }
-
-        if ((mb_strlen($this->container['categoryId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'categoryId', the character length must be bigger than or equal to 1.";
-        }
-
-        if ($this->container['displayName'] === null) {
-            $invalidProperties[] = "'displayName' can't be null";
-        }
-        if ((mb_strlen($this->container['displayName']) > 250)) {
-            $invalidProperties[] = "invalid value for 'displayName', the character length must be smaller than or equal to 250.";
-        }
-
-        if ((mb_strlen($this->container['displayName']) < 1)) {
-            $invalidProperties[] = "invalid value for 'displayName', the character length must be bigger than or equal to 1.";
-        }
-
-        if (!is_null($this->container['parentCategoryId']) && (mb_strlen($this->container['parentCategoryId']) > 32)) {
-            $invalidProperties[] = "invalid value for 'parentCategoryId', the character length must be smaller than or equal to 32.";
-        }
-
-        if (!is_null($this->container['parentCategoryId']) && (mb_strlen($this->container['parentCategoryId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'parentCategoryId', the character length must be bigger than or equal to 1.";
+        if (!is_null($this->container['offerId']) && ($this->container['offerId'] < 1)) {
+            $invalidProperties[] = "invalid value for 'offerId', must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -258,118 +214,30 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets categoryId
+     * Gets offerId
      *
-     * @return string
+     * @return int|null
      */
-    public function getCategoryId()
+    public function getOfferId()
     {
-        return $this->container['categoryId'];
+        return $this->container['offerId'];
     }
 
     /**
-     * Sets categoryId
+     * Sets offerId
      *
-     * @param string $categoryId Channel category Id.
+     * @param int|null $offerId Unique Offer Id to identify an Offer on a Sales Channel.
      *
      * @return self
      */
-    public function setCategoryId($categoryId)
+    public function setOfferId($offerId)
     {
-        if ((mb_strlen($categoryId) > 32)) {
-            throw new \InvalidArgumentException('invalid length for $categoryId when calling Category., must be smaller than or equal to 32.');
-        }
-        if ((mb_strlen($categoryId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $categoryId when calling Category., must be bigger than or equal to 1.');
+
+        if (!is_null($offerId) && ($offerId < 1)) {
+            throw new \InvalidArgumentException('invalid value for $offerId when calling SellerEventOfferNewAllOf., must be bigger than or equal to 1.');
         }
 
-        $this->container['categoryId'] = $categoryId;
-
-        return $this;
-    }
-
-    /**
-     * Gets displayName
-     *
-     * @return string
-     */
-    public function getDisplayName()
-    {
-        return $this->container['displayName'];
-    }
-
-    /**
-     * Sets displayName
-     *
-     * @param string $displayName Category display name.
-     *
-     * @return self
-     */
-    public function setDisplayName($displayName)
-    {
-        if ((mb_strlen($displayName) > 250)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling Category., must be smaller than or equal to 250.');
-        }
-        if ((mb_strlen($displayName) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling Category., must be bigger than or equal to 1.');
-        }
-
-        $this->container['displayName'] = $displayName;
-
-        return $this;
-    }
-
-    /**
-     * Gets listingAllowed
-     *
-     * @return bool|null
-     */
-    public function getListingAllowed()
-    {
-        return $this->container['listingAllowed'];
-    }
-
-    /**
-     * Sets listingAllowed
-     *
-     * @param bool|null $listingAllowed Mark a categoryId as leaf. Only leaf categories can list offers.
-     *
-     * @return self
-     */
-    public function setListingAllowed($listingAllowed)
-    {
-        $this->container['listingAllowed'] = $listingAllowed;
-
-        return $this;
-    }
-
-    /**
-     * Gets parentCategoryId
-     *
-     * @return string|null
-     */
-    public function getParentCategoryId()
-    {
-        return $this->container['parentCategoryId'];
-    }
-
-    /**
-     * Sets parentCategoryId
-     *
-     * @param string|null $parentCategoryId Parent category Id. If category is 0 the current category is considered as root category.
-     *
-     * @return self
-     */
-    public function setParentCategoryId($parentCategoryId)
-    {
-        if (!is_null($parentCategoryId) && (mb_strlen($parentCategoryId) > 32)) {
-            throw new \InvalidArgumentException('invalid length for $parentCategoryId when calling Category., must be smaller than or equal to 32.');
-        }
-        if (!is_null($parentCategoryId) && (mb_strlen($parentCategoryId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $parentCategoryId when calling Category., must be bigger than or equal to 1.');
-        }
-
-        $this->container['parentCategoryId'] = $parentCategoryId;
+        $this->container['offerId'] = $offerId;
 
         return $this;
     }
