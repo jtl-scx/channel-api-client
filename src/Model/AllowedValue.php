@@ -1,6 +1,6 @@
 <?php
 /**
- * Category
+ * AllowedValue
  *
  * PHP version 7.2
  *
@@ -33,7 +33,7 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * Category Class Doc Comment
+ * AllowedValue Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
@@ -43,7 +43,7 @@ use \JTL\SCX\Client\Channel\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null  
  */
-class Category implements ModelInterface, ArrayAccess, \JsonSerializable
+class AllowedValue implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -52,7 +52,7 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
       *
       * @var string
       */
-    protected static $openAPIModelName = 'Category';
+    protected static $openAPIModelName = 'AllowedValue';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -60,10 +60,8 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'categoryId' => 'string',
-        'displayName' => 'string',
-        'listingAllowed' => 'bool',
-        'parentCategoryId' => 'string'
+        'value' => 'string',
+        'display' => 'string'
     ];
 
     /**
@@ -74,10 +72,8 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'categoryId' => null,
-        'displayName' => null,
-        'listingAllowed' => null,
-        'parentCategoryId' => null
+        'value' => null,
+        'display' => null
     ];
 
     /**
@@ -107,10 +103,8 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'categoryId' => 'categoryId',
-        'displayName' => 'displayName',
-        'listingAllowed' => 'listingAllowed',
-        'parentCategoryId' => 'parentCategoryId'
+        'value' => 'value',
+        'display' => 'display'
     ];
 
     /**
@@ -119,10 +113,8 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'categoryId' => 'setCategoryId',
-        'displayName' => 'setDisplayName',
-        'listingAllowed' => 'setListingAllowed',
-        'parentCategoryId' => 'setParentCategoryId'
+        'value' => 'setValue',
+        'display' => 'setDisplay'
     ];
 
     /**
@@ -131,10 +123,8 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'categoryId' => 'getCategoryId',
-        'displayName' => 'getDisplayName',
-        'listingAllowed' => 'getListingAllowed',
-        'parentCategoryId' => 'getParentCategoryId'
+        'value' => 'getValue',
+        'display' => 'getDisplay'
     ];
 
     /**
@@ -197,10 +187,8 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
      */
     public function __construct(array $data = null)
     {
-        $this->container['categoryId'] = $data['categoryId'] ?? null;
-        $this->container['displayName'] = $data['displayName'] ?? null;
-        $this->container['listingAllowed'] = $data['listingAllowed'] ?? true;
-        $this->container['parentCategoryId'] = $data['parentCategoryId'] ?? null;
+        $this->container['value'] = $data['value'] ?? null;
+        $this->container['display'] = $data['display'] ?? null;
     }
 
     /**
@@ -212,34 +200,23 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
-        if ($this->container['categoryId'] === null) {
-            $invalidProperties[] = "'categoryId' can't be null";
+        if ($this->container['value'] === null) {
+            $invalidProperties[] = "'value' can't be null";
         }
-        if ((mb_strlen($this->container['categoryId']) > 32)) {
-            $invalidProperties[] = "invalid value for 'categoryId', the character length must be smaller than or equal to 32.";
-        }
-
-        if ((mb_strlen($this->container['categoryId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'categoryId', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['value']) > 1024)) {
+            $invalidProperties[] = "invalid value for 'value', the character length must be smaller than or equal to 1024.";
         }
 
-        if ($this->container['displayName'] === null) {
-            $invalidProperties[] = "'displayName' can't be null";
-        }
-        if ((mb_strlen($this->container['displayName']) > 250)) {
-            $invalidProperties[] = "invalid value for 'displayName', the character length must be smaller than or equal to 250.";
+        if ((mb_strlen($this->container['value']) < 1)) {
+            $invalidProperties[] = "invalid value for 'value', the character length must be bigger than or equal to 1.";
         }
 
-        if ((mb_strlen($this->container['displayName']) < 1)) {
-            $invalidProperties[] = "invalid value for 'displayName', the character length must be bigger than or equal to 1.";
+        if (!is_null($this->container['display']) && (mb_strlen($this->container['display']) > 1024)) {
+            $invalidProperties[] = "invalid value for 'display', the character length must be smaller than or equal to 1024.";
         }
 
-        if (!is_null($this->container['parentCategoryId']) && (mb_strlen($this->container['parentCategoryId']) > 32)) {
-            $invalidProperties[] = "invalid value for 'parentCategoryId', the character length must be smaller than or equal to 32.";
-        }
-
-        if (!is_null($this->container['parentCategoryId']) && (mb_strlen($this->container['parentCategoryId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'parentCategoryId', the character length must be bigger than or equal to 1.";
+        if (!is_null($this->container['display']) && (mb_strlen($this->container['display']) < 1)) {
+            $invalidProperties[] = "invalid value for 'display', the character length must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -258,118 +235,63 @@ class Category implements ModelInterface, ArrayAccess, \JsonSerializable
 
 
     /**
-     * Gets categoryId
+     * Gets value
      *
      * @return string
      */
-    public function getCategoryId()
+    public function getValue()
     {
-        return $this->container['categoryId'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets categoryId
+     * Sets value
      *
-     * @param string $categoryId Channel category Id.
+     * @param string $value An enumeration to include in the set. The enumeration bust be string-based. Example: '1', 'green_l_st'
      *
      * @return self
      */
-    public function setCategoryId($categoryId)
+    public function setValue($value)
     {
-        if ((mb_strlen($categoryId) > 32)) {
-            throw new \InvalidArgumentException('invalid length for $categoryId when calling Category., must be smaller than or equal to 32.');
+        if ((mb_strlen($value) > 1024)) {
+            throw new \InvalidArgumentException('invalid length for $value when calling AllowedValue., must be smaller than or equal to 1024.');
         }
-        if ((mb_strlen($categoryId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $categoryId when calling Category., must be bigger than or equal to 1.');
+        if ((mb_strlen($value) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $value when calling AllowedValue., must be bigger than or equal to 1.');
         }
 
-        $this->container['categoryId'] = $categoryId;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets displayName
-     *
-     * @return string
-     */
-    public function getDisplayName()
-    {
-        return $this->container['displayName'];
-    }
-
-    /**
-     * Sets displayName
-     *
-     * @param string $displayName Category display name.
-     *
-     * @return self
-     */
-    public function setDisplayName($displayName)
-    {
-        if ((mb_strlen($displayName) > 250)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling Category., must be smaller than or equal to 250.');
-        }
-        if ((mb_strlen($displayName) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling Category., must be bigger than or equal to 1.');
-        }
-
-        $this->container['displayName'] = $displayName;
-
-        return $this;
-    }
-
-    /**
-     * Gets listingAllowed
-     *
-     * @return bool|null
-     */
-    public function getListingAllowed()
-    {
-        return $this->container['listingAllowed'];
-    }
-
-    /**
-     * Sets listingAllowed
-     *
-     * @param bool|null $listingAllowed Mark a categoryId as leaf. Only leaf categories can list offers.
-     *
-     * @return self
-     */
-    public function setListingAllowed($listingAllowed)
-    {
-        $this->container['listingAllowed'] = $listingAllowed;
-
-        return $this;
-    }
-
-    /**
-     * Gets parentCategoryId
+     * Gets display
      *
      * @return string|null
      */
-    public function getParentCategoryId()
+    public function getDisplay()
     {
-        return $this->container['parentCategoryId'];
+        return $this->container['display'];
     }
 
     /**
-     * Sets parentCategoryId
+     * Sets display
      *
-     * @param string|null $parentCategoryId Parent category Id. If category is 0 the current category is considered as root category.
+     * @param string|null $display An optional alias for the enumeration, which will be shown in the GUI. If left empty, the value will be shown instead. Example: 'Red', 'Light Green + Striped'
      *
      * @return self
      */
-    public function setParentCategoryId($parentCategoryId)
+    public function setDisplay($display)
     {
-        if (!is_null($parentCategoryId) && (mb_strlen($parentCategoryId) > 32)) {
-            throw new \InvalidArgumentException('invalid length for $parentCategoryId when calling Category., must be smaller than or equal to 32.');
+        if (!is_null($display) && (mb_strlen($display) > 1024)) {
+            throw new \InvalidArgumentException('invalid length for $display when calling AllowedValue., must be smaller than or equal to 1024.');
         }
-        if (!is_null($parentCategoryId) && (mb_strlen($parentCategoryId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $parentCategoryId when calling Category., must be bigger than or equal to 1.');
+        if (!is_null($display) && (mb_strlen($display) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $display when calling AllowedValue., must be bigger than or equal to 1.');
         }
 
-        $this->container['parentCategoryId'] = $parentCategoryId;
+        $this->container['display'] = $display;
 
         return $this;
     }
