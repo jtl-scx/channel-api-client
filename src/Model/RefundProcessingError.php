@@ -1,6 +1,6 @@
 <?php
 /**
- * SupportedPaymentMethod
+ * RefundProcessingError
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SupportedPaymentMethod Class Doc Comment
+ * RefundProcessingError Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SupportedPaymentMethod implements ModelInterface, ArrayAccess
+class RefundProcessingError implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SupportedPaymentMethod';
+    protected static $openAPIModelName = 'RefundProcessingError';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,8 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethodId' => 'string',
-        'displayName' => 'string'
+        'code' => 'string',
+        'message' => 'string'
     ];
 
     /**
@@ -67,8 +67,8 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'paymentMethodId' => null,
-        'displayName' => null
+        'code' => null,
+        'message' => null
     ];
 
     /**
@@ -98,8 +98,8 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethodId' => 'paymentMethodId',
-        'displayName' => 'displayName'
+        'code' => 'code',
+        'message' => 'message'
     ];
 
     /**
@@ -108,8 +108,8 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethodId' => 'setPaymentMethodId',
-        'displayName' => 'setDisplayName'
+        'code' => 'setCode',
+        'message' => 'setMessage'
     ];
 
     /**
@@ -118,8 +118,8 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethodId' => 'getPaymentMethodId',
-        'displayName' => 'getDisplayName'
+        'code' => 'getCode',
+        'message' => 'getMessage'
     ];
 
     /**
@@ -182,8 +182,8 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['paymentMethodId'] = isset($data['paymentMethodId']) ? $data['paymentMethodId'] : null;
-        $this->container['displayName'] = isset($data['displayName']) ? $data['displayName'] : null;
+        $this->container['code'] = isset($data['code']) ? $data['code'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
     }
 
     /**
@@ -195,19 +195,15 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
+        if ($this->container['message'] === null) {
+            $invalidProperties[] = "'message' can't be null";
         }
-        if ((mb_strlen($this->container['paymentMethodId']) > 100)) {
-            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be smaller than or equal to 100.";
-        }
-
-        if ((mb_strlen($this->container['paymentMethodId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['message']) > 1024)) {
+            $invalidProperties[] = "invalid value for 'message', the character length must be smaller than or equal to 1024.";
         }
 
-        if (!is_null($this->container['displayName']) && (mb_strlen($this->container['displayName']) > 150)) {
-            $invalidProperties[] = "invalid value for 'displayName', the character length must be smaller than or equal to 150.";
+        if ((mb_strlen($this->container['message']) < 1)) {
+            $invalidProperties[] = "invalid value for 'message', the character length must be bigger than or equal to 1.";
         }
 
         return $invalidProperties;
@@ -226,60 +222,56 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets paymentMethodId
+     * Gets code
      *
-     * @return string
+     * @return string|null
      */
-    public function getPaymentMethodId()
+    public function getCode()
     {
-        return $this->container['paymentMethodId'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets paymentMethodId
+     * Sets code
      *
-     * @param string $paymentMethodId paymentMethodId
+     * @param string|null $code code
      *
      * @return $this
      */
-    public function setPaymentMethodId($paymentMethodId)
+    public function setCode($code)
     {
-        if ((mb_strlen($paymentMethodId) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethod., must be smaller than or equal to 100.');
-        }
-        if ((mb_strlen($paymentMethodId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethod., must be bigger than or equal to 1.');
-        }
-
-        $this->container['paymentMethodId'] = $paymentMethodId;
+        $this->container['code'] = $code;
 
         return $this;
     }
 
     /**
-     * Gets displayName
+     * Gets message
      *
-     * @return string|null
+     * @return string
      */
-    public function getDisplayName()
+    public function getMessage()
     {
-        return $this->container['displayName'];
+        return $this->container['message'];
     }
 
     /**
-     * Sets displayName
+     * Sets message
      *
-     * @param string|null $displayName displayName
+     * @param string $message message
      *
      * @return $this
      */
-    public function setDisplayName($displayName)
+    public function setMessage($message)
     {
-        if (!is_null($displayName) && (mb_strlen($displayName) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling SupportedPaymentMethod., must be smaller than or equal to 150.');
+        if ((mb_strlen($message) > 1024)) {
+            throw new \InvalidArgumentException('invalid length for $message when calling RefundProcessingError., must be smaller than or equal to 1024.');
+        }
+        if ((mb_strlen($message) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $message when calling RefundProcessingError., must be bigger than or equal to 1.');
         }
 
-        $this->container['displayName'] = $displayName;
+        $this->container['message'] = $message;
 
         return $this;
     }

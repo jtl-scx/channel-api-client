@@ -1,6 +1,6 @@
 <?php
 /**
- * SupportedPaymentMethod
+ * SellerEventOrderRefund
  *
  * PHP version 5
  *
@@ -28,19 +28,17 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-
-use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SupportedPaymentMethod Class Doc Comment
+ * SellerEventOrderRefund Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SupportedPaymentMethod implements ModelInterface, ArrayAccess
+class SellerEventOrderRefund extends Refund 
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +47,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SupportedPaymentMethod';
+    protected static $openAPIModelName = 'SellerEventOrderRefund';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +55,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethodId' => 'string',
-        'displayName' => 'string'
+        
     ];
 
     /**
@@ -67,8 +64,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'paymentMethodId' => null,
-        'displayName' => null
+        
     ];
 
     /**
@@ -78,7 +74,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes;
+        return self::$openAPITypes + parent::openAPITypes();
     }
 
     /**
@@ -88,7 +84,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats;
+        return self::$openAPIFormats + parent::openAPIFormats();
     }
 
     /**
@@ -98,8 +94,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethodId' => 'paymentMethodId',
-        'displayName' => 'displayName'
+        
     ];
 
     /**
@@ -108,8 +103,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethodId' => 'setPaymentMethodId',
-        'displayName' => 'setDisplayName'
+        
     ];
 
     /**
@@ -118,8 +112,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethodId' => 'getPaymentMethodId',
-        'displayName' => 'getDisplayName'
+        
     ];
 
     /**
@@ -130,7 +123,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -140,7 +133,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -150,7 +143,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -167,12 +160,6 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -182,8 +169,8 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['paymentMethodId'] = isset($data['paymentMethodId']) ? $data['paymentMethodId'] : null;
-        $this->container['displayName'] = isset($data['displayName']) ? $data['displayName'] : null;
+        parent::__construct($data);
+
     }
 
     /**
@@ -193,22 +180,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
-
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
-        }
-        if ((mb_strlen($this->container['paymentMethodId']) > 100)) {
-            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be smaller than or equal to 100.";
-        }
-
-        if ((mb_strlen($this->container['paymentMethodId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be bigger than or equal to 1.";
-        }
-
-        if (!is_null($this->container['displayName']) && (mb_strlen($this->container['displayName']) > 150)) {
-            $invalidProperties[] = "invalid value for 'displayName', the character length must be smaller than or equal to 150.";
-        }
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -224,65 +196,6 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
         return count($this->listInvalidProperties()) === 0;
     }
 
-
-    /**
-     * Gets paymentMethodId
-     *
-     * @return string
-     */
-    public function getPaymentMethodId()
-    {
-        return $this->container['paymentMethodId'];
-    }
-
-    /**
-     * Sets paymentMethodId
-     *
-     * @param string $paymentMethodId paymentMethodId
-     *
-     * @return $this
-     */
-    public function setPaymentMethodId($paymentMethodId)
-    {
-        if ((mb_strlen($paymentMethodId) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethod., must be smaller than or equal to 100.');
-        }
-        if ((mb_strlen($paymentMethodId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethod., must be bigger than or equal to 1.');
-        }
-
-        $this->container['paymentMethodId'] = $paymentMethodId;
-
-        return $this;
-    }
-
-    /**
-     * Gets displayName
-     *
-     * @return string|null
-     */
-    public function getDisplayName()
-    {
-        return $this->container['displayName'];
-    }
-
-    /**
-     * Sets displayName
-     *
-     * @param string|null $displayName displayName
-     *
-     * @return $this
-     */
-    public function setDisplayName($displayName)
-    {
-        if (!is_null($displayName) && (mb_strlen($displayName) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling SupportedPaymentMethod., must be smaller than or equal to 150.');
-        }
-
-        $this->container['displayName'] = $displayName;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

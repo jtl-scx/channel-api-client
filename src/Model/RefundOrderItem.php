@@ -1,6 +1,6 @@
 <?php
 /**
- * SupportedPaymentMethod
+ * RefundOrderItem
  *
  * PHP version 5
  *
@@ -33,14 +33,14 @@ use \ArrayAccess;
 use \JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SupportedPaymentMethod Class Doc Comment
+ * RefundOrderItem Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class SupportedPaymentMethod implements ModelInterface, ArrayAccess
+class RefundOrderItem implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -49,7 +49,7 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SupportedPaymentMethod';
+    protected static $openAPIModelName = 'RefundOrderItem';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -57,8 +57,11 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPITypes = [
-        'paymentMethodId' => 'string',
-        'displayName' => 'string'
+        'orderItemId' => 'string',
+        'quantity' => 'string',
+        'reason' => '\JTL\SCX\Client\Channel\Model\RefundReason',
+        'refund' => 'string',
+        'refundCurrency' => 'string'
     ];
 
     /**
@@ -67,8 +70,11 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $openAPIFormats = [
-        'paymentMethodId' => null,
-        'displayName' => null
+        'orderItemId' => 'string',
+        'quantity' => null,
+        'reason' => null,
+        'refund' => null,
+        'refundCurrency' => null
     ];
 
     /**
@@ -98,8 +104,11 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'paymentMethodId' => 'paymentMethodId',
-        'displayName' => 'displayName'
+        'orderItemId' => 'orderItemId',
+        'quantity' => 'quantity',
+        'reason' => 'reason',
+        'refund' => 'refund',
+        'refundCurrency' => 'refundCurrency'
     ];
 
     /**
@@ -108,8 +117,11 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'paymentMethodId' => 'setPaymentMethodId',
-        'displayName' => 'setDisplayName'
+        'orderItemId' => 'setOrderItemId',
+        'quantity' => 'setQuantity',
+        'reason' => 'setReason',
+        'refund' => 'setRefund',
+        'refundCurrency' => 'setRefundCurrency'
     ];
 
     /**
@@ -118,8 +130,11 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'paymentMethodId' => 'getPaymentMethodId',
-        'displayName' => 'getDisplayName'
+        'orderItemId' => 'getOrderItemId',
+        'quantity' => 'getQuantity',
+        'reason' => 'getReason',
+        'refund' => 'getRefund',
+        'refundCurrency' => 'getRefundCurrency'
     ];
 
     /**
@@ -182,8 +197,11 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['paymentMethodId'] = isset($data['paymentMethodId']) ? $data['paymentMethodId'] : null;
-        $this->container['displayName'] = isset($data['displayName']) ? $data['displayName'] : null;
+        $this->container['orderItemId'] = isset($data['orderItemId']) ? $data['orderItemId'] : null;
+        $this->container['quantity'] = isset($data['quantity']) ? $data['quantity'] : null;
+        $this->container['reason'] = isset($data['reason']) ? $data['reason'] : null;
+        $this->container['refund'] = isset($data['refund']) ? $data['refund'] : null;
+        $this->container['refundCurrency'] = isset($data['refundCurrency']) ? $data['refundCurrency'] : null;
     }
 
     /**
@@ -195,21 +213,29 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['paymentMethodId'] === null) {
-            $invalidProperties[] = "'paymentMethodId' can't be null";
+        if ($this->container['orderItemId'] === null) {
+            $invalidProperties[] = "'orderItemId' can't be null";
         }
-        if ((mb_strlen($this->container['paymentMethodId']) > 100)) {
-            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be smaller than or equal to 100.";
-        }
-
-        if ((mb_strlen($this->container['paymentMethodId']) < 1)) {
-            $invalidProperties[] = "invalid value for 'paymentMethodId', the character length must be bigger than or equal to 1.";
+        if ((mb_strlen($this->container['orderItemId']) > 50)) {
+            $invalidProperties[] = "invalid value for 'orderItemId', the character length must be smaller than or equal to 50.";
         }
 
-        if (!is_null($this->container['displayName']) && (mb_strlen($this->container['displayName']) > 150)) {
-            $invalidProperties[] = "invalid value for 'displayName', the character length must be smaller than or equal to 150.";
+        if ((mb_strlen($this->container['orderItemId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'orderItemId', the character length must be bigger than or equal to 1.";
         }
 
+        if ($this->container['quantity'] === null) {
+            $invalidProperties[] = "'quantity' can't be null";
+        }
+        if ($this->container['reason'] === null) {
+            $invalidProperties[] = "'reason' can't be null";
+        }
+        if ($this->container['refund'] === null) {
+            $invalidProperties[] = "'refund' can't be null";
+        }
+        if ($this->container['refundCurrency'] === null) {
+            $invalidProperties[] = "'refundCurrency' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -226,60 +252,128 @@ class SupportedPaymentMethod implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets paymentMethodId
+     * Gets orderItemId
      *
      * @return string
      */
-    public function getPaymentMethodId()
+    public function getOrderItemId()
     {
-        return $this->container['paymentMethodId'];
+        return $this->container['orderItemId'];
     }
 
     /**
-     * Sets paymentMethodId
+     * Sets orderItemId
      *
-     * @param string $paymentMethodId paymentMethodId
+     * @param string $orderItemId A unique identifier to identify a order item. This ID is provided by the Channel itself an should be used to identify a order item id.
      *
      * @return $this
      */
-    public function setPaymentMethodId($paymentMethodId)
+    public function setOrderItemId($orderItemId)
     {
-        if ((mb_strlen($paymentMethodId) > 100)) {
-            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethod., must be smaller than or equal to 100.');
+        if ((mb_strlen($orderItemId) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $orderItemId when calling RefundOrderItem., must be smaller than or equal to 50.');
         }
-        if ((mb_strlen($paymentMethodId) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $paymentMethodId when calling SupportedPaymentMethod., must be bigger than or equal to 1.');
+        if ((mb_strlen($orderItemId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $orderItemId when calling RefundOrderItem., must be bigger than or equal to 1.');
         }
 
-        $this->container['paymentMethodId'] = $paymentMethodId;
+        $this->container['orderItemId'] = $orderItemId;
 
         return $this;
     }
 
     /**
-     * Gets displayName
+     * Gets quantity
      *
-     * @return string|null
+     * @return string
      */
-    public function getDisplayName()
+    public function getQuantity()
     {
-        return $this->container['displayName'];
+        return $this->container['quantity'];
     }
 
     /**
-     * Sets displayName
+     * Sets quantity
      *
-     * @param string|null $displayName displayName
+     * @param string $quantity quantity
      *
      * @return $this
      */
-    public function setDisplayName($displayName)
+    public function setQuantity($quantity)
     {
-        if (!is_null($displayName) && (mb_strlen($displayName) > 150)) {
-            throw new \InvalidArgumentException('invalid length for $displayName when calling SupportedPaymentMethod., must be smaller than or equal to 150.');
-        }
+        $this->container['quantity'] = $quantity;
 
-        $this->container['displayName'] = $displayName;
+        return $this;
+    }
+
+    /**
+     * Gets reason
+     *
+     * @return \JTL\SCX\Client\Channel\Model\RefundReason
+     */
+    public function getReason()
+    {
+        return $this->container['reason'];
+    }
+
+    /**
+     * Sets reason
+     *
+     * @param \JTL\SCX\Client\Channel\Model\RefundReason $reason reason
+     *
+     * @return $this
+     */
+    public function setReason($reason)
+    {
+        $this->container['reason'] = $reason;
+
+        return $this;
+    }
+
+    /**
+     * Gets refund
+     *
+     * @return string
+     */
+    public function getRefund()
+    {
+        return $this->container['refund'];
+    }
+
+    /**
+     * Sets refund
+     *
+     * @param string $refund refund
+     *
+     * @return $this
+     */
+    public function setRefund($refund)
+    {
+        $this->container['refund'] = $refund;
+
+        return $this;
+    }
+
+    /**
+     * Gets refundCurrency
+     *
+     * @return string
+     */
+    public function getRefundCurrency()
+    {
+        return $this->container['refundCurrency'];
+    }
+
+    /**
+     * Sets refundCurrency
+     *
+     * @param string $refundCurrency refundCurrency
+     *
+     * @return $this
+     */
+    public function setRefundCurrency($refundCurrency)
+    {
+        $this->container['refundCurrency'] = $refundCurrency;
 
         return $this;
     }
