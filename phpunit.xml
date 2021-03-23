@@ -23,7 +23,6 @@
             <whitelist>
                 <directory>src</directory>
                 <exclude>
-                    <directory>src/Model</directory>
                     <file>src/ObjectSerializer.php</file>
                 </exclude>
             </whitelist>
