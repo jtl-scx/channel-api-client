@@ -20,11 +20,12 @@ use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderInvoice;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderRefund;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventSellerAttributesUpdateRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
-use JTL\SCX\Client\Channel\Model\SellerEventTypeList as M;
+use JTL\SCX\Client\Channel\Model\SellerEventTypeList as Event;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use MyCLabs\Enum\Enum;
 
@@ -47,28 +48,30 @@ use MyCLabs\Enum\Enum;
  * @method static EventType SellerOrderCancellationAccept()
  * @method static EventType SellerOrderCancellationDenied()
  * @method static EventType SellerEventOrderInvoice()
+ * @method static EventType SellerEventOrderRefund()
  *
  * @psalm-immutable
  */
 class EventType extends Enum
 {
-    public const SellerEventTest = M::SYSTEMTEST;
-    public const SystemNotification = M::SYSTEMNOTIFICATION;
-    public const SellerOrderAccept = M::SELLERORDER_ACCEPTED;
-    public const SellerOrderShipping = M::SELLERORDER_SHIPPING;
-    public const SellerOrderPayment = M::SELLERORDER_PAYMENT;
-    public const SellerOfferNew = M::SELLEROFFER_NEW;
-    public const SellerOfferUpdate = M::SELLEROFFER_UPDATE;
-    public const SellerOfferEnd = M::SELLEROFFER_END;
-    public const SellerOfferStockUpdate = M::SELLEROFFER_STOCK_UPDATE;
-    public const SellerOfferPriceUpdate = M::SELLEROFFER_PRICE_UPDATE;
-    public const SellerReportRequest = M::SELLERREPORT_REQUEST;
-    public const SellerChannelUnlinked = M::SELLERCHANNEL_UNLINKED;
-    public const SellerMetaSellerAttributesUpdateRequest = M::SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST;
-    public const SellerOrderCancellationAccept = M::SELLERORDER_CANCELLATION_ACCEPTED;
-    public const SellerOrderCancellationDenied = M::SELLERORDER_CANCELLATION_DENIED;
-    public const SellerOrderCancellationRequest = M::SELLERORDER_CANCELLATION_REQUEST;
-    public const SellerEventOrderInvoice = M::SELLERORDER_INVOICE;
+    public const SellerEventTest = Event::SYSTEMTEST;
+    public const SystemNotification = Event::SYSTEMNOTIFICATION;
+    public const SellerOrderAccept = Event::SELLERORDER_ACCEPTED;
+    public const SellerOrderShipping = Event::SELLERORDER_SHIPPING;
+    public const SellerOrderPayment = Event::SELLERORDER_PAYMENT;
+    public const SellerOfferNew = Event::SELLEROFFER_NEW;
+    public const SellerOfferUpdate = Event::SELLEROFFER_UPDATE;
+    public const SellerOfferEnd = Event::SELLEROFFER_END;
+    public const SellerOfferStockUpdate = Event::SELLEROFFER_STOCK_UPDATE;
+    public const SellerOfferPriceUpdate = Event::SELLEROFFER_PRICE_UPDATE;
+    public const SellerReportRequest = Event::SELLERREPORT_REQUEST;
+    public const SellerChannelUnlinked = Event::SELLERCHANNEL_UNLINKED;
+    public const SellerMetaSellerAttributesUpdateRequest = Event::SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST;
+    public const SellerOrderCancellationAccept = Event::SELLERORDER_CANCELLATION_ACCEPTED;
+    public const SellerOrderCancellationDenied = Event::SELLERORDER_CANCELLATION_DENIED;
+    public const SellerOrderCancellationRequest = Event::SELLERORDER_CANCELLATION_REQUEST;
+    public const SellerEventOrderInvoice = Event::SELLERORDER_INVOICE;
+    public const SellerEventOrderRefund = Event::SELLERORDER_REFUND;
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -122,6 +125,8 @@ class EventType extends Enum
                 return SellerEventOrderCancellationRequest::class;
             case $this::SellerEventOrderInvoice():
                 return SellerEventOrderInvoice::class;
+            case $this::SellerEventOrderRefund():
+                return SellerEventOrderRefund::class;
         }
 
         return \stdClass::class;
