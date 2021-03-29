@@ -29,8 +29,8 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use \ArrayAccess;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * RefundOrderItem Class Doc Comment
@@ -59,7 +59,7 @@ class RefundOrderItem implements ModelInterface, ArrayAccess
     protected static $openAPITypes = [
         'orderItemId' => 'string',
         'quantity' => 'string',
-        'reason' => '\JTL\SCX\Client\Channel\Model\RefundReason',
+        'reason' => 'string',
         'refund' => 'string',
         'refundCurrency' => 'string'
     ];
@@ -178,8 +178,33 @@ class RefundOrderItem implements ModelInterface, ArrayAccess
         return self::$openAPIModelName;
     }
 
+    const REASON_NO_REASON = 'NO_REASON';
+    const REASON_DEFECT = 'DEFECT';
+    const REASON_WRONG_ITEM = 'WRONG_ITEM';
+    const REASON_WRONG_SIZE = 'WRONG_SIZE';
+    const REASON_TOO_LATE = 'TOO_LATE';
+    const REASON_BAD_QUALITY = 'BAD_QUALITY';
+    const REASON_OTHER = 'OTHER';
     
 
+    
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getReasonAllowableValues()
+    {
+        return [
+            self::REASON_NO_REASON,
+            self::REASON_DEFECT,
+            self::REASON_WRONG_ITEM,
+            self::REASON_WRONG_SIZE,
+            self::REASON_TOO_LATE,
+            self::REASON_BAD_QUALITY,
+            self::REASON_OTHER,
+        ];
+    }
     
 
     /**
@@ -230,6 +255,14 @@ class RefundOrderItem implements ModelInterface, ArrayAccess
         if ($this->container['reason'] === null) {
             $invalidProperties[] = "'reason' can't be null";
         }
+        $allowedValues = $this->getReasonAllowableValues();
+        if (!is_null($this->container['reason']) && !in_array($this->container['reason'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value for 'reason', must be one of '%s'",
+                implode("', '", $allowedValues)
+            );
+        }
+
         if ($this->container['refund'] === null) {
             $invalidProperties[] = "'refund' can't be null";
         }
@@ -309,7 +342,7 @@ class RefundOrderItem implements ModelInterface, ArrayAccess
     /**
      * Gets reason
      *
-     * @return \JTL\SCX\Client\Channel\Model\RefundReason
+     * @return string
      */
     public function getReason()
     {
@@ -319,12 +352,21 @@ class RefundOrderItem implements ModelInterface, ArrayAccess
     /**
      * Sets reason
      *
-     * @param \JTL\SCX\Client\Channel\Model\RefundReason $reason reason
+     * @param string $reason reason
      *
      * @return $this
      */
     public function setReason($reason)
     {
+        $allowedValues = $this->getReasonAllowableValues();
+        if (!in_array($reason, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value for 'reason', must be one of '%s'",
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
         $this->container['reason'] = $reason;
 
         return $this;

@@ -28,7 +28,9 @@
  */
 
 namespace JTL\SCX\Client\Channel\Model;
-use \JTL\SCX\Client\Channel\ObjectSerializer;
+
+use ArrayAccess;
+use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
  * RefundProcessingResult Class Doc Comment
@@ -38,7 +40,7 @@ use \JTL\SCX\Client\Channel\ObjectSerializer;
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  */
-class RefundProcessingResult extends RefundProcessingResult2 
+class RefundProcessingResult implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -55,7 +57,10 @@ class RefundProcessingResult extends RefundProcessingResult2
       * @var string[]
       */
     protected static $openAPITypes = [
-        
+        'refundId' => 'string',
+        'sellerId' => 'string',
+        'isAccepted' => 'bool',
+        'processingErrorList' => '\JTL\SCX\Client\Channel\Model\RefundProcessingError[]'
     ];
 
     /**
@@ -64,7 +69,10 @@ class RefundProcessingResult extends RefundProcessingResult2
       * @var string[]
       */
     protected static $openAPIFormats = [
-        
+        'refundId' => null,
+        'sellerId' => null,
+        'isAccepted' => null,
+        'processingErrorList' => null
     ];
 
     /**
@@ -74,7 +82,7 @@ class RefundProcessingResult extends RefundProcessingResult2
      */
     public static function openAPITypes()
     {
-        return self::$openAPITypes + parent::openAPITypes();
+        return self::$openAPITypes;
     }
 
     /**
@@ -84,7 +92,7 @@ class RefundProcessingResult extends RefundProcessingResult2
      */
     public static function openAPIFormats()
     {
-        return self::$openAPIFormats + parent::openAPIFormats();
+        return self::$openAPIFormats;
     }
 
     /**
@@ -94,7 +102,10 @@ class RefundProcessingResult extends RefundProcessingResult2
      * @var string[]
      */
     protected static $attributeMap = [
-        
+        'refundId' => 'refundId',
+        'sellerId' => 'sellerId',
+        'isAccepted' => 'isAccepted',
+        'processingErrorList' => 'processingErrorList'
     ];
 
     /**
@@ -103,7 +114,10 @@ class RefundProcessingResult extends RefundProcessingResult2
      * @var string[]
      */
     protected static $setters = [
-        
+        'refundId' => 'setRefundId',
+        'sellerId' => 'setSellerId',
+        'isAccepted' => 'setIsAccepted',
+        'processingErrorList' => 'setProcessingErrorList'
     ];
 
     /**
@@ -112,7 +126,10 @@ class RefundProcessingResult extends RefundProcessingResult2
      * @var string[]
      */
     protected static $getters = [
-        
+        'refundId' => 'getRefundId',
+        'sellerId' => 'getSellerId',
+        'isAccepted' => 'getIsAccepted',
+        'processingErrorList' => 'getProcessingErrorList'
     ];
 
     /**
@@ -123,7 +140,7 @@ class RefundProcessingResult extends RefundProcessingResult2
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -133,7 +150,7 @@ class RefundProcessingResult extends RefundProcessingResult2
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -143,7 +160,7 @@ class RefundProcessingResult extends RefundProcessingResult2
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -160,6 +177,12 @@ class RefundProcessingResult extends RefundProcessingResult2
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -169,8 +192,10 @@ class RefundProcessingResult extends RefundProcessingResult2
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
+        $this->container['refundId'] = isset($data['refundId']) ? $data['refundId'] : null;
+        $this->container['sellerId'] = isset($data['sellerId']) ? $data['sellerId'] : null;
+        $this->container['isAccepted'] = isset($data['isAccepted']) ? $data['isAccepted'] : null;
+        $this->container['processingErrorList'] = isset($data['processingErrorList']) ? $data['processingErrorList'] : null;
     }
 
     /**
@@ -180,8 +205,29 @@ class RefundProcessingResult extends RefundProcessingResult2
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
+        if ($this->container['refundId'] === null) {
+            $invalidProperties[] = "'refundId' can't be null";
+        }
+        if ((mb_strlen($this->container['refundId']) > 128)) {
+            $invalidProperties[] = "invalid value for 'refundId', the character length must be smaller than or equal to 128.";
+        }
+
+        if ((mb_strlen($this->container['refundId']) < 1)) {
+            $invalidProperties[] = "invalid value for 'refundId', the character length must be bigger than or equal to 1.";
+        }
+
+        if ($this->container['sellerId'] === null) {
+            $invalidProperties[] = "'sellerId' can't be null";
+        }
+        if (!preg_match("/^\\w{1,50}$/", $this->container['sellerId'])) {
+            $invalidProperties[] = "invalid value for 'sellerId', must be conform to the pattern /^\\w{1,50}$/.";
+        }
+
+        if ($this->container['isAccepted'] === null) {
+            $invalidProperties[] = "'isAccepted' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -196,6 +242,114 @@ class RefundProcessingResult extends RefundProcessingResult2
         return count($this->listInvalidProperties()) === 0;
     }
 
+
+    /**
+     * Gets refundId
+     *
+     * @return string
+     */
+    public function getRefundId()
+    {
+        return $this->container['refundId'];
+    }
+
+    /**
+     * Sets refundId
+     *
+     * @param string $refundId Seller created unique Id to identify the processing Result of a Refund processing from a Channel.
+     *
+     * @return $this
+     */
+    public function setRefundId($refundId)
+    {
+        if ((mb_strlen($refundId) > 128)) {
+            throw new \InvalidArgumentException('invalid length for $refundId when calling RefundProcessingResult., must be smaller than or equal to 128.');
+        }
+        if ((mb_strlen($refundId) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $refundId when calling RefundProcessingResult., must be bigger than or equal to 1.');
+        }
+
+        $this->container['refundId'] = $refundId;
+
+        return $this;
+    }
+
+    /**
+     * Gets sellerId
+     *
+     * @return string
+     */
+    public function getSellerId()
+    {
+        return $this->container['sellerId'];
+    }
+
+    /**
+     * Sets sellerId
+     *
+     * @param string $sellerId A unique Id identify a Seller on a specific SalesChannel. The SellerId is generated from the Channel itself during the Seller SignUp Process.
+     *
+     * @return $this
+     */
+    public function setSellerId($sellerId)
+    {
+
+        if ((!preg_match("/^\\w{1,50}$/", $sellerId))) {
+            throw new \InvalidArgumentException("invalid value for $sellerId when calling RefundProcessingResult., must conform to the pattern /^\\w{1,50}$/.");
+        }
+
+        $this->container['sellerId'] = $sellerId;
+
+        return $this;
+    }
+
+    /**
+     * Gets isAccepted
+     *
+     * @return bool
+     */
+    public function getIsAccepted()
+    {
+        return $this->container['isAccepted'];
+    }
+
+    /**
+     * Sets isAccepted
+     *
+     * @param bool $isAccepted isAccepted
+     *
+     * @return $this
+     */
+    public function setIsAccepted($isAccepted)
+    {
+        $this->container['isAccepted'] = $isAccepted;
+
+        return $this;
+    }
+
+    /**
+     * Gets processingErrorList
+     *
+     * @return \JTL\SCX\Client\Channel\Model\RefundProcessingError[]|null
+     */
+    public function getProcessingErrorList()
+    {
+        return $this->container['processingErrorList'];
+    }
+
+    /**
+     * Sets processingErrorList
+     *
+     * @param \JTL\SCX\Client\Channel\Model\RefundProcessingError[]|null $processingErrorList processingErrorList
+     *
+     * @return $this
+     */
+    public function setProcessingErrorList($processingErrorList)
+    {
+        $this->container['processingErrorList'] = $processingErrorList;
+
+        return $this;
+    }
     /**
      * Returns true if offset exists. False otherwise.
      *

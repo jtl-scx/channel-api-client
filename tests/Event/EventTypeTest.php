@@ -20,6 +20,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationDenied;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderInvoice;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderRefund;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventSellerAttributesUpdateRequest;
@@ -52,6 +53,7 @@ class EventTypeTest extends TestCase
             [SellerEventOrderCancellationDenied::class, EventType::SellerOrderCancellationDenied()],
             [SellerEventOrderCancellationRequest::class, EventType::SellerOrderCancellationRequest()],
             [SellerEventOrderInvoice::class, EventType::SellerEventOrderInvoice()],
+            [SellerEventOrderRefund::class, EventType::SellerEventOrderRefund()],
             [\stdClass::class, new EventType('FooBarEvent')],
         ];
     }
