@@ -148,6 +148,8 @@ class SellerEventListEventListTest extends TestCase
      */
     public function it_has_a_Event(): void
     {
+        // This tests will fail after a model re-creation.
+        // Change affected typehint für method to object
         $sample = $this->buildSampleForDataType('object');
         $sut = new SellerEventListEventList(['event' => $sample]);
 
@@ -165,6 +167,8 @@ class SellerEventListEventListTest extends TestCase
      */
     public function it_has_a_setter_for_Event(): void
     {
+        // This tests will fail after a model re-creation.
+        // Change affected typehint für method to object
         $sample = $this->buildSampleForDataType('object');
         $sut = new SellerEventListEventList();
 

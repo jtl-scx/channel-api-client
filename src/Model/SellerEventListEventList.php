@@ -58,7 +58,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @param \DateTime
       * @param SellerEventTypeList
-      * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventSellerAttributesUpdateRequestSellerEventOrderCancellationRequestSellerEventOrderCancellationAcceptedSellerEventOrderCancellationDeniedSellerEventOrderAcceptSellerEventOrderInvoiceSellerEventOrderReturnReceivedSellerEventOrderRefund
+      * @param object
       *
       * @var string[]
       */
@@ -66,7 +66,7 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
         'id' => 'string',
         'createdAt' => '\DateTime',
         'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventSellerAttributesUpdateRequestSellerEventOrderCancellationRequestSellerEventOrderCancellationAcceptedSellerEventOrderCancellationDeniedSellerEventOrderAcceptSellerEventOrderInvoiceSellerEventOrderReturnReceivedSellerEventOrderRefund'
+        'event' => 'object'
     ];
 
     /**

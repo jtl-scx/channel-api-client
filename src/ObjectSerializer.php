@@ -93,7 +93,7 @@ class ObjectSerializer
                             /** array $callable */
                             $allowedEnumTypes = $callable();
 
-                            if($value instanceof EnumInterface) {
+                            if ($value instanceof EnumInterface) {
                                 $value = $value->getValue();
                             }
 
@@ -108,7 +108,7 @@ class ObjectSerializer
                     }
                 }
             } else {
-                foreach($data as $property => $value) {
+                foreach ($data as $property => $value) {
                     $values[$property] = self::sanitizeForSerialization($value);
                 }
             }
@@ -383,7 +383,7 @@ class ObjectSerializer
 
                 if (isset($data->{$instance::attributeMap()[$property]})) {
                     $propertyValue = $data->{$instance::attributeMap()[$property]};
-                    if(class_exists($type) && in_array(EnumInterface::class, class_implements($type))) {
+                    if (class_exists($type) && in_array(EnumInterface::class, class_implements($type))) {
                         $propertyValue = new $type($propertyValue);
                     }
                     $instance->$propertySetter(self::deserialize($propertyValue, $type, null));
