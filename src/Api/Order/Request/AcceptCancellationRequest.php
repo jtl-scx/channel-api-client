@@ -9,15 +9,15 @@
 namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
-use JTL\SCX\Client\Channel\Model\OrderCancellationAccept;
+use JTL\SCX\Client\Channel\Model\CancellationAccept;
 
 class AcceptCancellationRequest extends AbstractScxApiRequest
 {
-    private OrderCancellationAccept $accept;
+    private CancellationAccept $accept;
 
     public function __construct(string $sellerId, string $orderCancellationRequestId)
     {
-        $this->accept = new OrderCancellationAccept([
+        $this->accept = new CancellationAccept([
             'sellerId' => $sellerId,
             'orderCancellationRequestId' => $orderCancellationRequestId
         ]);

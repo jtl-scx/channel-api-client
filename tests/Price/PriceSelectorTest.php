@@ -61,9 +61,9 @@ class PriceSelectorTest extends TestCase
         $expectedType = PriceType::B2C();
 
         $quantityPriceMock = $this->createMock(QuantityPrice::class);
-        $quantityPriceMock->expects($this->atLeastOnce())->method('getQuantity')->willReturn(1);
+        $quantityPriceMock->expects($this->atLeastOnce())->method('getQuantity')->willReturn('1.0');
         $quantityPriceHighQuantityMock = $this->createMock(QuantityPrice::class);
-        $quantityPriceHighQuantityMock->expects($this->atLeastOnce())->method('getQuantity')->willReturn(99);
+        $quantityPriceHighQuantityMock->expects($this->atLeastOnce())->method('getQuantity')->willReturn('99');
         $priceList = [
             $quantityPriceHighQuantityMock,
             $quantityPriceMock,
@@ -87,9 +87,9 @@ class PriceSelectorTest extends TestCase
         $expectedType = PriceType::B2C();
 
         $quantityPriceMock = $this->createMock(QuantityPrice::class);
-        $quantityPriceMock->expects($this->atLeastOnce())->method('getQuantity')->willReturn(1);
+        $quantityPriceMock->expects($this->atLeastOnce())->method('getQuantity')->willReturn('1.0');
         $quantityPriceHighQuantityMock = $this->createMock(QuantityPrice::class);
-        $quantityPriceHighQuantityMock->expects($this->atLeastOnce())->method('getQuantity')->willReturn(99);
+        $quantityPriceHighQuantityMock->expects($this->atLeastOnce())->method('getQuantity')->willReturn('99');
         $priceList = [
             $quantityPriceMock,
             $quantityPriceHighQuantityMock,

@@ -9,15 +9,15 @@
 namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
-use JTL\SCX\Client\Channel\Model\OrderCancellationDenied;
+use JTL\SCX\Client\Channel\Model\CancellationDenied;
 
 class DenyCancellationRequest extends AbstractScxApiRequest
 {
-    private OrderCancellationDenied $denied;
+    private CancellationDenied $denied;
 
     public function __construct(string $sellerId, string $orderCancellationRequestId, string $reason)
     {
-        $this->denied = new OrderCancellationDenied([
+        $this->denied = new CancellationDenied([
             'sellerId' => $sellerId,
             'orderCancellationRequestId' => $orderCancellationRequestId,
             'reason' => $reason

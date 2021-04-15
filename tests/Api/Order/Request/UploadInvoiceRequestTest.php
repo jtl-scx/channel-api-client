@@ -39,14 +39,15 @@ class UploadInvoiceRequestTest extends TestCase
      */
     public function it_has_meta_data_and_document_as_multipart_parameters(): void
     {
-        $meta = new InvoiceMetaData(['sellerId' => 'a_seller']);
+        $meta = $this->createStub(InvoiceMetaData::class);
+        $meta->method('__toString')->willReturn('meta_data_as_json');
         $sut = new UploadInvoiceRequest($meta, 'document_data');
 
         $parameters = $sut->buildMultipartBody();
 
         $this->assertCount(2, $parameters);
         $this->assertEquals('invoice', $parameters[0]->getName());
-        $this->assertEquals(json_encode(['sellerId' => 'a_seller'], JSON_PRETTY_PRINT), $parameters[0]->getContent());
+        $this->assertEquals('meta_data_as_json', $parameters[0]->getContent());
 
         $this->assertEquals('document', $parameters[1]->getName());
         $this->assertEquals('document_data', $parameters[1]->getContent());
