@@ -32,6 +32,7 @@ use MyCLabs\Enum\Enum;
 
 /**
  * Class EventType
+ * @method static EventType Unknown()
  * @method static EventType SystemNotification()
  * @method static EventType SellerEventTest()
  * @method static EventType SellerOrderAccept()
@@ -56,6 +57,7 @@ use MyCLabs\Enum\Enum;
  */
 class EventType extends Enum
 {
+    public const Unknown = 'unknown';
     public const SellerEventTest = Event::SYSTEMTEST;
     public const SystemNotification = Event::SYSTEMNOTIFICATION;
     public const SellerOrderAccept = Event::SELLERORDER_ACCEPTED;
@@ -76,19 +78,19 @@ class EventType extends Enum
     public const SellerEventOrderRefund = Event::SELLERORDER_REFUND;
     public const SellerOrderReturnReceived = Event::SELLERORDER_RETURN_RECEIVED;
 
+
     /**
-     * Allow EventType to build event there is an unknown event type.
-     * New Event Types may be realistic scenario when working with SCX Channel API
-     *
+     * EventType constructor.
      * @psalm-suppress MissingImmutableAnnotation
-     *
      * @param $value
-     * @return bool
      */
-    public static function isValid($value): bool
+    public function __construct($value)
     {
-        // allow to build object with unknown event types
-        return true;
+        try {
+            parent::__construct($value);
+        } catch (\UnexpectedValueException $e) {
+            parent::__construct(self::Unknown);
+        }
     }
 
     public function getEventModelClass(): string
