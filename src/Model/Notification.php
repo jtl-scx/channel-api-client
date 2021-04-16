@@ -62,7 +62,6 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
-        'channel' => 'string',
         'sellerId' => 'string',
         'severity' => '\JTL\SCX\Client\Channel\Model\ChannelNotificationSeverity',
         'message' => 'string',
@@ -77,7 +76,6 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'channel' => null,
         'sellerId' => null,
         'severity' => null,
         'message' => null,
@@ -111,7 +109,6 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
-        'channel' => 'channel',
         'sellerId' => 'sellerId',
         'severity' => 'severity',
         'message' => 'message',
@@ -124,7 +121,6 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
-        'channel' => 'setChannel',
         'sellerId' => 'setSellerId',
         'severity' => 'setSeverity',
         'message' => 'setMessage',
@@ -137,7 +133,6 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
-        'channel' => 'getChannel',
         'sellerId' => 'getSellerId',
         'severity' => 'getSeverity',
         'message' => 'getMessage',
@@ -198,7 +193,6 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public function __construct(array $data = null)
     {
-        $this->container['channel'] = $data['channel'] ?? null;
         $this->container['sellerId'] = $data['sellerId'] ?? null;
         $this->container['severity'] = $data['severity'] ?? null;
         $this->container['message'] = $data['message'] ?? null;
@@ -213,13 +207,6 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     public function listInvalidProperties()
     {
         $invalidProperties = [];
-
-        if ($this->container['channel'] === null) {
-            $invalidProperties[] = "'channel' can't be null";
-        }
-        if (!preg_match("/^\\w{5,15}$/", $this->container['channel'])) {
-            $invalidProperties[] = "invalid value for 'channel', must be conform to the pattern /^\\w{5,15}$/.";
-        }
 
         if ($this->container['sellerId'] === null) {
             $invalidProperties[] = "'sellerId' can't be null";
@@ -246,18 +233,6 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
-    }
-
-
-    public function getChannel(): string
-    {
-        return $this->container['channel'];
-    }
-
-    public function setChannel(string $channel): Notification
-    {
-        $this->container['channel'] = $channel;
-        return $this;
     }
 
 

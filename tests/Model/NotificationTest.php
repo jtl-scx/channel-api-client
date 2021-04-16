@@ -47,38 +47,6 @@ class NotificationTest extends TestCase
 
 
     /**
-     * Test attribute "channel"
-     * @test
-     */
-    public function it_has_a_Channel(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Notification(['channel' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannel');
-        $this->assertSame($sample, $sut->getChannel());
-
-        $this->assertArrayHasKey('channel', $sut);
-        $this->assertSame($sample, $sut['channel']);
-
-    }
-
-    /**
-     * Test attribute "channel"
-     * @test
-     */
-    public function it_has_a_setter_for_Channel(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Notification();
-
-        $this->assertMethodExists($sut, 'setChannel');
-        $sut->setChannel($sample);
-        $this->assertSame($sample, $sut['channel']);
-    }
-
-
-    /**
      * Test attribute "sellerId"
      * @test
      */
