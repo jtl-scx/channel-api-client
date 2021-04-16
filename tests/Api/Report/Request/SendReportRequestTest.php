@@ -34,4 +34,37 @@ class SendReportRequestTest extends TestCase
         $this->assertSame('/v1/channel/report/{reportId}', $request->getUrl());
         $this->assertSame(['reportId' => $reportId], $request->getParams());
     }
+
+    public function testCanBeCreatedForInventoryReport(): void
+    {
+        $reportId = '123';
+        $item = new SellerInventoryItem([
+            'offerId' => 123,
+            'sku' => '123',
+            'quantity' => '1',
+        ]);
+        $sut = SendReportRequest::forSellerInventoryReport($reportId, [$item], false);
+
+        $this->assertSame('[{"offerId":123,"sku":"123","quantity":"1"}]', $sut->getBody());
+        $this->assertSame('POST', $sut->getHttpMethod());
+        $this->assertSame('/v1/channel/report/{reportId}', $sut->getUrl());
+        $this->assertSame(['reportId' => $reportId], $sut->getParams());
+    }
+
+    public function testContentEncodingHeaderIsSetWhenUsingCompression(): void
+    {
+        $sut = SendReportRequest::forSellerInventoryReport('123', [], true);
+
+        $this->assertSame(['Content-Encoding' => 'gzip'], $sut->getAdditionalHeaders());
+        $gzipData = $sut->getBody();
+        $this->assertEquals('[]', gzdecode($gzipData));
+    }
+
+    public function testContentEncodingHeaderIsNotSetWhenUsingNoCompression(): void
+    {
+        $sut = SendReportRequest::forSellerInventoryReport('123', [], false);
+
+        $this->assertEmpty($sut->getAdditionalHeaders());
+        $this->assertEquals('[]', $sut->getBody());
+    }
 }
