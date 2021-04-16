@@ -21,6 +21,7 @@ use JTL\SCX\Client\Channel\Model\SellerEventOrderCancellationRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderInvoice;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderPayment;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderRefund;
+use JTL\SCX\Client\Channel\Model\SellerEventOrderReturnReceived;
 use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventReportRequest;
 use JTL\SCX\Client\Channel\Model\SellerEventSellerAttributesUpdateRequest;
@@ -49,6 +50,7 @@ use MyCLabs\Enum\Enum;
  * @method static EventType SellerOrderCancellationDenied()
  * @method static EventType SellerEventOrderInvoice()
  * @method static EventType SellerEventOrderRefund()
+ * @method static EventType SellerOrderReturnReceived()
  *
  * @psalm-immutable
  */
@@ -72,6 +74,7 @@ class EventType extends Enum
     public const SellerOrderCancellationRequest = Event::SELLERORDER_CANCELLATION_REQUEST;
     public const SellerEventOrderInvoice = Event::SELLERORDER_INVOICE;
     public const SellerEventOrderRefund = Event::SELLERORDER_REFUND;
+    public const SellerOrderReturnReceived = Event::SELLERORDER_RETURN_RECEIVED;
 
     /**
      * Allow EventType to build event there is an unknown event type.
@@ -127,6 +130,8 @@ class EventType extends Enum
                 return SellerEventOrderInvoice::class;
             case $this::SellerEventOrderRefund():
                 return SellerEventOrderRefund::class;
+            case $this::SellerOrderReturnReceived():
+                return SellerEventOrderReturnReceived::class;
         }
 
         return \stdClass::class;
