@@ -48,7 +48,6 @@ class ChannelNotificationReferenceType implements EnumInterface
     const OFFER = 'OFFER';
     const CHANNELOFFER = 'CHANNELOFFER';
     const ORDERITEMID = 'ORDERITEMID';
-    const ORDERID = 'ORDERID';
     
     /**
      * Gets allowable values of the enum
@@ -60,7 +59,6 @@ class ChannelNotificationReferenceType implements EnumInterface
             self::OFFER,
             self::CHANNELOFFER,
             self::ORDERITEMID,
-            self::ORDERID,
         ];
     }
 
@@ -78,11 +76,6 @@ class ChannelNotificationReferenceType implements EnumInterface
     public static function ORDERITEMID(): ChannelNotificationReferenceType
     {
         return new self('ORDERITEMID');
-    }
-    
-    public static function ORDERID(): ChannelNotificationReferenceType
-    {
-        return new self('ORDERID');
     }
     
 

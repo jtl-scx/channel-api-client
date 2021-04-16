@@ -104,26 +104,6 @@ class ChannelNotificationReferenceTypeTest extends TestCase
         $sut = ChannelNotificationReferenceType::ORDERITEMID();
         self::assertInstanceOf(ChannelNotificationReferenceType::class, $sut);
     }
-    /**
-     * Test Enum Value "ORDERID"
-     * @test
-     */
-    public function is_a_const_ORDERID(): void
-    {
-        self::assertEquals('ORDERID', ChannelNotificationReferenceType::ORDERID);
-        $sut = new ChannelNotificationReferenceType('ORDERID');
-        self::assertEquals('ORDERID', $sut->getValue());
-    }
-
-    /**
-     * Test Enum Value Named Constructor "ORDERID"
-     * @test
-     */
-    public function it_can_be_constructed_forORDERID(): void
-    {
-        $sut = ChannelNotificationReferenceType::ORDERID();
-        self::assertInstanceOf(ChannelNotificationReferenceType::class, $sut);
-    }
 
     /**
      * Test allowed values from Enum
@@ -135,7 +115,6 @@ class ChannelNotificationReferenceTypeTest extends TestCase
             ChannelNotificationReferenceType::OFFER,
             ChannelNotificationReferenceType::CHANNELOFFER,
             ChannelNotificationReferenceType::ORDERITEMID,
-            ChannelNotificationReferenceType::ORDERID,
         ];
         self::assertEquals($allowed, ChannelNotificationReferenceType::getAllowableEnumValues());
     }
