@@ -45,38 +45,43 @@ class SellerEventListTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "eventList"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_EventList(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\SellerEventListEventList[]');
-        $sut = new SellerEventList(['eventList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getEventList');
-        $this->assertSame($sample, $sut->getEventList());
-
-        $this->assertArrayHasKey('eventList', $sut);
-        $this->assertSame($sample, $sut['eventList']);
-
+        return [
+            'assert property EventList' => [
+                'eventList',
+                '\JTL\SCX\Client\Channel\Model\SellerEventListEventList[]',
+                'getEventList',
+                'setEventList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "eventList"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_EventList(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\SellerEventListEventList[]');
-        $sut = new SellerEventList();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventList([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setEventList');
-        $sut->setEventList($sample);
-        $this->assertSame($sample, $sut['eventList']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(SellerEventList $sut, string $methodName): void
     {
         try {

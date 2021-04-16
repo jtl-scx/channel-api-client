@@ -45,166 +45,67 @@ class OfferListingSuccessfulTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingSuccessful(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OfferId' => [
+                'offerId',
+                'int',
+                'getOfferId',
+                'setOfferId'
+            ],
+            'assert property ChannelOfferId' => [
+                'channelOfferId',
+                'string',
+                'getChannelOfferId',
+                'setChannelOfferId'
+            ],
+            'assert property ListedAt' => [
+                'listedAt',
+                '\DateTime',
+                'getListedAt',
+                'setListedAt'
+            ],
+            'assert property ListingUrl' => [
+                'listingUrl',
+                'string',
+                'getListingUrl',
+                'setListingUrl'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingSuccessful();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OfferListingSuccessful([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "offerId"
-     * @test
-     */
-    public function it_has_a_OfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new OfferListingSuccessful(['offerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOfferId');
-        $this->assertSame($sample, $sut->getOfferId());
-
-        $this->assertArrayHasKey('offerId', $sut);
-        $this->assertSame($sample, $sut['offerId']);
-
-    }
-
-    /**
-     * Test attribute "offerId"
-     * @test
-     */
-    public function it_has_a_setter_for_OfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new OfferListingSuccessful();
-
-        $this->assertMethodExists($sut, 'setOfferId');
-        $sut->setOfferId($sample);
-        $this->assertSame($sample, $sut['offerId']);
-    }
-
-
-    /**
-     * Test attribute "channelOfferId"
-     * @test
-     */
-    public function it_has_a_ChannelOfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingSuccessful(['channelOfferId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannelOfferId');
-        $this->assertSame($sample, $sut->getChannelOfferId());
-
-        $this->assertArrayHasKey('channelOfferId', $sut);
-        $this->assertSame($sample, $sut['channelOfferId']);
-
-    }
-
-    /**
-     * Test attribute "channelOfferId"
-     * @test
-     */
-    public function it_has_a_setter_for_ChannelOfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingSuccessful();
-
-        $this->assertMethodExists($sut, 'setChannelOfferId');
-        $sut->setChannelOfferId($sample);
-        $this->assertSame($sample, $sut['channelOfferId']);
-    }
-
-
-    /**
-     * Test attribute "listedAt"
-     * @test
-     */
-    public function it_has_a_ListedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new OfferListingSuccessful(['listedAt' => $sample]);
-
-        $this->assertMethodExists($sut, 'getListedAt');
-        $this->assertSame($sample, $sut->getListedAt());
-
-        $this->assertArrayHasKey('listedAt', $sut);
-        $this->assertSame($sample, $sut['listedAt']);
-
-    }
-
-    /**
-     * Test attribute "listedAt"
-     * @test
-     */
-    public function it_has_a_setter_for_ListedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new OfferListingSuccessful();
-
-        $this->assertMethodExists($sut, 'setListedAt');
-        $sut->setListedAt($sample);
-        $this->assertSame($sample, $sut['listedAt']);
-    }
-
-
-    /**
-     * Test attribute "listingUrl"
-     * @test
-     */
-    public function it_has_a_ListingUrl(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingSuccessful(['listingUrl' => $sample]);
-
-        $this->assertMethodExists($sut, 'getListingUrl');
-        $this->assertSame($sample, $sut->getListingUrl());
-
-        $this->assertArrayHasKey('listingUrl', $sut);
-        $this->assertSame($sample, $sut['listingUrl']);
-
-    }
-
-    /**
-     * Test attribute "listingUrl"
-     * @test
-     */
-    public function it_has_a_setter_for_ListingUrl(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingSuccessful();
-
-        $this->assertMethodExists($sut, 'setListingUrl');
-        $sut->setListingUrl($sample);
-        $this->assertSame($sample, $sut['listingUrl']);
-    }
-
+    
     private function assertMethodExists(OfferListingSuccessful $sut, string $methodName): void
     {
         try {

@@ -59,230 +59,79 @@ class ChannelUpdateFeatureListTest extends TestCase
         $this->assertMethodExists($sut, 'getInvoiceDocumentTransferAllowableValues');
         $this->assertEquals($allowed, $sut->getInvoiceDocumentTransferAllowableValues());
     }
-
     /**
-     * Test attribute "invoiceDocumentTransfer"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_InvoiceDocumentTransfer(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelUpdateFeatureList(['invoiceDocumentTransfer' => $sample]);
-
-        $this->assertMethodExists($sut, 'getInvoiceDocumentTransfer');
-        $this->assertSame($sample, $sut->getInvoiceDocumentTransfer());
-
-        $this->assertArrayHasKey('invoiceDocumentTransfer', $sut);
-        $this->assertSame($sample, $sut['invoiceDocumentTransfer']);
-
+        return [
+            'assert property InvoiceDocumentTransfer' => [
+                'invoiceDocumentTransfer',
+                'string',
+                'getInvoiceDocumentTransfer',
+                'setInvoiceDocumentTransfer'
+            ],
+            'assert property PriceUpdatesSupported' => [
+                'priceUpdatesSupported',
+                'bool',
+                'getPriceUpdatesSupported',
+                'setPriceUpdatesSupported'
+            ],
+            'assert property QuantityPriceSupported' => [
+                'quantityPriceSupported',
+                'bool',
+                'getQuantityPriceSupported',
+                'setQuantityPriceSupported'
+            ],
+            'assert property RemainingQuanitySupported' => [
+                'remainingQuanitySupported',
+                'bool',
+                'getRemainingQuanitySupported',
+                'setRemainingQuanitySupported'
+            ],
+            'assert property VariationsSupported' => [
+                'variationsSupported',
+                'bool',
+                'getVariationsSupported',
+                'setVariationsSupported'
+            ],
+            'assert property ReturnTrackingRequired' => [
+                'returnTrackingRequired',
+                'bool',
+                'getReturnTrackingRequired',
+                'setReturnTrackingRequired'
+            ],
+            'assert property AllowCombineOrders' => [
+                'allowCombineOrders',
+                'bool',
+                'getAllowCombineOrders',
+                'setAllowCombineOrders'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "invoiceDocumentTransfer"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_InvoiceDocumentTransfer(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelUpdateFeatureList();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ChannelUpdateFeatureList([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setInvoiceDocumentTransfer');
-        $sut->setInvoiceDocumentTransfer($sample);
-        $this->assertSame($sample, $sut['invoiceDocumentTransfer']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "priceUpdatesSupported"
-     * @test
-     */
-    public function it_has_a_PriceUpdatesSupported(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList(['priceUpdatesSupported' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPriceUpdatesSupported');
-        $this->assertSame($sample, $sut->getPriceUpdatesSupported());
-
-        $this->assertArrayHasKey('priceUpdatesSupported', $sut);
-        $this->assertSame($sample, $sut['priceUpdatesSupported']);
-
-    }
-
-    /**
-     * Test attribute "priceUpdatesSupported"
-     * @test
-     */
-    public function it_has_a_setter_for_PriceUpdatesSupported(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList();
-
-        $this->assertMethodExists($sut, 'setPriceUpdatesSupported');
-        $sut->setPriceUpdatesSupported($sample);
-        $this->assertSame($sample, $sut['priceUpdatesSupported']);
-    }
-
-
-    /**
-     * Test attribute "quantityPriceSupported"
-     * @test
-     */
-    public function it_has_a_QuantityPriceSupported(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList(['quantityPriceSupported' => $sample]);
-
-        $this->assertMethodExists($sut, 'getQuantityPriceSupported');
-        $this->assertSame($sample, $sut->getQuantityPriceSupported());
-
-        $this->assertArrayHasKey('quantityPriceSupported', $sut);
-        $this->assertSame($sample, $sut['quantityPriceSupported']);
-
-    }
-
-    /**
-     * Test attribute "quantityPriceSupported"
-     * @test
-     */
-    public function it_has_a_setter_for_QuantityPriceSupported(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList();
-
-        $this->assertMethodExists($sut, 'setQuantityPriceSupported');
-        $sut->setQuantityPriceSupported($sample);
-        $this->assertSame($sample, $sut['quantityPriceSupported']);
-    }
-
-
-    /**
-     * Test attribute "remainingQuanitySupported"
-     * @test
-     */
-    public function it_has_a_RemainingQuanitySupported(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList(['remainingQuanitySupported' => $sample]);
-
-        $this->assertMethodExists($sut, 'getRemainingQuanitySupported');
-        $this->assertSame($sample, $sut->getRemainingQuanitySupported());
-
-        $this->assertArrayHasKey('remainingQuanitySupported', $sut);
-        $this->assertSame($sample, $sut['remainingQuanitySupported']);
-
-    }
-
-    /**
-     * Test attribute "remainingQuanitySupported"
-     * @test
-     */
-    public function it_has_a_setter_for_RemainingQuanitySupported(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList();
-
-        $this->assertMethodExists($sut, 'setRemainingQuanitySupported');
-        $sut->setRemainingQuanitySupported($sample);
-        $this->assertSame($sample, $sut['remainingQuanitySupported']);
-    }
-
-
-    /**
-     * Test attribute "variationsSupported"
-     * @test
-     */
-    public function it_has_a_VariationsSupported(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList(['variationsSupported' => $sample]);
-
-        $this->assertMethodExists($sut, 'getVariationsSupported');
-        $this->assertSame($sample, $sut->getVariationsSupported());
-
-        $this->assertArrayHasKey('variationsSupported', $sut);
-        $this->assertSame($sample, $sut['variationsSupported']);
-
-    }
-
-    /**
-     * Test attribute "variationsSupported"
-     * @test
-     */
-    public function it_has_a_setter_for_VariationsSupported(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList();
-
-        $this->assertMethodExists($sut, 'setVariationsSupported');
-        $sut->setVariationsSupported($sample);
-        $this->assertSame($sample, $sut['variationsSupported']);
-    }
-
-
-    /**
-     * Test attribute "returnTrackingRequired"
-     * @test
-     */
-    public function it_has_a_ReturnTrackingRequired(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList(['returnTrackingRequired' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReturnTrackingRequired');
-        $this->assertSame($sample, $sut->getReturnTrackingRequired());
-
-        $this->assertArrayHasKey('returnTrackingRequired', $sut);
-        $this->assertSame($sample, $sut['returnTrackingRequired']);
-
-    }
-
-    /**
-     * Test attribute "returnTrackingRequired"
-     * @test
-     */
-    public function it_has_a_setter_for_ReturnTrackingRequired(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList();
-
-        $this->assertMethodExists($sut, 'setReturnTrackingRequired');
-        $sut->setReturnTrackingRequired($sample);
-        $this->assertSame($sample, $sut['returnTrackingRequired']);
-    }
-
-
-    /**
-     * Test attribute "allowCombineOrders"
-     * @test
-     */
-    public function it_has_a_AllowCombineOrders(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList(['allowCombineOrders' => $sample]);
-
-        $this->assertMethodExists($sut, 'getAllowCombineOrders');
-        $this->assertSame($sample, $sut->getAllowCombineOrders());
-
-        $this->assertArrayHasKey('allowCombineOrders', $sut);
-        $this->assertSame($sample, $sut['allowCombineOrders']);
-
-    }
-
-    /**
-     * Test attribute "allowCombineOrders"
-     * @test
-     */
-    public function it_has_a_setter_for_AllowCombineOrders(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelUpdateFeatureList();
-
-        $this->assertMethodExists($sut, 'setAllowCombineOrders');
-        $sut->setAllowCombineOrders($sample);
-        $this->assertSame($sample, $sut['allowCombineOrders']);
-    }
-
+    
     private function assertMethodExists(ChannelUpdateFeatureList $sut, string $methodName): void
     {
         try {

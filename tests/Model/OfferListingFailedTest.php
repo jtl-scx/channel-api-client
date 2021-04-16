@@ -45,134 +45,61 @@ class OfferListingFailedTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingFailed(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OfferId' => [
+                'offerId',
+                'int',
+                'getOfferId',
+                'setOfferId'
+            ],
+            'assert property ErrorList' => [
+                'errorList',
+                '\JTL\SCX\Client\Channel\Model\OfferListingFailedError[]',
+                'getErrorList',
+                'setErrorList'
+            ],
+            'assert property FailedAt' => [
+                'failedAt',
+                '\DateTime',
+                'getFailedAt',
+                'setFailedAt'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingFailed();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OfferListingFailed([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "offerId"
-     * @test
-     */
-    public function it_has_a_OfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new OfferListingFailed(['offerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOfferId');
-        $this->assertSame($sample, $sut->getOfferId());
-
-        $this->assertArrayHasKey('offerId', $sut);
-        $this->assertSame($sample, $sut['offerId']);
-
-    }
-
-    /**
-     * Test attribute "offerId"
-     * @test
-     */
-    public function it_has_a_setter_for_OfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new OfferListingFailed();
-
-        $this->assertMethodExists($sut, 'setOfferId');
-        $sut->setOfferId($sample);
-        $this->assertSame($sample, $sut['offerId']);
-    }
-
-
-    /**
-     * Test attribute "errorList"
-     * @test
-     */
-    public function it_has_a_ErrorList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OfferListingFailedError[]');
-        $sut = new OfferListingFailed(['errorList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getErrorList');
-        $this->assertSame($sample, $sut->getErrorList());
-
-        $this->assertArrayHasKey('errorList', $sut);
-        $this->assertSame($sample, $sut['errorList']);
-
-    }
-
-    /**
-     * Test attribute "errorList"
-     * @test
-     */
-    public function it_has_a_setter_for_ErrorList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OfferListingFailedError[]');
-        $sut = new OfferListingFailed();
-
-        $this->assertMethodExists($sut, 'setErrorList');
-        $sut->setErrorList($sample);
-        $this->assertSame($sample, $sut['errorList']);
-    }
-
-
-    /**
-     * Test attribute "failedAt"
-     * @test
-     */
-    public function it_has_a_FailedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new OfferListingFailed(['failedAt' => $sample]);
-
-        $this->assertMethodExists($sut, 'getFailedAt');
-        $this->assertSame($sample, $sut->getFailedAt());
-
-        $this->assertArrayHasKey('failedAt', $sut);
-        $this->assertSame($sample, $sut['failedAt']);
-
-    }
-
-    /**
-     * Test attribute "failedAt"
-     * @test
-     */
-    public function it_has_a_setter_for_FailedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new OfferListingFailed();
-
-        $this->assertMethodExists($sut, 'setFailedAt');
-        $sut->setFailedAt($sample);
-        $this->assertSame($sample, $sut['failedAt']);
-    }
-
+    
     private function assertMethodExists(OfferListingFailed $sut, string $methodName): void
     {
         try {

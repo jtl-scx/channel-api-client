@@ -45,486 +45,127 @@ class OrderTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderStatus' => [
+                'orderStatus',
+                '\JTL\SCX\Client\Channel\Model\ChannelOrderStatus',
+                'getOrderStatus',
+                'setOrderStatus'
+            ],
+            'assert property OrderAcceptUntil' => [
+                'orderAcceptUntil',
+                '\DateTime',
+                'getOrderAcceptUntil',
+                'setOrderAcceptUntil'
+            ],
+            'assert property PaymentStatus' => [
+                'paymentStatus',
+                '\JTL\SCX\Client\Channel\Model\ChannelPaymentStatus',
+                'getPaymentStatus',
+                'setPaymentStatus'
+            ],
+            'assert property PaymentMethod' => [
+                'paymentMethod',
+                'string',
+                'getPaymentMethod',
+                'setPaymentMethod'
+            ],
+            'assert property PaymentReference' => [
+                'paymentReference',
+                'string',
+                'getPaymentReference',
+                'setPaymentReference'
+            ],
+            'assert property OrderId' => [
+                'orderId',
+                'string',
+                'getOrderId',
+                'setOrderId'
+            ],
+            'assert property PurchasedAt' => [
+                'purchasedAt',
+                '\DateTime',
+                'getPurchasedAt',
+                'setPurchasedAt'
+            ],
+            'assert property LastChangedAt' => [
+                'lastChangedAt',
+                '\DateTime',
+                'getLastChangedAt',
+                'setLastChangedAt'
+            ],
+            'assert property Currency' => [
+                'currency',
+                'string',
+                'getCurrency',
+                'setCurrency'
+            ],
+            'assert property OrderItem' => [
+                'orderItem',
+                '\JTL\SCX\Client\Channel\Model\OrderItem[]',
+                'getOrderItem',
+                'setOrderItem'
+            ],
+            'assert property BillingAddress' => [
+                'billingAddress',
+                '\JTL\SCX\Client\Channel\Model\Address',
+                'getBillingAddress',
+                'setBillingAddress'
+            ],
+            'assert property ShippingAddress' => [
+                'shippingAddress',
+                '\JTL\SCX\Client\Channel\Model\Address',
+                'getShippingAddress',
+                'setShippingAddress'
+            ],
+            'assert property Note' => [
+                'note',
+                'string',
+                'getNote',
+                'setNote'
+            ],
+            'assert property Buyer' => [
+                'buyer',
+                '\JTL\SCX\Client\Channel\Model\OrderBuyer',
+                'getBuyer',
+                'setBuyer'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new Order([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "orderStatus"
-     * @test
-     */
-    public function it_has_a_OrderStatus(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelOrderStatus');
-        $sut = new Order(['orderStatus' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderStatus');
-        $this->assertSame($sample, $sut->getOrderStatus());
-
-        $this->assertArrayHasKey('orderStatus', $sut);
-        $this->assertSame($sample, $sut['orderStatus']);
-
-    }
-
-    /**
-     * Test attribute "orderStatus"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderStatus(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelOrderStatus');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setOrderStatus');
-        $sut->setOrderStatus($sample);
-        $this->assertSame($sample, $sut['orderStatus']);
-    }
-
-
-    /**
-     * Test attribute "orderAcceptUntil"
-     * @test
-     */
-    public function it_has_a_OrderAcceptUntil(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new Order(['orderAcceptUntil' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderAcceptUntil');
-        $this->assertSame($sample, $sut->getOrderAcceptUntil());
-
-        $this->assertArrayHasKey('orderAcceptUntil', $sut);
-        $this->assertSame($sample, $sut['orderAcceptUntil']);
-
-    }
-
-    /**
-     * Test attribute "orderAcceptUntil"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderAcceptUntil(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setOrderAcceptUntil');
-        $sut->setOrderAcceptUntil($sample);
-        $this->assertSame($sample, $sut['orderAcceptUntil']);
-    }
-
-
-    /**
-     * Test attribute "paymentStatus"
-     * @test
-     */
-    public function it_has_a_PaymentStatus(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelPaymentStatus');
-        $sut = new Order(['paymentStatus' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPaymentStatus');
-        $this->assertSame($sample, $sut->getPaymentStatus());
-
-        $this->assertArrayHasKey('paymentStatus', $sut);
-        $this->assertSame($sample, $sut['paymentStatus']);
-
-    }
-
-    /**
-     * Test attribute "paymentStatus"
-     * @test
-     */
-    public function it_has_a_setter_for_PaymentStatus(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelPaymentStatus');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setPaymentStatus');
-        $sut->setPaymentStatus($sample);
-        $this->assertSame($sample, $sut['paymentStatus']);
-    }
-
-
-    /**
-     * Test attribute "paymentMethod"
-     * @test
-     */
-    public function it_has_a_PaymentMethod(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order(['paymentMethod' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPaymentMethod');
-        $this->assertSame($sample, $sut->getPaymentMethod());
-
-        $this->assertArrayHasKey('paymentMethod', $sut);
-        $this->assertSame($sample, $sut['paymentMethod']);
-
-    }
-
-    /**
-     * Test attribute "paymentMethod"
-     * @test
-     */
-    public function it_has_a_setter_for_PaymentMethod(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setPaymentMethod');
-        $sut->setPaymentMethod($sample);
-        $this->assertSame($sample, $sut['paymentMethod']);
-    }
-
-
-    /**
-     * Test attribute "paymentReference"
-     * @test
-     */
-    public function it_has_a_PaymentReference(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order(['paymentReference' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPaymentReference');
-        $this->assertSame($sample, $sut->getPaymentReference());
-
-        $this->assertArrayHasKey('paymentReference', $sut);
-        $this->assertSame($sample, $sut['paymentReference']);
-
-    }
-
-    /**
-     * Test attribute "paymentReference"
-     * @test
-     */
-    public function it_has_a_setter_for_PaymentReference(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setPaymentReference');
-        $sut->setPaymentReference($sample);
-        $this->assertSame($sample, $sut['paymentReference']);
-    }
-
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order(['orderId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderId');
-        $this->assertSame($sample, $sut->getOrderId());
-
-        $this->assertArrayHasKey('orderId', $sut);
-        $this->assertSame($sample, $sut['orderId']);
-
-    }
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setOrderId');
-        $sut->setOrderId($sample);
-        $this->assertSame($sample, $sut['orderId']);
-    }
-
-
-    /**
-     * Test attribute "purchasedAt"
-     * @test
-     */
-    public function it_has_a_PurchasedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new Order(['purchasedAt' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPurchasedAt');
-        $this->assertSame($sample, $sut->getPurchasedAt());
-
-        $this->assertArrayHasKey('purchasedAt', $sut);
-        $this->assertSame($sample, $sut['purchasedAt']);
-
-    }
-
-    /**
-     * Test attribute "purchasedAt"
-     * @test
-     */
-    public function it_has_a_setter_for_PurchasedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setPurchasedAt');
-        $sut->setPurchasedAt($sample);
-        $this->assertSame($sample, $sut['purchasedAt']);
-    }
-
-
-    /**
-     * Test attribute "lastChangedAt"
-     * @test
-     */
-    public function it_has_a_LastChangedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new Order(['lastChangedAt' => $sample]);
-
-        $this->assertMethodExists($sut, 'getLastChangedAt');
-        $this->assertSame($sample, $sut->getLastChangedAt());
-
-        $this->assertArrayHasKey('lastChangedAt', $sut);
-        $this->assertSame($sample, $sut['lastChangedAt']);
-
-    }
-
-    /**
-     * Test attribute "lastChangedAt"
-     * @test
-     */
-    public function it_has_a_setter_for_LastChangedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setLastChangedAt');
-        $sut->setLastChangedAt($sample);
-        $this->assertSame($sample, $sut['lastChangedAt']);
-    }
-
-
-    /**
-     * Test attribute "currency"
-     * @test
-     */
-    public function it_has_a_Currency(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order(['currency' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCurrency');
-        $this->assertSame($sample, $sut->getCurrency());
-
-        $this->assertArrayHasKey('currency', $sut);
-        $this->assertSame($sample, $sut['currency']);
-
-    }
-
-    /**
-     * Test attribute "currency"
-     * @test
-     */
-    public function it_has_a_setter_for_Currency(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setCurrency');
-        $sut->setCurrency($sample);
-        $this->assertSame($sample, $sut['currency']);
-    }
-
-
-    /**
-     * Test attribute "orderItem"
-     * @test
-     */
-    public function it_has_a_OrderItem(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderItem[]');
-        $sut = new Order(['orderItem' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderItem');
-        $this->assertSame($sample, $sut->getOrderItem());
-
-        $this->assertArrayHasKey('orderItem', $sut);
-        $this->assertSame($sample, $sut['orderItem']);
-
-    }
-
-    /**
-     * Test attribute "orderItem"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderItem(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderItem[]');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setOrderItem');
-        $sut->setOrderItem($sample);
-        $this->assertSame($sample, $sut['orderItem']);
-    }
-
-
-    /**
-     * Test attribute "billingAddress"
-     * @test
-     */
-    public function it_has_a_BillingAddress(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Address');
-        $sut = new Order(['billingAddress' => $sample]);
-
-        $this->assertMethodExists($sut, 'getBillingAddress');
-        $this->assertSame($sample, $sut->getBillingAddress());
-
-        $this->assertArrayHasKey('billingAddress', $sut);
-        $this->assertSame($sample, $sut['billingAddress']);
-
-    }
-
-    /**
-     * Test attribute "billingAddress"
-     * @test
-     */
-    public function it_has_a_setter_for_BillingAddress(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Address');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setBillingAddress');
-        $sut->setBillingAddress($sample);
-        $this->assertSame($sample, $sut['billingAddress']);
-    }
-
-
-    /**
-     * Test attribute "shippingAddress"
-     * @test
-     */
-    public function it_has_a_ShippingAddress(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Address');
-        $sut = new Order(['shippingAddress' => $sample]);
-
-        $this->assertMethodExists($sut, 'getShippingAddress');
-        $this->assertSame($sample, $sut->getShippingAddress());
-
-        $this->assertArrayHasKey('shippingAddress', $sut);
-        $this->assertSame($sample, $sut['shippingAddress']);
-
-    }
-
-    /**
-     * Test attribute "shippingAddress"
-     * @test
-     */
-    public function it_has_a_setter_for_ShippingAddress(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Address');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setShippingAddress');
-        $sut->setShippingAddress($sample);
-        $this->assertSame($sample, $sut['shippingAddress']);
-    }
-
-
-    /**
-     * Test attribute "note"
-     * @test
-     */
-    public function it_has_a_Note(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order(['note' => $sample]);
-
-        $this->assertMethodExists($sut, 'getNote');
-        $this->assertSame($sample, $sut->getNote());
-
-        $this->assertArrayHasKey('note', $sut);
-        $this->assertSame($sample, $sut['note']);
-
-    }
-
-    /**
-     * Test attribute "note"
-     * @test
-     */
-    public function it_has_a_setter_for_Note(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setNote');
-        $sut->setNote($sample);
-        $this->assertSame($sample, $sut['note']);
-    }
-
-
-    /**
-     * Test attribute "buyer"
-     * @test
-     */
-    public function it_has_a_Buyer(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderBuyer');
-        $sut = new Order(['buyer' => $sample]);
-
-        $this->assertMethodExists($sut, 'getBuyer');
-        $this->assertSame($sample, $sut->getBuyer());
-
-        $this->assertArrayHasKey('buyer', $sut);
-        $this->assertSame($sample, $sut['buyer']);
-
-    }
-
-    /**
-     * Test attribute "buyer"
-     * @test
-     */
-    public function it_has_a_setter_for_Buyer(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderBuyer');
-        $sut = new Order();
-
-        $this->assertMethodExists($sut, 'setBuyer');
-        $sut->setBuyer($sample);
-        $this->assertSame($sample, $sut['buyer']);
-    }
-
+    
     private function assertMethodExists(Order $sut, string $methodName): void
     {
         try {

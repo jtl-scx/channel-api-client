@@ -45,70 +45,49 @@ class SupportedPaymentMethodTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "paymentMethodId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_PaymentMethodId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SupportedPaymentMethod(['paymentMethodId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPaymentMethodId');
-        $this->assertSame($sample, $sut->getPaymentMethodId());
-
-        $this->assertArrayHasKey('paymentMethodId', $sut);
-        $this->assertSame($sample, $sut['paymentMethodId']);
-
+        return [
+            'assert property PaymentMethodId' => [
+                'paymentMethodId',
+                'string',
+                'getPaymentMethodId',
+                'setPaymentMethodId'
+            ],
+            'assert property DisplayName' => [
+                'displayName',
+                'string',
+                'getDisplayName',
+                'setDisplayName'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "paymentMethodId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_PaymentMethodId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SupportedPaymentMethod();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SupportedPaymentMethod([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setPaymentMethodId');
-        $sut->setPaymentMethodId($sample);
-        $this->assertSame($sample, $sut['paymentMethodId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SupportedPaymentMethod(['displayName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDisplayName');
-        $this->assertSame($sample, $sut->getDisplayName());
-
-        $this->assertArrayHasKey('displayName', $sut);
-        $this->assertSame($sample, $sut['displayName']);
-
-    }
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_setter_for_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SupportedPaymentMethod();
-
-        $this->assertMethodExists($sut, 'setDisplayName');
-        $sut->setDisplayName($sample);
-        $this->assertSame($sample, $sut['displayName']);
-    }
-
+    
     private function assertMethodExists(SupportedPaymentMethod $sut, string $methodName): void
     {
         try {

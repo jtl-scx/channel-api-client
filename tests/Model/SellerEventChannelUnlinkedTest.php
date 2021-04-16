@@ -45,102 +45,55 @@ class SellerEventChannelUnlinkedTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventChannelUnlinked(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property Reason' => [
+                'reason',
+                'string',
+                'getReason',
+                'setReason'
+            ],
+            'assert property UnlinkedAt' => [
+                'unlinkedAt',
+                '\DateTime',
+                'getUnlinkedAt',
+                'setUnlinkedAt'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventChannelUnlinked();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventChannelUnlinked([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "reason"
-     * @test
-     */
-    public function it_has_a_Reason(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventChannelUnlinked(['reason' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReason');
-        $this->assertSame($sample, $sut->getReason());
-
-        $this->assertArrayHasKey('reason', $sut);
-        $this->assertSame($sample, $sut['reason']);
-
-    }
-
-    /**
-     * Test attribute "reason"
-     * @test
-     */
-    public function it_has_a_setter_for_Reason(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventChannelUnlinked();
-
-        $this->assertMethodExists($sut, 'setReason');
-        $sut->setReason($sample);
-        $this->assertSame($sample, $sut['reason']);
-    }
-
-
-    /**
-     * Test attribute "unlinkedAt"
-     * @test
-     */
-    public function it_has_a_UnlinkedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new SellerEventChannelUnlinked(['unlinkedAt' => $sample]);
-
-        $this->assertMethodExists($sut, 'getUnlinkedAt');
-        $this->assertSame($sample, $sut->getUnlinkedAt());
-
-        $this->assertArrayHasKey('unlinkedAt', $sut);
-        $this->assertSame($sample, $sut['unlinkedAt']);
-
-    }
-
-    /**
-     * Test attribute "unlinkedAt"
-     * @test
-     */
-    public function it_has_a_setter_for_UnlinkedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new SellerEventChannelUnlinked();
-
-        $this->assertMethodExists($sut, 'setUnlinkedAt');
-        $sut->setUnlinkedAt($sample);
-        $this->assertSame($sample, $sut['unlinkedAt']);
-    }
-
+    
     private function assertMethodExists(SellerEventChannelUnlinked $sut, string $methodName): void
     {
         try {

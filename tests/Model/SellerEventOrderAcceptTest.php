@@ -45,134 +45,61 @@ class SellerEventOrderAcceptTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderAccept(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderId' => [
+                'orderId',
+                'string',
+                'getOrderId',
+                'setOrderId'
+            ],
+            'assert property OrderAccepted' => [
+                'orderAccepted',
+                'bool',
+                'getOrderAccepted',
+                'setOrderAccepted'
+            ],
+            'assert property Reason' => [
+                'reason',
+                '\JTL\SCX\Client\Channel\Model\CancelReason',
+                'getReason',
+                'setReason'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderAccept();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventOrderAccept([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderAccept(['orderId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderId');
-        $this->assertSame($sample, $sut->getOrderId());
-
-        $this->assertArrayHasKey('orderId', $sut);
-        $this->assertSame($sample, $sut['orderId']);
-
-    }
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderAccept();
-
-        $this->assertMethodExists($sut, 'setOrderId');
-        $sut->setOrderId($sample);
-        $this->assertSame($sample, $sut['orderId']);
-    }
-
-
-    /**
-     * Test attribute "orderAccepted"
-     * @test
-     */
-    public function it_has_a_OrderAccepted(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new SellerEventOrderAccept(['orderAccepted' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderAccepted');
-        $this->assertSame($sample, $sut->getOrderAccepted());
-
-        $this->assertArrayHasKey('orderAccepted', $sut);
-        $this->assertSame($sample, $sut['orderAccepted']);
-
-    }
-
-    /**
-     * Test attribute "orderAccepted"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderAccepted(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new SellerEventOrderAccept();
-
-        $this->assertMethodExists($sut, 'setOrderAccepted');
-        $sut->setOrderAccepted($sample);
-        $this->assertSame($sample, $sut['orderAccepted']);
-    }
-
-
-    /**
-     * Test attribute "reason"
-     * @test
-     */
-    public function it_has_a_Reason(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\CancelReason');
-        $sut = new SellerEventOrderAccept(['reason' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReason');
-        $this->assertSame($sample, $sut->getReason());
-
-        $this->assertArrayHasKey('reason', $sut);
-        $this->assertSame($sample, $sut['reason']);
-
-    }
-
-    /**
-     * Test attribute "reason"
-     * @test
-     */
-    public function it_has_a_setter_for_Reason(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\CancelReason');
-        $sut = new SellerEventOrderAccept();
-
-        $this->assertMethodExists($sut, 'setReason');
-        $sut->setReason($sample);
-        $this->assertSame($sample, $sut['reason']);
-    }
-
+    
     private function assertMethodExists(SellerEventOrderAccept $sut, string $methodName): void
     {
         try {

@@ -45,102 +45,55 @@ class OfferListingFailedErrorTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "code"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Code(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingFailedError(['code' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCode');
-        $this->assertSame($sample, $sut->getCode());
-
-        $this->assertArrayHasKey('code', $sut);
-        $this->assertSame($sample, $sut['code']);
-
+        return [
+            'assert property Code' => [
+                'code',
+                'string',
+                'getCode',
+                'setCode'
+            ],
+            'assert property Message' => [
+                'message',
+                'string',
+                'getMessage',
+                'setMessage'
+            ],
+            'assert property LongMessage' => [
+                'longMessage',
+                'string',
+                'getLongMessage',
+                'setLongMessage'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "code"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Code(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingFailedError();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OfferListingFailedError([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCode');
-        $sut->setCode($sample);
-        $this->assertSame($sample, $sut['code']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingFailedError(['message' => $sample]);
-
-        $this->assertMethodExists($sut, 'getMessage');
-        $this->assertSame($sample, $sut->getMessage());
-
-        $this->assertArrayHasKey('message', $sut);
-        $this->assertSame($sample, $sut['message']);
-
-    }
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_setter_for_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingFailedError();
-
-        $this->assertMethodExists($sut, 'setMessage');
-        $sut->setMessage($sample);
-        $this->assertSame($sample, $sut['message']);
-    }
-
-
-    /**
-     * Test attribute "longMessage"
-     * @test
-     */
-    public function it_has_a_LongMessage(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingFailedError(['longMessage' => $sample]);
-
-        $this->assertMethodExists($sut, 'getLongMessage');
-        $this->assertSame($sample, $sut->getLongMessage());
-
-        $this->assertArrayHasKey('longMessage', $sut);
-        $this->assertSame($sample, $sut['longMessage']);
-
-    }
-
-    /**
-     * Test attribute "longMessage"
-     * @test
-     */
-    public function it_has_a_setter_for_LongMessage(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingFailedError();
-
-        $this->assertMethodExists($sut, 'setLongMessage');
-        $sut->setLongMessage($sample);
-        $this->assertSame($sample, $sut['longMessage']);
-    }
-
+    
     private function assertMethodExists(OfferListingFailedError $sut, string $methodName): void
     {
         try {

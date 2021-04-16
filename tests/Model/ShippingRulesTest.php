@@ -45,38 +45,43 @@ class ShippingRulesTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "supportedCarrierList"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SupportedCarrierList(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\SupportedCarrier[]');
-        $sut = new ShippingRules(['supportedCarrierList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSupportedCarrierList');
-        $this->assertSame($sample, $sut->getSupportedCarrierList());
-
-        $this->assertArrayHasKey('supportedCarrierList', $sut);
-        $this->assertSame($sample, $sut['supportedCarrierList']);
-
+        return [
+            'assert property SupportedCarrierList' => [
+                'supportedCarrierList',
+                '\JTL\SCX\Client\Channel\Model\SupportedCarrier[]',
+                'getSupportedCarrierList',
+                'setSupportedCarrierList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "supportedCarrierList"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SupportedCarrierList(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\SupportedCarrier[]');
-        $sut = new ShippingRules();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ShippingRules([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSupportedCarrierList');
-        $sut->setSupportedCarrierList($sample);
-        $this->assertSame($sample, $sut['supportedCarrierList']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(ShippingRules $sut, string $methodName): void
     {
         try {

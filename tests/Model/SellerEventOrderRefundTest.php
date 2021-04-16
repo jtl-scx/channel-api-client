@@ -45,134 +45,61 @@ class SellerEventOrderRefundTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "refundId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_RefundId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderRefund(['refundId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getRefundId');
-        $this->assertSame($sample, $sut->getRefundId());
-
-        $this->assertArrayHasKey('refundId', $sut);
-        $this->assertSame($sample, $sut['refundId']);
-
+        return [
+            'assert property RefundId' => [
+                'refundId',
+                'string',
+                'getRefundId',
+                'setRefundId'
+            ],
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderId' => [
+                'orderId',
+                'string',
+                'getOrderId',
+                'setOrderId'
+            ],
+            'assert property OrderItem' => [
+                'orderItem',
+                '\JTL\SCX\Client\Channel\Model\RefundOrderItem[]',
+                'getOrderItem',
+                'setOrderItem'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "refundId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_RefundId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderRefund();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventOrderRefund([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setRefundId');
-        $sut->setRefundId($sample);
-        $this->assertSame($sample, $sut['refundId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderRefund(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
-    }
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_setter_for_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderRefund();
-
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
-    }
-
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderRefund(['orderId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderId');
-        $this->assertSame($sample, $sut->getOrderId());
-
-        $this->assertArrayHasKey('orderId', $sut);
-        $this->assertSame($sample, $sut['orderId']);
-
-    }
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderRefund();
-
-        $this->assertMethodExists($sut, 'setOrderId');
-        $sut->setOrderId($sample);
-        $this->assertSame($sample, $sut['orderId']);
-    }
-
-
-    /**
-     * Test attribute "orderItem"
-     * @test
-     */
-    public function it_has_a_OrderItem(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\RefundOrderItem[]');
-        $sut = new SellerEventOrderRefund(['orderItem' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderItem');
-        $this->assertSame($sample, $sut->getOrderItem());
-
-        $this->assertArrayHasKey('orderItem', $sut);
-        $this->assertSame($sample, $sut['orderItem']);
-
-    }
-
-    /**
-     * Test attribute "orderItem"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderItem(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\RefundOrderItem[]');
-        $sut = new SellerEventOrderRefund();
-
-        $this->assertMethodExists($sut, 'setOrderItem');
-        $sut->setOrderItem($sample);
-        $this->assertSame($sample, $sut['orderItem']);
-    }
-
+    
     private function assertMethodExists(SellerEventOrderRefund $sut, string $methodName): void
     {
         try {

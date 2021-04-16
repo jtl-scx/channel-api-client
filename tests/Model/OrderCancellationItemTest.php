@@ -45,70 +45,49 @@ class OrderCancellationItemTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "orderItemId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_OrderItemId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderCancellationItem(['orderItemId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderItemId');
-        $this->assertSame($sample, $sut->getOrderItemId());
-
-        $this->assertArrayHasKey('orderItemId', $sut);
-        $this->assertSame($sample, $sut['orderItemId']);
-
+        return [
+            'assert property OrderItemId' => [
+                'orderItemId',
+                'string',
+                'getOrderItemId',
+                'setOrderItemId'
+            ],
+            'assert property Quantity' => [
+                'quantity',
+                'string',
+                'getQuantity',
+                'setQuantity'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "orderItemId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_OrderItemId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderCancellationItem();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OrderCancellationItem([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setOrderItemId');
-        $sut->setOrderItemId($sample);
-        $this->assertSame($sample, $sut['orderItemId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderCancellationItem(['quantity' => $sample]);
-
-        $this->assertMethodExists($sut, 'getQuantity');
-        $this->assertSame($sample, $sut->getQuantity());
-
-        $this->assertArrayHasKey('quantity', $sut);
-        $this->assertSame($sample, $sut['quantity']);
-
-    }
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_setter_for_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderCancellationItem();
-
-        $this->assertMethodExists($sut, 'setQuantity');
-        $sut->setQuantity($sample);
-        $this->assertSame($sample, $sut['quantity']);
-    }
-
+    
     private function assertMethodExists(OrderCancellationItem $sut, string $methodName): void
     {
         try {

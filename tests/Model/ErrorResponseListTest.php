@@ -45,38 +45,43 @@ class ErrorResponseListTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "errorList"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_ErrorList(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Error[]');
-        $sut = new ErrorResponseList(['errorList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getErrorList');
-        $this->assertSame($sample, $sut->getErrorList());
-
-        $this->assertArrayHasKey('errorList', $sut);
-        $this->assertSame($sample, $sut['errorList']);
-
+        return [
+            'assert property ErrorList' => [
+                'errorList',
+                '\JTL\SCX\Client\Channel\Model\Error[]',
+                'getErrorList',
+                'setErrorList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "errorList"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_ErrorList(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Error[]');
-        $sut = new ErrorResponseList();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ErrorResponseList([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setErrorList');
-        $sut->setErrorList($sample);
-        $this->assertSame($sample, $sut['errorList']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(ErrorResponseList $sut, string $methodName): void
     {
         try {

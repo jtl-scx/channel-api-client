@@ -45,166 +45,67 @@ class RefundOrderItemTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "orderItemId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_OrderItemId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundOrderItem(['orderItemId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderItemId');
-        $this->assertSame($sample, $sut->getOrderItemId());
-
-        $this->assertArrayHasKey('orderItemId', $sut);
-        $this->assertSame($sample, $sut['orderItemId']);
-
+        return [
+            'assert property OrderItemId' => [
+                'orderItemId',
+                'string',
+                'getOrderItemId',
+                'setOrderItemId'
+            ],
+            'assert property Quantity' => [
+                'quantity',
+                'string',
+                'getQuantity',
+                'setQuantity'
+            ],
+            'assert property Reason' => [
+                'reason',
+                '\JTL\SCX\Client\Channel\Model\RefundReason',
+                'getReason',
+                'setReason'
+            ],
+            'assert property Refund' => [
+                'refund',
+                'string',
+                'getRefund',
+                'setRefund'
+            ],
+            'assert property RefundCurrency' => [
+                'refundCurrency',
+                'string',
+                'getRefundCurrency',
+                'setRefundCurrency'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "orderItemId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_OrderItemId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundOrderItem();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new RefundOrderItem([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setOrderItemId');
-        $sut->setOrderItemId($sample);
-        $this->assertSame($sample, $sut['orderItemId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundOrderItem(['quantity' => $sample]);
-
-        $this->assertMethodExists($sut, 'getQuantity');
-        $this->assertSame($sample, $sut->getQuantity());
-
-        $this->assertArrayHasKey('quantity', $sut);
-        $this->assertSame($sample, $sut['quantity']);
-
-    }
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_setter_for_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundOrderItem();
-
-        $this->assertMethodExists($sut, 'setQuantity');
-        $sut->setQuantity($sample);
-        $this->assertSame($sample, $sut['quantity']);
-    }
-
-
-    /**
-     * Test attribute "reason"
-     * @test
-     */
-    public function it_has_a_Reason(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\RefundReason');
-        $sut = new RefundOrderItem(['reason' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReason');
-        $this->assertSame($sample, $sut->getReason());
-
-        $this->assertArrayHasKey('reason', $sut);
-        $this->assertSame($sample, $sut['reason']);
-
-    }
-
-    /**
-     * Test attribute "reason"
-     * @test
-     */
-    public function it_has_a_setter_for_Reason(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\RefundReason');
-        $sut = new RefundOrderItem();
-
-        $this->assertMethodExists($sut, 'setReason');
-        $sut->setReason($sample);
-        $this->assertSame($sample, $sut['reason']);
-    }
-
-
-    /**
-     * Test attribute "refund"
-     * @test
-     */
-    public function it_has_a_Refund(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundOrderItem(['refund' => $sample]);
-
-        $this->assertMethodExists($sut, 'getRefund');
-        $this->assertSame($sample, $sut->getRefund());
-
-        $this->assertArrayHasKey('refund', $sut);
-        $this->assertSame($sample, $sut['refund']);
-
-    }
-
-    /**
-     * Test attribute "refund"
-     * @test
-     */
-    public function it_has_a_setter_for_Refund(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundOrderItem();
-
-        $this->assertMethodExists($sut, 'setRefund');
-        $sut->setRefund($sample);
-        $this->assertSame($sample, $sut['refund']);
-    }
-
-
-    /**
-     * Test attribute "refundCurrency"
-     * @test
-     */
-    public function it_has_a_RefundCurrency(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundOrderItem(['refundCurrency' => $sample]);
-
-        $this->assertMethodExists($sut, 'getRefundCurrency');
-        $this->assertSame($sample, $sut->getRefundCurrency());
-
-        $this->assertArrayHasKey('refundCurrency', $sut);
-        $this->assertSame($sample, $sut['refundCurrency']);
-
-    }
-
-    /**
-     * Test attribute "refundCurrency"
-     * @test
-     */
-    public function it_has_a_setter_for_RefundCurrency(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundOrderItem();
-
-        $this->assertMethodExists($sut, 'setRefundCurrency');
-        $sut->setRefundCurrency($sample);
-        $this->assertSame($sample, $sut['refundCurrency']);
-    }
-
+    
     private function assertMethodExists(RefundOrderItem $sut, string $methodName): void
     {
         try {

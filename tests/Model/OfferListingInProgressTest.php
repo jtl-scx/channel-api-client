@@ -45,102 +45,55 @@ class OfferListingInProgressTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingInProgress(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OfferId' => [
+                'offerId',
+                'int',
+                'getOfferId',
+                'setOfferId'
+            ],
+            'assert property StartedAt' => [
+                'startedAt',
+                '\DateTime',
+                'getStartedAt',
+                'setStartedAt'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OfferListingInProgress();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OfferListingInProgress([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "offerId"
-     * @test
-     */
-    public function it_has_a_OfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new OfferListingInProgress(['offerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOfferId');
-        $this->assertSame($sample, $sut->getOfferId());
-
-        $this->assertArrayHasKey('offerId', $sut);
-        $this->assertSame($sample, $sut['offerId']);
-
-    }
-
-    /**
-     * Test attribute "offerId"
-     * @test
-     */
-    public function it_has_a_setter_for_OfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new OfferListingInProgress();
-
-        $this->assertMethodExists($sut, 'setOfferId');
-        $sut->setOfferId($sample);
-        $this->assertSame($sample, $sut['offerId']);
-    }
-
-
-    /**
-     * Test attribute "startedAt"
-     * @test
-     */
-    public function it_has_a_StartedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new OfferListingInProgress(['startedAt' => $sample]);
-
-        $this->assertMethodExists($sut, 'getStartedAt');
-        $this->assertSame($sample, $sut->getStartedAt());
-
-        $this->assertArrayHasKey('startedAt', $sut);
-        $this->assertSame($sample, $sut['startedAt']);
-
-    }
-
-    /**
-     * Test attribute "startedAt"
-     * @test
-     */
-    public function it_has_a_setter_for_StartedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new OfferListingInProgress();
-
-        $this->assertMethodExists($sut, 'setStartedAt');
-        $sut->setStartedAt($sample);
-        $this->assertSame($sample, $sut['startedAt']);
-    }
-
+    
     private function assertMethodExists(OfferListingInProgress $sut, string $methodName): void
     {
         try {

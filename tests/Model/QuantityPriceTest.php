@@ -45,102 +45,55 @@ class QuantityPriceTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "amount"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Amount(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new QuantityPrice(['amount' => $sample]);
-
-        $this->assertMethodExists($sut, 'getAmount');
-        $this->assertSame($sample, $sut->getAmount());
-
-        $this->assertArrayHasKey('amount', $sut);
-        $this->assertSame($sample, $sut['amount']);
-
+        return [
+            'assert property Amount' => [
+                'amount',
+                'string',
+                'getAmount',
+                'setAmount'
+            ],
+            'assert property Currency' => [
+                'currency',
+                'string',
+                'getCurrency',
+                'setCurrency'
+            ],
+            'assert property Quantity' => [
+                'quantity',
+                'string',
+                'getQuantity',
+                'setQuantity'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "amount"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Amount(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new QuantityPrice();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new QuantityPrice([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setAmount');
-        $sut->setAmount($sample);
-        $this->assertSame($sample, $sut['amount']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "currency"
-     * @test
-     */
-    public function it_has_a_Currency(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new QuantityPrice(['currency' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCurrency');
-        $this->assertSame($sample, $sut->getCurrency());
-
-        $this->assertArrayHasKey('currency', $sut);
-        $this->assertSame($sample, $sut['currency']);
-
-    }
-
-    /**
-     * Test attribute "currency"
-     * @test
-     */
-    public function it_has_a_setter_for_Currency(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new QuantityPrice();
-
-        $this->assertMethodExists($sut, 'setCurrency');
-        $sut->setCurrency($sample);
-        $this->assertSame($sample, $sut['currency']);
-    }
-
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new QuantityPrice(['quantity' => $sample]);
-
-        $this->assertMethodExists($sut, 'getQuantity');
-        $this->assertSame($sample, $sut->getQuantity());
-
-        $this->assertArrayHasKey('quantity', $sut);
-        $this->assertSame($sample, $sut['quantity']);
-
-    }
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_setter_for_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new QuantityPrice();
-
-        $this->assertMethodExists($sut, 'setQuantity');
-        $sut->setQuantity($sample);
-        $this->assertSame($sample, $sut['quantity']);
-    }
-
+    
     private function assertMethodExists(QuantityPrice $sut, string $methodName): void
     {
         try {

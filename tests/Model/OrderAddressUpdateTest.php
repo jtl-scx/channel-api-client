@@ -45,134 +45,61 @@ class OrderAddressUpdateTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderAddressUpdate(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderId' => [
+                'orderId',
+                'string',
+                'getOrderId',
+                'setOrderId'
+            ],
+            'assert property BillingAddress' => [
+                'billingAddress',
+                '\JTL\SCX\Client\Channel\Model\Address',
+                'getBillingAddress',
+                'setBillingAddress'
+            ],
+            'assert property ShippingAddress' => [
+                'shippingAddress',
+                '\JTL\SCX\Client\Channel\Model\Address',
+                'getShippingAddress',
+                'setShippingAddress'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderAddressUpdate();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OrderAddressUpdate([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderAddressUpdate(['orderId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderId');
-        $this->assertSame($sample, $sut->getOrderId());
-
-        $this->assertArrayHasKey('orderId', $sut);
-        $this->assertSame($sample, $sut['orderId']);
-
-    }
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderAddressUpdate();
-
-        $this->assertMethodExists($sut, 'setOrderId');
-        $sut->setOrderId($sample);
-        $this->assertSame($sample, $sut['orderId']);
-    }
-
-
-    /**
-     * Test attribute "billingAddress"
-     * @test
-     */
-    public function it_has_a_BillingAddress(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Address');
-        $sut = new OrderAddressUpdate(['billingAddress' => $sample]);
-
-        $this->assertMethodExists($sut, 'getBillingAddress');
-        $this->assertSame($sample, $sut->getBillingAddress());
-
-        $this->assertArrayHasKey('billingAddress', $sut);
-        $this->assertSame($sample, $sut['billingAddress']);
-
-    }
-
-    /**
-     * Test attribute "billingAddress"
-     * @test
-     */
-    public function it_has_a_setter_for_BillingAddress(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Address');
-        $sut = new OrderAddressUpdate();
-
-        $this->assertMethodExists($sut, 'setBillingAddress');
-        $sut->setBillingAddress($sample);
-        $this->assertSame($sample, $sut['billingAddress']);
-    }
-
-
-    /**
-     * Test attribute "shippingAddress"
-     * @test
-     */
-    public function it_has_a_ShippingAddress(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Address');
-        $sut = new OrderAddressUpdate(['shippingAddress' => $sample]);
-
-        $this->assertMethodExists($sut, 'getShippingAddress');
-        $this->assertSame($sample, $sut->getShippingAddress());
-
-        $this->assertArrayHasKey('shippingAddress', $sut);
-        $this->assertSame($sample, $sut['shippingAddress']);
-
-    }
-
-    /**
-     * Test attribute "shippingAddress"
-     * @test
-     */
-    public function it_has_a_setter_for_ShippingAddress(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Address');
-        $sut = new OrderAddressUpdate();
-
-        $this->assertMethodExists($sut, 'setShippingAddress');
-        $sut->setShippingAddress($sample);
-        $this->assertSame($sample, $sut['shippingAddress']);
-    }
-
+    
     private function assertMethodExists(OrderAddressUpdate $sut, string $methodName): void
     {
         try {

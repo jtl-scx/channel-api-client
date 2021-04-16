@@ -45,70 +45,49 @@ class PriceContainerTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "id"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Id(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new PriceContainer(['id' => $sample]);
-
-        $this->assertMethodExists($sut, 'getId');
-        $this->assertSame($sample, $sut->getId());
-
-        $this->assertArrayHasKey('id', $sut);
-        $this->assertSame($sample, $sut['id']);
-
+        return [
+            'assert property Id' => [
+                'id',
+                'string',
+                'getId',
+                'setId'
+            ],
+            'assert property QuantityPriceList' => [
+                'quantityPriceList',
+                '\JTL\SCX\Client\Channel\Model\QuantityPrice[]',
+                'getQuantityPriceList',
+                'setQuantityPriceList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "id"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Id(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new PriceContainer();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new PriceContainer([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setId');
-        $sut->setId($sample);
-        $this->assertSame($sample, $sut['id']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "quantityPriceList"
-     * @test
-     */
-    public function it_has_a_QuantityPriceList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\QuantityPrice[]');
-        $sut = new PriceContainer(['quantityPriceList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getQuantityPriceList');
-        $this->assertSame($sample, $sut->getQuantityPriceList());
-
-        $this->assertArrayHasKey('quantityPriceList', $sut);
-        $this->assertSame($sample, $sut['quantityPriceList']);
-
-    }
-
-    /**
-     * Test attribute "quantityPriceList"
-     * @test
-     */
-    public function it_has_a_setter_for_QuantityPriceList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\QuantityPrice[]');
-        $sut = new PriceContainer();
-
-        $this->assertMethodExists($sut, 'setQuantityPriceList');
-        $sut->setQuantityPriceList($sample);
-        $this->assertSame($sample, $sut['quantityPriceList']);
-    }
-
+    
     private function assertMethodExists(PriceContainer $sut, string $methodName): void
     {
         try {

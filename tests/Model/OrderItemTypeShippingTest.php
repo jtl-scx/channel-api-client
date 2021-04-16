@@ -45,166 +45,67 @@ class OrderItemTypeShippingTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "orderItemId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_OrderItemId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping(['orderItemId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderItemId');
-        $this->assertSame($sample, $sut->getOrderItemId());
-
-        $this->assertArrayHasKey('orderItemId', $sut);
-        $this->assertSame($sample, $sut['orderItemId']);
-
+        return [
+            'assert property OrderItemId' => [
+                'orderItemId',
+                'string',
+                'getOrderItemId',
+                'setOrderItemId'
+            ],
+            'assert property Type' => [
+                'type',
+                'string',
+                'getType',
+                'setType'
+            ],
+            'assert property GrossPrice' => [
+                'grossPrice',
+                'string',
+                'getGrossPrice',
+                'setGrossPrice'
+            ],
+            'assert property TaxPercent' => [
+                'taxPercent',
+                'string',
+                'getTaxPercent',
+                'setTaxPercent'
+            ],
+            'assert property ShippingGroup' => [
+                'shippingGroup',
+                'string',
+                'getShippingGroup',
+                'setShippingGroup'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "orderItemId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_OrderItemId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OrderItemTypeShipping([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setOrderItemId');
-        $sut->setOrderItemId($sample);
-        $this->assertSame($sample, $sut['orderItemId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "type"
-     * @test
-     */
-    public function it_has_a_Type(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping(['type' => $sample]);
-
-        $this->assertMethodExists($sut, 'getType');
-        $this->assertSame($sample, $sut->getType());
-
-        $this->assertArrayHasKey('type', $sut);
-        $this->assertSame($sample, $sut['type']);
-
-    }
-
-    /**
-     * Test attribute "type"
-     * @test
-     */
-    public function it_has_a_setter_for_Type(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping();
-
-        $this->assertMethodExists($sut, 'setType');
-        $sut->setType($sample);
-        $this->assertSame($sample, $sut['type']);
-    }
-
-
-    /**
-     * Test attribute "grossPrice"
-     * @test
-     */
-    public function it_has_a_GrossPrice(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping(['grossPrice' => $sample]);
-
-        $this->assertMethodExists($sut, 'getGrossPrice');
-        $this->assertSame($sample, $sut->getGrossPrice());
-
-        $this->assertArrayHasKey('grossPrice', $sut);
-        $this->assertSame($sample, $sut['grossPrice']);
-
-    }
-
-    /**
-     * Test attribute "grossPrice"
-     * @test
-     */
-    public function it_has_a_setter_for_GrossPrice(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping();
-
-        $this->assertMethodExists($sut, 'setGrossPrice');
-        $sut->setGrossPrice($sample);
-        $this->assertSame($sample, $sut['grossPrice']);
-    }
-
-
-    /**
-     * Test attribute "taxPercent"
-     * @test
-     */
-    public function it_has_a_TaxPercent(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping(['taxPercent' => $sample]);
-
-        $this->assertMethodExists($sut, 'getTaxPercent');
-        $this->assertSame($sample, $sut->getTaxPercent());
-
-        $this->assertArrayHasKey('taxPercent', $sut);
-        $this->assertSame($sample, $sut['taxPercent']);
-
-    }
-
-    /**
-     * Test attribute "taxPercent"
-     * @test
-     */
-    public function it_has_a_setter_for_TaxPercent(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping();
-
-        $this->assertMethodExists($sut, 'setTaxPercent');
-        $sut->setTaxPercent($sample);
-        $this->assertSame($sample, $sut['taxPercent']);
-    }
-
-
-    /**
-     * Test attribute "shippingGroup"
-     * @test
-     */
-    public function it_has_a_ShippingGroup(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping(['shippingGroup' => $sample]);
-
-        $this->assertMethodExists($sut, 'getShippingGroup');
-        $this->assertSame($sample, $sut->getShippingGroup());
-
-        $this->assertArrayHasKey('shippingGroup', $sut);
-        $this->assertSame($sample, $sut['shippingGroup']);
-
-    }
-
-    /**
-     * Test attribute "shippingGroup"
-     * @test
-     */
-    public function it_has_a_setter_for_ShippingGroup(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderItemTypeShipping();
-
-        $this->assertMethodExists($sut, 'setShippingGroup');
-        $sut->setShippingGroup($sample);
-        $this->assertSame($sample, $sut['shippingGroup']);
-    }
-
+    
     private function assertMethodExists(OrderItemTypeShipping $sut, string $methodName): void
     {
         try {

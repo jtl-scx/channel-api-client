@@ -45,102 +45,55 @@ class PriceTypeTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "priceTypeId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_PriceTypeId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new PriceType(['priceTypeId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPriceTypeId');
-        $this->assertSame($sample, $sut->getPriceTypeId());
-
-        $this->assertArrayHasKey('priceTypeId', $sut);
-        $this->assertSame($sample, $sut['priceTypeId']);
-
+        return [
+            'assert property PriceTypeId' => [
+                'priceTypeId',
+                'string',
+                'getPriceTypeId',
+                'setPriceTypeId'
+            ],
+            'assert property DisplayName' => [
+                'displayName',
+                'string',
+                'getDisplayName',
+                'setDisplayName'
+            ],
+            'assert property Description' => [
+                'description',
+                'string',
+                'getDescription',
+                'setDescription'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "priceTypeId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_PriceTypeId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new PriceType();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new PriceType([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setPriceTypeId');
-        $sut->setPriceTypeId($sample);
-        $this->assertSame($sample, $sut['priceTypeId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new PriceType(['displayName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDisplayName');
-        $this->assertSame($sample, $sut->getDisplayName());
-
-        $this->assertArrayHasKey('displayName', $sut);
-        $this->assertSame($sample, $sut['displayName']);
-
-    }
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_setter_for_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new PriceType();
-
-        $this->assertMethodExists($sut, 'setDisplayName');
-        $sut->setDisplayName($sample);
-        $this->assertSame($sample, $sut['displayName']);
-    }
-
-
-    /**
-     * Test attribute "description"
-     * @test
-     */
-    public function it_has_a_Description(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new PriceType(['description' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDescription');
-        $this->assertSame($sample, $sut->getDescription());
-
-        $this->assertArrayHasKey('description', $sut);
-        $this->assertSame($sample, $sut['description']);
-
-    }
-
-    /**
-     * Test attribute "description"
-     * @test
-     */
-    public function it_has_a_setter_for_Description(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new PriceType();
-
-        $this->assertMethodExists($sut, 'setDescription');
-        $sut->setDescription($sample);
-        $this->assertSame($sample, $sut['description']);
-    }
-
+    
     private function assertMethodExists(PriceType $sut, string $methodName): void
     {
         try {

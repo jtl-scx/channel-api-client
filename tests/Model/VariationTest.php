@@ -45,390 +45,109 @@ class VariationTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "offerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_OfferId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new Variation(['offerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOfferId');
-        $this->assertSame($sample, $sut->getOfferId());
-
-        $this->assertArrayHasKey('offerId', $sut);
-        $this->assertSame($sample, $sut['offerId']);
-
+        return [
+            'assert property OfferId' => [
+                'offerId',
+                'int',
+                'getOfferId',
+                'setOfferId'
+            ],
+            'assert property Sku' => [
+                'sku',
+                'string',
+                'getSku',
+                'setSku'
+            ],
+            'assert property Gtin' => [
+                'gtin',
+                'string',
+                'getGtin',
+                'setGtin'
+            ],
+            'assert property VariationDimensionList' => [
+                'variationDimensionList',
+                '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]',
+                'getVariationDimensionList',
+                'setVariationDimensionList'
+            ],
+            'assert property Quantity' => [
+                'quantity',
+                'string',
+                'getQuantity',
+                'setQuantity'
+            ],
+            'assert property PriceList' => [
+                'priceList',
+                '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
+                'getPriceList',
+                'setPriceList'
+            ],
+            'assert property TaxPercent' => [
+                'taxPercent',
+                'string',
+                'getTaxPercent',
+                'setTaxPercent'
+            ],
+            'assert property PictureList' => [
+                'pictureList',
+                'string[]',
+                'getPictureList',
+                'setPictureList'
+            ],
+            'assert property Title' => [
+                'title',
+                'string',
+                'getTitle',
+                'setTitle'
+            ],
+            'assert property SubTitle' => [
+                'subTitle',
+                'string',
+                'getSubTitle',
+                'setSubTitle'
+            ],
+            'assert property Description' => [
+                'description',
+                'string',
+                'getDescription',
+                'setDescription'
+            ],
+            'assert property ChannelAttributeList' => [
+                'channelAttributeList',
+                '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]',
+                'getChannelAttributeList',
+                'setChannelAttributeList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "offerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_OfferId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new Variation();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new Variation([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setOfferId');
-        $sut->setOfferId($sample);
-        $this->assertSame($sample, $sut['offerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "sku"
-     * @test
-     */
-    public function it_has_a_Sku(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation(['sku' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSku');
-        $this->assertSame($sample, $sut->getSku());
-
-        $this->assertArrayHasKey('sku', $sut);
-        $this->assertSame($sample, $sut['sku']);
-
-    }
-
-    /**
-     * Test attribute "sku"
-     * @test
-     */
-    public function it_has_a_setter_for_Sku(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setSku');
-        $sut->setSku($sample);
-        $this->assertSame($sample, $sut['sku']);
-    }
-
-
-    /**
-     * Test attribute "gtin"
-     * @test
-     */
-    public function it_has_a_Gtin(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation(['gtin' => $sample]);
-
-        $this->assertMethodExists($sut, 'getGtin');
-        $this->assertSame($sample, $sut->getGtin());
-
-        $this->assertArrayHasKey('gtin', $sut);
-        $this->assertSame($sample, $sut['gtin']);
-
-    }
-
-    /**
-     * Test attribute "gtin"
-     * @test
-     */
-    public function it_has_a_setter_for_Gtin(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setGtin');
-        $sut->setGtin($sample);
-        $this->assertSame($sample, $sut['gtin']);
-    }
-
-
-    /**
-     * Test attribute "variationDimensionList"
-     * @test
-     */
-    public function it_has_a_VariationDimensionList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelAttribute[]');
-        $sut = new Variation(['variationDimensionList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getVariationDimensionList');
-        $this->assertSame($sample, $sut->getVariationDimensionList());
-
-        $this->assertArrayHasKey('variationDimensionList', $sut);
-        $this->assertSame($sample, $sut['variationDimensionList']);
-
-    }
-
-    /**
-     * Test attribute "variationDimensionList"
-     * @test
-     */
-    public function it_has_a_setter_for_VariationDimensionList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelAttribute[]');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setVariationDimensionList');
-        $sut->setVariationDimensionList($sample);
-        $this->assertSame($sample, $sut['variationDimensionList']);
-    }
-
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation(['quantity' => $sample]);
-
-        $this->assertMethodExists($sut, 'getQuantity');
-        $this->assertSame($sample, $sut->getQuantity());
-
-        $this->assertArrayHasKey('quantity', $sut);
-        $this->assertSame($sample, $sut['quantity']);
-
-    }
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_setter_for_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setQuantity');
-        $sut->setQuantity($sample);
-        $this->assertSame($sample, $sut['quantity']);
-    }
-
-
-    /**
-     * Test attribute "priceList"
-     * @test
-     */
-    public function it_has_a_PriceList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\PriceContainer[]');
-        $sut = new Variation(['priceList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPriceList');
-        $this->assertSame($sample, $sut->getPriceList());
-
-        $this->assertArrayHasKey('priceList', $sut);
-        $this->assertSame($sample, $sut['priceList']);
-
-    }
-
-    /**
-     * Test attribute "priceList"
-     * @test
-     */
-    public function it_has_a_setter_for_PriceList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\PriceContainer[]');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setPriceList');
-        $sut->setPriceList($sample);
-        $this->assertSame($sample, $sut['priceList']);
-    }
-
-
-    /**
-     * Test attribute "taxPercent"
-     * @test
-     */
-    public function it_has_a_TaxPercent(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation(['taxPercent' => $sample]);
-
-        $this->assertMethodExists($sut, 'getTaxPercent');
-        $this->assertSame($sample, $sut->getTaxPercent());
-
-        $this->assertArrayHasKey('taxPercent', $sut);
-        $this->assertSame($sample, $sut['taxPercent']);
-
-    }
-
-    /**
-     * Test attribute "taxPercent"
-     * @test
-     */
-    public function it_has_a_setter_for_TaxPercent(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setTaxPercent');
-        $sut->setTaxPercent($sample);
-        $this->assertSame($sample, $sut['taxPercent']);
-    }
-
-
-    /**
-     * Test attribute "pictureList"
-     * @test
-     */
-    public function it_has_a_PictureList(): void
-    {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new Variation(['pictureList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPictureList');
-        $this->assertSame($sample, $sut->getPictureList());
-
-        $this->assertArrayHasKey('pictureList', $sut);
-        $this->assertSame($sample, $sut['pictureList']);
-
-    }
-
-    /**
-     * Test attribute "pictureList"
-     * @test
-     */
-    public function it_has_a_setter_for_PictureList(): void
-    {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setPictureList');
-        $sut->setPictureList($sample);
-        $this->assertSame($sample, $sut['pictureList']);
-    }
-
-
-    /**
-     * Test attribute "title"
-     * @test
-     */
-    public function it_has_a_Title(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation(['title' => $sample]);
-
-        $this->assertMethodExists($sut, 'getTitle');
-        $this->assertSame($sample, $sut->getTitle());
-
-        $this->assertArrayHasKey('title', $sut);
-        $this->assertSame($sample, $sut['title']);
-
-    }
-
-    /**
-     * Test attribute "title"
-     * @test
-     */
-    public function it_has_a_setter_for_Title(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setTitle');
-        $sut->setTitle($sample);
-        $this->assertSame($sample, $sut['title']);
-    }
-
-
-    /**
-     * Test attribute "subTitle"
-     * @test
-     */
-    public function it_has_a_SubTitle(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation(['subTitle' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSubTitle');
-        $this->assertSame($sample, $sut->getSubTitle());
-
-        $this->assertArrayHasKey('subTitle', $sut);
-        $this->assertSame($sample, $sut['subTitle']);
-
-    }
-
-    /**
-     * Test attribute "subTitle"
-     * @test
-     */
-    public function it_has_a_setter_for_SubTitle(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setSubTitle');
-        $sut->setSubTitle($sample);
-        $this->assertSame($sample, $sut['subTitle']);
-    }
-
-
-    /**
-     * Test attribute "description"
-     * @test
-     */
-    public function it_has_a_Description(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation(['description' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDescription');
-        $this->assertSame($sample, $sut->getDescription());
-
-        $this->assertArrayHasKey('description', $sut);
-        $this->assertSame($sample, $sut['description']);
-
-    }
-
-    /**
-     * Test attribute "description"
-     * @test
-     */
-    public function it_has_a_setter_for_Description(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setDescription');
-        $sut->setDescription($sample);
-        $this->assertSame($sample, $sut['description']);
-    }
-
-
-    /**
-     * Test attribute "channelAttributeList"
-     * @test
-     */
-    public function it_has_a_ChannelAttributeList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelAttribute[]');
-        $sut = new Variation(['channelAttributeList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannelAttributeList');
-        $this->assertSame($sample, $sut->getChannelAttributeList());
-
-        $this->assertArrayHasKey('channelAttributeList', $sut);
-        $this->assertSame($sample, $sut['channelAttributeList']);
-
-    }
-
-    /**
-     * Test attribute "channelAttributeList"
-     * @test
-     */
-    public function it_has_a_setter_for_ChannelAttributeList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelAttribute[]');
-        $sut = new Variation();
-
-        $this->assertMethodExists($sut, 'setChannelAttributeList');
-        $sut->setChannelAttributeList($sample);
-        $this->assertSame($sample, $sut['channelAttributeList']);
-    }
-
+    
     private function assertMethodExists(Variation $sut, string $methodName): void
     {
         try {

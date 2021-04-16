@@ -45,70 +45,49 @@ class SellerEventTestTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "channel"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Channel(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventTest(['channel' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannel');
-        $this->assertSame($sample, $sut->getChannel());
-
-        $this->assertArrayHasKey('channel', $sut);
-        $this->assertSame($sample, $sut['channel']);
-
+        return [
+            'assert property Channel' => [
+                'channel',
+                'string',
+                'getChannel',
+                'setChannel'
+            ],
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "channel"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Channel(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventTest();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventTest([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setChannel');
-        $sut->setChannel($sample);
-        $this->assertSame($sample, $sut['channel']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventTest(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
-    }
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_setter_for_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventTest();
-
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
-    }
-
+    
     private function assertMethodExists(SellerEventTest $sut, string $methodName): void
     {
         try {

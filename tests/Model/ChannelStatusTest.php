@@ -45,70 +45,49 @@ class ChannelStatusTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "isActive"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_IsActive(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelStatus(['isActive' => $sample]);
-
-        $this->assertMethodExists($sut, 'getIsActive');
-        $this->assertSame($sample, $sut->getIsActive());
-
-        $this->assertArrayHasKey('isActive', $sut);
-        $this->assertSame($sample, $sut['isActive']);
-
+        return [
+            'assert property IsActive' => [
+                'isActive',
+                'bool',
+                'getIsActive',
+                'setIsActive'
+            ],
+            'assert property Channel' => [
+                'channel',
+                '\JTL\SCX\Client\Channel\Model\SalesChannelData',
+                'getChannel',
+                'setChannel'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "isActive"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_IsActive(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new ChannelStatus();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ChannelStatus([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setIsActive');
-        $sut->setIsActive($sample);
-        $this->assertSame($sample, $sut['isActive']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "channel"
-     * @test
-     */
-    public function it_has_a_Channel(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\SalesChannelData');
-        $sut = new ChannelStatus(['channel' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannel');
-        $this->assertSame($sample, $sut->getChannel());
-
-        $this->assertArrayHasKey('channel', $sut);
-        $this->assertSame($sample, $sut['channel']);
-
-    }
-
-    /**
-     * Test attribute "channel"
-     * @test
-     */
-    public function it_has_a_setter_for_Channel(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\SalesChannelData');
-        $sut = new ChannelStatus();
-
-        $this->assertMethodExists($sut, 'setChannel');
-        $sut->setChannel($sample);
-        $this->assertSame($sample, $sut['channel']);
-    }
-
+    
     private function assertMethodExists(ChannelStatus $sut, string $methodName): void
     {
         try {

@@ -45,102 +45,55 @@ class OrderShippingShippedFromTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "city"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_City(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingShippedFrom(['city' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCity');
-        $this->assertSame($sample, $sut->getCity());
-
-        $this->assertArrayHasKey('city', $sut);
-        $this->assertSame($sample, $sut['city']);
-
+        return [
+            'assert property City' => [
+                'city',
+                'string',
+                'getCity',
+                'setCity'
+            ],
+            'assert property Country' => [
+                'country',
+                'string',
+                'getCountry',
+                'setCountry'
+            ],
+            'assert property Postcode' => [
+                'postcode',
+                'string',
+                'getPostcode',
+                'setPostcode'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "city"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_City(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingShippedFrom();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OrderShippingShippedFrom([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCity');
-        $sut->setCity($sample);
-        $this->assertSame($sample, $sut['city']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "country"
-     * @test
-     */
-    public function it_has_a_Country(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingShippedFrom(['country' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCountry');
-        $this->assertSame($sample, $sut->getCountry());
-
-        $this->assertArrayHasKey('country', $sut);
-        $this->assertSame($sample, $sut['country']);
-
-    }
-
-    /**
-     * Test attribute "country"
-     * @test
-     */
-    public function it_has_a_setter_for_Country(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingShippedFrom();
-
-        $this->assertMethodExists($sut, 'setCountry');
-        $sut->setCountry($sample);
-        $this->assertSame($sample, $sut['country']);
-    }
-
-
-    /**
-     * Test attribute "postcode"
-     * @test
-     */
-    public function it_has_a_Postcode(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingShippedFrom(['postcode' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPostcode');
-        $this->assertSame($sample, $sut->getPostcode());
-
-        $this->assertArrayHasKey('postcode', $sut);
-        $this->assertSame($sample, $sut['postcode']);
-
-    }
-
-    /**
-     * Test attribute "postcode"
-     * @test
-     */
-    public function it_has_a_setter_for_Postcode(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingShippedFrom();
-
-        $this->assertMethodExists($sut, 'setPostcode');
-        $sut->setPostcode($sample);
-        $this->assertSame($sample, $sut['postcode']);
-    }
-
+    
     private function assertMethodExists(OrderShippingShippedFrom $sut, string $methodName): void
     {
         try {

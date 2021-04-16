@@ -45,102 +45,55 @@ class SellerEventOrderCancellationDeniedTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationDenied(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderCancellationRequestId' => [
+                'orderCancellationRequestId',
+                'string',
+                'getOrderCancellationRequestId',
+                'setOrderCancellationRequestId'
+            ],
+            'assert property Reason' => [
+                'reason',
+                'string',
+                'getReason',
+                'setReason'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationDenied();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventOrderCancellationDenied([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "orderCancellationRequestId"
-     * @test
-     */
-    public function it_has_a_OrderCancellationRequestId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationDenied(['orderCancellationRequestId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderCancellationRequestId');
-        $this->assertSame($sample, $sut->getOrderCancellationRequestId());
-
-        $this->assertArrayHasKey('orderCancellationRequestId', $sut);
-        $this->assertSame($sample, $sut['orderCancellationRequestId']);
-
-    }
-
-    /**
-     * Test attribute "orderCancellationRequestId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderCancellationRequestId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationDenied();
-
-        $this->assertMethodExists($sut, 'setOrderCancellationRequestId');
-        $sut->setOrderCancellationRequestId($sample);
-        $this->assertSame($sample, $sut['orderCancellationRequestId']);
-    }
-
-
-    /**
-     * Test attribute "reason"
-     * @test
-     */
-    public function it_has_a_Reason(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationDenied(['reason' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReason');
-        $this->assertSame($sample, $sut->getReason());
-
-        $this->assertArrayHasKey('reason', $sut);
-        $this->assertSame($sample, $sut['reason']);
-
-    }
-
-    /**
-     * Test attribute "reason"
-     * @test
-     */
-    public function it_has_a_setter_for_Reason(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationDenied();
-
-        $this->assertMethodExists($sut, 'setReason');
-        $sut->setReason($sample);
-        $this->assertSame($sample, $sut['reason']);
-    }
-
+    
     private function assertMethodExists(SellerEventOrderCancellationDenied $sut, string $methodName): void
     {
         try {

@@ -45,70 +45,49 @@ class ReturnAnnouncementReturnTrackingTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "carrier"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Carrier(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnAnnouncementReturnTracking(['carrier' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCarrier');
-        $this->assertSame($sample, $sut->getCarrier());
-
-        $this->assertArrayHasKey('carrier', $sut);
-        $this->assertSame($sample, $sut['carrier']);
-
+        return [
+            'assert property Carrier' => [
+                'carrier',
+                'string',
+                'getCarrier',
+                'setCarrier'
+            ],
+            'assert property TrackingNumber' => [
+                'trackingNumber',
+                'string',
+                'getTrackingNumber',
+                'setTrackingNumber'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "carrier"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Carrier(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnAnnouncementReturnTracking();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ReturnAnnouncementReturnTracking([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCarrier');
-        $sut->setCarrier($sample);
-        $this->assertSame($sample, $sut['carrier']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "trackingNumber"
-     * @test
-     */
-    public function it_has_a_TrackingNumber(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnAnnouncementReturnTracking(['trackingNumber' => $sample]);
-
-        $this->assertMethodExists($sut, 'getTrackingNumber');
-        $this->assertSame($sample, $sut->getTrackingNumber());
-
-        $this->assertArrayHasKey('trackingNumber', $sut);
-        $this->assertSame($sample, $sut['trackingNumber']);
-
-    }
-
-    /**
-     * Test attribute "trackingNumber"
-     * @test
-     */
-    public function it_has_a_setter_for_TrackingNumber(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnAnnouncementReturnTracking();
-
-        $this->assertMethodExists($sut, 'setTrackingNumber');
-        $sut->setTrackingNumber($sample);
-        $this->assertSame($sample, $sut['trackingNumber']);
-    }
-
+    
     private function assertMethodExists(ReturnAnnouncementReturnTracking $sut, string $methodName): void
     {
         try {

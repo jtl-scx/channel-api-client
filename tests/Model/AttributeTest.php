@@ -45,102 +45,6 @@ class AttributeTest extends TestCase
 {
 
 
-
-    /**
-     * Test attribute "attributeId"
-     * @test
-     */
-    public function it_has_a_AttributeId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute(['attributeId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getAttributeId');
-        $this->assertSame($sample, $sut->getAttributeId());
-
-        $this->assertArrayHasKey('attributeId', $sut);
-        $this->assertSame($sample, $sut['attributeId']);
-
-    }
-
-    /**
-     * Test attribute "attributeId"
-     * @test
-     */
-    public function it_has_a_setter_for_AttributeId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setAttributeId');
-        $sut->setAttributeId($sample);
-        $this->assertSame($sample, $sut['attributeId']);
-    }
-
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute(['displayName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDisplayName');
-        $this->assertSame($sample, $sut->getDisplayName());
-
-        $this->assertArrayHasKey('displayName', $sut);
-        $this->assertSame($sample, $sut['displayName']);
-
-    }
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_setter_for_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setDisplayName');
-        $sut->setDisplayName($sample);
-        $this->assertSame($sample, $sut['displayName']);
-    }
-
-
-    /**
-     * Test attribute "isMultipleAllowed"
-     * @test
-     */
-    public function it_has_a_IsMultipleAllowed(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Attribute(['isMultipleAllowed' => $sample]);
-
-        $this->assertMethodExists($sut, 'getIsMultipleAllowed');
-        $this->assertSame($sample, $sut->getIsMultipleAllowed());
-
-        $this->assertArrayHasKey('isMultipleAllowed', $sut);
-        $this->assertSame($sample, $sut['isMultipleAllowed']);
-
-    }
-
-    /**
-     * Test attribute "isMultipleAllowed"
-     * @test
-     */
-    public function it_has_a_setter_for_IsMultipleAllowed(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setIsMultipleAllowed');
-        $sut->setIsMultipleAllowed($sample);
-        $this->assertSame($sample, $sut['isMultipleAllowed']);
-    }
-
     /**
      * Test allowed values for type
      * @test
@@ -155,454 +59,139 @@ class AttributeTest extends TestCase
         $this->assertMethodExists($sut, 'getTypeAllowableValues');
         $this->assertEquals($allowed, $sut->getTypeAllowableValues());
     }
-
     /**
-     * Test attribute "type"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Type(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute(['type' => $sample]);
-
-        $this->assertMethodExists($sut, 'getType');
-        $this->assertSame($sample, $sut->getType());
-
-        $this->assertArrayHasKey('type', $sut);
-        $this->assertSame($sample, $sut['type']);
-
+        return [
+            'assert property AttributeId' => [
+                'attributeId',
+                'string',
+                'getAttributeId',
+                'setAttributeId'
+            ],
+            'assert property DisplayName' => [
+                'displayName',
+                'string',
+                'getDisplayName',
+                'setDisplayName'
+            ],
+            'assert property IsMultipleAllowed' => [
+                'isMultipleAllowed',
+                'bool',
+                'getIsMultipleAllowed',
+                'setIsMultipleAllowed'
+            ],
+            'assert property Type' => [
+                'type',
+                'string',
+                'getType',
+                'setType'
+            ],
+            'assert property Values' => [
+                'values',
+                '\JTL\SCX\Client\Channel\Model\AllowedValue[]',
+                'getValues',
+                'setValues'
+            ],
+            'assert property AttributeValueValidation' => [
+                'attributeValueValidation',
+                'string',
+                'getAttributeValueValidation',
+                'setAttributeValueValidation'
+            ],
+            'assert property ConditionalMandatoryBy' => [
+                'conditionalMandatoryBy',
+                '\JTL\SCX\Client\Channel\Model\AttributeConditionalMandatoryBy[]',
+                'getConditionalMandatoryBy',
+                'setConditionalMandatoryBy'
+            ],
+            'assert property ConditionalOptionalBy' => [
+                'conditionalOptionalBy',
+                '\JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy[]',
+                'getConditionalOptionalBy',
+                'setConditionalOptionalBy'
+            ],
+            'assert property Required' => [
+                'required',
+                'bool',
+                'getRequired',
+                'setRequired'
+            ],
+            'assert property Recommended' => [
+                'recommended',
+                'bool',
+                'getRecommended',
+                'setRecommended'
+            ],
+            'assert property Section' => [
+                'section',
+                'string',
+                'getSection',
+                'setSection'
+            ],
+            'assert property SectionPosition' => [
+                'sectionPosition',
+                'int',
+                'getSectionPosition',
+                'setSectionPosition'
+            ],
+            'assert property SubSection' => [
+                'subSection',
+                'string',
+                'getSubSection',
+                'setSubSection'
+            ],
+            'assert property SubSectionPosition' => [
+                'subSectionPosition',
+                'int',
+                'getSubSectionPosition',
+                'setSubSectionPosition'
+            ],
+            'assert property Description' => [
+                'description',
+                'string',
+                'getDescription',
+                'setDescription'
+            ],
+            'assert property IsVariationDimension' => [
+                'isVariationDimension',
+                'bool',
+                'getIsVariationDimension',
+                'setIsVariationDimension'
+            ],
+            'assert property EnumValues' => [
+                'enumValues',
+                'string[]',
+                'getEnumValues',
+                'setEnumValues'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "type"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Type(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new Attribute([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setType');
-        $sut->setType($sample);
-        $this->assertSame($sample, $sut['type']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "values"
-     * @test
-     */
-    public function it_has_a_Values(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\AllowedValue[]');
-        $sut = new Attribute(['values' => $sample]);
-
-        $this->assertMethodExists($sut, 'getValues');
-        $this->assertSame($sample, $sut->getValues());
-
-        $this->assertArrayHasKey('values', $sut);
-        $this->assertSame($sample, $sut['values']);
-
-    }
-
-    /**
-     * Test attribute "values"
-     * @test
-     */
-    public function it_has_a_setter_for_Values(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\AllowedValue[]');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setValues');
-        $sut->setValues($sample);
-        $this->assertSame($sample, $sut['values']);
-    }
-
-
-    /**
-     * Test attribute "attributeValueValidation"
-     * @test
-     */
-    public function it_has_a_AttributeValueValidation(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute(['attributeValueValidation' => $sample]);
-
-        $this->assertMethodExists($sut, 'getAttributeValueValidation');
-        $this->assertSame($sample, $sut->getAttributeValueValidation());
-
-        $this->assertArrayHasKey('attributeValueValidation', $sut);
-        $this->assertSame($sample, $sut['attributeValueValidation']);
-
-    }
-
-    /**
-     * Test attribute "attributeValueValidation"
-     * @test
-     */
-    public function it_has_a_setter_for_AttributeValueValidation(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setAttributeValueValidation');
-        $sut->setAttributeValueValidation($sample);
-        $this->assertSame($sample, $sut['attributeValueValidation']);
-    }
-
-
-    /**
-     * Test attribute "conditionalMandatoryBy"
-     * @test
-     */
-    public function it_has_a_ConditionalMandatoryBy(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\AttributeConditionalMandatoryBy[]');
-        $sut = new Attribute(['conditionalMandatoryBy' => $sample]);
-
-        $this->assertMethodExists($sut, 'getConditionalMandatoryBy');
-        $this->assertSame($sample, $sut->getConditionalMandatoryBy());
-
-        $this->assertArrayHasKey('conditionalMandatoryBy', $sut);
-        $this->assertSame($sample, $sut['conditionalMandatoryBy']);
-
-    }
-
-    /**
-     * Test attribute "conditionalMandatoryBy"
-     * @test
-     */
-    public function it_has_a_setter_for_ConditionalMandatoryBy(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\AttributeConditionalMandatoryBy[]');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setConditionalMandatoryBy');
-        $sut->setConditionalMandatoryBy($sample);
-        $this->assertSame($sample, $sut['conditionalMandatoryBy']);
-    }
-
-
-    /**
-     * Test attribute "conditionalOptionalBy"
-     * @test
-     */
-    public function it_has_a_ConditionalOptionalBy(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy[]');
-        $sut = new Attribute(['conditionalOptionalBy' => $sample]);
-
-        $this->assertMethodExists($sut, 'getConditionalOptionalBy');
-        $this->assertSame($sample, $sut->getConditionalOptionalBy());
-
-        $this->assertArrayHasKey('conditionalOptionalBy', $sut);
-        $this->assertSame($sample, $sut['conditionalOptionalBy']);
-
-    }
-
-    /**
-     * Test attribute "conditionalOptionalBy"
-     * @test
-     */
-    public function it_has_a_setter_for_ConditionalOptionalBy(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\AttributeConditionalOptionalBy[]');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setConditionalOptionalBy');
-        $sut->setConditionalOptionalBy($sample);
-        $this->assertSame($sample, $sut['conditionalOptionalBy']);
-    }
-
-
-    /**
-     * Test attribute "required"
-     * @test
-     */
-    public function it_has_a_Required(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Attribute(['required' => $sample]);
-
-        $this->assertMethodExists($sut, 'getRequired');
-        $this->assertSame($sample, $sut->getRequired());
-
-        $this->assertArrayHasKey('required', $sut);
-        $this->assertSame($sample, $sut['required']);
-
-    }
-
-    /**
-     * Test attribute "required"
-     * @test
-     */
-    public function it_has_a_setter_for_Required(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setRequired');
-        $sut->setRequired($sample);
-        $this->assertSame($sample, $sut['required']);
-    }
-
-
-    /**
-     * Test attribute "recommended"
-     * @test
-     */
-    public function it_has_a_Recommended(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Attribute(['recommended' => $sample]);
-
-        $this->assertMethodExists($sut, 'getRecommended');
-        $this->assertSame($sample, $sut->getRecommended());
-
-        $this->assertArrayHasKey('recommended', $sut);
-        $this->assertSame($sample, $sut['recommended']);
-
-    }
-
-    /**
-     * Test attribute "recommended"
-     * @test
-     */
-    public function it_has_a_setter_for_Recommended(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setRecommended');
-        $sut->setRecommended($sample);
-        $this->assertSame($sample, $sut['recommended']);
-    }
-
-
-    /**
-     * Test attribute "section"
-     * @test
-     */
-    public function it_has_a_Section(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute(['section' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSection');
-        $this->assertSame($sample, $sut->getSection());
-
-        $this->assertArrayHasKey('section', $sut);
-        $this->assertSame($sample, $sut['section']);
-
-    }
-
-    /**
-     * Test attribute "section"
-     * @test
-     */
-    public function it_has_a_setter_for_Section(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setSection');
-        $sut->setSection($sample);
-        $this->assertSame($sample, $sut['section']);
-    }
-
-
-    /**
-     * Test attribute "sectionPosition"
-     * @test
-     */
-    public function it_has_a_SectionPosition(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new Attribute(['sectionPosition' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSectionPosition');
-        $this->assertSame($sample, $sut->getSectionPosition());
-
-        $this->assertArrayHasKey('sectionPosition', $sut);
-        $this->assertSame($sample, $sut['sectionPosition']);
-
-    }
-
-    /**
-     * Test attribute "sectionPosition"
-     * @test
-     */
-    public function it_has_a_setter_for_SectionPosition(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setSectionPosition');
-        $sut->setSectionPosition($sample);
-        $this->assertSame($sample, $sut['sectionPosition']);
-    }
-
-
-    /**
-     * Test attribute "subSection"
-     * @test
-     */
-    public function it_has_a_SubSection(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute(['subSection' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSubSection');
-        $this->assertSame($sample, $sut->getSubSection());
-
-        $this->assertArrayHasKey('subSection', $sut);
-        $this->assertSame($sample, $sut['subSection']);
-
-    }
-
-    /**
-     * Test attribute "subSection"
-     * @test
-     */
-    public function it_has_a_setter_for_SubSection(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setSubSection');
-        $sut->setSubSection($sample);
-        $this->assertSame($sample, $sut['subSection']);
-    }
-
-
-    /**
-     * Test attribute "subSectionPosition"
-     * @test
-     */
-    public function it_has_a_SubSectionPosition(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new Attribute(['subSectionPosition' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSubSectionPosition');
-        $this->assertSame($sample, $sut->getSubSectionPosition());
-
-        $this->assertArrayHasKey('subSectionPosition', $sut);
-        $this->assertSame($sample, $sut['subSectionPosition']);
-
-    }
-
-    /**
-     * Test attribute "subSectionPosition"
-     * @test
-     */
-    public function it_has_a_setter_for_SubSectionPosition(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setSubSectionPosition');
-        $sut->setSubSectionPosition($sample);
-        $this->assertSame($sample, $sut['subSectionPosition']);
-    }
-
-
-    /**
-     * Test attribute "description"
-     * @test
-     */
-    public function it_has_a_Description(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute(['description' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDescription');
-        $this->assertSame($sample, $sut->getDescription());
-
-        $this->assertArrayHasKey('description', $sut);
-        $this->assertSame($sample, $sut['description']);
-
-    }
-
-    /**
-     * Test attribute "description"
-     * @test
-     */
-    public function it_has_a_setter_for_Description(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setDescription');
-        $sut->setDescription($sample);
-        $this->assertSame($sample, $sut['description']);
-    }
-
-
-    /**
-     * Test attribute "isVariationDimension"
-     * @test
-     */
-    public function it_has_a_IsVariationDimension(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Attribute(['isVariationDimension' => $sample]);
-
-        $this->assertMethodExists($sut, 'getIsVariationDimension');
-        $this->assertSame($sample, $sut->getIsVariationDimension());
-
-        $this->assertArrayHasKey('isVariationDimension', $sut);
-        $this->assertSame($sample, $sut['isVariationDimension']);
-
-    }
-
-    /**
-     * Test attribute "isVariationDimension"
-     * @test
-     */
-    public function it_has_a_setter_for_IsVariationDimension(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setIsVariationDimension');
-        $sut->setIsVariationDimension($sample);
-        $this->assertSame($sample, $sut['isVariationDimension']);
-    }
-
-
-    /**
-     * Test attribute "enumValues"
-     * @test
-     */
-    public function it_has_a_EnumValues(): void
-    {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new Attribute(['enumValues' => $sample]);
-
-        $this->assertMethodExists($sut, 'getEnumValues');
-        $this->assertSame($sample, $sut->getEnumValues());
-
-        $this->assertArrayHasKey('enumValues', $sut);
-        $this->assertSame($sample, $sut['enumValues']);
-
-    }
-
-    /**
-     * Test attribute "enumValues"
-     * @test
-     */
-    public function it_has_a_setter_for_EnumValues(): void
-    {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new Attribute();
-
-        $this->assertMethodExists($sut, 'setEnumValues');
-        $sut->setEnumValues($sample);
-        $this->assertSame($sample, $sut['enumValues']);
-    }
-
+    
     private function assertMethodExists(Attribute $sut, string $methodName): void
     {
         try {

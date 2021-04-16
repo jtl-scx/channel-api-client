@@ -45,70 +45,49 @@ class AllowedValueTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "value"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Value(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new AllowedValue(['value' => $sample]);
-
-        $this->assertMethodExists($sut, 'getValue');
-        $this->assertSame($sample, $sut->getValue());
-
-        $this->assertArrayHasKey('value', $sut);
-        $this->assertSame($sample, $sut['value']);
-
+        return [
+            'assert property Value' => [
+                'value',
+                'string',
+                'getValue',
+                'setValue'
+            ],
+            'assert property Display' => [
+                'display',
+                'string',
+                'getDisplay',
+                'setDisplay'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "value"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Value(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new AllowedValue();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new AllowedValue([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setValue');
-        $sut->setValue($sample);
-        $this->assertSame($sample, $sut['value']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "display"
-     * @test
-     */
-    public function it_has_a_Display(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new AllowedValue(['display' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDisplay');
-        $this->assertSame($sample, $sut->getDisplay());
-
-        $this->assertArrayHasKey('display', $sut);
-        $this->assertSame($sample, $sut['display']);
-
-    }
-
-    /**
-     * Test attribute "display"
-     * @test
-     */
-    public function it_has_a_setter_for_Display(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new AllowedValue();
-
-        $this->assertMethodExists($sut, 'setDisplay');
-        $sut->setDisplay($sample);
-        $this->assertSame($sample, $sut['display']);
-    }
-
+    
     private function assertMethodExists(AllowedValue $sut, string $methodName): void
     {
         try {

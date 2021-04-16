@@ -45,134 +45,61 @@ class OrderShippingTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShipping(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderId' => [
+                'orderId',
+                'string',
+                'getOrderId',
+                'setOrderId'
+            ],
+            'assert property ShippingComplete' => [
+                'shippingComplete',
+                'bool',
+                'getShippingComplete',
+                'setShippingComplete'
+            ],
+            'assert property ShippingItems' => [
+                'shippingItems',
+                '\JTL\SCX\Client\Channel\Model\OrderShippingPosition[]',
+                'getShippingItems',
+                'setShippingItems'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShipping();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OrderShipping([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShipping(['orderId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderId');
-        $this->assertSame($sample, $sut->getOrderId());
-
-        $this->assertArrayHasKey('orderId', $sut);
-        $this->assertSame($sample, $sut['orderId']);
-
-    }
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShipping();
-
-        $this->assertMethodExists($sut, 'setOrderId');
-        $sut->setOrderId($sample);
-        $this->assertSame($sample, $sut['orderId']);
-    }
-
-
-    /**
-     * Test attribute "shippingComplete"
-     * @test
-     */
-    public function it_has_a_ShippingComplete(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new OrderShipping(['shippingComplete' => $sample]);
-
-        $this->assertMethodExists($sut, 'getShippingComplete');
-        $this->assertSame($sample, $sut->getShippingComplete());
-
-        $this->assertArrayHasKey('shippingComplete', $sut);
-        $this->assertSame($sample, $sut['shippingComplete']);
-
-    }
-
-    /**
-     * Test attribute "shippingComplete"
-     * @test
-     */
-    public function it_has_a_setter_for_ShippingComplete(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new OrderShipping();
-
-        $this->assertMethodExists($sut, 'setShippingComplete');
-        $sut->setShippingComplete($sample);
-        $this->assertSame($sample, $sut['shippingComplete']);
-    }
-
-
-    /**
-     * Test attribute "shippingItems"
-     * @test
-     */
-    public function it_has_a_ShippingItems(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderShippingPosition[]');
-        $sut = new OrderShipping(['shippingItems' => $sample]);
-
-        $this->assertMethodExists($sut, 'getShippingItems');
-        $this->assertSame($sample, $sut->getShippingItems());
-
-        $this->assertArrayHasKey('shippingItems', $sut);
-        $this->assertSame($sample, $sut['shippingItems']);
-
-    }
-
-    /**
-     * Test attribute "shippingItems"
-     * @test
-     */
-    public function it_has_a_setter_for_ShippingItems(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderShippingPosition[]');
-        $sut = new OrderShipping();
-
-        $this->assertMethodExists($sut, 'setShippingItems');
-        $sut->setShippingItems($sample);
-        $this->assertSame($sample, $sut['shippingItems']);
-    }
-
+    
     private function assertMethodExists(OrderShipping $sut, string $methodName): void
     {
         try {

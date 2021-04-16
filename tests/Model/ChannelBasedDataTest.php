@@ -45,294 +45,91 @@ class ChannelBasedDataTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "currency"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Currency(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData(['currency' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCurrency');
-        $this->assertSame($sample, $sut->getCurrency());
-
-        $this->assertArrayHasKey('currency', $sut);
-        $this->assertSame($sample, $sut['currency']);
-
+        return [
+            'assert property Currency' => [
+                'currency',
+                'string',
+                'getCurrency',
+                'setCurrency'
+            ],
+            'assert property MarketplaceList' => [
+                'marketplaceList',
+                'string[]',
+                'getMarketplaceList',
+                'setMarketplaceList'
+            ],
+            'assert property SupportedLanguages' => [
+                'supportedLanguages',
+                'string[]',
+                'getSupportedLanguages',
+                'setSupportedLanguages'
+            ],
+            'assert property DisplayName' => [
+                'displayName',
+                'string',
+                'getDisplayName',
+                'setDisplayName'
+            ],
+            'assert property Website' => [
+                'website',
+                'string',
+                'getWebsite',
+                'setWebsite'
+            ],
+            'assert property SupportContact' => [
+                'supportContact',
+                'string',
+                'getSupportContact',
+                'setSupportContact'
+            ],
+            'assert property Vendor' => [
+                'vendor',
+                'string',
+                'getVendor',
+                'setVendor'
+            ],
+            'assert property SignUpUrl' => [
+                'signUpUrl',
+                'string',
+                'getSignUpUrl',
+                'setSignUpUrl'
+            ],
+            'assert property FeatureList' => [
+                'featureList',
+                '\JTL\SCX\Client\Channel\Model\ChannelUpdateFeatureList',
+                'getFeatureList',
+                'setFeatureList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "currency"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Currency(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ChannelBasedData([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCurrency');
-        $sut->setCurrency($sample);
-        $this->assertSame($sample, $sut['currency']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "marketplaceList"
-     * @test
-     */
-    public function it_has_a_MarketplaceList(): void
-    {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new ChannelBasedData(['marketplaceList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getMarketplaceList');
-        $this->assertSame($sample, $sut->getMarketplaceList());
-
-        $this->assertArrayHasKey('marketplaceList', $sut);
-        $this->assertSame($sample, $sut['marketplaceList']);
-
-    }
-
-    /**
-     * Test attribute "marketplaceList"
-     * @test
-     */
-    public function it_has_a_setter_for_MarketplaceList(): void
-    {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new ChannelBasedData();
-
-        $this->assertMethodExists($sut, 'setMarketplaceList');
-        $sut->setMarketplaceList($sample);
-        $this->assertSame($sample, $sut['marketplaceList']);
-    }
-
-
-    /**
-     * Test attribute "supportedLanguages"
-     * @test
-     */
-    public function it_has_a_SupportedLanguages(): void
-    {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new ChannelBasedData(['supportedLanguages' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSupportedLanguages');
-        $this->assertSame($sample, $sut->getSupportedLanguages());
-
-        $this->assertArrayHasKey('supportedLanguages', $sut);
-        $this->assertSame($sample, $sut['supportedLanguages']);
-
-    }
-
-    /**
-     * Test attribute "supportedLanguages"
-     * @test
-     */
-    public function it_has_a_setter_for_SupportedLanguages(): void
-    {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new ChannelBasedData();
-
-        $this->assertMethodExists($sut, 'setSupportedLanguages');
-        $sut->setSupportedLanguages($sample);
-        $this->assertSame($sample, $sut['supportedLanguages']);
-    }
-
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData(['displayName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDisplayName');
-        $this->assertSame($sample, $sut->getDisplayName());
-
-        $this->assertArrayHasKey('displayName', $sut);
-        $this->assertSame($sample, $sut['displayName']);
-
-    }
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_setter_for_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData();
-
-        $this->assertMethodExists($sut, 'setDisplayName');
-        $sut->setDisplayName($sample);
-        $this->assertSame($sample, $sut['displayName']);
-    }
-
-
-    /**
-     * Test attribute "website"
-     * @test
-     */
-    public function it_has_a_Website(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData(['website' => $sample]);
-
-        $this->assertMethodExists($sut, 'getWebsite');
-        $this->assertSame($sample, $sut->getWebsite());
-
-        $this->assertArrayHasKey('website', $sut);
-        $this->assertSame($sample, $sut['website']);
-
-    }
-
-    /**
-     * Test attribute "website"
-     * @test
-     */
-    public function it_has_a_setter_for_Website(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData();
-
-        $this->assertMethodExists($sut, 'setWebsite');
-        $sut->setWebsite($sample);
-        $this->assertSame($sample, $sut['website']);
-    }
-
-
-    /**
-     * Test attribute "supportContact"
-     * @test
-     */
-    public function it_has_a_SupportContact(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData(['supportContact' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSupportContact');
-        $this->assertSame($sample, $sut->getSupportContact());
-
-        $this->assertArrayHasKey('supportContact', $sut);
-        $this->assertSame($sample, $sut['supportContact']);
-
-    }
-
-    /**
-     * Test attribute "supportContact"
-     * @test
-     */
-    public function it_has_a_setter_for_SupportContact(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData();
-
-        $this->assertMethodExists($sut, 'setSupportContact');
-        $sut->setSupportContact($sample);
-        $this->assertSame($sample, $sut['supportContact']);
-    }
-
-
-    /**
-     * Test attribute "vendor"
-     * @test
-     */
-    public function it_has_a_Vendor(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData(['vendor' => $sample]);
-
-        $this->assertMethodExists($sut, 'getVendor');
-        $this->assertSame($sample, $sut->getVendor());
-
-        $this->assertArrayHasKey('vendor', $sut);
-        $this->assertSame($sample, $sut['vendor']);
-
-    }
-
-    /**
-     * Test attribute "vendor"
-     * @test
-     */
-    public function it_has_a_setter_for_Vendor(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData();
-
-        $this->assertMethodExists($sut, 'setVendor');
-        $sut->setVendor($sample);
-        $this->assertSame($sample, $sut['vendor']);
-    }
-
-
-    /**
-     * Test attribute "signUpUrl"
-     * @test
-     */
-    public function it_has_a_SignUpUrl(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData(['signUpUrl' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSignUpUrl');
-        $this->assertSame($sample, $sut->getSignUpUrl());
-
-        $this->assertArrayHasKey('signUpUrl', $sut);
-        $this->assertSame($sample, $sut['signUpUrl']);
-
-    }
-
-    /**
-     * Test attribute "signUpUrl"
-     * @test
-     */
-    public function it_has_a_setter_for_SignUpUrl(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelBasedData();
-
-        $this->assertMethodExists($sut, 'setSignUpUrl');
-        $sut->setSignUpUrl($sample);
-        $this->assertSame($sample, $sut['signUpUrl']);
-    }
-
-
-    /**
-     * Test attribute "featureList"
-     * @test
-     */
-    public function it_has_a_FeatureList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelUpdateFeatureList');
-        $sut = new ChannelBasedData(['featureList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getFeatureList');
-        $this->assertSame($sample, $sut->getFeatureList());
-
-        $this->assertArrayHasKey('featureList', $sut);
-        $this->assertSame($sample, $sut['featureList']);
-
-    }
-
-    /**
-     * Test attribute "featureList"
-     * @test
-     */
-    public function it_has_a_setter_for_FeatureList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelUpdateFeatureList');
-        $sut = new ChannelBasedData();
-
-        $this->assertMethodExists($sut, 'setFeatureList');
-        $sut->setFeatureList($sample);
-        $this->assertSame($sample, $sut['featureList']);
-    }
-
+    
     private function assertMethodExists(ChannelBasedData $sut, string $methodName): void
     {
         try {

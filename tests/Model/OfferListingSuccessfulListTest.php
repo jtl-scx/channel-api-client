@@ -45,38 +45,43 @@ class OfferListingSuccessfulListTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "offerList"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_OfferList(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OfferListingSuccessful[]');
-        $sut = new OfferListingSuccessfulList(['offerList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOfferList');
-        $this->assertSame($sample, $sut->getOfferList());
-
-        $this->assertArrayHasKey('offerList', $sut);
-        $this->assertSame($sample, $sut['offerList']);
-
+        return [
+            'assert property OfferList' => [
+                'offerList',
+                '\JTL\SCX\Client\Channel\Model\OfferListingSuccessful[]',
+                'getOfferList',
+                'setOfferList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "offerList"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_OfferList(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OfferListingSuccessful[]');
-        $sut = new OfferListingSuccessfulList();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OfferListingSuccessfulList([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setOfferList');
-        $sut->setOfferList($sample);
-        $this->assertSame($sample, $sut['offerList']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(OfferListingSuccessfulList $sut, string $methodName): void
     {
         try {

@@ -45,70 +45,49 @@ class SupportedCarrierTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "carrierId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_CarrierId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SupportedCarrier(['carrierId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCarrierId');
-        $this->assertSame($sample, $sut->getCarrierId());
-
-        $this->assertArrayHasKey('carrierId', $sut);
-        $this->assertSame($sample, $sut['carrierId']);
-
+        return [
+            'assert property CarrierId' => [
+                'carrierId',
+                'string',
+                'getCarrierId',
+                'setCarrierId'
+            ],
+            'assert property DisplayName' => [
+                'displayName',
+                'string',
+                'getDisplayName',
+                'setDisplayName'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "carrierId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_CarrierId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SupportedCarrier();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SupportedCarrier([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCarrierId');
-        $sut->setCarrierId($sample);
-        $this->assertSame($sample, $sut['carrierId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SupportedCarrier(['displayName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDisplayName');
-        $this->assertSame($sample, $sut->getDisplayName());
-
-        $this->assertArrayHasKey('displayName', $sut);
-        $this->assertSame($sample, $sut['displayName']);
-
-    }
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_setter_for_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SupportedCarrier();
-
-        $this->assertMethodExists($sut, 'setDisplayName');
-        $sut->setDisplayName($sample);
-        $this->assertSame($sample, $sut['displayName']);
-    }
-
+    
     private function assertMethodExists(SupportedCarrier $sut, string $methodName): void
     {
         try {

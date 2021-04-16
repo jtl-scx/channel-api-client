@@ -45,70 +45,49 @@ class ReturnProcessingErrorTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "code"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Code(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnProcessingError(['code' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCode');
-        $this->assertSame($sample, $sut->getCode());
-
-        $this->assertArrayHasKey('code', $sut);
-        $this->assertSame($sample, $sut['code']);
-
+        return [
+            'assert property Code' => [
+                'code',
+                'string',
+                'getCode',
+                'setCode'
+            ],
+            'assert property Message' => [
+                'message',
+                'string',
+                'getMessage',
+                'setMessage'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "code"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Code(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnProcessingError();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ReturnProcessingError([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCode');
-        $sut->setCode($sample);
-        $this->assertSame($sample, $sut['code']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnProcessingError(['message' => $sample]);
-
-        $this->assertMethodExists($sut, 'getMessage');
-        $this->assertSame($sample, $sut->getMessage());
-
-        $this->assertArrayHasKey('message', $sut);
-        $this->assertSame($sample, $sut['message']);
-
-    }
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_setter_for_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnProcessingError();
-
-        $this->assertMethodExists($sut, 'setMessage');
-        $sut->setMessage($sample);
-        $this->assertSame($sample, $sut['message']);
-    }
-
+    
     private function assertMethodExists(ReturnProcessingError $sut, string $methodName): void
     {
         try {

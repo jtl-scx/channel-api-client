@@ -45,294 +45,91 @@ class SellerInventoryItemTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "offerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_OfferId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new SellerInventoryItem(['offerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOfferId');
-        $this->assertSame($sample, $sut->getOfferId());
-
-        $this->assertArrayHasKey('offerId', $sut);
-        $this->assertSame($sample, $sut['offerId']);
-
+        return [
+            'assert property OfferId' => [
+                'offerId',
+                'int',
+                'getOfferId',
+                'setOfferId'
+            ],
+            'assert property ChannelOfferId' => [
+                'channelOfferId',
+                'string',
+                'getChannelOfferId',
+                'setChannelOfferId'
+            ],
+            'assert property Sku' => [
+                'sku',
+                'string',
+                'getSku',
+                'setSku'
+            ],
+            'assert property Ean' => [
+                'ean',
+                'string',
+                'getEan',
+                'setEan'
+            ],
+            'assert property Quantity' => [
+                'quantity',
+                'string',
+                'getQuantity',
+                'setQuantity'
+            ],
+            'assert property PriceList' => [
+                'priceList',
+                '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
+                'getPriceList',
+                'setPriceList'
+            ],
+            'assert property Title' => [
+                'title',
+                'string',
+                'getTitle',
+                'setTitle'
+            ],
+            'assert property ChannelCategoryId' => [
+                'channelCategoryId',
+                'string',
+                'getChannelCategoryId',
+                'setChannelCategoryId'
+            ],
+            'assert property ChannelAttributeList' => [
+                'channelAttributeList',
+                '\JTL\SCX\Client\Channel\Model\ChannelAttribute[]',
+                'getChannelAttributeList',
+                'setChannelAttributeList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "offerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_OfferId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new SellerInventoryItem();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerInventoryItem([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setOfferId');
-        $sut->setOfferId($sample);
-        $this->assertSame($sample, $sut['offerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "channelOfferId"
-     * @test
-     */
-    public function it_has_a_ChannelOfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem(['channelOfferId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannelOfferId');
-        $this->assertSame($sample, $sut->getChannelOfferId());
-
-        $this->assertArrayHasKey('channelOfferId', $sut);
-        $this->assertSame($sample, $sut['channelOfferId']);
-
-    }
-
-    /**
-     * Test attribute "channelOfferId"
-     * @test
-     */
-    public function it_has_a_setter_for_ChannelOfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem();
-
-        $this->assertMethodExists($sut, 'setChannelOfferId');
-        $sut->setChannelOfferId($sample);
-        $this->assertSame($sample, $sut['channelOfferId']);
-    }
-
-
-    /**
-     * Test attribute "sku"
-     * @test
-     */
-    public function it_has_a_Sku(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem(['sku' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSku');
-        $this->assertSame($sample, $sut->getSku());
-
-        $this->assertArrayHasKey('sku', $sut);
-        $this->assertSame($sample, $sut['sku']);
-
-    }
-
-    /**
-     * Test attribute "sku"
-     * @test
-     */
-    public function it_has_a_setter_for_Sku(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem();
-
-        $this->assertMethodExists($sut, 'setSku');
-        $sut->setSku($sample);
-        $this->assertSame($sample, $sut['sku']);
-    }
-
-
-    /**
-     * Test attribute "ean"
-     * @test
-     */
-    public function it_has_a_Ean(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem(['ean' => $sample]);
-
-        $this->assertMethodExists($sut, 'getEan');
-        $this->assertSame($sample, $sut->getEan());
-
-        $this->assertArrayHasKey('ean', $sut);
-        $this->assertSame($sample, $sut['ean']);
-
-    }
-
-    /**
-     * Test attribute "ean"
-     * @test
-     */
-    public function it_has_a_setter_for_Ean(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem();
-
-        $this->assertMethodExists($sut, 'setEan');
-        $sut->setEan($sample);
-        $this->assertSame($sample, $sut['ean']);
-    }
-
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem(['quantity' => $sample]);
-
-        $this->assertMethodExists($sut, 'getQuantity');
-        $this->assertSame($sample, $sut->getQuantity());
-
-        $this->assertArrayHasKey('quantity', $sut);
-        $this->assertSame($sample, $sut['quantity']);
-
-    }
-
-    /**
-     * Test attribute "quantity"
-     * @test
-     */
-    public function it_has_a_setter_for_Quantity(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem();
-
-        $this->assertMethodExists($sut, 'setQuantity');
-        $sut->setQuantity($sample);
-        $this->assertSame($sample, $sut['quantity']);
-    }
-
-
-    /**
-     * Test attribute "priceList"
-     * @test
-     */
-    public function it_has_a_PriceList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\PriceContainer[]');
-        $sut = new SellerInventoryItem(['priceList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPriceList');
-        $this->assertSame($sample, $sut->getPriceList());
-
-        $this->assertArrayHasKey('priceList', $sut);
-        $this->assertSame($sample, $sut['priceList']);
-
-    }
-
-    /**
-     * Test attribute "priceList"
-     * @test
-     */
-    public function it_has_a_setter_for_PriceList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\PriceContainer[]');
-        $sut = new SellerInventoryItem();
-
-        $this->assertMethodExists($sut, 'setPriceList');
-        $sut->setPriceList($sample);
-        $this->assertSame($sample, $sut['priceList']);
-    }
-
-
-    /**
-     * Test attribute "title"
-     * @test
-     */
-    public function it_has_a_Title(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem(['title' => $sample]);
-
-        $this->assertMethodExists($sut, 'getTitle');
-        $this->assertSame($sample, $sut->getTitle());
-
-        $this->assertArrayHasKey('title', $sut);
-        $this->assertSame($sample, $sut['title']);
-
-    }
-
-    /**
-     * Test attribute "title"
-     * @test
-     */
-    public function it_has_a_setter_for_Title(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem();
-
-        $this->assertMethodExists($sut, 'setTitle');
-        $sut->setTitle($sample);
-        $this->assertSame($sample, $sut['title']);
-    }
-
-
-    /**
-     * Test attribute "channelCategoryId"
-     * @test
-     */
-    public function it_has_a_ChannelCategoryId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem(['channelCategoryId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannelCategoryId');
-        $this->assertSame($sample, $sut->getChannelCategoryId());
-
-        $this->assertArrayHasKey('channelCategoryId', $sut);
-        $this->assertSame($sample, $sut['channelCategoryId']);
-
-    }
-
-    /**
-     * Test attribute "channelCategoryId"
-     * @test
-     */
-    public function it_has_a_setter_for_ChannelCategoryId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerInventoryItem();
-
-        $this->assertMethodExists($sut, 'setChannelCategoryId');
-        $sut->setChannelCategoryId($sample);
-        $this->assertSame($sample, $sut['channelCategoryId']);
-    }
-
-
-    /**
-     * Test attribute "channelAttributeList"
-     * @test
-     */
-    public function it_has_a_ChannelAttributeList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelAttribute[]');
-        $sut = new SellerInventoryItem(['channelAttributeList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannelAttributeList');
-        $this->assertSame($sample, $sut->getChannelAttributeList());
-
-        $this->assertArrayHasKey('channelAttributeList', $sut);
-        $this->assertSame($sample, $sut['channelAttributeList']);
-
-    }
-
-    /**
-     * Test attribute "channelAttributeList"
-     * @test
-     */
-    public function it_has_a_setter_for_ChannelAttributeList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelAttribute[]');
-        $sut = new SellerInventoryItem();
-
-        $this->assertMethodExists($sut, 'setChannelAttributeList');
-        $sut->setChannelAttributeList($sample);
-        $this->assertSame($sample, $sut['channelAttributeList']);
-    }
-
+    
     private function assertMethodExists(SellerInventoryItem $sut, string $methodName): void
     {
         try {

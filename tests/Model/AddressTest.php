@@ -45,70 +45,6 @@ class AddressTest extends TestCase
 {
 
 
-
-    /**
-     * Test attribute "firstName"
-     * @test
-     */
-    public function it_has_a_FirstName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['firstName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getFirstName');
-        $this->assertSame($sample, $sut->getFirstName());
-
-        $this->assertArrayHasKey('firstName', $sut);
-        $this->assertSame($sample, $sut['firstName']);
-
-    }
-
-    /**
-     * Test attribute "firstName"
-     * @test
-     */
-    public function it_has_a_setter_for_FirstName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setFirstName');
-        $sut->setFirstName($sample);
-        $this->assertSame($sample, $sut['firstName']);
-    }
-
-
-    /**
-     * Test attribute "lastName"
-     * @test
-     */
-    public function it_has_a_LastName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['lastName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getLastName');
-        $this->assertSame($sample, $sut->getLastName());
-
-        $this->assertArrayHasKey('lastName', $sut);
-        $this->assertSame($sample, $sut['lastName']);
-
-    }
-
-    /**
-     * Test attribute "lastName"
-     * @test
-     */
-    public function it_has_a_setter_for_LastName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setLastName');
-        $sut->setLastName($sample);
-        $this->assertSame($sample, $sut['lastName']);
-    }
-
     /**
      * Test allowed values for gender
      * @test
@@ -123,294 +59,103 @@ class AddressTest extends TestCase
         $this->assertMethodExists($sut, 'getGenderAllowableValues');
         $this->assertEquals($allowed, $sut->getGenderAllowableValues());
     }
-
     /**
-     * Test attribute "gender"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Gender(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['gender' => $sample]);
-
-        $this->assertMethodExists($sut, 'getGender');
-        $this->assertSame($sample, $sut->getGender());
-
-        $this->assertArrayHasKey('gender', $sut);
-        $this->assertSame($sample, $sut['gender']);
-
+        return [
+            'assert property FirstName' => [
+                'firstName',
+                'string',
+                'getFirstName',
+                'setFirstName'
+            ],
+            'assert property LastName' => [
+                'lastName',
+                'string',
+                'getLastName',
+                'setLastName'
+            ],
+            'assert property Gender' => [
+                'gender',
+                'string',
+                'getGender',
+                'setGender'
+            ],
+            'assert property CompanyName' => [
+                'companyName',
+                'string',
+                'getCompanyName',
+                'setCompanyName'
+            ],
+            'assert property Street' => [
+                'street',
+                'string',
+                'getStreet',
+                'setStreet'
+            ],
+            'assert property HouseNumber' => [
+                'houseNumber',
+                'string',
+                'getHouseNumber',
+                'setHouseNumber'
+            ],
+            'assert property Addition' => [
+                'addition',
+                'string',
+                'getAddition',
+                'setAddition'
+            ],
+            'assert property Postcode' => [
+                'postcode',
+                'string',
+                'getPostcode',
+                'setPostcode'
+            ],
+            'assert property City' => [
+                'city',
+                'string',
+                'getCity',
+                'setCity'
+            ],
+            'assert property Phone' => [
+                'phone',
+                'string',
+                'getPhone',
+                'setPhone'
+            ],
+            'assert property Country' => [
+                'country',
+                'string',
+                'getCountry',
+                'setCountry'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "gender"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Gender(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new Address([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setGender');
-        $sut->setGender($sample);
-        $this->assertSame($sample, $sut['gender']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "companyName"
-     * @test
-     */
-    public function it_has_a_CompanyName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['companyName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCompanyName');
-        $this->assertSame($sample, $sut->getCompanyName());
-
-        $this->assertArrayHasKey('companyName', $sut);
-        $this->assertSame($sample, $sut['companyName']);
-
-    }
-
-    /**
-     * Test attribute "companyName"
-     * @test
-     */
-    public function it_has_a_setter_for_CompanyName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setCompanyName');
-        $sut->setCompanyName($sample);
-        $this->assertSame($sample, $sut['companyName']);
-    }
-
-
-    /**
-     * Test attribute "street"
-     * @test
-     */
-    public function it_has_a_Street(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['street' => $sample]);
-
-        $this->assertMethodExists($sut, 'getStreet');
-        $this->assertSame($sample, $sut->getStreet());
-
-        $this->assertArrayHasKey('street', $sut);
-        $this->assertSame($sample, $sut['street']);
-
-    }
-
-    /**
-     * Test attribute "street"
-     * @test
-     */
-    public function it_has_a_setter_for_Street(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setStreet');
-        $sut->setStreet($sample);
-        $this->assertSame($sample, $sut['street']);
-    }
-
-
-    /**
-     * Test attribute "houseNumber"
-     * @test
-     */
-    public function it_has_a_HouseNumber(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['houseNumber' => $sample]);
-
-        $this->assertMethodExists($sut, 'getHouseNumber');
-        $this->assertSame($sample, $sut->getHouseNumber());
-
-        $this->assertArrayHasKey('houseNumber', $sut);
-        $this->assertSame($sample, $sut['houseNumber']);
-
-    }
-
-    /**
-     * Test attribute "houseNumber"
-     * @test
-     */
-    public function it_has_a_setter_for_HouseNumber(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setHouseNumber');
-        $sut->setHouseNumber($sample);
-        $this->assertSame($sample, $sut['houseNumber']);
-    }
-
-
-    /**
-     * Test attribute "addition"
-     * @test
-     */
-    public function it_has_a_Addition(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['addition' => $sample]);
-
-        $this->assertMethodExists($sut, 'getAddition');
-        $this->assertSame($sample, $sut->getAddition());
-
-        $this->assertArrayHasKey('addition', $sut);
-        $this->assertSame($sample, $sut['addition']);
-
-    }
-
-    /**
-     * Test attribute "addition"
-     * @test
-     */
-    public function it_has_a_setter_for_Addition(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setAddition');
-        $sut->setAddition($sample);
-        $this->assertSame($sample, $sut['addition']);
-    }
-
-
-    /**
-     * Test attribute "postcode"
-     * @test
-     */
-    public function it_has_a_Postcode(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['postcode' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPostcode');
-        $this->assertSame($sample, $sut->getPostcode());
-
-        $this->assertArrayHasKey('postcode', $sut);
-        $this->assertSame($sample, $sut['postcode']);
-
-    }
-
-    /**
-     * Test attribute "postcode"
-     * @test
-     */
-    public function it_has_a_setter_for_Postcode(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setPostcode');
-        $sut->setPostcode($sample);
-        $this->assertSame($sample, $sut['postcode']);
-    }
-
-
-    /**
-     * Test attribute "city"
-     * @test
-     */
-    public function it_has_a_City(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['city' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCity');
-        $this->assertSame($sample, $sut->getCity());
-
-        $this->assertArrayHasKey('city', $sut);
-        $this->assertSame($sample, $sut['city']);
-
-    }
-
-    /**
-     * Test attribute "city"
-     * @test
-     */
-    public function it_has_a_setter_for_City(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setCity');
-        $sut->setCity($sample);
-        $this->assertSame($sample, $sut['city']);
-    }
-
-
-    /**
-     * Test attribute "phone"
-     * @test
-     */
-    public function it_has_a_Phone(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['phone' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPhone');
-        $this->assertSame($sample, $sut->getPhone());
-
-        $this->assertArrayHasKey('phone', $sut);
-        $this->assertSame($sample, $sut['phone']);
-
-    }
-
-    /**
-     * Test attribute "phone"
-     * @test
-     */
-    public function it_has_a_setter_for_Phone(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setPhone');
-        $sut->setPhone($sample);
-        $this->assertSame($sample, $sut['phone']);
-    }
-
-
-    /**
-     * Test attribute "country"
-     * @test
-     */
-    public function it_has_a_Country(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address(['country' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCountry');
-        $this->assertSame($sample, $sut->getCountry());
-
-        $this->assertArrayHasKey('country', $sut);
-        $this->assertSame($sample, $sut['country']);
-
-    }
-
-    /**
-     * Test attribute "country"
-     * @test
-     */
-    public function it_has_a_setter_for_Country(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Address();
-
-        $this->assertMethodExists($sut, 'setCountry');
-        $sut->setCountry($sample);
-        $this->assertSame($sample, $sut['country']);
-    }
-
+    
     private function assertMethodExists(Address $sut, string $methodName): void
     {
         try {

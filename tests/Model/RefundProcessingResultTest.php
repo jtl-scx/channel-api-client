@@ -45,134 +45,61 @@ class RefundProcessingResultTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "refundId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_RefundId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundProcessingResult(['refundId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getRefundId');
-        $this->assertSame($sample, $sut->getRefundId());
-
-        $this->assertArrayHasKey('refundId', $sut);
-        $this->assertSame($sample, $sut['refundId']);
-
+        return [
+            'assert property RefundId' => [
+                'refundId',
+                'string',
+                'getRefundId',
+                'setRefundId'
+            ],
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property IsAccepted' => [
+                'isAccepted',
+                'bool',
+                'getIsAccepted',
+                'setIsAccepted'
+            ],
+            'assert property ProcessingErrorList' => [
+                'processingErrorList',
+                '\JTL\SCX\Client\Channel\Model\RefundProcessingError[]',
+                'getProcessingErrorList',
+                'setProcessingErrorList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "refundId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_RefundId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundProcessingResult();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new RefundProcessingResult([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setRefundId');
-        $sut->setRefundId($sample);
-        $this->assertSame($sample, $sut['refundId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundProcessingResult(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
-    }
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_setter_for_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new RefundProcessingResult();
-
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
-    }
-
-
-    /**
-     * Test attribute "isAccepted"
-     * @test
-     */
-    public function it_has_a_IsAccepted(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new RefundProcessingResult(['isAccepted' => $sample]);
-
-        $this->assertMethodExists($sut, 'getIsAccepted');
-        $this->assertSame($sample, $sut->getIsAccepted());
-
-        $this->assertArrayHasKey('isAccepted', $sut);
-        $this->assertSame($sample, $sut['isAccepted']);
-
-    }
-
-    /**
-     * Test attribute "isAccepted"
-     * @test
-     */
-    public function it_has_a_setter_for_IsAccepted(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new RefundProcessingResult();
-
-        $this->assertMethodExists($sut, 'setIsAccepted');
-        $sut->setIsAccepted($sample);
-        $this->assertSame($sample, $sut['isAccepted']);
-    }
-
-
-    /**
-     * Test attribute "processingErrorList"
-     * @test
-     */
-    public function it_has_a_ProcessingErrorList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\RefundProcessingError[]');
-        $sut = new RefundProcessingResult(['processingErrorList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getProcessingErrorList');
-        $this->assertSame($sample, $sut->getProcessingErrorList());
-
-        $this->assertArrayHasKey('processingErrorList', $sut);
-        $this->assertSame($sample, $sut['processingErrorList']);
-
-    }
-
-    /**
-     * Test attribute "processingErrorList"
-     * @test
-     */
-    public function it_has_a_setter_for_ProcessingErrorList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\RefundProcessingError[]');
-        $sut = new RefundProcessingResult();
-
-        $this->assertMethodExists($sut, 'setProcessingErrorList');
-        $sut->setProcessingErrorList($sample);
-        $this->assertSame($sample, $sut['processingErrorList']);
-    }
-
+    
     private function assertMethodExists(RefundProcessingResult $sut, string $methodName): void
     {
         try {

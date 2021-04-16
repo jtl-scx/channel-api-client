@@ -45,70 +45,49 @@ class ProductAttributeTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "name"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Name(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ProductAttribute(['name' => $sample]);
-
-        $this->assertMethodExists($sut, 'getName');
-        $this->assertSame($sample, $sut->getName());
-
-        $this->assertArrayHasKey('name', $sut);
-        $this->assertSame($sample, $sut['name']);
-
+        return [
+            'assert property Name' => [
+                'name',
+                'string',
+                'getName',
+                'setName'
+            ],
+            'assert property Value' => [
+                'value',
+                'string',
+                'getValue',
+                'setValue'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "name"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Name(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ProductAttribute();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ProductAttribute([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setName');
-        $sut->setName($sample);
-        $this->assertSame($sample, $sut['name']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "value"
-     * @test
-     */
-    public function it_has_a_Value(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ProductAttribute(['value' => $sample]);
-
-        $this->assertMethodExists($sut, 'getValue');
-        $this->assertSame($sample, $sut->getValue());
-
-        $this->assertArrayHasKey('value', $sut);
-        $this->assertSame($sample, $sut['value']);
-
-    }
-
-    /**
-     * Test attribute "value"
-     * @test
-     */
-    public function it_has_a_setter_for_Value(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ProductAttribute();
-
-        $this->assertMethodExists($sut, 'setValue');
-        $sut->setValue($sample);
-        $this->assertSame($sample, $sut['value']);
-    }
-
+    
     private function assertMethodExists(ProductAttribute $sut, string $methodName): void
     {
         try {

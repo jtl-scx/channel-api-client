@@ -62,6 +62,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
       * @var string[]
       */
     protected static $openAPITypes = [
+        'anotherId' => 'string',
         'sellerId' => 'string',
         'severity' => '\JTL\SCX\Client\Channel\Model\ChannelNotificationSeverity',
         'message' => 'string',
@@ -76,6 +77,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
+        'anotherId' => null,
         'sellerId' => null,
         'severity' => null,
         'message' => null,
@@ -109,6 +111,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $attributeMap = [
+        'anotherId' => 'anotherId',
         'sellerId' => 'sellerId',
         'severity' => 'severity',
         'message' => 'message',
@@ -121,6 +124,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $setters = [
+        'anotherId' => 'setAnotherId',
         'sellerId' => 'setSellerId',
         'severity' => 'setSeverity',
         'message' => 'setMessage',
@@ -133,6 +137,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
      * @var string[]
      */
     protected static $getters = [
+        'anotherId' => 'getAnotherId',
         'sellerId' => 'getSellerId',
         'severity' => 'getSeverity',
         'message' => 'getMessage',
@@ -193,6 +198,7 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
 
     public function __construct(array $data = null)
     {
+        $this->container['anotherId'] = $data['anotherId'] ?? null;
         $this->container['sellerId'] = $data['sellerId'] ?? null;
         $this->container['severity'] = $data['severity'] ?? null;
         $this->container['message'] = $data['message'] ?? null;
@@ -233,6 +239,18 @@ class Notification implements ModelInterface, ArrayAccess, \JsonSerializable
     public function valid()
     {
         return count($this->listInvalidProperties()) === 0;
+    }
+
+
+    public function getAnotherId(): ?string
+    {
+        return $this->container['anotherId'];
+    }
+
+    public function setAnotherId(?string $anotherId): Notification
+    {
+        $this->container['anotherId'] = $anotherId;
+        return $this;
     }
 
 

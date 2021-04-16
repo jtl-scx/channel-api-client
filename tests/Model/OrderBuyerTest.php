@@ -45,38 +45,43 @@ class OrderBuyerTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "email"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Email(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderBuyer(['email' => $sample]);
-
-        $this->assertMethodExists($sut, 'getEmail');
-        $this->assertSame($sample, $sut->getEmail());
-
-        $this->assertArrayHasKey('email', $sut);
-        $this->assertSame($sample, $sut['email']);
-
+        return [
+            'assert property Email' => [
+                'email',
+                'string',
+                'getEmail',
+                'setEmail'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "email"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Email(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderBuyer();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OrderBuyer([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setEmail');
-        $sut->setEmail($sample);
-        $this->assertSame($sample, $sut['email']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(OrderBuyer $sut, string $methodName): void
     {
         try {

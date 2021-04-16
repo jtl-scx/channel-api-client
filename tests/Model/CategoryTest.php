@@ -45,134 +45,61 @@ class CategoryTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "categoryId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_CategoryId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Category(['categoryId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCategoryId');
-        $this->assertSame($sample, $sut->getCategoryId());
-
-        $this->assertArrayHasKey('categoryId', $sut);
-        $this->assertSame($sample, $sut['categoryId']);
-
+        return [
+            'assert property CategoryId' => [
+                'categoryId',
+                'string',
+                'getCategoryId',
+                'setCategoryId'
+            ],
+            'assert property DisplayName' => [
+                'displayName',
+                'string',
+                'getDisplayName',
+                'setDisplayName'
+            ],
+            'assert property ListingAllowed' => [
+                'listingAllowed',
+                'bool',
+                'getListingAllowed',
+                'setListingAllowed'
+            ],
+            'assert property ParentCategoryId' => [
+                'parentCategoryId',
+                'string',
+                'getParentCategoryId',
+                'setParentCategoryId'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "categoryId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_CategoryId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Category();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new Category([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCategoryId');
-        $sut->setCategoryId($sample);
-        $this->assertSame($sample, $sut['categoryId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Category(['displayName' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDisplayName');
-        $this->assertSame($sample, $sut->getDisplayName());
-
-        $this->assertArrayHasKey('displayName', $sut);
-        $this->assertSame($sample, $sut['displayName']);
-
-    }
-
-    /**
-     * Test attribute "displayName"
-     * @test
-     */
-    public function it_has_a_setter_for_DisplayName(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Category();
-
-        $this->assertMethodExists($sut, 'setDisplayName');
-        $sut->setDisplayName($sample);
-        $this->assertSame($sample, $sut['displayName']);
-    }
-
-
-    /**
-     * Test attribute "listingAllowed"
-     * @test
-     */
-    public function it_has_a_ListingAllowed(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Category(['listingAllowed' => $sample]);
-
-        $this->assertMethodExists($sut, 'getListingAllowed');
-        $this->assertSame($sample, $sut->getListingAllowed());
-
-        $this->assertArrayHasKey('listingAllowed', $sut);
-        $this->assertSame($sample, $sut['listingAllowed']);
-
-    }
-
-    /**
-     * Test attribute "listingAllowed"
-     * @test
-     */
-    public function it_has_a_setter_for_ListingAllowed(): void
-    {
-        $sample = $this->buildSampleForDataType('bool');
-        $sut = new Category();
-
-        $this->assertMethodExists($sut, 'setListingAllowed');
-        $sut->setListingAllowed($sample);
-        $this->assertSame($sample, $sut['listingAllowed']);
-    }
-
-
-    /**
-     * Test attribute "parentCategoryId"
-     * @test
-     */
-    public function it_has_a_ParentCategoryId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Category(['parentCategoryId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getParentCategoryId');
-        $this->assertSame($sample, $sut->getParentCategoryId());
-
-        $this->assertArrayHasKey('parentCategoryId', $sut);
-        $this->assertSame($sample, $sut['parentCategoryId']);
-
-    }
-
-    /**
-     * Test attribute "parentCategoryId"
-     * @test
-     */
-    public function it_has_a_setter_for_ParentCategoryId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Category();
-
-        $this->assertMethodExists($sut, 'setParentCategoryId');
-        $sut->setParentCategoryId($sample);
-        $this->assertSame($sample, $sut['parentCategoryId']);
-    }
-
+    
     private function assertMethodExists(Category $sut, string $methodName): void
     {
         try {

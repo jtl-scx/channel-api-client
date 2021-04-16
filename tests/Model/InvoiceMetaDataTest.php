@@ -45,134 +45,61 @@ class InvoiceMetaDataTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "type"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Type(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\InvoiceDocumentType');
-        $sut = new InvoiceMetaData(['type' => $sample]);
-
-        $this->assertMethodExists($sut, 'getType');
-        $this->assertSame($sample, $sut->getType());
-
-        $this->assertArrayHasKey('type', $sut);
-        $this->assertSame($sample, $sut['type']);
-
+        return [
+            'assert property Type' => [
+                'type',
+                '\JTL\SCX\Client\Channel\Model\InvoiceDocumentType',
+                'getType',
+                'setType'
+            ],
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderId' => [
+                'orderId',
+                'string',
+                'getOrderId',
+                'setOrderId'
+            ],
+            'assert property InvoiceNumber' => [
+                'invoiceNumber',
+                'string',
+                'getInvoiceNumber',
+                'setInvoiceNumber'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "type"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Type(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\InvoiceDocumentType');
-        $sut = new InvoiceMetaData();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new InvoiceMetaData([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setType');
-        $sut->setType($sample);
-        $this->assertSame($sample, $sut['type']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new InvoiceMetaData(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
-    }
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_setter_for_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new InvoiceMetaData();
-
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
-    }
-
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new InvoiceMetaData(['orderId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderId');
-        $this->assertSame($sample, $sut->getOrderId());
-
-        $this->assertArrayHasKey('orderId', $sut);
-        $this->assertSame($sample, $sut['orderId']);
-
-    }
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new InvoiceMetaData();
-
-        $this->assertMethodExists($sut, 'setOrderId');
-        $sut->setOrderId($sample);
-        $this->assertSame($sample, $sut['orderId']);
-    }
-
-
-    /**
-     * Test attribute "invoiceNumber"
-     * @test
-     */
-    public function it_has_a_InvoiceNumber(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new InvoiceMetaData(['invoiceNumber' => $sample]);
-
-        $this->assertMethodExists($sut, 'getInvoiceNumber');
-        $this->assertSame($sample, $sut->getInvoiceNumber());
-
-        $this->assertArrayHasKey('invoiceNumber', $sut);
-        $this->assertSame($sample, $sut['invoiceNumber']);
-
-    }
-
-    /**
-     * Test attribute "invoiceNumber"
-     * @test
-     */
-    public function it_has_a_setter_for_InvoiceNumber(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new InvoiceMetaData();
-
-        $this->assertMethodExists($sut, 'setInvoiceNumber');
-        $sut->setInvoiceNumber($sample);
-        $this->assertSame($sample, $sut['invoiceNumber']);
-    }
-
+    
     private function assertMethodExists(InvoiceMetaData $sut, string $methodName): void
     {
         try {

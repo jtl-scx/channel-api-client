@@ -45,134 +45,61 @@ class NotificationTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Notification(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property Severity' => [
+                'severity',
+                '\JTL\SCX\Client\Channel\Model\ChannelNotificationSeverity',
+                'getSeverity',
+                'setSeverity'
+            ],
+            'assert property Message' => [
+                'message',
+                'string',
+                'getMessage',
+                'setMessage'
+            ],
+            'assert property Reference' => [
+                'reference',
+                '\JTL\SCX\Client\Channel\Model\ChannelNotificationReference',
+                'getReference',
+                'setReference'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Notification();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new Notification([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "severity"
-     * @test
-     */
-    public function it_has_a_Severity(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelNotificationSeverity');
-        $sut = new Notification(['severity' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSeverity');
-        $this->assertSame($sample, $sut->getSeverity());
-
-        $this->assertArrayHasKey('severity', $sut);
-        $this->assertSame($sample, $sut['severity']);
-
-    }
-
-    /**
-     * Test attribute "severity"
-     * @test
-     */
-    public function it_has_a_setter_for_Severity(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelNotificationSeverity');
-        $sut = new Notification();
-
-        $this->assertMethodExists($sut, 'setSeverity');
-        $sut->setSeverity($sample);
-        $this->assertSame($sample, $sut['severity']);
-    }
-
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Notification(['message' => $sample]);
-
-        $this->assertMethodExists($sut, 'getMessage');
-        $this->assertSame($sample, $sut->getMessage());
-
-        $this->assertArrayHasKey('message', $sut);
-        $this->assertSame($sample, $sut['message']);
-
-    }
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_setter_for_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new Notification();
-
-        $this->assertMethodExists($sut, 'setMessage');
-        $sut->setMessage($sample);
-        $this->assertSame($sample, $sut['message']);
-    }
-
-
-    /**
-     * Test attribute "reference"
-     * @test
-     */
-    public function it_has_a_Reference(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelNotificationReference');
-        $sut = new Notification(['reference' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReference');
-        $this->assertSame($sample, $sut->getReference());
-
-        $this->assertArrayHasKey('reference', $sut);
-        $this->assertSame($sample, $sut['reference']);
-
-    }
-
-    /**
-     * Test attribute "reference"
-     * @test
-     */
-    public function it_has_a_setter_for_Reference(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ChannelNotificationReference');
-        $sut = new Notification();
-
-        $this->assertMethodExists($sut, 'setReference');
-        $sut->setReference($sample);
-        $this->assertSame($sample, $sut['reference']);
-    }
-
+    
     private function assertMethodExists(Notification $sut, string $methodName): void
     {
         try {

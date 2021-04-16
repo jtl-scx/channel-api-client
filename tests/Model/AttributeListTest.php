@@ -45,38 +45,43 @@ class AttributeListTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "attributeList"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_AttributeList(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Attribute[]');
-        $sut = new AttributeList(['attributeList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getAttributeList');
-        $this->assertSame($sample, $sut->getAttributeList());
-
-        $this->assertArrayHasKey('attributeList', $sut);
-        $this->assertSame($sample, $sut['attributeList']);
-
+        return [
+            'assert property AttributeList' => [
+                'attributeList',
+                '\JTL\SCX\Client\Channel\Model\Attribute[]',
+                'getAttributeList',
+                'setAttributeList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "attributeList"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_AttributeList(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Attribute[]');
-        $sut = new AttributeList();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new AttributeList([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setAttributeList');
-        $sut->setAttributeList($sample);
-        $this->assertSame($sample, $sut['attributeList']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(AttributeList $sut, string $methodName): void
     {
         try {

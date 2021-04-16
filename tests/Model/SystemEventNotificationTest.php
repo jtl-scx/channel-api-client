@@ -45,102 +45,6 @@ class SystemEventNotificationTest extends TestCase
 {
 
 
-
-    /**
-     * Test attribute "channel"
-     * @test
-     */
-    public function it_has_a_Channel(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SystemEventNotification(['channel' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannel');
-        $this->assertSame($sample, $sut->getChannel());
-
-        $this->assertArrayHasKey('channel', $sut);
-        $this->assertSame($sample, $sut['channel']);
-
-    }
-
-    /**
-     * Test attribute "channel"
-     * @test
-     */
-    public function it_has_a_setter_for_Channel(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SystemEventNotification();
-
-        $this->assertMethodExists($sut, 'setChannel');
-        $sut->setChannel($sample);
-        $this->assertSame($sample, $sut['channel']);
-    }
-
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SystemEventNotification(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
-    }
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_setter_for_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SystemEventNotification();
-
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
-    }
-
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SystemEventNotification(['message' => $sample]);
-
-        $this->assertMethodExists($sut, 'getMessage');
-        $this->assertSame($sample, $sut->getMessage());
-
-        $this->assertArrayHasKey('message', $sut);
-        $this->assertSame($sample, $sut['message']);
-
-    }
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_setter_for_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SystemEventNotification();
-
-        $this->assertMethodExists($sut, 'setMessage');
-        $sut->setMessage($sample);
-        $this->assertSame($sample, $sut['message']);
-    }
-
     /**
      * Test allowed values for severity
      * @test
@@ -155,38 +59,61 @@ class SystemEventNotificationTest extends TestCase
         $this->assertMethodExists($sut, 'getSeverityAllowableValues');
         $this->assertEquals($allowed, $sut->getSeverityAllowableValues());
     }
-
     /**
-     * Test attribute "severity"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Severity(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SystemEventNotification(['severity' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSeverity');
-        $this->assertSame($sample, $sut->getSeverity());
-
-        $this->assertArrayHasKey('severity', $sut);
-        $this->assertSame($sample, $sut['severity']);
-
+        return [
+            'assert property Channel' => [
+                'channel',
+                'string',
+                'getChannel',
+                'setChannel'
+            ],
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property Message' => [
+                'message',
+                'string',
+                'getMessage',
+                'setMessage'
+            ],
+            'assert property Severity' => [
+                'severity',
+                'string',
+                'getSeverity',
+                'setSeverity'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "severity"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Severity(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SystemEventNotification();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SystemEventNotification([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSeverity');
-        $sut->setSeverity($sample);
-        $this->assertSame($sample, $sut['severity']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(SystemEventNotification $sut, string $methodName): void
     {
         try {

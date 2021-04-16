@@ -45,38 +45,43 @@ class EventIdListTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "eventIdList"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_EventIdList(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new EventIdList(['eventIdList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getEventIdList');
-        $this->assertSame($sample, $sut->getEventIdList());
-
-        $this->assertArrayHasKey('eventIdList', $sut);
-        $this->assertSame($sample, $sut['eventIdList']);
-
+        return [
+            'assert property EventIdList' => [
+                'eventIdList',
+                'string[]',
+                'getEventIdList',
+                'setEventIdList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "eventIdList"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_EventIdList(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string[]');
-        $sut = new EventIdList();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new EventIdList([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setEventIdList');
-        $sut->setEventIdList($sample);
-        $this->assertSame($sample, $sut['eventIdList']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(EventIdList $sut, string $methodName): void
     {
         try {

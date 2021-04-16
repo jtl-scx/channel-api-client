@@ -45,198 +45,73 @@ class SellerEventOrderCancellationRequestTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "orderCancellationRequestId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_OrderCancellationRequestId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationRequest(['orderCancellationRequestId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderCancellationRequestId');
-        $this->assertSame($sample, $sut->getOrderCancellationRequestId());
-
-        $this->assertArrayHasKey('orderCancellationRequestId', $sut);
-        $this->assertSame($sample, $sut['orderCancellationRequestId']);
-
+        return [
+            'assert property OrderCancellationRequestId' => [
+                'orderCancellationRequestId',
+                'string',
+                'getOrderCancellationRequestId',
+                'setOrderCancellationRequestId'
+            ],
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderId' => [
+                'orderId',
+                'string',
+                'getOrderId',
+                'setOrderId'
+            ],
+            'assert property OrderItem' => [
+                'orderItem',
+                '\JTL\SCX\Client\Channel\Model\OrderCancellationItem[]',
+                'getOrderItem',
+                'setOrderItem'
+            ],
+            'assert property CancelReason' => [
+                'cancelReason',
+                '\JTL\SCX\Client\Channel\Model\CancelReason',
+                'getCancelReason',
+                'setCancelReason'
+            ],
+            'assert property Message' => [
+                'message',
+                'string',
+                'getMessage',
+                'setMessage'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "orderCancellationRequestId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_OrderCancellationRequestId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationRequest();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventOrderCancellationRequest([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setOrderCancellationRequestId');
-        $sut->setOrderCancellationRequestId($sample);
-        $this->assertSame($sample, $sut['orderCancellationRequestId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationRequest(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
-    }
-
-    /**
-     * Test attribute "sellerId"
-     * @test
-     */
-    public function it_has_a_setter_for_SellerId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationRequest();
-
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
-    }
-
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationRequest(['orderId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderId');
-        $this->assertSame($sample, $sut->getOrderId());
-
-        $this->assertArrayHasKey('orderId', $sut);
-        $this->assertSame($sample, $sut['orderId']);
-
-    }
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationRequest();
-
-        $this->assertMethodExists($sut, 'setOrderId');
-        $sut->setOrderId($sample);
-        $this->assertSame($sample, $sut['orderId']);
-    }
-
-
-    /**
-     * Test attribute "orderItem"
-     * @test
-     */
-    public function it_has_a_OrderItem(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderCancellationItem[]');
-        $sut = new SellerEventOrderCancellationRequest(['orderItem' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderItem');
-        $this->assertSame($sample, $sut->getOrderItem());
-
-        $this->assertArrayHasKey('orderItem', $sut);
-        $this->assertSame($sample, $sut['orderItem']);
-
-    }
-
-    /**
-     * Test attribute "orderItem"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderItem(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderCancellationItem[]');
-        $sut = new SellerEventOrderCancellationRequest();
-
-        $this->assertMethodExists($sut, 'setOrderItem');
-        $sut->setOrderItem($sample);
-        $this->assertSame($sample, $sut['orderItem']);
-    }
-
-
-    /**
-     * Test attribute "cancelReason"
-     * @test
-     */
-    public function it_has_a_CancelReason(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\CancelReason');
-        $sut = new SellerEventOrderCancellationRequest(['cancelReason' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCancelReason');
-        $this->assertSame($sample, $sut->getCancelReason());
-
-        $this->assertArrayHasKey('cancelReason', $sut);
-        $this->assertSame($sample, $sut['cancelReason']);
-
-    }
-
-    /**
-     * Test attribute "cancelReason"
-     * @test
-     */
-    public function it_has_a_setter_for_CancelReason(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\CancelReason');
-        $sut = new SellerEventOrderCancellationRequest();
-
-        $this->assertMethodExists($sut, 'setCancelReason');
-        $sut->setCancelReason($sample);
-        $this->assertSame($sample, $sut['cancelReason']);
-    }
-
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationRequest(['message' => $sample]);
-
-        $this->assertMethodExists($sut, 'getMessage');
-        $this->assertSame($sample, $sut->getMessage());
-
-        $this->assertArrayHasKey('message', $sut);
-        $this->assertSame($sample, $sut['message']);
-
-    }
-
-    /**
-     * Test attribute "message"
-     * @test
-     */
-    public function it_has_a_setter_for_Message(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOrderCancellationRequest();
-
-        $this->assertMethodExists($sut, 'setMessage');
-        $sut->setMessage($sample);
-        $this->assertSame($sample, $sut['message']);
-    }
-
+    
     private function assertMethodExists(SellerEventOrderCancellationRequest $sut, string $methodName): void
     {
         try {

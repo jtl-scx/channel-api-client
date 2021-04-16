@@ -45,38 +45,43 @@ class OrderStatusListTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "orderList"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_OrderList(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderStatus[]');
-        $sut = new OrderStatusList(['orderList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderList');
-        $this->assertSame($sample, $sut->getOrderList());
-
-        $this->assertArrayHasKey('orderList', $sut);
-        $this->assertSame($sample, $sut['orderList']);
-
+        return [
+            'assert property OrderList' => [
+                'orderList',
+                '\JTL\SCX\Client\Channel\Model\OrderStatus[]',
+                'getOrderList',
+                'setOrderList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "orderList"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_OrderList(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderStatus[]');
-        $sut = new OrderStatusList();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OrderStatusList([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setOrderList');
-        $sut->setOrderList($sample);
-        $this->assertSame($sample, $sut['orderList']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(OrderStatusList $sut, string $methodName): void
     {
         try {

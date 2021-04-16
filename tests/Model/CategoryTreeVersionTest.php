@@ -45,38 +45,43 @@ class CategoryTreeVersionTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "categoryTreeVersion"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_CategoryTreeVersion(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new CategoryTreeVersion(['categoryTreeVersion' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCategoryTreeVersion');
-        $this->assertSame($sample, $sut->getCategoryTreeVersion());
-
-        $this->assertArrayHasKey('categoryTreeVersion', $sut);
-        $this->assertSame($sample, $sut['categoryTreeVersion']);
-
+        return [
+            'assert property CategoryTreeVersion' => [
+                'categoryTreeVersion',
+                'string',
+                'getCategoryTreeVersion',
+                'setCategoryTreeVersion'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "categoryTreeVersion"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_CategoryTreeVersion(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new CategoryTreeVersion();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new CategoryTreeVersion([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCategoryTreeVersion');
-        $sut->setCategoryTreeVersion($sample);
-        $this->assertSame($sample, $sut['categoryTreeVersion']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(CategoryTreeVersion $sut, string $methodName): void
     {
         try {

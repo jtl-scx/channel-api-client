@@ -45,166 +45,67 @@ class ReturnReceivedTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnReceived(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OrderId' => [
+                'orderId',
+                'string',
+                'getOrderId',
+                'setOrderId'
+            ],
+            'assert property SellerReturnId' => [
+                'sellerReturnId',
+                'string',
+                'getSellerReturnId',
+                'setSellerReturnId'
+            ],
+            'assert property ChannelReturnId' => [
+                'channelReturnId',
+                'string',
+                'getChannelReturnId',
+                'setChannelReturnId'
+            ],
+            'assert property OrderItem' => [
+                'orderItem',
+                '\JTL\SCX\Client\Channel\Model\ReturnReceivedOrderItem[]',
+                'getOrderItem',
+                'setOrderItem'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnReceived();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ReturnReceived([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnReceived(['orderId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderId');
-        $this->assertSame($sample, $sut->getOrderId());
-
-        $this->assertArrayHasKey('orderId', $sut);
-        $this->assertSame($sample, $sut['orderId']);
-
-    }
-
-    /**
-     * Test attribute "orderId"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnReceived();
-
-        $this->assertMethodExists($sut, 'setOrderId');
-        $sut->setOrderId($sample);
-        $this->assertSame($sample, $sut['orderId']);
-    }
-
-
-    /**
-     * Test attribute "sellerReturnId"
-     * @test
-     */
-    public function it_has_a_SellerReturnId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnReceived(['sellerReturnId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerReturnId');
-        $this->assertSame($sample, $sut->getSellerReturnId());
-
-        $this->assertArrayHasKey('sellerReturnId', $sut);
-        $this->assertSame($sample, $sut['sellerReturnId']);
-
-    }
-
-    /**
-     * Test attribute "sellerReturnId"
-     * @test
-     */
-    public function it_has_a_setter_for_SellerReturnId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnReceived();
-
-        $this->assertMethodExists($sut, 'setSellerReturnId');
-        $sut->setSellerReturnId($sample);
-        $this->assertSame($sample, $sut['sellerReturnId']);
-    }
-
-
-    /**
-     * Test attribute "channelReturnId"
-     * @test
-     */
-    public function it_has_a_ChannelReturnId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnReceived(['channelReturnId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannelReturnId');
-        $this->assertSame($sample, $sut->getChannelReturnId());
-
-        $this->assertArrayHasKey('channelReturnId', $sut);
-        $this->assertSame($sample, $sut['channelReturnId']);
-
-    }
-
-    /**
-     * Test attribute "channelReturnId"
-     * @test
-     */
-    public function it_has_a_setter_for_ChannelReturnId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ReturnReceived();
-
-        $this->assertMethodExists($sut, 'setChannelReturnId');
-        $sut->setChannelReturnId($sample);
-        $this->assertSame($sample, $sut['channelReturnId']);
-    }
-
-
-    /**
-     * Test attribute "orderItem"
-     * @test
-     */
-    public function it_has_a_OrderItem(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ReturnReceivedOrderItem[]');
-        $sut = new ReturnReceived(['orderItem' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderItem');
-        $this->assertSame($sample, $sut->getOrderItem());
-
-        $this->assertArrayHasKey('orderItem', $sut);
-        $this->assertSame($sample, $sut['orderItem']);
-
-    }
-
-    /**
-     * Test attribute "orderItem"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderItem(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ReturnReceivedOrderItem[]');
-        $sut = new ReturnReceived();
-
-        $this->assertMethodExists($sut, 'setOrderItem');
-        $sut->setOrderItem($sample);
-        $this->assertSame($sample, $sut['orderItem']);
-    }
-
+    
     private function assertMethodExists(ReturnReceived $sut, string $methodName): void
     {
         try {

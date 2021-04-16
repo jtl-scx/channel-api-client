@@ -45,198 +45,73 @@ class OrderShippingPositionTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "carrier"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Carrier(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingPosition(['carrier' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCarrier');
-        $this->assertSame($sample, $sut->getCarrier());
-
-        $this->assertArrayHasKey('carrier', $sut);
-        $this->assertSame($sample, $sut['carrier']);
-
+        return [
+            'assert property Carrier' => [
+                'carrier',
+                'string',
+                'getCarrier',
+                'setCarrier'
+            ],
+            'assert property TrackingNumber' => [
+                'trackingNumber',
+                'string',
+                'getTrackingNumber',
+                'setTrackingNumber'
+            ],
+            'assert property ReturnTracking' => [
+                'returnTracking',
+                '\JTL\SCX\Client\Channel\Model\OrderShippingReturnTracking',
+                'getReturnTracking',
+                'setReturnTracking'
+            ],
+            'assert property ShippedAt' => [
+                'shippedAt',
+                '\DateTime',
+                'getShippedAt',
+                'setShippedAt'
+            ],
+            'assert property OrderItemIdList' => [
+                'orderItemIdList',
+                '\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]',
+                'getOrderItemIdList',
+                'setOrderItemIdList'
+            ],
+            'assert property ShippedFrom' => [
+                'shippedFrom',
+                '\JTL\SCX\Client\Channel\Model\OrderShippingShippedFrom',
+                'getShippedFrom',
+                'setShippedFrom'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "carrier"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Carrier(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingPosition();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new OrderShippingPosition([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCarrier');
-        $sut->setCarrier($sample);
-        $this->assertSame($sample, $sut['carrier']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "trackingNumber"
-     * @test
-     */
-    public function it_has_a_TrackingNumber(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingPosition(['trackingNumber' => $sample]);
-
-        $this->assertMethodExists($sut, 'getTrackingNumber');
-        $this->assertSame($sample, $sut->getTrackingNumber());
-
-        $this->assertArrayHasKey('trackingNumber', $sut);
-        $this->assertSame($sample, $sut['trackingNumber']);
-
-    }
-
-    /**
-     * Test attribute "trackingNumber"
-     * @test
-     */
-    public function it_has_a_setter_for_TrackingNumber(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new OrderShippingPosition();
-
-        $this->assertMethodExists($sut, 'setTrackingNumber');
-        $sut->setTrackingNumber($sample);
-        $this->assertSame($sample, $sut['trackingNumber']);
-    }
-
-
-    /**
-     * Test attribute "returnTracking"
-     * @test
-     */
-    public function it_has_a_ReturnTracking(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderShippingReturnTracking');
-        $sut = new OrderShippingPosition(['returnTracking' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReturnTracking');
-        $this->assertSame($sample, $sut->getReturnTracking());
-
-        $this->assertArrayHasKey('returnTracking', $sut);
-        $this->assertSame($sample, $sut['returnTracking']);
-
-    }
-
-    /**
-     * Test attribute "returnTracking"
-     * @test
-     */
-    public function it_has_a_setter_for_ReturnTracking(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderShippingReturnTracking');
-        $sut = new OrderShippingPosition();
-
-        $this->assertMethodExists($sut, 'setReturnTracking');
-        $sut->setReturnTracking($sample);
-        $this->assertSame($sample, $sut['returnTracking']);
-    }
-
-
-    /**
-     * Test attribute "shippedAt"
-     * @test
-     */
-    public function it_has_a_ShippedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new OrderShippingPosition(['shippedAt' => $sample]);
-
-        $this->assertMethodExists($sut, 'getShippedAt');
-        $this->assertSame($sample, $sut->getShippedAt());
-
-        $this->assertArrayHasKey('shippedAt', $sut);
-        $this->assertSame($sample, $sut['shippedAt']);
-
-    }
-
-    /**
-     * Test attribute "shippedAt"
-     * @test
-     */
-    public function it_has_a_setter_for_ShippedAt(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new OrderShippingPosition();
-
-        $this->assertMethodExists($sut, 'setShippedAt');
-        $sut->setShippedAt($sample);
-        $this->assertSame($sample, $sut['shippedAt']);
-    }
-
-
-    /**
-     * Test attribute "orderItemIdList"
-     * @test
-     */
-    public function it_has_a_OrderItemIdList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]');
-        $sut = new OrderShippingPosition(['orderItemIdList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOrderItemIdList');
-        $this->assertSame($sample, $sut->getOrderItemIdList());
-
-        $this->assertArrayHasKey('orderItemIdList', $sut);
-        $this->assertSame($sample, $sut['orderItemIdList']);
-
-    }
-
-    /**
-     * Test attribute "orderItemIdList"
-     * @test
-     */
-    public function it_has_a_setter_for_OrderItemIdList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderShippingPositionItem[]');
-        $sut = new OrderShippingPosition();
-
-        $this->assertMethodExists($sut, 'setOrderItemIdList');
-        $sut->setOrderItemIdList($sample);
-        $this->assertSame($sample, $sut['orderItemIdList']);
-    }
-
-
-    /**
-     * Test attribute "shippedFrom"
-     * @test
-     */
-    public function it_has_a_ShippedFrom(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderShippingShippedFrom');
-        $sut = new OrderShippingPosition(['shippedFrom' => $sample]);
-
-        $this->assertMethodExists($sut, 'getShippedFrom');
-        $this->assertSame($sample, $sut->getShippedFrom());
-
-        $this->assertArrayHasKey('shippedFrom', $sut);
-        $this->assertSame($sample, $sut['shippedFrom']);
-
-    }
-
-    /**
-     * Test attribute "shippedFrom"
-     * @test
-     */
-    public function it_has_a_setter_for_ShippedFrom(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\OrderShippingShippedFrom');
-        $sut = new OrderShippingPosition();
-
-        $this->assertMethodExists($sut, 'setShippedFrom');
-        $sut->setShippedFrom($sample);
-        $this->assertSame($sample, $sut['shippedFrom']);
-    }
-
+    
     private function assertMethodExists(OrderShippingPosition $sut, string $methodName): void
     {
         try {

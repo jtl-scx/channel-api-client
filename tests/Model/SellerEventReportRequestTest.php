@@ -45,166 +45,67 @@ class SellerEventReportRequestTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventReportRequest(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property ReportType' => [
+                'reportType',
+                '\JTL\SCX\Client\Channel\Model\ReportType',
+                'getReportType',
+                'setReportType'
+            ],
+            'assert property StartDate' => [
+                'startDate',
+                '\DateTime',
+                'getStartDate',
+                'setStartDate'
+            ],
+            'assert property EndDate' => [
+                'endDate',
+                '\DateTime',
+                'getEndDate',
+                'setEndDate'
+            ],
+            'assert property ReportId' => [
+                'reportId',
+                'string',
+                'getReportId',
+                'setReportId'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventReportRequest();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventReportRequest([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "reportType"
-     * @test
-     */
-    public function it_has_a_ReportType(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ReportType');
-        $sut = new SellerEventReportRequest(['reportType' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReportType');
-        $this->assertSame($sample, $sut->getReportType());
-
-        $this->assertArrayHasKey('reportType', $sut);
-        $this->assertSame($sample, $sut['reportType']);
-
-    }
-
-    /**
-     * Test attribute "reportType"
-     * @test
-     */
-    public function it_has_a_setter_for_ReportType(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\ReportType');
-        $sut = new SellerEventReportRequest();
-
-        $this->assertMethodExists($sut, 'setReportType');
-        $sut->setReportType($sample);
-        $this->assertSame($sample, $sut['reportType']);
-    }
-
-
-    /**
-     * Test attribute "startDate"
-     * @test
-     */
-    public function it_has_a_StartDate(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new SellerEventReportRequest(['startDate' => $sample]);
-
-        $this->assertMethodExists($sut, 'getStartDate');
-        $this->assertSame($sample, $sut->getStartDate());
-
-        $this->assertArrayHasKey('startDate', $sut);
-        $this->assertSame($sample, $sut['startDate']);
-
-    }
-
-    /**
-     * Test attribute "startDate"
-     * @test
-     */
-    public function it_has_a_setter_for_StartDate(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new SellerEventReportRequest();
-
-        $this->assertMethodExists($sut, 'setStartDate');
-        $sut->setStartDate($sample);
-        $this->assertSame($sample, $sut['startDate']);
-    }
-
-
-    /**
-     * Test attribute "endDate"
-     * @test
-     */
-    public function it_has_a_EndDate(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new SellerEventReportRequest(['endDate' => $sample]);
-
-        $this->assertMethodExists($sut, 'getEndDate');
-        $this->assertSame($sample, $sut->getEndDate());
-
-        $this->assertArrayHasKey('endDate', $sut);
-        $this->assertSame($sample, $sut['endDate']);
-
-    }
-
-    /**
-     * Test attribute "endDate"
-     * @test
-     */
-    public function it_has_a_setter_for_EndDate(): void
-    {
-        $sample = $this->buildSampleForDataType('\DateTime');
-        $sut = new SellerEventReportRequest();
-
-        $this->assertMethodExists($sut, 'setEndDate');
-        $sut->setEndDate($sample);
-        $this->assertSame($sample, $sut['endDate']);
-    }
-
-
-    /**
-     * Test attribute "reportId"
-     * @test
-     */
-    public function it_has_a_ReportId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventReportRequest(['reportId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getReportId');
-        $this->assertSame($sample, $sut->getReportId());
-
-        $this->assertArrayHasKey('reportId', $sut);
-        $this->assertSame($sample, $sut['reportId']);
-
-    }
-
-    /**
-     * Test attribute "reportId"
-     * @test
-     */
-    public function it_has_a_setter_for_ReportId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventReportRequest();
-
-        $this->assertMethodExists($sut, 'setReportId');
-        $sut->setReportId($sample);
-        $this->assertSame($sample, $sut['reportId']);
-    }
-
+    
     private function assertMethodExists(SellerEventReportRequest $sut, string $methodName): void
     {
         try {

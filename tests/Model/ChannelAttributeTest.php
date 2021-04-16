@@ -45,70 +45,49 @@ class ChannelAttributeTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "attributeId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_AttributeId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelAttribute(['attributeId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getAttributeId');
-        $this->assertSame($sample, $sut->getAttributeId());
-
-        $this->assertArrayHasKey('attributeId', $sut);
-        $this->assertSame($sample, $sut['attributeId']);
-
+        return [
+            'assert property AttributeId' => [
+                'attributeId',
+                'string',
+                'getAttributeId',
+                'setAttributeId'
+            ],
+            'assert property Value' => [
+                'value',
+                'string',
+                'getValue',
+                'setValue'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "attributeId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_AttributeId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelAttribute();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ChannelAttribute([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setAttributeId');
-        $sut->setAttributeId($sample);
-        $this->assertSame($sample, $sut['attributeId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "value"
-     * @test
-     */
-    public function it_has_a_Value(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelAttribute(['value' => $sample]);
-
-        $this->assertMethodExists($sut, 'getValue');
-        $this->assertSame($sample, $sut->getValue());
-
-        $this->assertArrayHasKey('value', $sut);
-        $this->assertSame($sample, $sut['value']);
-
-    }
-
-    /**
-     * Test attribute "value"
-     * @test
-     */
-    public function it_has_a_setter_for_Value(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new ChannelAttribute();
-
-        $this->assertMethodExists($sut, 'setValue');
-        $sut->setValue($sample);
-        $this->assertSame($sample, $sut['value']);
-    }
-
+    
     private function assertMethodExists(ChannelAttribute $sut, string $methodName): void
     {
         try {

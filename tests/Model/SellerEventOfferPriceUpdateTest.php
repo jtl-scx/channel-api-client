@@ -45,134 +45,61 @@ class SellerEventOfferPriceUpdateTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "sellerId"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_SellerId(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOfferPriceUpdate(['sellerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getSellerId');
-        $this->assertSame($sample, $sut->getSellerId());
-
-        $this->assertArrayHasKey('sellerId', $sut);
-        $this->assertSame($sample, $sut['sellerId']);
-
+        return [
+            'assert property SellerId' => [
+                'sellerId',
+                'string',
+                'getSellerId',
+                'setSellerId'
+            ],
+            'assert property OfferId' => [
+                'offerId',
+                'int',
+                'getOfferId',
+                'setOfferId'
+            ],
+            'assert property ChannelOfferId' => [
+                'channelOfferId',
+                'string',
+                'getChannelOfferId',
+                'setChannelOfferId'
+            ],
+            'assert property PriceList' => [
+                'priceList',
+                '\JTL\SCX\Client\Channel\Model\PriceContainer[]',
+                'getPriceList',
+                'setPriceList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "sellerId"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_SellerId(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOfferPriceUpdate();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new SellerEventOfferPriceUpdate([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setSellerId');
-        $sut->setSellerId($sample);
-        $this->assertSame($sample, $sut['sellerId']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "offerId"
-     * @test
-     */
-    public function it_has_a_OfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new SellerEventOfferPriceUpdate(['offerId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getOfferId');
-        $this->assertSame($sample, $sut->getOfferId());
-
-        $this->assertArrayHasKey('offerId', $sut);
-        $this->assertSame($sample, $sut['offerId']);
-
-    }
-
-    /**
-     * Test attribute "offerId"
-     * @test
-     */
-    public function it_has_a_setter_for_OfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('int');
-        $sut = new SellerEventOfferPriceUpdate();
-
-        $this->assertMethodExists($sut, 'setOfferId');
-        $sut->setOfferId($sample);
-        $this->assertSame($sample, $sut['offerId']);
-    }
-
-
-    /**
-     * Test attribute "channelOfferId"
-     * @test
-     */
-    public function it_has_a_ChannelOfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOfferPriceUpdate(['channelOfferId' => $sample]);
-
-        $this->assertMethodExists($sut, 'getChannelOfferId');
-        $this->assertSame($sample, $sut->getChannelOfferId());
-
-        $this->assertArrayHasKey('channelOfferId', $sut);
-        $this->assertSame($sample, $sut['channelOfferId']);
-
-    }
-
-    /**
-     * Test attribute "channelOfferId"
-     * @test
-     */
-    public function it_has_a_setter_for_ChannelOfferId(): void
-    {
-        $sample = $this->buildSampleForDataType('string');
-        $sut = new SellerEventOfferPriceUpdate();
-
-        $this->assertMethodExists($sut, 'setChannelOfferId');
-        $sut->setChannelOfferId($sample);
-        $this->assertSame($sample, $sut['channelOfferId']);
-    }
-
-
-    /**
-     * Test attribute "priceList"
-     * @test
-     */
-    public function it_has_a_PriceList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\PriceContainer[]');
-        $sut = new SellerEventOfferPriceUpdate(['priceList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getPriceList');
-        $this->assertSame($sample, $sut->getPriceList());
-
-        $this->assertArrayHasKey('priceList', $sut);
-        $this->assertSame($sample, $sut['priceList']);
-
-    }
-
-    /**
-     * Test attribute "priceList"
-     * @test
-     */
-    public function it_has_a_setter_for_PriceList(): void
-    {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\PriceContainer[]');
-        $sut = new SellerEventOfferPriceUpdate();
-
-        $this->assertMethodExists($sut, 'setPriceList');
-        $sut->setPriceList($sample);
-        $this->assertSame($sample, $sut['priceList']);
-    }
-
+    
     private function assertMethodExists(SellerEventOfferPriceUpdate $sut, string $methodName): void
     {
         try {

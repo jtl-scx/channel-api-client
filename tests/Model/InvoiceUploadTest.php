@@ -45,70 +45,49 @@ class InvoiceUploadTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "invoice"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_Invoice(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\InvoiceMetaData');
-        $sut = new InvoiceUpload(['invoice' => $sample]);
-
-        $this->assertMethodExists($sut, 'getInvoice');
-        $this->assertSame($sample, $sut->getInvoice());
-
-        $this->assertArrayHasKey('invoice', $sut);
-        $this->assertSame($sample, $sut['invoice']);
-
+        return [
+            'assert property Invoice' => [
+                'invoice',
+                '\JTL\SCX\Client\Channel\Model\InvoiceMetaData',
+                'getInvoice',
+                'setInvoice'
+            ],
+            'assert property Document' => [
+                'document',
+                '\SplFileObject',
+                'getDocument',
+                'setDocument'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "invoice"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_Invoice(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\InvoiceMetaData');
-        $sut = new InvoiceUpload();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new InvoiceUpload([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setInvoice');
-        $sut->setInvoice($sample);
-        $this->assertSame($sample, $sut['invoice']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
-
-    /**
-     * Test attribute "document"
-     * @test
-     */
-    public function it_has_a_Document(): void
-    {
-        $sample = $this->buildSampleForDataType('\SplFileObject');
-        $sut = new InvoiceUpload(['document' => $sample]);
-
-        $this->assertMethodExists($sut, 'getDocument');
-        $this->assertSame($sample, $sut->getDocument());
-
-        $this->assertArrayHasKey('document', $sut);
-        $this->assertSame($sample, $sut['document']);
-
-    }
-
-    /**
-     * Test attribute "document"
-     * @test
-     */
-    public function it_has_a_setter_for_Document(): void
-    {
-        $sample = $this->buildSampleForDataType('\SplFileObject');
-        $sut = new InvoiceUpload();
-
-        $this->assertMethodExists($sut, 'setDocument');
-        $sut->setDocument($sample);
-        $this->assertSame($sample, $sut['document']);
-    }
-
+    
     private function assertMethodExists(InvoiceUpload $sut, string $methodName): void
     {
         try {

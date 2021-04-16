@@ -45,38 +45,43 @@ class ChannelCategoryTreeTest extends TestCase
 {
 
 
-
     /**
-     * Test attribute "categoryList"
-     * @test
+     * @return array
+     * @dataProvider
      */
-    public function it_has_a_CategoryList(): void
+    public function expectedInterface(): array
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Category[]');
-        $sut = new ChannelCategoryTree(['categoryList' => $sample]);
-
-        $this->assertMethodExists($sut, 'getCategoryList');
-        $this->assertSame($sample, $sut->getCategoryList());
-
-        $this->assertArrayHasKey('categoryList', $sut);
-        $this->assertSame($sample, $sut['categoryList']);
-
+        return [
+            'assert property CategoryList' => [
+                'categoryList',
+                '\JTL\SCX\Client\Channel\Model\Category[]',
+                'getCategoryList',
+                'setCategoryList'
+            ],
+        ];
     }
 
     /**
-     * Test attribute "categoryList"
      * @test
+     * @dataProvider expectedInterface
      */
-    public function it_has_a_setter_for_CategoryList(): void
+    public function it_has_expected_interface(string $property, string $type, string $expectedGetter, string $expectedSetter): void
     {
-        $sample = $this->buildSampleForDataType('\JTL\SCX\Client\Channel\Model\Category[]');
-        $sut = new ChannelCategoryTree();
+        $sample = $this->buildSampleForDataType($type);
+        $sut = new ChannelCategoryTree([$property => $sample]);
 
-        $this->assertMethodExists($sut, 'setCategoryList');
-        $sut->setCategoryList($sample);
-        $this->assertSame($sample, $sut['categoryList']);
+        $this->assertMethodExists($sut, $expectedGetter);
+        $this->assertSame($sample, $sut->$expectedGetter());
+
+        $this->assertArrayHasKey($property, $sut);
+        $this->assertSame($sample, $sut[$property]);
+
+        $newSample = $this->buildSampleForDataType($type);
+        $this->assertMethodExists($sut, $expectedSetter);
+        $sut->$expectedSetter($newSample);
+        $this->assertSame($newSample, $sut[$property]);
     }
-
+    
     private function assertMethodExists(ChannelCategoryTree $sut, string $methodName): void
     {
         try {
