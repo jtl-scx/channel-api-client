@@ -42,6 +42,17 @@ class AbstractOrderResponseTest extends TestCase
         $this->assertEquals(null, $response->getErrorList());
     }
 
+    public function testCheckIfThereIsAOrderRelatedErrorByHint(): void
+    {
+        $error1 = $this->createStub(Error::class);
+        $error1->method('getHint')->willReturn('MYORDERID');
+        $errorList = [$error1];
+        $response = new TestResponse(201, $errorList);
+
+        $this->assertTrue($response->hasError());
+        $this->assertTrue($response->orderIdHasError('MYORDERID'));
+    }
+
     public function testCanHaveErrorsButNotSpecifiedOne(): void
     {
         $error1 = $this->createMock(Error::class);
@@ -54,6 +65,8 @@ class AbstractOrderResponseTest extends TestCase
         $this->assertTrue($response->hasError());
         $this->assertFalse($response->orderIdHasError('FalseOrderId'));
     }
+
+
 }
 
 class TestResponse extends AbstractOrderResponse
