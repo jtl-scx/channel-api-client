@@ -65,8 +65,6 @@ class AbstractOrderResponseTest extends TestCase
         $this->assertTrue($response->hasError());
         $this->assertFalse($response->orderIdHasError('FalseOrderId'));
     }
-
-
 }
 
 class TestResponse extends AbstractOrderResponse
