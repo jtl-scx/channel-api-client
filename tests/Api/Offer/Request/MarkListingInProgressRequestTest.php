@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Offer\Request;
 
+use DateTime;
 use JTL\SCX\Client\Channel\Model\OfferListingInProgress;
 use JTL\SCX\Client\Channel\Model\OfferListingInProgressList;
 use JTL\SCX\Client\Request\ScxApiRequest;
@@ -20,10 +21,10 @@ class MarkListingInProgressRequestTest extends TestCase
 {
     public function testCanInitiateWithOfferListModel()
     {
-        $model = new OfferListingInProgressList(['offerList' => [new OfferListingInProgress(['offerId' => 'in progress'])]]);
+        $model = $this->createStub(OfferListingInProgressList::class);
+        $model->method('__toString')->willReturn('in progress');
         $request = new MarkListingInProgressRequest($model);
-        $this->assertJson($request->getBody());
-        $this->assertStringContainsString('in progress', $request->getBody());
+        $this->assertEquals('in progress', $request->getBody());
     }
 
     public function testCanReadBody()
@@ -36,9 +37,9 @@ class MarkListingInProgressRequestTest extends TestCase
     {
         $request = new MarkListingInProgressRequest();
 
-        $request->addOffer(new OfferListingInProgress(['offerId' => 'offerId1']));
-        $request->addOffer(new OfferListingInProgress(['offerId' => 'offerId2']));
-        $request->addOffer(new OfferListingInProgress(['offerId' => 'offerId3']));
+        $request->addOffer(new OfferListingInProgress(['sellerId' => 'offerId1', 'offerId' => 1, 'startedAt' => $this->createStub(DateTime::class)]));
+        $request->addOffer(new OfferListingInProgress(['sellerId' => 'offerId2', 'offerId' => 2, 'startedAt' => $this->createStub(DateTime::class)]));
+        $request->addOffer(new OfferListingInProgress(['sellerId' => 'offerId3', 'offerId' => 3, 'startedAt' => $this->createStub(DateTime::class)]));
 
         $body = $request->getBody();
 

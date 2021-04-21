@@ -19,15 +19,12 @@ class MarkListingSuccessfulRequest extends AbstractScxApiRequest
 
     public function __construct(OfferListingSuccessfulList $offerList = null)
     {
-        if ($offerList === null) {
-            $offerList = new OfferListingSuccessfulList();
-        }
-        $this->offerList = $offerList;
+        $this->offerList = $offerList ?? new OfferListingSuccessfulList(['offerList' => []]);
     }
 
     public function addOffer(OfferListingSuccessful $offer): void
     {
-        $newOfferList = $this->offerList->getOfferList() ?? [];
+        $newOfferList = $this->offerList->getOfferList();
         $newOfferList[] = $offer;
         $this->offerList->setOfferList($newOfferList);
     }

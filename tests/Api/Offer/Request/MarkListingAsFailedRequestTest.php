@@ -20,10 +20,11 @@ class MarkListingAsFailedRequestTest extends TestCase
 {
     public function testCanInitiateWithOfferListModel()
     {
-        $model = new OfferListingFailedList(['offerList' => [new OfferListingFailed(['offerId' => 'failedOffer'])]]);
+        $model = $this->createStub(OfferListingFailedList::class);
+        $model->method('__toString')->willReturn('this_is_json');
+
         $request = new MarkListingAsFailedRequest($model);
-        $this->assertJson($request->getBody());
-        $this->assertStringContainsString('failedOffer', $request->getBody());
+        $this->assertEquals('this_is_json', $request->getBody());
     }
 
     public function testCanReadOfferListModel()
@@ -36,9 +37,9 @@ class MarkListingAsFailedRequestTest extends TestCase
     {
         $request = new MarkListingAsFailedRequest();
 
-        $request->addOffer(new OfferListingFailed(['offerId' => 'failedOffer1']));
-        $request->addOffer(new OfferListingFailed(['offerId' => 'failedOffer2']));
-        $request->addOffer(new OfferListingFailed(['offerId' => 'failedOffer3']));
+        $request->addOffer(new OfferListingFailed(['sellerId' => 'failedOffer1', 'offerId' => 1, 'errorList' => [], 'failedAt' => $this->createStub(\DateTime::class)]));
+        $request->addOffer(new OfferListingFailed(['sellerId' => 'failedOffer2', 'offerId' => 2, 'errorList' => [], 'failedAt' => $this->createStub(\DateTime::class)]));
+        $request->addOffer(new OfferListingFailed(['sellerId' => 'failedOffer3', 'offerId' => 3, 'errorList' => [], 'failedAt' => $this->createStub(\DateTime::class)]));
 
         $body = $request->getBody();
 

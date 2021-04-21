@@ -9,7 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Report\Request;
 
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
-use JTL\SCX\Client\Channel\Model\ModelInterface;
+use JTL\SCX\Client\Channel\Model\SellerInventoryItem;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 use JTL\SCX\Client\Request\ScxApiRequest;
 
@@ -24,7 +24,7 @@ class SendReportRequest extends AbstractScxApiRequest
     /**
      * SendReportRequest constructor.
      * @param string $reportId
-     * @param ModelInterface[] $reportData
+     * @param array $reportData
      * @param bool $enableCompression
      */
     public function __construct(string $reportId, array $reportData, bool $enableCompression = true)
@@ -32,6 +32,17 @@ class SendReportRequest extends AbstractScxApiRequest
         $this->reportData = $reportData;
         $this->reportId = $reportId;
         $this->enableCompression = $enableCompression;
+    }
+
+    /**
+     * @param string $reportId
+     * @param array<SellerInventoryItem> $reportData
+     * @param bool $enableCompression
+     * @return SendReportRequest
+     */
+    public static function forSellerInventoryReport(string $reportId, array $reportData, bool $enableCompression = true): self
+    {
+        return new self($reportId, $reportData, $enableCompression);
     }
 
     public function getUrl(): string

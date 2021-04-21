@@ -39,6 +39,8 @@ foreach ($response->getEventList() as $key => $event) {
         $event->getCreatedAt()->format('c')
     );
 
+    var_dump($event->getEvent());
+
     $eventIdList[] = $event->getId();
 }
 

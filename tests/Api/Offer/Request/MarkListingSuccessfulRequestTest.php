@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Offer\Request;
 
+use DateTime;
 use JTL\SCX\Client\Channel\Model\OfferListingSuccessful;
 use JTL\SCX\Client\Channel\Model\OfferListingSuccessfulList;
 use JTL\SCX\Client\Request\ScxApiRequest;
@@ -20,10 +21,10 @@ class MarkListingSuccessfulRequestTest extends TestCase
 {
     public function testCanInitiateWithOfferListModel()
     {
-        $model = new OfferListingSuccessfulList(['offerList' => [new OfferListingSuccessful(['offerId' => 'juhu'])]]);
+        $model = $this->createStub(OfferListingSuccessfulList::class);
+        $model->method('__toString')->willReturn('juhu');
         $request = new MarkListingSuccessfulRequest($model);
-        $this->assertJson($request->getBody());
-        $this->assertStringContainsString('juhu', $request->getBody());
+        $this->assertEquals('juhu', $request->getBody());
     }
 
     public function testCanReadOfferListModel()
@@ -36,9 +37,9 @@ class MarkListingSuccessfulRequestTest extends TestCase
     {
         $request = new MarkListingSuccessfulRequest();
 
-        $request->addOffer(new OfferListingSuccessful(['offerId' => 'activeOffer1']));
-        $request->addOffer(new OfferListingSuccessful(['offerId' => 'activeOffer2']));
-        $request->addOffer(new OfferListingSuccessful(['offerId' => 'activeOffer3']));
+        $request->addOffer(new OfferListingSuccessful(['sellerId' => 'activeOffer1', 'offerId' => 1, 'listedAt' => $this->createStub(DateTime::class)]));
+        $request->addOffer(new OfferListingSuccessful(['sellerId' => 'activeOffer2', 'offerId' => 2, 'listedAt' => $this->createStub(DateTime::class)]));
+        $request->addOffer(new OfferListingSuccessful(['sellerId' => 'activeOffer3', 'offerId' => 3, 'listedAt' => $this->createStub(DateTime::class)]));
 
         $body = $request->getBody();
 
