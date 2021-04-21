@@ -29,7 +29,7 @@
 
 namespace JTL\SCX\Client\Channel\Model;
 
-use PHPUnit\Framework\TestCase;
+use JTL\SCX\Client\Channel\AbstractApiModelTest;
 
 /**
  * SellerEventListEventListTest Class Doc Comment
@@ -41,7 +41,7 @@ use PHPUnit\Framework\TestCase;
  * @link        https://openapi-generator.tech
  * @covers      \JTL\SCX\Client\Channel\Model\SellerEventListEventList
  */
-class SellerEventListEventListTest extends TestCase
+class SellerEventListEventListTest extends AbstractApiModelTest
 {
 
 
@@ -70,14 +70,6 @@ class SellerEventListEventListTest extends TestCase
                 'getType',
                 'setType'
             ],
-            // Greetings fellow traveler
-            //
-            // you may wonder why this assertion will fail. It is because OpenApi Code generation will not handle OneOf
-            // classes the right way. Or maybe we are using OpenApi in a way it was never expected.
-            // But I don't want to bore you with my stories. Go Ahead an revert changes in generated SellerEventListEventList
-            // object affection this method. And than it will work again.
-            //
-            // Praise Ulla!
             'assert property Event' => [
                 'event',
                 'object',
@@ -107,61 +99,5 @@ class SellerEventListEventListTest extends TestCase
         $sut->$expectedSetter($newSample);
         $this->assertSame($newSample, $sut[$property]);
     }
-    
-    private function assertMethodExists(SellerEventListEventList $sut, string $methodName): void
-    {
-        try {
-            $_ = (new \ReflectionClass($sut))->getMethod($methodName);
-        } catch (\ReflectionException $e) {
-            self::fail("No public method {$methodName} found in " . get_class($sut));
-        }
-        $this->assertTrue(true);
-    }
 
-    private function buildSampleForDataType(string $dataType)
-    {
-        $isArray = substr($dataType, -2) === '[]';
-
-        if ($isArray) {
-            $dataType = substr($dataType, 0, strlen($dataType)-2);
-        }
-
-        $isMap = substr($dataType, 0, 3) === 'map';
-        if ($isMap) {
-            $isArray = true;
-            $dataType = 'string';
-        }
-
-        switch ($dataType) {
-            case '\SplFileObject':
-                $sampleData = new \SplFileObject('php://memory');
-                break;
-            case 'object':
-                $sampleData = $this->createStub('\stdClass');
-                break;
-            case 'integer':
-            case 'int':
-                $sampleData = random_int(100, 10000);
-                break;
-            case 'double':
-            case 'float':
-                $sampleData = random_int(100, 10000)/pi();
-                break;
-            case 'bool':
-            case 'boolean':
-                $sampleData = (bool)random_int(0, 1);
-                break;
-            case 'string':
-            case 'text':
-                $sampleData = uniqid('a_string');
-                break;
-            default:
-                $sampleData = $this->createStub($dataType);
-        }
-
-        if ($isArray) {
-            $sampleData = [$sampleData];
-        }
-        return $sampleData;
-    }
 }
