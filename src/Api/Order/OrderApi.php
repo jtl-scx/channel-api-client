@@ -16,6 +16,7 @@ use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\DenyCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\GetInvoiceRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\ReturnOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\SendRefundProcessingResultRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderStatusRequest;
@@ -26,6 +27,7 @@ use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\DenyCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\InvoiceResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\RequestOrderCancellationResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\ReturnOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\SendRefundProcessingResultResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
@@ -152,6 +154,18 @@ class OrderApi
     {
         $response = $this->client->request($request);
         return new SendRefundProcessingResultResponse($response->getStatusCode());
+    }
+
+    /**
+     * @param ReturnOrderRequest $request
+     * @return ReturnOrderResponse
+     * @throws GuzzleException
+     * @throws RequestFailedException
+     */
+    public function returnOrder(ReturnOrderRequest $request): ReturnOrderResponse
+    {
+        $response = $this->client->request($request);
+        return new ReturnOrderResponse($response->getStatusCode());
     }
 
     /**
