@@ -24,6 +24,8 @@ src/Model/ReportRequest.php
 tests/Model/ReportRequestTest.php
 src/Model/ReportSellerInventory.php
 tests/Model/ReportSellerInventoryTest.php
+src/Model/TicketReply.php
+tests/Model/TicketReplyTest.php
 # SKIP-MODEL-END
 
 # After Model re-creation you can remove thoose files localy using the command below

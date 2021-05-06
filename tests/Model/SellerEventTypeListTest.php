@@ -426,6 +426,16 @@ class SellerEventTypeListTest extends AbstractApiModelTest
     }
 
     /**
+     * Test Enum Value Named Constructor "SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST"
+     * @test
+     */
+    public function it_can_be_constructed_forSELLERTICKET_REPLY(): void
+    {
+        $sut = SellerEventTypeList::SELLERTICKET_REPLY();
+        self::assertInstanceOf(SellerEventTypeList::class, $sut);
+    }
+
+    /**
      * Test allowed values from Enum
      * @test
      */
@@ -451,6 +461,7 @@ class SellerEventTypeListTest extends AbstractApiModelTest
             SellerEventTypeList::SELLERREPORT_REQUEST,
             SellerEventTypeList::SELLERCHANNEL_UNLINKED,
             SellerEventTypeList::SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST,
+            SellerEventTypeList::SELLERTICKET_REPLY,
         ];
         self::assertEquals($allowed, SellerEventTypeList::getAllowableEnumValues());
     }
