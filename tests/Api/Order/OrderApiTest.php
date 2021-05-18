@@ -244,11 +244,11 @@ class OrderApiTest extends TestCase
         $request = $this->createMock(ReturnOrderRequest::class);
 
         $responseMock = $this->createMock(ResponseInterface::class);
-        $responseMock->method('getStatusCode')->willReturn(200);
+        $responseMock->method('getStatusCode')->willReturn(201);
 
         $apiClientMock->expects($this->once())->method('request')->with($request)->willReturn($responseMock);
 
-        $response = $client->returnOrder($request);
+        $response = $client->sendOrderReturn($request);
 
         $this->assertInstanceOf(ReturnOrderResponse::class, $response);
         $this->assertTrue($response->isSuccessful());

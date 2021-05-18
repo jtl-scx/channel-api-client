@@ -162,7 +162,7 @@ class OrderApi
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function returnOrder(ReturnOrderRequest $request): ReturnOrderResponse
+    public function sendOrderReturn(ReturnOrderRequest $request): ReturnOrderResponse
     {
         $response = $this->client->request($request);
         return new ReturnOrderResponse($response->getStatusCode());
