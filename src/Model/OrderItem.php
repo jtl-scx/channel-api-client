@@ -340,9 +340,6 @@ class OrderItem implements ModelInterface, ArrayAccess, \JsonSerializable
         if ($this->container['shippingGroup'] === null) {
             $invalidProperties[] = "'shippingGroup' can't be null";
         }
-        if ($this->container['note'] === null) {
-            $invalidProperties[] = "'note' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -562,12 +559,12 @@ class OrderItem implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
 
-    public function getNote(): string
+    public function getNote(): ?string
     {
         return $this->container['note'];
     }
 
-    public function setNote(string $note): OrderItem
+    public function setNote(?string $note): OrderItem
     {
         $this->container['note'] = $note;
         return $this;
