@@ -9,10 +9,9 @@
 namespace JTL\SCX\Client\Channel\Api;
 
 use JTL\SCX\Client\Channel\ObjectSerializer;
-use JTL\SCX\Client\ResponseDeserializer;
 use Psr\Http\Message\ResponseInterface;
 
-class ChannelApiResponseDeserializer implements ResponseDeserializer
+class ChannelApiResponseDeserializer
 {
     public function deserialize(ResponseInterface $response, string $openApiModel): object
     {
