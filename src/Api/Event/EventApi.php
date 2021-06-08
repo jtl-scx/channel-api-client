@@ -20,18 +20,17 @@ use JTL\SCX\Client\Channel\Api\Event\Response\GetSellerEventListResponse;
 use JTL\SCX\Client\Channel\Event\EventType;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\JsonSerializer;
-use JTL\SCX\Client\ResponseDeserializer;
 
 class EventApi
 {
     private JsonSerializer $jsonSerializer;
     private AuthAwareApiClient $client;
-    private ResponseDeserializer $responseDeserializer;
+    private ChannelApiResponseDeserializer $responseDeserializer;
 
     public function __construct(
         AuthAwareApiClient $client,
         JsonSerializer $jsonSerializer = null,
-        ResponseDeserializer $responseDeserializer = null
+        ChannelApiResponseDeserializer $responseDeserializer = null
     ) {
         $this->client = $client;
         $this->jsonSerializer = $jsonSerializer ?? new JsonSerializer();

@@ -10,8 +10,8 @@ namespace JTL\SCX\Client\Channel\Api\Category;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Model\CategoryTreeVersion;
-use JTL\SCX\Client\ResponseDeserializer;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -33,7 +33,7 @@ class CategoryApiTest extends TestCase
 
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
         $apiClientMock->expects($this->once())->method('request')->with($requestMock)->willReturn($responseMock);
-        $serializerMock = $this->createMock(ResponseDeserializer::class);
+        $serializerMock = $this->createMock(ChannelApiResponseDeserializer::class);
         $serializerMock->expects($this->once())->method('deserialize')->with($responseMock)->willReturn($categoryTreeVersionMock);
 
         $client = new CategoryApi($apiClientMock, $serializerMock);

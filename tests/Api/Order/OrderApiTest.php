@@ -9,6 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Order;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Order\Request\AcceptCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\DenyCancellationRequest;
@@ -27,8 +28,6 @@ use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UploadInvoiceResponse;
 use JTL\SCX\Client\Channel\Model\ErrorResponseList;
-use JTL\SCX\Client\Channel\Model\InlineResponse500;
-use JTL\SCX\Client\ResponseDeserializer;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -121,7 +120,7 @@ class OrderApiTest extends TestCase
 
         $errorResponse = $this->createMock(ErrorResponseList::class);
         $errorResponse->expects($this->atLeastOnce())->method('getErrorList')->willReturn([]);
-        $deserializerMock = $this->createMock(ResponseDeserializer::class);
+        $deserializerMock = $this->createMock(ChannelApiResponseDeserializer::class);
         $deserializerMock->expects($this->once())->method('deserializeObject')->willReturn($errorResponse);
 
         $client = new OrderApi($apiClientMock, $deserializerMock);
@@ -133,7 +132,7 @@ class OrderApiTest extends TestCase
     public function testCanSendAcceptCancellationRequest(): void
     {
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
-        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+        $deserializerStub = $this->createStub(ChannelApiResponseDeserializer::class);
 
         $sut = new OrderApi($apiClientMock, $deserializerStub);
 
@@ -152,7 +151,7 @@ class OrderApiTest extends TestCase
     public function testCanSendDenyCancellationRequest(): void
     {
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
-        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+        $deserializerStub = $this->createStub(ChannelApiResponseDeserializer::class);
 
         $sut = new OrderApi($apiClientMock, $deserializerStub);
 
@@ -171,7 +170,7 @@ class OrderApiTest extends TestCase
     public function testItCanDownloadAInvoiceSuccessfully(): void
     {
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
-        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+        $deserializerStub = $this->createStub(ChannelApiResponseDeserializer::class);
 
         $client = new OrderApi($apiClientMock, $deserializerStub);
 
@@ -195,7 +194,7 @@ class OrderApiTest extends TestCase
     public function testItCanUploadAInvoiceSuccessfully(): void
     {
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
-        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+        $deserializerStub = $this->createStub(ChannelApiResponseDeserializer::class);
 
         $client = new OrderApi($apiClientMock, $deserializerStub);
 
@@ -215,7 +214,7 @@ class OrderApiTest extends TestCase
     public function testItCanSendRefundProcessingResultSuccessfully(): void
     {
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
-        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+        $deserializerStub = $this->createStub(ChannelApiResponseDeserializer::class);
 
         $client = new OrderApi($apiClientMock, $deserializerStub);
 

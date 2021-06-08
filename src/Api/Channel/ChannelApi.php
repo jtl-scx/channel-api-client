@@ -17,16 +17,15 @@ use JTL\SCX\Client\Channel\Api\Channel\Response\UpdateChannelResponse;
 use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Model\ChannelStatus;
 use JTL\SCX\Client\Exception\RequestFailedException;
-use JTL\SCX\Client\ResponseDeserializer;
 
 class ChannelApi
 {
     private AuthAwareApiClient $client;
-    private ResponseDeserializer $responseDeserializer;
+    private ChannelApiResponseDeserializer $responseDeserializer;
 
     public function __construct(
         AuthAwareApiClient $client,
-        ResponseDeserializer $responseDeserializer = null
+        ChannelApiResponseDeserializer $responseDeserializer = null
     ) {
         $this->client = $client;
         $this->responseDeserializer = $responseDeserializer ?? new ChannelApiResponseDeserializer();

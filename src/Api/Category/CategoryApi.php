@@ -15,16 +15,15 @@ use JTL\SCX\Client\Channel\Api\Category\Response\UpdateCategoryTreeResponse;
 use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Model\CategoryTreeVersion;
 use JTL\SCX\Client\Exception\RequestFailedException;
-use JTL\SCX\Client\ResponseDeserializer;
 
 class CategoryApi
 {
     private AuthAwareApiClient $apiClient;
-    private ResponseDeserializer $responseDeserializer;
+    private ChannelApiResponseDeserializer $responseDeserializer;
 
     public function __construct(
         AuthAwareApiClient $apiClient,
-        ResponseDeserializer $responseDeserializer = null
+        ChannelApiResponseDeserializer $responseDeserializer = null
     ) {
         $this->apiClient = $apiClient;
         $this->responseDeserializer = $responseDeserializer ?? new ChannelApiResponseDeserializer();

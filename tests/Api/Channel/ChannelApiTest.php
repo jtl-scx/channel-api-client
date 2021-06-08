@@ -11,9 +11,9 @@ namespace JTL\SCX\Client\Channel\Api\Channel;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Channel\Request\GetChannelStatusRequest;
 use JTL\SCX\Client\Channel\Api\Channel\Request\UpdateChannelRequest;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Model\ChannelStatus;
 use JTL\SCX\Client\Channel\Model\SalesChannelData;
-use JTL\SCX\Client\ResponseDeserializer;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -35,7 +35,7 @@ class ChannelApiTest extends TestCase
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
         $apiClientMock->expects($this->once())->method('request')->with($requestMock)->willReturn($responseMock);
 
-        $serializerMock = $this->createMock(ResponseDeserializer::class);
+        $serializerMock = $this->createMock(ChannelApiResponseDeserializer::class);
 
         $client = new ChannelApi($apiClientMock, $serializerMock);
         $response = $client->update($requestMock);
@@ -56,7 +56,7 @@ class ChannelApiTest extends TestCase
 
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
         $apiClientMock->expects($this->once())->method('request')->with($requestMock)->willReturn($responseMock);
-        $serializerMock = $this->createMock(ResponseDeserializer::class);
+        $serializerMock = $this->createMock(ChannelApiResponseDeserializer::class);
         $serializerMock->expects($this->once())->method('deserialize')->with($responseMock)->willReturn($channelStatusMock);
 
         $client = new ChannelApi($apiClientMock, $serializerMock);
