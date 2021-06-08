@@ -10,11 +10,11 @@ namespace JTL\SCX\Client\Channel\Api\Channel;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\ApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Channel\Request\GetChannelStatusRequest;
 use JTL\SCX\Client\Channel\Api\Channel\Request\UpdateChannelRequest;
 use JTL\SCX\Client\Channel\Api\Channel\Response\GetChannelStatusResponse;
 use JTL\SCX\Client\Channel\Api\Channel\Response\UpdateChannelResponse;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Model\ChannelStatus;
 use JTL\SCX\Client\Exception\RequestFailedException;
 use JTL\SCX\Client\ResponseDeserializer;
@@ -29,7 +29,7 @@ class ChannelApi
         ResponseDeserializer $responseDeserializer = null
     ) {
         $this->client = $client;
-        $this->responseDeserializer = $responseDeserializer ?? new ApiResponseDeserializer();
+        $this->responseDeserializer = $responseDeserializer ?? new ChannelApiResponseDeserializer();
     }
 
     /**

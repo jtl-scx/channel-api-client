@@ -10,7 +10,7 @@ namespace JTL\SCX\Client\Channel\Api\Event;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\ApiResponseDeserializer;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Channel\Api\Event\Request\AcknowledgeEventIdListRequest;
@@ -35,7 +35,7 @@ class EventApi
     ) {
         $this->client = $client;
         $this->jsonSerializer = $jsonSerializer ?? new JsonSerializer();
-        $this->responseDeserializer = $responseDeserializer ?? new ApiResponseDeserializer();
+        $this->responseDeserializer = $responseDeserializer ?? new ChannelApiResponseDeserializer();
     }
 
     /**
@@ -53,11 +53,12 @@ class EventApi
         foreach ($data->eventList as $event) {
             $eventType = new EventType($event->type);
 
+            $eventData = is_array($event->event) ? null : $this->createEventByType($eventType, $event->event);
             $eventContainer = new EventContainer(
                 $event->id,
                 new \DateTimeImmutable($event->createdAt),
                 $eventType,
-                is_array($event->event) ? null : $this->createEventByType($eventType, $event->event)
+                $eventData
             );
 
             $eventList->add($eventContainer);

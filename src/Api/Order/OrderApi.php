@@ -10,7 +10,7 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\ApiResponseDeserializer;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Order\Request\AcceptCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\DenyCancellationRequest;
@@ -43,7 +43,7 @@ class OrderApi
     public function __construct(AuthAwareApiClient $client, ResponseDeserializer $responseDeserializer = null)
     {
         $this->client = $client;
-        $this->responseDeserializer = $responseDeserializer ?? new ApiResponseDeserializer();
+        $this->responseDeserializer = $responseDeserializer ?? new ChannelApiResponseDeserializer();
     }
 
     /**
