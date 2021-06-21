@@ -9,6 +9,7 @@
 namespace JTL\SCX\Client\Channel\Api\Event;
 
 use JTL\SCX\Client\Api\AuthAwareApiClient;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Channel\Api\Event\Request\AcknowledgeEventIdListRequest;
 use JTL\SCX\Client\Channel\Api\Event\Request\GetEventListRequest;
@@ -20,7 +21,6 @@ use JTL\SCX\Client\Channel\Model\SellerEventOrderShipping;
 use JTL\SCX\Client\Channel\Model\SellerEventTest;
 use JTL\SCX\Client\Channel\Model\SystemEventNotification;
 use JTL\SCX\Client\JsonSerializer;
-use JTL\SCX\Client\ResponseDeserializer;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
@@ -62,7 +62,7 @@ class EventApiTest extends TestCase
         $apiClientMock->expects($this->once())->method('request')->with($requestMock)->willReturn($responseMock);
         $jsonDeserializerMock = $this->createMock(JsonSerializer::class);
         $jsonDeserializerMock->expects($this->once())->method('deserialize')->with($jsonContent)->willReturn($data);
-        $serializerMock = $this->createMock(ResponseDeserializer::class);
+        $serializerMock = $this->createMock(ChannelApiResponseDeserializer::class);
         $serializerMock->expects($this->exactly($isEvent ? 1 : 0))->method('deserializeObject')->with(
             $eventData->event,
             $eventClass
@@ -103,7 +103,7 @@ class EventApiTest extends TestCase
             ->willReturn($responseMock);
 
         $jsonDeserializerMock = $this->createMock(JsonSerializer::class);
-        $serializerMock = $this->createMock(ResponseDeserializer::class);
+        $serializerMock = $this->createMock(ChannelApiResponseDeserializer::class);
 
         $client = new EventApi($apiClientMock, $jsonDeserializerMock, $serializerMock);
 

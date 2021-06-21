@@ -10,7 +10,7 @@ namespace JTL\SCX\Client\Channel\Api\Order;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\ApiResponseDeserializer;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Order\Request\AcceptCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\DenyCancellationRequest;
@@ -34,18 +34,17 @@ use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UploadInvoiceResponse;
 use JTL\SCX\Client\Channel\Model\ErrorResponseList;
 use JTL\SCX\Client\Exception\RequestFailedException;
-use JTL\SCX\Client\ResponseDeserializer;
 use Psr\Http\Message\ResponseInterface;
 
 class OrderApi
 {
     private AuthAwareApiClient $client;
-    private ResponseDeserializer $responseDeserializer;
+    private ChannelApiResponseDeserializer $responseDeserializer;
 
-    public function __construct(AuthAwareApiClient $client, ResponseDeserializer $responseDeserializer = null)
+    public function __construct(AuthAwareApiClient $client, ChannelApiResponseDeserializer $responseDeserializer = null)
     {
         $this->client = $client;
-        $this->responseDeserializer = $responseDeserializer ?? new ApiResponseDeserializer();
+        $this->responseDeserializer = $responseDeserializer ?? new ChannelApiResponseDeserializer();
     }
 
     /**

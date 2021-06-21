@@ -36,7 +36,11 @@ abstract class AbstractOrderResponse extends AbstractResponse
     public function orderIdHasError(string $orderId): bool
     {
         foreach ($this->errorList ?? [] as $error) {
-            if (strpos($error->getMessage(), $orderId) !== false) {
+            if ($error->getHint() === $orderId) {
+                return true;
+            }
+
+            if (strpos((string)$error->getMessage(), $orderId) !== false) {
                 return true;
             }
         }

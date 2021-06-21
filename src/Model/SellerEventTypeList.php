@@ -64,6 +64,7 @@ class SellerEventTypeList implements EnumInterface
     const SELLERREPORT_REQUEST = 'Seller:Report.Request';
     const SELLERCHANNEL_UNLINKED = 'Seller:Channel.Unlinked';
     const SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST = 'Seller:Meta.SellerAttributesUpdateRequest';
+    const SELLERTICKET_REPLY = 'Seller:Ticket.Reply';
     
     /**
      * Gets allowable values of the enum
@@ -91,6 +92,7 @@ class SellerEventTypeList implements EnumInterface
             self::SELLERREPORT_REQUEST,
             self::SELLERCHANNEL_UNLINKED,
             self::SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST,
+            self::SELLERTICKET_REPLY,
         ];
     }
 
@@ -188,6 +190,11 @@ class SellerEventTypeList implements EnumInterface
     public static function SELLERMETA_SELLER_ATTRIBUTES_UPDATE_REQUEST(): SellerEventTypeList
     {
         return new self('Seller:Meta.SellerAttributesUpdateRequest');
+    }
+    
+    public static function SELLERTICKET_REPLY(): SellerEventTypeList
+    {
+        return new self('Seller:Ticket.Reply');
     }
     
 

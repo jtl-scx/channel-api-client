@@ -13,8 +13,7 @@ use JTL\SCX\Client\Response\AbstractResponse;
 
 class GetChannelStatusResponse extends AbstractResponse
 {
-    /** @var SalesChannelData */
-    private $salesChannelData;
+    private SalesChannelData $salesChannelData;
 
     /**
      * GetChannelStatusResponse constructor.

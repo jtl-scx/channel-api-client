@@ -10,24 +10,23 @@ namespace JTL\SCX\Client\Channel\Api\Category;
 
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
-use JTL\SCX\Client\ApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Api\Category\Request\UpdateCategoryTreeRequest;
 use JTL\SCX\Client\Channel\Api\Category\Response\UpdateCategoryTreeResponse;
+use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
 use JTL\SCX\Client\Channel\Model\CategoryTreeVersion;
 use JTL\SCX\Client\Exception\RequestFailedException;
-use JTL\SCX\Client\ResponseDeserializer;
 
 class CategoryApi
 {
     private AuthAwareApiClient $apiClient;
-    private ResponseDeserializer $responseDeserializer;
+    private ChannelApiResponseDeserializer $responseDeserializer;
 
     public function __construct(
         AuthAwareApiClient $apiClient,
-        ResponseDeserializer $responseDeserializer = null
+        ChannelApiResponseDeserializer $responseDeserializer = null
     ) {
         $this->apiClient = $apiClient;
-        $this->responseDeserializer = $responseDeserializer ?? new ApiResponseDeserializer();
+        $this->responseDeserializer = $responseDeserializer ?? new ChannelApiResponseDeserializer();
     }
 
     /**
