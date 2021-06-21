@@ -236,7 +236,7 @@ class OrderApiTest extends TestCase
     public function testCanReturnOrder(): void
     {
         $apiClientMock = $this->createMock(AuthAwareApiClient::class);
-        $deserializerStub = $this->createStub(ResponseDeserializer::class);
+        $deserializerStub = $this->createStub(ChannelApiResponseDeserializer::class);
 
         $client = new OrderApi($apiClientMock, $deserializerStub);
 
