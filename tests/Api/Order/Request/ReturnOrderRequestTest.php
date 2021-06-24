@@ -17,7 +17,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package JTL\SCX\Client\Channel\Api\Order\Request
  *
- * @covers \JTL\SCX\Client\Channel\Api\Order\Request\ReturnOrderProcessingResultRequest
+ * @covers \JTL\SCX\Client\Channel\Api\Order\Request\ReturnOrderRequest
  */
 class ReturnOrderRequestTest extends TestCase
 {
