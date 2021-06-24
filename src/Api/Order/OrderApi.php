@@ -16,6 +16,7 @@ use JTL\SCX\Client\Channel\Api\Order\Request\CreateOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\DenyCancellationRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\GetInvoiceRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\RequestOrderCancellationRequest;
+use JTL\SCX\Client\Channel\Api\Order\Request\ReturnOrderProcessingResultRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\ReturnOrderRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\SendRefundProcessingResultRequest;
 use JTL\SCX\Client\Channel\Api\Order\Request\UpdateOrderAddressRequest;
@@ -27,6 +28,7 @@ use JTL\SCX\Client\Channel\Api\Order\Response\CreateOrdersResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\DenyCancellationResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\InvoiceResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\RequestOrderCancellationResponse;
+use JTL\SCX\Client\Channel\Api\Order\Response\ReturnOrderProcessingResultResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\ReturnOrderResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\SendRefundProcessingResultResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderAddressResponse;
@@ -34,6 +36,7 @@ use JTL\SCX\Client\Channel\Api\Order\Response\UpdateOrderStatusResponse;
 use JTL\SCX\Client\Channel\Api\Order\Response\UploadInvoiceResponse;
 use JTL\SCX\Client\Channel\Model\ErrorResponseList;
 use JTL\SCX\Client\Exception\RequestFailedException;
+use JTL\SCX\Client\Response\AbstractResponse;
 use Psr\Http\Message\ResponseInterface;
 
 class OrderApi
@@ -156,16 +159,29 @@ class OrderApi
     }
 
     /**
-     * @param ReturnOrderRequest $request
-     * @return ReturnOrderResponse
-     * @throws GuzzleException
-     * @throws RequestFailedException
+     * @param \JTL\SCX\Client\Channel\Api\Order\Request\ReturnOrderRequest $request
+     * @return \JTL\SCX\Client\Channel\Api\Order\Response\ReturnOrderResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JTL\SCX\Client\Exception\RequestFailedException
      */
     public function sendOrderReturn(ReturnOrderRequest $request): ReturnOrderResponse
     {
         $response = $this->client->request($request);
         return new ReturnOrderResponse($response->getStatusCode());
     }
+
+    /**
+     * @param ReturnOrderProcessingResultRequest $request
+     * @return \JTL\SCX\Client\Channel\Api\Order\Response\ReturnOrderProcessingResultResponse
+     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @throws \JTL\SCX\Client\Exception\RequestFailedException
+     */
+    public function sendOrderReturnProcessingResult(ReturnOrderProcessingResultRequest $request): ReturnOrderProcessingResultResponse
+    {
+        $response = $this->client->request($request);
+        return new ReturnOrderProcessingResultResponse($response->getStatusCode());
+    }
+
 
     /**
      * @param ResponseInterface $apiResponse

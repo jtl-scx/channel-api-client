@@ -9,20 +9,20 @@
 namespace JTL\SCX\Client\Channel\Api\Order\Request;
 
 use JTL\SCX\Client\Channel\Api\AbstractScxApiRequest;
-use JTL\SCX\Client\Channel\Model\ReturnAnnouncement;
+use JTL\SCX\Client\Channel\Model\ReturnProcessingResult;
 
-class ReturnOrderRequest extends AbstractScxApiRequest
+class ReturnOrderProcessingResultRequest extends AbstractScxApiRequest
 {
-    private ReturnAnnouncement $returnAnnouncement;
+    private ReturnProcessingResult $result;
 
-    public function __construct(ReturnAnnouncement $returnAnnouncement)
+    public function __construct(ReturnProcessingResult $returnAnnouncement)
     {
-        $this->returnAnnouncement = $returnAnnouncement;
+        $this->result = $returnAnnouncement;
     }
 
     public function getUrl(): string
     {
-        return '/v1/channel/order/return';
+        return '/v1/channel/order/return/processing-result';
     }
 
     public function getHttpMethod(): string
@@ -32,6 +32,6 @@ class ReturnOrderRequest extends AbstractScxApiRequest
 
     public function getBody(): ?string
     {
-        return (String)$this->returnAnnouncement;
+        return (string)$this->result;
     }
 }
