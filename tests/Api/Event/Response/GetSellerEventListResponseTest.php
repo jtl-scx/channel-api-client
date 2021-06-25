@@ -8,8 +8,9 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event\Response;
 
-use PHPUnit\Framework\TestCase;
+use JTL\SCX\Client\Channel\Api\Event\Model\ErroneousEvent;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class GetSellerEventListResponseTest
@@ -29,5 +30,20 @@ class GetSellerEventListResponseTest extends TestCase
 
         $this->assertSame($eventList, $response->getEventList());
         $this->assertSame($statusCode, $response->getStatusCode());
+    }
+
+    /**
+     * @test
+     */
+    public function it_may_have_a_list_of_ErroneousEvents(): void
+    {
+        $errorEvents = [$this->createStub(ErroneousEvent::class)];
+        $sut = new GetSellerEventListResponse(
+            $this->createStub(EventContainerList::class),
+            200,
+            $errorEvents
+        );
+
+        self::assertSame($errorEvents, $sut->getErroneousEvents());
     }
 }

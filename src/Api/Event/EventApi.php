@@ -11,6 +11,7 @@ namespace JTL\SCX\Client\Channel\Api\Event;
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\ChannelApiResponseDeserializer;
+use JTL\SCX\Client\Channel\Api\Event\Model\ErroneousEvent;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainer;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Channel\Api\Event\Request\AcknowledgeEventIdListRequest;
@@ -46,24 +47,40 @@ class EventApi
     public function get(GetEventListRequest $request = null): GetSellerEventListResponse
     {
         $responseData = $this->client->request($request ?? new GetEventListRequest());
-        $data = $this->jsonSerializer->deserialize($responseData->getBody()->getContents(), false);
+        $data = $this->jsonSerializer->deserialize((string)$responseData->getBody(), false);
         $eventList = new EventContainerList();
 
-        foreach ($data->eventList as $event) {
-            $eventType = new EventType($event->type);
-
-            $eventData = is_array($event->event) ? null : $this->createEventByType($eventType, $event->event);
-            $eventContainer = new EventContainer(
-                $event->id,
-                new \DateTimeImmutable($event->createdAt),
-                $eventType,
-                $eventData
-            );
-
-            $eventList->add($eventContainer);
+        if (!isset($data->eventList)) {
+            throw new \UnexpectedValueException('Missing eventList property in Api Response');
         }
 
-        return new GetSellerEventListResponse($eventList, $responseData->getStatusCode());
+        $errorEvents = [];
+        foreach ($data->eventList as $event) {
+            if (!isset($event->type, $event->id, $event->event, $event->createdAt)) {
+                $eventJson = json_encode($event);
+                $errorEvents[] = new ErroneousEvent($eventJson, "Invalid or missing properties", null);
+                continue;
+            }
+
+            try {
+                $eventType = new EventType($event->type);
+                $eventData = is_array($event->event) ? null : $this->createEventByType($eventType, $event->event);
+
+                $eventContainer = new EventContainer(
+                    (string)$event->id,
+                    new \DateTimeImmutable($event->createdAt),
+                    $eventType,
+                    $eventData
+                );
+                $eventList->add($eventContainer);
+            } catch (\Throwable $exception) {
+                $eventJson = json_encode($event);
+                $errorEvents[] = new ErroneousEvent($eventJson, $exception->getMessage(), $exception);
+                continue;
+            }
+        }
+
+        return new GetSellerEventListResponse($eventList, $responseData->getStatusCode(), $errorEvents);
     }
 
     /**

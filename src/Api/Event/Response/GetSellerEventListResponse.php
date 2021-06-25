@@ -8,6 +8,7 @@
 
 namespace JTL\SCX\Client\Channel\Api\Event\Response;
 
+use JTL\SCX\Client\Channel\Api\Event\Model\ErroneousEvent;
 use JTL\SCX\Client\Channel\Api\Event\Model\EventContainerList;
 use JTL\SCX\Client\Response\AbstractResponse;
 
@@ -19,14 +20,21 @@ class GetSellerEventListResponse extends AbstractResponse
     private EventContainerList $eventList;
 
     /**
+     * @var array<ErroneousEvent>
+     */
+    private array $errorEvents;
+
+    /**
      * GetSellerEventListResponse constructor.
      * @param EventContainerList $eventList
      * @param int $statusCode
+     * @param array<ErroneousEvent> $errorEvents
      */
-    public function __construct(EventContainerList $eventList, int $statusCode)
+    public function __construct(EventContainerList $eventList, int $statusCode, array $errorEvents = [])
     {
-        $this->eventList = $eventList;
         parent::__construct($statusCode);
+        $this->eventList = $eventList;
+        $this->errorEvents = $errorEvents;
     }
 
     /**
@@ -35,5 +43,13 @@ class GetSellerEventListResponse extends AbstractResponse
     public function getEventList(): EventContainerList
     {
         return $this->eventList;
+    }
+
+    /**
+     * @return array<ErroneousEvent>
+     */
+    public function getErroneousEvents(): array
+    {
+        return $this->errorEvents;
     }
 }
