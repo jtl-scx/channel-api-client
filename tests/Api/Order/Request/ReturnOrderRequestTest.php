@@ -35,6 +35,5 @@ class ReturnOrderRequestTest extends TestCase
         self::assertEquals('/v1/channel/order/return', $request->getUrl());
         self::assertEquals(ScxApiRequest::HTTP_METHOD_POST, $request->getHttpMethod());
         self::assertEquals((string)$returnAnnouncement, $request->getBody());
-        self::assertSame($returnAnnouncement, $request->getReturnAnnouncement());
     }
 }
