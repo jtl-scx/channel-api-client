@@ -11,7 +11,9 @@ namespace JTL\SCX\Client\Channel\Api\Seller;
 use GuzzleHttp\Exception\GuzzleException;
 use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Seller\Request\CreateSellerRequest;
+use JTL\SCX\Client\Channel\Api\Seller\Request\UnlinkSellerRequest;
 use JTL\SCX\Client\Channel\Api\Seller\Response\CreateSellerResponse;
+use JTL\SCX\Client\Channel\Api\Seller\Response\UnlinkSellerResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
 
 class SellerApi
@@ -32,5 +34,17 @@ class SellerApi
     {
         $response = $this->client->request($createSellerRequest);
         return new CreateSellerResponse($response->getStatusCode());
+    }
+
+    /**
+     * @param UnlinkSellerRequest $unlinkSellerRequest
+     * @return UnlinkSellerResponse
+     * @throws GuzzleException
+     * @throws RequestFailedException
+     */
+    public function unlink(UnlinkSellerRequest $unlinkSellerRequest): UnlinkSellerResponse
+    {
+        $response = $this->client->request($unlinkSellerRequest);
+        return new UnlinkSellerResponse($response->getStatusCode());
     }
 }
