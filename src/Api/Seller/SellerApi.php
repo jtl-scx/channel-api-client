@@ -15,7 +15,6 @@ use JTL\SCX\Client\Channel\Api\Seller\Request\UnlinkSellerRequest;
 use JTL\SCX\Client\Channel\Api\Seller\Response\CreateSellerResponse;
 use JTL\SCX\Client\Channel\Api\Seller\Response\UnlinkSellerResponse;
 use JTL\SCX\Client\Exception\RequestFailedException;
-use JTL\SCX\Client\Response\AbstractResponse;
 
 class SellerApi
 {

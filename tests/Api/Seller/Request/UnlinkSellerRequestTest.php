@@ -18,8 +18,19 @@ class UnlinkSellerRequestTest extends TestCase
         $sellerId = uniqid('sellerId', true);
 
         $request = new UnlinkSellerRequest($sellerId);
-        $this->assertSame('/v1/channel/seller/{sellerId}', $request->getUrl());
+        $this->assertSame('/v1/channel/seller/{sellerId}{?reason}', $request->getUrl());
         $this->assertSame('DELETE', $request->getHttpMethod());
-        $this->assertSame(['sellerId' => $sellerId], $request->getParams());
+        $this->assertSame(['sellerId' => $sellerId, 'reason' => null], $request->getParams());
+    }
+
+    public function testCanBeCreatedAndValidatedWithReason(): void
+    {
+        $sellerId = uniqid('sellerId', true);
+        $reason = uniqid('reason', true);
+
+        $request = new UnlinkSellerRequest($sellerId, $reason);
+        $this->assertSame('/v1/channel/seller/{sellerId}{?reason}', $request->getUrl());
+        $this->assertSame('DELETE', $request->getHttpMethod());
+        $this->assertSame(['sellerId' => $sellerId, 'reason' => $reason], $request->getParams());
     }
 }
