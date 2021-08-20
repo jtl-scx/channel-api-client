@@ -6,7 +6,7 @@
  * Date: 1/5/21
  */
 
-namespace Api\Order\Response;
+namespace JTL\SCX\Client\Channel\Api\Order\Response;
 
 use JTL\SCX\Client\Channel\Api\Order\Response\InvoiceResponse;
 use PHPUnit\Framework\TestCase;
