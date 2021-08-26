@@ -40,5 +40,4 @@ class UpdateSellerRequestTest extends TestCase
         $sut = new UpdateSellerRequest($updateSeller);
         self::assertEquals('THIS_IS_JSON', $sut->getBody());
     }
-
 }

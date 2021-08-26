@@ -48,7 +48,7 @@ class SellerApi
 
     /**
      * @param string $sessionId
-     * @return UpdateSession
+     * @return UpdateSessionResponse
      * @throws GuzzleException
      * @throws RequestFailedException
      */

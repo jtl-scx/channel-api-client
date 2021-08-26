@@ -36,6 +36,4 @@ class GetSellerIdFromUpdateSessionRequestTest extends TestCase
         $sut = new GetSellerIdFromUpdateSessionRequest('abcd');
         self::assertEquals(['session' => 'abcd'], $sut->getParams());
     }
-
-
 }
