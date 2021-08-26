@@ -70,6 +70,7 @@ class SalesChannelData implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'string',
         'vendor' => 'string',
         'signUpUrl' => 'string',
+        'updateUrl' => 'string',
         'featureList' => '\JTL\SCX\Client\Channel\Model\ChannelUpdateFeatureList'
     ];
 
@@ -90,6 +91,7 @@ class SalesChannelData implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'email',
         'vendor' => null,
         'signUpUrl' => null,
+        'updateUrl' => null,
         'featureList' => null
     ];
 
@@ -129,6 +131,7 @@ class SalesChannelData implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'supportContact',
         'vendor' => 'vendor',
         'signUpUrl' => 'signUpUrl',
+        'updateUrl' => 'updateUrl',
         'featureList' => 'featureList'
     ];
 
@@ -147,6 +150,7 @@ class SalesChannelData implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'setSupportContact',
         'vendor' => 'setVendor',
         'signUpUrl' => 'setSignUpUrl',
+        'updateUrl' => 'setUpdateUrl',
         'featureList' => 'setFeatureList'
     ];
 
@@ -165,6 +169,7 @@ class SalesChannelData implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'getSupportContact',
         'vendor' => 'getVendor',
         'signUpUrl' => 'getSignUpUrl',
+        'updateUrl' => 'getUpdateUrl',
         'featureList' => 'getFeatureList'
     ];
 
@@ -231,6 +236,7 @@ class SalesChannelData implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['supportContact'] = $data['supportContact'] ?? null;
         $this->container['vendor'] = $data['vendor'] ?? null;
         $this->container['signUpUrl'] = $data['signUpUrl'] ?? null;
+        $this->container['updateUrl'] = $data['updateUrl'] ?? null;
         $this->container['featureList'] = $data['featureList'] ?? null;
     }
 
@@ -270,6 +276,9 @@ class SalesChannelData implements ModelInterface, ArrayAccess, \JsonSerializable
         }
         if ($this->container['signUpUrl'] === null) {
             $invalidProperties[] = "'signUpUrl' can't be null";
+        }
+        if ($this->container['featureList'] === null) {
+            $invalidProperties[] = "'featureList' can't be null";
         }
         return $invalidProperties;
     }
@@ -394,12 +403,24 @@ class SalesChannelData implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
 
-    public function getFeatureList(): ?ChannelUpdateFeatureList
+    public function getUpdateUrl(): ?string
+    {
+        return $this->container['updateUrl'];
+    }
+
+    public function setUpdateUrl(?string $updateUrl): SalesChannelData
+    {
+        $this->container['updateUrl'] = $updateUrl;
+        return $this;
+    }
+
+
+    public function getFeatureList(): ChannelUpdateFeatureList
     {
         return $this->container['featureList'];
     }
 
-    public function setFeatureList(?ChannelUpdateFeatureList $featureList): SalesChannelData
+    public function setFeatureList(ChannelUpdateFeatureList $featureList): SalesChannelData
     {
         $this->container['featureList'] = $featureList;
         return $this;
