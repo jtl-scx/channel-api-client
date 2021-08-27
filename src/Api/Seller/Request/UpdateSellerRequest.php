@@ -24,7 +24,7 @@ class UpdateSellerRequest extends AbstractScxApiRequest
         return self::HTTP_METHOD_PATCH;
     }
 
-    public function getBody(): ?string
+    public function getBody(): string
     {
         return (string)$this->updateSeller;
     }
