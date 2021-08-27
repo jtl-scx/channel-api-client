@@ -69,6 +69,7 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'string',
         'vendor' => 'string',
         'signUpUrl' => 'string',
+        'updateUrl' => 'string',
         'featureList' => '\JTL\SCX\Client\Channel\Model\ChannelUpdateFeatureList'
     ];
 
@@ -88,6 +89,7 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'email',
         'vendor' => null,
         'signUpUrl' => null,
+        'updateUrl' => null,
         'featureList' => null
     ];
 
@@ -126,6 +128,7 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'supportContact',
         'vendor' => 'vendor',
         'signUpUrl' => 'signUpUrl',
+        'updateUrl' => 'updateUrl',
         'featureList' => 'featureList'
     ];
 
@@ -143,6 +146,7 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'setSupportContact',
         'vendor' => 'setVendor',
         'signUpUrl' => 'setSignUpUrl',
+        'updateUrl' => 'setUpdateUrl',
         'featureList' => 'setFeatureList'
     ];
 
@@ -160,6 +164,7 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         'supportContact' => 'getSupportContact',
         'vendor' => 'getVendor',
         'signUpUrl' => 'getSignUpUrl',
+        'updateUrl' => 'getUpdateUrl',
         'featureList' => 'getFeatureList'
     ];
 
@@ -225,6 +230,7 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
         $this->container['supportContact'] = $data['supportContact'] ?? null;
         $this->container['vendor'] = $data['vendor'] ?? null;
         $this->container['signUpUrl'] = $data['signUpUrl'] ?? null;
+        $this->container['updateUrl'] = $data['updateUrl'] ?? null;
         $this->container['featureList'] = $data['featureList'] ?? null;
     }
 
@@ -237,6 +243,27 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     {
         $invalidProperties = [];
 
+        if ($this->container['marketplaceList'] === null) {
+            $invalidProperties[] = "'marketplaceList' can't be null";
+        }
+        if ($this->container['displayName'] === null) {
+            $invalidProperties[] = "'displayName' can't be null";
+        }
+        if ($this->container['website'] === null) {
+            $invalidProperties[] = "'website' can't be null";
+        }
+        if ($this->container['supportContact'] === null) {
+            $invalidProperties[] = "'supportContact' can't be null";
+        }
+        if ($this->container['vendor'] === null) {
+            $invalidProperties[] = "'vendor' can't be null";
+        }
+        if ($this->container['signUpUrl'] === null) {
+            $invalidProperties[] = "'signUpUrl' can't be null";
+        }
+        if ($this->container['featureList'] === null) {
+            $invalidProperties[] = "'featureList' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -264,12 +291,12 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
 
-    public function getMarketplaceList(): ?array
+    public function getMarketplaceList(): array
     {
         return $this->container['marketplaceList'];
     }
 
-    public function setMarketplaceList(?array $marketplaceList): ChannelUpdate
+    public function setMarketplaceList(array $marketplaceList): ChannelUpdate
     {
         $this->container['marketplaceList'] = $marketplaceList;
         return $this;
@@ -288,72 +315,84 @@ class ChannelUpdate implements ModelInterface, ArrayAccess, \JsonSerializable
     }
 
 
-    public function getDisplayName(): ?string
+    public function getDisplayName(): string
     {
         return $this->container['displayName'];
     }
 
-    public function setDisplayName(?string $displayName): ChannelUpdate
+    public function setDisplayName(string $displayName): ChannelUpdate
     {
         $this->container['displayName'] = $displayName;
         return $this;
     }
 
 
-    public function getWebsite(): ?string
+    public function getWebsite(): string
     {
         return $this->container['website'];
     }
 
-    public function setWebsite(?string $website): ChannelUpdate
+    public function setWebsite(string $website): ChannelUpdate
     {
         $this->container['website'] = $website;
         return $this;
     }
 
 
-    public function getSupportContact(): ?string
+    public function getSupportContact(): string
     {
         return $this->container['supportContact'];
     }
 
-    public function setSupportContact(?string $supportContact): ChannelUpdate
+    public function setSupportContact(string $supportContact): ChannelUpdate
     {
         $this->container['supportContact'] = $supportContact;
         return $this;
     }
 
 
-    public function getVendor(): ?string
+    public function getVendor(): string
     {
         return $this->container['vendor'];
     }
 
-    public function setVendor(?string $vendor): ChannelUpdate
+    public function setVendor(string $vendor): ChannelUpdate
     {
         $this->container['vendor'] = $vendor;
         return $this;
     }
 
 
-    public function getSignUpUrl(): ?string
+    public function getSignUpUrl(): string
     {
         return $this->container['signUpUrl'];
     }
 
-    public function setSignUpUrl(?string $signUpUrl): ChannelUpdate
+    public function setSignUpUrl(string $signUpUrl): ChannelUpdate
     {
         $this->container['signUpUrl'] = $signUpUrl;
         return $this;
     }
 
 
-    public function getFeatureList(): ?ChannelUpdateFeatureList
+    public function getUpdateUrl(): ?string
+    {
+        return $this->container['updateUrl'];
+    }
+
+    public function setUpdateUrl(?string $updateUrl): ChannelUpdate
+    {
+        $this->container['updateUrl'] = $updateUrl;
+        return $this;
+    }
+
+
+    public function getFeatureList(): ChannelUpdateFeatureList
     {
         return $this->container['featureList'];
     }
 
-    public function setFeatureList(?ChannelUpdateFeatureList $featureList): ChannelUpdate
+    public function setFeatureList(ChannelUpdateFeatureList $featureList): ChannelUpdate
     {
         $this->container['featureList'] = $featureList;
         return $this;

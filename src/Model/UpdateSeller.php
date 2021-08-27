@@ -1,6 +1,6 @@
 <?php
 /**
- * SellerEventListEventList
+ * UpdateSeller
  *
  * PHP version 7.2
  *
@@ -32,7 +32,7 @@ use ArrayAccess;
 use JTL\SCX\Client\Channel\ObjectSerializer;
 
 /**
- * SellerEventListEventList Class Doc Comment
+ * UpdateSeller Class Doc Comment
  *
  * @category Class
  * @package  JTL\SCX\Client\Channel
@@ -42,7 +42,7 @@ use JTL\SCX\Client\Channel\ObjectSerializer;
  * @template TKey int|null
  * @template TValue mixed|null
  */
-class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSerializable
+class UpdateSeller implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -51,22 +51,17 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
       *
       * @var string
       */
-    protected static $openAPIModelName = 'SellerEventList_eventList';
+    protected static $openAPIModelName = 'UpdateSeller';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
       *
-      * @param \DateTime
-      * @param SellerEventTypeList
-      * @param OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventSellerAttributesUpdateRequestSellerEventOrderCancellationRequestSellerEventOrderCancellationAcceptedSellerEventOrderCancellationDeniedSellerEventOrderAcceptSellerEventOrderInvoiceSellerEventOrderReturnReceivedSellerEventOrderRefundSellerEventTicketReply
       *
       * @var string[]
       */
     protected static $openAPITypes = [
-        'id' => 'string',
-        'createdAt' => '\DateTime',
-        'type' => '\JTL\SCX\Client\Channel\Model\SellerEventTypeList',
-        'event' => 'OneOfSellerEventOrderShippingSellerEventOrderPaymentSellerEventOfferEndSellerEventOfferNewSellerEventOfferUpdateSellerEventOfferStockUpdateSellerEventOfferPriceUpdateSellerEventTestSellerEventReportRequestSystemEventNotificationSellerEventChannelUnlinkedSellerEventSellerAttributesUpdateRequestSellerEventOrderCancellationRequestSellerEventOrderCancellationAcceptedSellerEventOrderCancellationDeniedSellerEventOrderAcceptSellerEventOrderInvoiceSellerEventOrderReturnReceivedSellerEventOrderRefundSellerEventTicketReply'
+        'session' => 'string',
+        'isActive' => 'bool'
     ];
 
     /**
@@ -77,10 +72,8 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
       * @psalm-var array<string, string|null>
       */
     protected static $openAPIFormats = [
-        'id' => null,
-        'createdAt' => 'date-time',
-        'type' => null,
-        'event' => null
+        'session' => 'uuid',
+        'isActive' => null
     ];
 
     /**
@@ -110,10 +103,8 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'id',
-        'createdAt' => 'createdAt',
-        'type' => 'type',
-        'event' => 'event'
+        'session' => 'session',
+        'isActive' => 'isActive'
     ];
 
     /**
@@ -122,10 +113,8 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'createdAt' => 'setCreatedAt',
-        'type' => 'setType',
-        'event' => 'setEvent'
+        'session' => 'setSession',
+        'isActive' => 'setIsActive'
     ];
 
     /**
@@ -134,10 +123,8 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'createdAt' => 'getCreatedAt',
-        'type' => 'getType',
-        'event' => 'getEvent'
+        'session' => 'getSession',
+        'isActive' => 'getIsActive'
     ];
 
     /**
@@ -194,10 +181,8 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
 
     public function __construct(array $data = null)
     {
-        $this->container['id'] = $data['id'] ?? null;
-        $this->container['createdAt'] = $data['createdAt'] ?? null;
-        $this->container['type'] = $data['type'] ?? null;
-        $this->container['event'] = $data['event'] ?? null;
+        $this->container['session'] = $data['session'] ?? null;
+        $this->container['isActive'] = $data['isActive'] ?? null;
     }
 
     /**
@@ -209,18 +194,6 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
     {
         $invalidProperties = [];
 
-        if ($this->container['id'] === null) {
-            $invalidProperties[] = "'id' can't be null";
-        }
-        if ($this->container['createdAt'] === null) {
-            $invalidProperties[] = "'createdAt' can't be null";
-        }
-        if ($this->container['type'] === null) {
-            $invalidProperties[] = "'type' can't be null";
-        }
-        if ($this->container['event'] === null) {
-            $invalidProperties[] = "'event' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -236,50 +209,26 @@ class SellerEventListEventList implements ModelInterface, ArrayAccess, \JsonSeri
     }
 
 
-    public function getId(): string
+    public function getSession(): ?string
     {
-        return $this->container['id'];
+        return $this->container['session'];
     }
 
-    public function setId(string $id): SellerEventListEventList
+    public function setSession(?string $session): UpdateSeller
     {
-        $this->container['id'] = $id;
+        $this->container['session'] = $session;
         return $this;
     }
 
 
-    public function getCreatedAt(): \DateTime
+    public function getIsActive(): ?bool
     {
-        return $this->container['createdAt'];
+        return $this->container['isActive'];
     }
 
-    public function setCreatedAt(\DateTime $createdAt): SellerEventListEventList
+    public function setIsActive(?bool $isActive): UpdateSeller
     {
-        $this->container['createdAt'] = $createdAt;
-        return $this;
-    }
-
-
-    public function getType(): SellerEventTypeList
-    {
-        return $this->container['type'];
-    }
-
-    public function setType(SellerEventTypeList $type): SellerEventListEventList
-    {
-        $this->container['type'] = $type;
-        return $this;
-    }
-
-
-    public function getEvent(): object
-    {
-        return $this->container['event'];
-    }
-
-    public function setEvent(object $event): SellerEventListEventList
-    {
-        $this->container['event'] = $event;
+        $this->container['isActive'] = $isActive;
         return $this;
     }
 

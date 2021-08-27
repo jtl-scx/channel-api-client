@@ -106,6 +106,12 @@ class ChannelUpdateTest extends AbstractApiModelTest
                 'getFeatureList',
                 'setFeatureList'
             ],
+            'assert property UpdateUrl' => [
+                'updateUrl',
+                'string',
+                'getUpdateUrl',
+                'setUpdateUrl'
+            ],
         ];
     }
 

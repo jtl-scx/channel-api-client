@@ -112,6 +112,12 @@ class SalesChannelDataTest extends AbstractApiModelTest
                 'getFeatureList',
                 'setFeatureList'
             ],
+            'assert property UpdateUrl' => [
+                'updateUrl',
+                'string',
+                'getUpdateUrl',
+                'setUpdateUrl'
+            ],
         ];
     }
 

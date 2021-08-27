@@ -106,6 +106,12 @@ class ChannelBasedDataTest extends AbstractApiModelTest
                 'getFeatureList',
                 'setFeatureList'
             ],
+            'assert property updateUrl' => [
+                'updateUrl',
+                'string',
+                'getUpdateUrl',
+                'setUpdateUrl'
+            ],
         ];
     }
 
