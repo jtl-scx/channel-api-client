@@ -13,6 +13,7 @@ use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateCategoryAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateGlobalAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateSellerAttributesRequest;
+use JTL\SCX\Client\Channel\Api\Attribute\Request\DeleteCategoryAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\DeleteGlobalAttributeRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\AttributesCreatedResponse;
 use JTL\SCX\Client\Channel\Api\Attribute\Response\AttributesDeletedResponse;
@@ -70,6 +71,18 @@ class AttributesApi
      * @throws RequestFailedException
      */
     public function deleteGlobalAttribute(DeleteGlobalAttributeRequest $request): AttributesDeletedResponse
+    {
+        $response = $this->apiClient->request($request);
+        return new AttributesDeletedResponse($response->getStatusCode());
+    }
+
+    /**
+     * @param DeleteCategoryAttributesRequest $request
+     * @return AttributesDeletedResponse
+     * @throws GuzzleException
+     * @throws RequestFailedException
+     */
+    public function deleteCategoryAttributes(DeleteCategoryAttributesRequest $request): AttributesDeletedResponse
     {
         $response = $this->apiClient->request($request);
         return new AttributesDeletedResponse($response->getStatusCode());
