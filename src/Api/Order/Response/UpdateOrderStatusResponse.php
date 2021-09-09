@@ -10,4 +10,8 @@ namespace JTL\SCX\Client\Channel\Api\Order\Response;
 
 class UpdateOrderStatusResponse extends AbstractOrderResponse
 {
+    public function isSuccessful(): bool
+    {
+        return $this->getStatusCode() === 201;
+    }
 }
