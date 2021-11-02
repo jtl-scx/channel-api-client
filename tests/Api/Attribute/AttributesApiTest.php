@@ -105,6 +105,4 @@ class AttributesApiTest extends TestCase
 
         $this->assertSame($status, $response->getStatusCode());
     }
-
-
 }
