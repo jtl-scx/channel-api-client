@@ -77,14 +77,14 @@ class AttributesApi
     }
 
     /**
-     * @param DeleteCategoryAttributesRequest $request
+     * @param string $categoryId
      * @return AttributesDeletedResponse
      * @throws GuzzleException
      * @throws RequestFailedException
      */
-    public function deleteCategoryAttributes(DeleteCategoryAttributesRequest $request): AttributesDeletedResponse
+    public function deleteCategoryAttributes(string $categoryId): AttributesDeletedResponse
     {
-        $response = $this->apiClient->request($request);
+        $response = $this->apiClient->request(new DeleteCategoryAttributesRequest($categoryId));
         return new AttributesDeletedResponse($response->getStatusCode());
     }
 }
