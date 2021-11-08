@@ -12,6 +12,7 @@ use JTL\SCX\Client\Api\AuthAwareApiClient;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateCategoryAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateGlobalAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\CreateSellerAttributesRequest;
+use JTL\SCX\Client\Channel\Api\Attribute\Request\DeleteCategoryAttributesRequest;
 use JTL\SCX\Client\Channel\Api\Attribute\Request\DeleteGlobalAttributeRequest;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
@@ -84,6 +85,23 @@ class AttributesApiTest extends TestCase
 
         $client = new AttributesApi($apiClientMock);
         $response = $client->createCategoryAttributes($requestMock);
+
+        $this->assertSame($status, $response->getStatusCode());
+    }
+
+    public function testItSendCategoryAttributeDeleteCall(): void
+    {
+        $status = 201;
+        $responseMock = $this->createMock(ResponseInterface::class);
+        $responseMock->method('getStatusCode')->willReturn($status);
+
+        $apiClientMock = $this->createMock(AuthAwareApiClient::class);
+        $apiClientMock->expects($this->once())->method('request')
+            ->with(self::isInstanceOf(DeleteCategoryAttributesRequest::class))
+            ->willReturn($responseMock);
+
+        $client = new AttributesApi($apiClientMock);
+        $response = $client->deleteCategoryAttributes('A_CATEGORY_ID');
 
         $this->assertSame($status, $response->getStatusCode());
     }
